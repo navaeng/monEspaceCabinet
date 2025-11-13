@@ -1,7 +1,7 @@
 import os
 import requests
 import base64
-RAW_VERSION_URL = "https://api.github.com/repos/Ishak-devs/ERP/contents/version/version.txt?ref=develop"
+RAW_VERSION_URL = "https://github.com/Ishak-devs/ERP/releases/latest"
 
 def get_remote_version():
     token = os.getenv("GITHUB_TOKEN")

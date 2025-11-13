@@ -15,9 +15,10 @@ def compare_version():
     remote_version = "https://api.github.com/repos/Ishak-devs/ERP/releases/latest"
     response = requests.get(remote_version, headers=headers)
     print("Response JSON:", response.json())
+    print(response.status_code)
     latest_version = response.json()["tag_name"]
     print('remote_version:', remote_version)
-    current_version = "https://api.github.com/repos/Ishak-devs/ERP/contents/version/version.txt?ref=develop"
+    current_version = "v.1.0"
 
     #if latest_version > current_version:
         #download_url = response.json()["assets"][0]["browser_download_url"]

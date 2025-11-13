@@ -1,4 +1,3 @@
-"""
 name: Build Windows Application
 
 on:
@@ -41,4 +40,4 @@ jobs:
       with:
         name: main-exe
         path: dist/main.exe  
-        """"
+        

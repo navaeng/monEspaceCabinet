@@ -16,16 +16,15 @@ def download_new_version(download_url, GITHUB_TOKEN):
         response = requests.get(download_url, stream=True, headers=headers)
         response.raise_for_status()
 
-        print(response.status_code)
-        print(response.headers["Content-Type"])
-
         new_exe_app = os.path.join(temps_dir, "nava_last_version.exe")
 
         with open(new_exe_app, 'wb') as f:
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
 
-        update_app(download_url)
+        update_app(download_url, GITHUB_TOKEN)
+        print(response.status_code)
+        print(response.headers["Content-Type"])
         return new_exe_app
 
     except Exception as e:

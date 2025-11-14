@@ -1,5 +1,5 @@
 import json
-from data.prompt.prompt_diplomes import prompt_diplomes
+from data.prompt.simple_prompt_diplomes import simple_prompt_diplomes
 from data.read_cv import read_cv
 from data.call_groq import call_groq
 
@@ -18,8 +18,8 @@ def extract_diplomes_from_cv(file_path):
     cv_size = len(cv_text.split())
     print("CV lu, longueur :", cv_size)
 
-    prompt = prompt_diplomes(cv_text)
-    print("⚡ llamma travail (diplomes)…")
+    prompt = simple_prompt_diplomes(cv_text)
+    print(" extraction simple  (diplomes)…")
     output = call_groq(prompt)
 
     json_text = extract_json(output).strip()

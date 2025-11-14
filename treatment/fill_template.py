@@ -5,7 +5,7 @@ from treatment.replace_empersand import replace_ampersand
 from treatment.path_ressources import ressources_path
 from treatment.jinra.create_jinra_env import create_jinra_env
 from treatment.buttons.enabled_false_all_buttons import enabled_false_all_buttons
-from treatment.start_extract import start_extract
+from data.extract.extract_and_call_simple_prompt import extract_and_call_simple_prompt
 from treatment.translate.translate import translate
 import traceback
 
@@ -26,13 +26,16 @@ def fill_template(self):
 
     def worker(selected_file, file_label):
         try:
-            data_skills_tools, data_infos, data_diplomes, data_experiences = start_extract(selected_file, file_label)
+            
+            print(f"Checkbox english: {self.english_cv.isChecked()}")
+            if hasattr(self, 'cv_simple') and self.cv_simple.isChecked():
+                            
+                data_skills_tools, data_infos, data_diplomes, data_experiences = extract_and_call_simple_prompt(selected_file, file_label)
 
             data = {**data_skills_tools, **data_infos, **data_diplomes, **data_experiences}
             if not data:
                 raise ValueError("Les données du CV n'ont pas pu être extraites.")
-            
-            print(f"Checkbox english: {self.english_cv.isChecked()}")
+
             print(f"Checkbox cv simple: {self.cv_simple.isChecked()}")
             print(f"Checkbox cv complex: {self.cv_complex.isChecked()}")
 

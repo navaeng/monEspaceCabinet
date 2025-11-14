@@ -4,7 +4,7 @@ from data.extract_data.extract_experiences import extract_experiences_from_cv
 from data.extract_data.extract_diplomes import extract_diplomes_from_cv
 import sys
 
-def start_extract(selected_file, file_label):
+def extract_and_call_simple_prompt(selected_file, file_label):
         file_label.setText("Lancement...")
         sys.stdout.reconfigure(encoding='utf-8')
 

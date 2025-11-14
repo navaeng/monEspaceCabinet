@@ -1,4 +1,4 @@
-def prompt_skills_tools(cv_text):
+def simple_prompt_skills_tools(cv_text):
     return f"""
 Extrais les compétences et les outils, logiciels du CV, retourne un JSON valide.
 

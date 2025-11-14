@@ -1,4 +1,4 @@
-def prompt_diplomes(cv_text):
+def simple_prompt_diplomes(cv_text):
     return f"""
 Extrais les diplômes et formations du CV et retourne un JSON valide.
 

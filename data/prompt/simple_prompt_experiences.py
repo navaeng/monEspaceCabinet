@@ -1,4 +1,4 @@
-def prompt_experiences(cv_text):
+def simple_prompt_experiences(cv_text):
     return f"""
 Extrais TOUTES les expériences professionnelles du CV suivant et retourne un JSON valide.
 

@@ -1,4 +1,4 @@
-def prompt_infos(cv_text):
+def simple_prompt_infos(cv_text):
     return f"""
 Extrais les informations suivantes du CV et retourne un JSON valide.
 

@@ -1,5 +1,5 @@
 import json
-from data.prompt.prompt_experiences import prompt_experiences
+from data.prompt.simple_prompt_experiences import simple_prompt_experiences
 from data.read_cv import read_cv
 from data.call_groq import call_groq
 import html
@@ -18,7 +18,7 @@ def extract_experiences_from_cv(file_path):
     cv_size = len(cv_text.split())
     print("CV lu, longueur :", cv_size)
 
-    prompt = prompt_experiences(cv_text)
+    prompt = simple_prompt_experiences(cv_text)
     print("⚡ travail en cours du modele (experiences)…")
     output = call_groq(prompt)
 

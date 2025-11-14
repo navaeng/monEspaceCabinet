@@ -10,6 +10,8 @@ def upload_cv(self):
             self.file_label.setText("Fichier sélectionné ✅")
             self.english_cv.setEnabled(True)
             self.valider_btn.setEnabled(True)
+            self.cv_simple.setEnabled(True)
+            self.cv_complex.setEnabled(True)
         else:
             self.selected_file = None
             self.file_label.setText("Aucun fichier sélectionné.")

@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QStackedWidget, QPushButton
 from layout.form.form_cv import CVUploadForm
-from layout.components.header.logo import LogoWidget
+from layout.components.images.logo import LogoWidget
 from PyQt6.QtCore import Qt
 from version.compare.compare_version import compare_version
 from treatment.path_ressources import ressources_path

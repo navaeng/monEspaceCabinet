@@ -4,16 +4,12 @@ from PyQt6.QtWidgets import QFileDialog, QMessageBox
 from treatment.replace_empersand import replace_ampersand
 from treatment.path_ressources import ressources_path
 from treatment.jinra.create_jinra_env import create_jinra_env
-from treatment.buttons.enabled_buttons import enabled_buttons
+from treatment.buttons.enabled_false_all_buttons import enabled_false_all_buttons
 from treatment.start_extract import start_extract
 from treatment.translate.translate import translate
 import traceback
 
 def fill_template(self):
-
-    if not hasattr(self, "selected_file") or not self.selected_file:
-        self.file_label.setText("Aucun fichier sélectionné.")
-        return
 
     QMessageBox.information(self,"Génération du dossier de compétences", "Vous allez choisir où sera généré le dossier de compétences")
     
@@ -26,7 +22,7 @@ def fill_template(self):
     if not output_path:
         return
 
-    enabled_buttons(self)
+    enabled_false_all_buttons(self)
 
     def worker(selected_file, file_label):
         try:
@@ -36,8 +32,10 @@ def fill_template(self):
             if not data:
                 raise ValueError("Les données du CV n'ont pas pu être extraites.")
             
-            print(f"Checkbox checked: {self.english_cv.isChecked()}")
-            
+            print(f"Checkbox english: {self.english_cv.isChecked()}")
+            print(f"Checkbox cv simple: {self.cv_simple.isChecked()}")
+            print(f"Checkbox cv complex: {self.cv_complex.isChecked()}")
+
             if hasattr(self, 'english_cv') and self.english_cv.isChecked():
                 data = translate(data)
                 

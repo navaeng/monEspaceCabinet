@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QCheckBox
+from PyQt6.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QCheckBox, QHBoxLayout
 from PyQt6.QtCore import Qt
 from treatment.upload_cv import upload_cv
 from treatment.fill_template import fill_template
@@ -40,20 +40,25 @@ class CVUploadForm(QWidget):
         self.valider_btn.clicked.connect(lambda: fill_template(self))
         layout.addWidget(self.valider_btn, alignment=Qt.AlignmentFlag.AlignCenter)
 
+        cv_layout = QHBoxLayout()
+
         self.cv_simple = QCheckBox("CV simple", self)
         self.cv_simple.setEnabled(False)
-        layout.addWidget(self.cv_simple, alignment=Qt.AlignmentFlag.AlignCenter)
         self.cv_simple.setChecked(False)
+        cv_layout.addWidget(self.cv_simple)
 
         self.cv_complex = QCheckBox("CV complex", self)
         self.cv_complex.setEnabled(False)
-        layout.addWidget(self.cv_complex, alignment=Qt.AlignmentFlag.AlignCenter)
         self.cv_complex.setChecked(False)
+        cv_layout.addWidget(self.cv_complex)
 
         self.english_cv = QCheckBox("CV anglais", self)
         self.english_cv.setEnabled(False)
-        layout.addWidget(self.english_cv, alignment=Qt.AlignmentFlag.AlignCenter)
         self.english_cv.setChecked(False)
+        cv_layout.addWidget(self.english_cv)
+
+        cv_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addLayout(cv_layout)
 
 
         layout.addStretch()

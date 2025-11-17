@@ -36,20 +36,23 @@ class CVUploadForm(QWidget):
         self.upload_btn.setEnabled(True)
         self.upload_btn.clicked.connect(lambda: save_cv(self))
         layout.addWidget(self.upload_btn, alignment=Qt.AlignmentFlag.AlignCenter)
+
+        label_qst = QLabel("Ajouter plus de compétences en lien avec le profil ?")
+        layout.addWidget(label_qst, alignment=Qt.AlignmentFlag.AlignCenter)
+
+        self.cv_complex = QRadioButton("Oui", self)
+        self.cv_complex.setEnabled(False)
+        layout.addWidget(self.cv_complex, alignment=Qt.AlignmentFlag.AlignCenter)
+
+        self.cv_simple = QRadioButton("Non", self)
+        self.cv_simple.setEnabled(False)
+        layout.addWidget(self.cv_simple, alignment=Qt.AlignmentFlag.AlignCenter)
         
         self.valider_btn = QPushButton("Générer un dossier")
         self.valider_btn.setEnabled(False)
         self.valider_btn.clicked.connect(lambda: fill_template(self))
 
         layout.addWidget(self.valider_btn, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        self.cv_simple = QRadioButton("CV simple", self)
-        self.cv_simple.setEnabled(False)
-        layout.addWidget(self.cv_simple, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        self.cv_complex = QRadioButton("CV complex", self)
-        self.cv_complex.setEnabled(False)
-        layout.addWidget(self.cv_complex, alignment=Qt.AlignmentFlag.AlignCenter)
 
         self.cv_type_group = QButtonGroup(self)
         self.cv_type_group.addButton(self.cv_simple)

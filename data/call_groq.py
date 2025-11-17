@@ -1,24 +1,24 @@
 import os
-from groq import Groq
+from openai import OpenAI
 from dotenv import load_dotenv
+import requests
 
 load_dotenv()
     
-def call_groq(prompt, temperature=0):
-    client = Groq(
-        api_key=os.environ.get("GROQ_API_KEY"),
-    )
+def call_groq(prompt):
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",
+        "Content-Type": "application/json"
+    }
 
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": prompt,
+    data = {
+        "model": "deepseek/deepseek-chat",
+        "messages": [
+            {"role": "user", "content": prompt}
+        ]
+    }
 
-            }
-        ],                
-        temperature=temperature,
-        model="llama-3.3-70b-versatile",
-    )
-    
-    return chat_completion.choices[0].message.content
+    response = requests.post(url, headers=headers, json=data)
+    response_json = response.json()
+    return response_json["choices"][0]["message"]["content"]

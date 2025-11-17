@@ -1,24 +1,24 @@
 def simple_prompt_skills_tools(cv_text):
     return f"""
-Extrais les compétences et les outils, logiciels du CV, retourne un JSON valide.
+Extrais les compétences et les outils du CV, retourne un JSON valide.
 
-Englobe les par domaines avec un titre précis à chaque fois, N'ouvre AUCUNE parenthèse ou accolade de + que le JSON.
+Règles à respecter : 
+
+-Prends en compte le context du cv et retournes les compétences du candidat synthétisés par des phrases.
+-Englobe les logiciels et outils avec un titre précis à chaque fois.
+- Retourne sans fautes d'ortographe ou de grammaire.
 
 CV :
 {cv_text}
 
-Format de sortie (JSON uniquement sans commentaires) :
+Format de sortie (JSON UNIQUEMENT sans commentaires ou caractère spécial) :
 {{
-  "Competences_par_titre": [
-    {{
-      "titre": "",
-      "competences": []
-    }}
+  "compétences": []
   ],
   "Logiciels_par_titre": [
     {{
       "titre": "",
-      "logiciels_outils": []
+      "logiciels_outils": 
     }}
   ]
 }}

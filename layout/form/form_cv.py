@@ -51,12 +51,7 @@ class CVUploadForm(QWidget):
         self.cv_type_group.addButton(self.add_skills_yes)
         self.cv_type_group.addButton(self.add_skills_no)
         self.cv_type_group.buttonClicked.connect(lambda: self.valider_btn.setEnabled(True))
-        
-        self.valider_btn = QPushButton("Générer un dossier")
-        self.valider_btn.setEnabled(False)
-        self.valider_btn.clicked.connect(lambda: fill_template(self))
-
-        layout.addWidget(self.valider_btn, alignment=Qt.AlignmentFlag.AlignCenter)
+    
 
         self.add_skills_yes.setChecked(False)
         self.add_skills_no.setChecked(False)
@@ -65,6 +60,12 @@ class CVUploadForm(QWidget):
         self.english_cv.setEnabled(False)
         layout.addWidget(self.english_cv, alignment=Qt.AlignmentFlag.AlignCenter)
         self.english_cv.setChecked(False)
+
+        self.valider_btn = QPushButton("Générer un dossier")
+        self.valider_btn.setEnabled(False)
+        self.valider_btn.clicked.connect(lambda: fill_template(self))
+
+        layout.addWidget(self.valider_btn, alignment=Qt.AlignmentFlag.AlignCenter)
 
         layout.addStretch()
         

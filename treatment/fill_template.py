@@ -1,19 +1,16 @@
 from docxtpl import DocxTemplate
 import threading
 from PyQt6.QtWidgets import QFileDialog, QMessageBox
-from treatment.replace_empersand import replace_ampersand
+from treatment.json.replace_json_element.replace_empersand import replace_ampersand
 from treatment.path_ressources import ressources_path
 from treatment.jinra.create_jinra_env import create_jinra_env
-from treatment.buttons.enabled_buttons import enabled_buttons
-from treatment.start_extract import start_extract
+from treatment.buttons.enabled_false_all_buttons import enabled_false_all_buttons
+from data.extract.extract_and_call_prompt import extract_and_call_prompt
 from treatment.translate.translate import translate
 import traceback
+from treatment.json.replace_json_element.replace_level_language import replace_level_language
 
 def fill_template(self):
-
-    if not hasattr(self, "selected_file") or not self.selected_file:
-        self.file_label.setText("Aucun fichier sélectionné.")
-        return
 
     QMessageBox.information(self,"Génération du dossier de compétences", "Vous allez choisir où sera généré le dossier de compétences")
     
@@ -26,18 +23,22 @@ def fill_template(self):
     if not output_path:
         return
 
-    enabled_buttons(self)
+    enabled_false_all_buttons(self)
 
     def worker(selected_file, file_label):
         try:
-            data_skills_tools, data_infos, data_diplomes, data_experiences = start_extract(selected_file, file_label)
+
+            print(f"Checkbox english: {self.english_cv.isChecked()}")
+                            
+            data_skills_tools, data_infos, data_diplomes, data_experiences = extract_and_call_prompt(selected_file, file_label, self)
 
             data = {**data_skills_tools, **data_infos, **data_diplomes, **data_experiences}
             if not data:
                 raise ValueError("Les données du CV n'ont pas pu être extraites.")
-            
-            print(f"Checkbox checked: {self.english_cv.isChecked()}")
-            
+
+            print(f"Checkbox add skills yes: {self.add_skills_yes.isChecked()}")
+            print(f"Checkbox add skills no: {self.add_skills_no.isChecked()}")
+
             if hasattr(self, 'english_cv') and self.english_cv.isChecked():
                 data = translate(data)
                 
@@ -48,6 +49,7 @@ def fill_template(self):
 
             self.file_label.setText("Ecriture du dossier...")
             data = replace_ampersand(data)
+            data = replace_level_language(data)
             doc.render(data)
             doc.save(output_path)
             self.file_label.setText("✅ Dossier généré avec succès !")
@@ -59,5 +61,8 @@ def fill_template(self):
             self.file_label.setText(error_msg[:600])
             self.upload_btn.setEnabled(True)
             print(error_msg)
+
+
             
     threading.Thread(target=worker,args=(self.selected_file, self.file_label), daemon=True).start()
+

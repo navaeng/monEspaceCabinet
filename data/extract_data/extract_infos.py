@@ -1,36 +1,28 @@
 import json
-from data.prompt.prompt_infos import prompt_infos
+from data.prompt.simple_prompt.prompt_infos import prompt_infos
 from data.read_cv import read_cv
 from data.call_groq import call_groq
-
-
-def extract_json(text):
-    start = text.find('{')
-    end = text.rfind('}')
-    if start != -1 and end != -1 and end > start:
-        return text[start:end+1]
-    return text
-
+from treatment.json.extract_json import  extract_json
 
 def extract_infos_from_cv(file_path):
-    print("Début de extract_infos_from_cv")
+    print("Début de extract_experiences_from_cv")
     cv_text = read_cv(file_path)
     cv_size = len(cv_text.split())
     print("CV lu, longueur :", cv_size)
 
     prompt = prompt_infos(cv_text)
-    print("⚡  travail en cours du model (infos)…")
+    print("⚡  travail en cours du modele (infos)…")
     output = call_groq(prompt)
 
     json_text = extract_json(output).strip()
     print("JSON extrait :", json_text)
     
     try:
-        data_infos = json.loads(json_text)
+        data_skills = json.loads(json_text)
     except json.JSONDecodeError as e:
         print(f"Erreur JSON : {e}")
         print("JSON brut (repr) :", repr(json_text))
-        data_infos = {}
+        data_skills = {}
 
-    print("envoi de la data infos")
-    return data_infos
+    print("envoi de la data infos...")
+    return data_skills

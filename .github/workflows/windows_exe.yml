@@ -3,10 +3,10 @@ name: Build Windows Application
 on:
   push:
     branches:
-      - feature 
+      - develop 
   pull_request:
     branches:
-      - feature  
+      - develop  
 
 jobs:
   build:
@@ -40,4 +40,3 @@ jobs:
       with:
         name: main-exe
         path: dist/main.exe  
-        

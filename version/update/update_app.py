@@ -3,7 +3,6 @@ import sys
 import subprocess
 import os
 
-
 def update_app(download_url, GITHUB_TOKEN):
     from version.download.downloader import download_new_version
     new_exe = download_new_version(download_url, GITHUB_TOKEN)

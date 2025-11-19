@@ -1,0 +1,35 @@
+name: Test Main App Updater
+
+on:
+  push:
+    branches:
+      - develop 
+  pull_request:
+    branches:
+      - develop  
+
+jobs:
+  test-updater:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Create fake old app
+      run: |
+        echo print("I am old app v1.0") > old_app.exe
+
+    - name: Run main app
+      run: |
+        python main.py

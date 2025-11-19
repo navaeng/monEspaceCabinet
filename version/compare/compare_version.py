@@ -19,7 +19,7 @@ def compare_version():
     print(response.status_code)
     latest_version = response.json()["tag_name"]
     print('remote_version:', remote_version)
-    current_version = "v1.1.0"
+    current_version = "v1.1.1"
 
     if latest_version > current_version:
         

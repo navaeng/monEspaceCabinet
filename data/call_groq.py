@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
     
-def call_groq(prompt, temperature=0):
+def call_groq(prompt):
     client = Groq(
         api_key=os.environ.get("GROQ_API_KEY"),
     )
@@ -17,7 +17,6 @@ def call_groq(prompt, temperature=0):
 
             }
         ],                
-        temperature=temperature,
         model="openai/gpt-oss-120b", 
     )
     

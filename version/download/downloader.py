@@ -1,9 +1,12 @@
 import requests
-import os
-import sys
-from version.update.update_app import update_app
+import os, sys
+
+
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+
 
 def download_new_version(download_url, GITHUB_TOKEN):
+    
     try:
         temps_dir = os.path.join(os.path.dirname(sys.executable), "temp")
         os.makedirs(temps_dir, exist_ok=True)
@@ -22,7 +25,6 @@ def download_new_version(download_url, GITHUB_TOKEN):
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
 
-        update_app(download_url, GITHUB_TOKEN)
         print(response.status_code)
         print(response.headers["Content-Type"])
         return new_exe_app

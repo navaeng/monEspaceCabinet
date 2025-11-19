@@ -1,6 +1,5 @@
 import requests
 import os
-from version.download.downloader import download_new_version
 
 def compare_version():
     print('compare version...')
@@ -33,6 +32,12 @@ def compare_version():
         }
 
         print(f'Download URL: {download_url, download_headers }')
-        download_new_version(download_url, GITHUB_TOKEN)
+        from version.download.downloader import download_new_version
+        new_exe = download_new_version(download_url, GITHUB_TOKEN)
+        if new_exe:
+            from version.update.update_app import update_app
+            update_app(new_exe)
+            
         return True, download_url
     return False, None
+

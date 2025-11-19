@@ -1,13 +1,5 @@
-import shutil
-import sys
-import subprocess
-import os
-
-def update_app(download_url, GITHUB_TOKEN):
-    from version.download.downloader import download_new_version
-    new_exe = download_new_version(download_url, GITHUB_TOKEN)
-
-    if new_exe:
+def update_app(new_exe):
+        import shutil, sys, subprocess, os
         current_exe = sys.executable    
         temp_exe = current_exe + ".new"   
 

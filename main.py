@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         load_dotenv(ressources_path(".env"))
 
-        self.setWindowTitle("NAVA")
+        self.setWindowTitle("NAVA-UPDATE")
 
         self.stacked_widget = QStackedWidget()
         self.setCentralWidget(self.stacked_widget)

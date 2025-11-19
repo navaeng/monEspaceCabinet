@@ -1,15 +1,9 @@
 import json
-from data.prompt.prompt_experiences import prompt_experiences
+from data.prompt.simple_prompt.prompt_experiences import prompt_experiences
 from data.read_cv import read_cv
 from data.call_groq import call_groq
 import html
-
-def extract_json(text):
-    start = text.find('{')
-    end = text.rfind('}')
-    if start != -1 and end != -1 and end > start:
-        return text[start:end+1]
-    return text
+from treatment.json.extract_json import  extract_json
 
 
 def extract_experiences_from_cv(file_path):

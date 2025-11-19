@@ -4,11 +4,11 @@ from data.extract_data.extract_experiences import extract_experiences_from_cv
 from data.extract_data.extract_diplomes import extract_diplomes_from_cv
 import sys
 
-def start_extract(selected_file, file_label):
+def extract_and_call_prompt(selected_file, file_label, self):
         file_label.setText("Lancement...")
         sys.stdout.reconfigure(encoding='utf-8')
-
-        data_skills_tools = extract_skills_tools_from_cv(selected_file)
+        
+        data_skills_tools = extract_skills_tools_from_cv(selected_file, self)
         file_label.setText("Extractions des compétences...")
 
         data_infos = extract_infos_from_cv(selected_file)

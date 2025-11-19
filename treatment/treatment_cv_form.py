@@ -26,6 +26,6 @@ class Treatment_cv_form(QWidget):
             self.file_label.setText("Veuillez sélectionner un fichier avant de valider.")
             return
 
-        if not (self.cv_simple.isChecked() or self.cv_complex.isChecked()):
-            self.file_label.setText("Choisissez le ype de cv")
+        if not (self.add_skills_yes.isChecked() or self.add_skills_no.isChecked()):
+            self.file_label.setText("Veuillez remplir les informations")
             return

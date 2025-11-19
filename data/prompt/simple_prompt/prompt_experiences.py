@@ -11,7 +11,7 @@ Règles à respecter :
 - Attention à n'oublier aucune expérience.
 - Retourne sans fautes d'ortographe ou de grammaire.
 - Si tu ne trouve pas un éléments laisse le vide.
-- Respecte la syntaxe du json.
+- Concernant clients, attention on parle de client et non pas de n'importe quels acteurs vérifie bien ce que tu extrait.
 
 CV :
 {cv_text}

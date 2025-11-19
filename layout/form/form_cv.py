@@ -25,7 +25,7 @@ class CVUploadForm(QWidget):
         self.file_label = QLabel("")
         layout.addWidget(self.file_label, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        self.upload_btn = QPushButton("Sélectionner un cv")
+        self.upload_btn = QPushButton("Sélectionner un fichier")
         self.upload_btn.setEnabled(True)
         self.upload_btn.clicked.connect(lambda: save_cv(self))
         layout.addWidget(self.upload_btn, alignment=Qt.AlignmentFlag.AlignCenter)

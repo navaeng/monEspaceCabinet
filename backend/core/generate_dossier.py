@@ -1,0 +1,105 @@
+import traceback
+from pathlib import Path
+
+from data.extract_and_call_prompt_api import (
+    extract_and_call_prompt_api,
+)
+from docxtpl import DocxTemplate
+from treatment.fix_logiciels_outils import fix_logiciels_outils
+from treatment.jinja2.create_jinra_env import create_jinra_env
+from treatment.json.replace_json_element.replace_empersand import replace_ampersand
+from treatment.json.replace_json_element.replace_level_language import (
+    replace_level_language,
+)
+from treatment.path_ressources import ressources_path
+
+
+def generate_dossier_api(
+    selected_file: str,
+    output_path: str,
+    add_skills: bool,
+    english_cv: bool = False,
+    progress_callback=None,
+) -> dict:
+    def log_progress(message: str):
+        """Helper pour logger la progression"""
+        if progress_callback:
+            progress_callback(message)
+        print(f"📊 {message}")
+
+    try:
+        log_progress("Extraction des données du CV...")
+
+        # Appeler la version API de extract_and_call_prompt
+        all_data, data_skills_tools, data_infos, data_diplomes, data_experiences = (
+            extract_and_call_prompt_api(
+                cv_file_path=selected_file,
+                add_skills=add_skills,
+                english_cv=english_cv,
+                progress_callback=progress_callback,
+            )
+        )
+
+        log_progress("Fusion des données extraites...")
+
+        data = {
+            "cv_texte_propre": all_data,
+            **(data_skills_tools or {}),
+            **(data_infos or {}),
+            **(data_diplomes or {}),
+            **(data_experiences or {}),
+        }
+
+        if not data:
+            raise ValueError("Les données du CV n'ont pas pu être extraites.")
+
+        log_progress("Chargement du template...")
+
+        # Charger le template Word
+        template_path = ressources_path("ressources/template3.docx")
+        doc = DocxTemplate(template_path)
+
+        # Créer l'environnement Jinja
+        create_jinra_env(doc)
+
+        log_progress("Traitement des données...")
+
+        # Appliquer les transformations
+        data = replace_ampersand(data)
+        data = replace_level_language(data)
+
+        if not isinstance(data, dict):
+            raise ValueError(f"Erreur: data n'est pas un dict (type={type(data)})")
+
+        log_progress("Génération du document...")
+
+        # Rendre le template avec les données
+        fix_logiciels_outils(data)
+        doc.render(data)
+
+        # Sauvegarder
+        doc.save(output_path)
+
+        log_progress("✅ Dossier généré avec succès!")
+
+        return {
+            "success": True,
+            "message": "Dossier généré avec succès",
+            "output_path": output_path,
+        }
+
+    except Exception as e:
+        error_msg = f"Erreur lors de la génération: {str(e)}\n{traceback.format_exc()}"
+        print(f"❌ {error_msg}")
+
+        return {"success": False, "message": str(e), "error": error_msg}
+
+
+def validate_cv_file(file_path: str) -> bool:
+    path = Path(file_path)
+
+    if not path.exists():
+        return False
+
+    valid_extensions = [".pdf", ".doc", ".docx"]
+    return path.suffix.lower() in valid_extensions

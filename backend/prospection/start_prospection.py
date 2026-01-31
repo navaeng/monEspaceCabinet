@@ -2,7 +2,7 @@ import os
 import random
 import time
 import urllib.parse
-
+from selenium.webdriver.chrome.service import Service
 # from operator import call
 import undetected_chromedriver as uc
 from data.prompt.prospection.prompt_message_prospection import (
@@ -61,9 +61,10 @@ def run_chrome(job_title: str, config_db):
     # os.system("pkill -9 chrome")
     os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
     os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
+    chrome_service = Service(log_path="chromedriver.log")
     if os.path.exists("linkedin_profile/SingletonLock"):
         os.remove("linkedin_profile/SingletonLock")
-    driver = uc.Chrome(options=options, use_subprocess=True, version_main=143)
+    driver = uc.Chrome(options=options, service=chrome_service, use_subprocess=True, version_main=144)
     driver.maximize_window()
     driver.execute_cdp_cmd(
         "Page.addScriptToEvaluateOnNewDocument",

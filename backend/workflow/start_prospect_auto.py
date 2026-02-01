@@ -15,7 +15,7 @@ from threading import Lock
 
 # from typing_extensions import Sequence
 
-
+prospection_lock = Lock()
 def start_prospect_auto():
 
     while True:
@@ -32,7 +32,7 @@ def start_prospect_auto():
             )
             data = cast(list[dict[str, Any]], res.data or [])
             print(f"DEBUG - Nombre de jobs trouvés : {len(data)}")
-            prospection_lock = Lock()
+            # prospection_lock = Lock()
 
             if prospection_lock.acquire(blocking=False): # Pour recuperer le verrou si il est pas pris
                 try:

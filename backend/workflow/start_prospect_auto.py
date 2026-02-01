@@ -66,6 +66,7 @@ def start_prospect_auto():
         except Exception as e:
             print({e})
         time.sleep(600)
+        print('Reload automatique pour verifier les prospect')
 
 
 """

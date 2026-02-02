@@ -4,7 +4,8 @@ import unicodedata
 from contextlib import asynccontextmanager
 from datetime import datetime
 from pathlib import Path
-from threading import Lock
+
+# from threading import Lock
 from typing import Any, Dict, List, cast
 
 from core.generate_dossier import generate_dossier_api, validate_cv_file
@@ -308,6 +309,7 @@ async def start_prospection_stream(request: ProspectionRequest):
 
         if not res.data:
             return {"status": "error", "message": "Config introuvable"}
+            prospection_lock.release()
         response = cast(APIResponse, res)
 
         data_list = cast(List[Dict[str, Any]], response.data) if response.data else []

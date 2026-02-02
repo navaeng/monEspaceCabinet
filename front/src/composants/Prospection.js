@@ -6,8 +6,8 @@ function Prospection() {
   const [isLoading, setIsLoading] = useState(false);
   // const [currentStatus, setCurrentStatus] = useState("");
   const [prospection, setProspection] = useState([]);
-  const [expandedProspection, setExpandedProspection] = useState(null);
-  const [statusMessage, setStatusMessage] = useState("");
+  // const [expandedProspection, setExpandedProspection] = useState(null);
+  // const [statusMessage, setStatusMessage] = useState("");
   const [itemToDelete, setItemToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -35,7 +35,7 @@ function Prospection() {
     if (!intitule.trim()) return;
 
     setIsLoading(true);
-    setStatusMessage("En cours...");
+    // setStatusMessage("En cours...");
 
     try {
       const response = await fetch(
@@ -48,7 +48,7 @@ function Prospection() {
       );
 
       const reader = response.body.getReader();
-      const decoder = new TextDecoder();
+      // const decoder = new TextDecoder();
 
       while (true) {
         const { value, done } = await reader.read();
@@ -208,9 +208,9 @@ function Prospection() {
                   filteredProspection.map((p) => (
                     <div
                       key={p.id}
-                      className={`p-3 hover:bg-gray-50 transition-colors ${
-                        expandedProspection === p.id ? "bg-gray-50" : ""
-                      }`}
+                      // className={`p-3 hover:bg-gray-50 transition-colors ${
+                      //   expandedProspection === p.id ? "bg-gray-50" : ""
+                      // }`}
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1 min-w-0">

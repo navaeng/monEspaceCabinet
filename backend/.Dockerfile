@@ -1,0 +1,21 @@
+FROM python:3.10-slim
+
+RUN apt-get update && apt-get install -y \
+    wget gnupg unzip curl \
+    google-chrome-stable \
+    libmupdf-dev \
+    --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Railway default port
+EXPOSE 8080
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

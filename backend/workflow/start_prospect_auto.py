@@ -3,24 +3,26 @@
 # import time
 # from datetime import time as dt_time
 import random
+import time
 from datetime import datetime, timedelta
+from threading import Lock
 from typing import Any, cast
 
 # import pytz
 # import supabase
 from database import supabase_client
-from prospection.start_prospection import run_chrome
-import time
-from threading import Lock
 
 # from typing_extensions import Sequence
+from lock import prospection_lock
+from prospection.start_prospection import run_chrome
 
-prospection_lock = Lock()
+
 def start_prospect_auto():
-    supabase_client.table("prospection_settings").update({"is_active": False}).eq("is_active", True).execute()
+    supabase_client.table("prospection_settings").update({"is_active": False}).eq(
+        "is_active", True
+    ).execute()
 
     while True:
-
         try:
             maintenant = datetime.now().astimezone()
             # delai = random.randint(1, 55)
@@ -35,7 +37,9 @@ def start_prospect_auto():
             print(f"DEBUG - Nombre de jobs trouvés : {len(data)}")
             # prospection_lock = Lock()
 
-            if prospection_lock.acquire(blocking=False): # Pour recuperer le verrou si il est pas pris
+            if prospection_lock.acquire(
+                blocking=False
+            ):  # Pour recuperer le verrou si il est pas pris
                 try:
                     for job in data:
                         job_id = job.get("id")
@@ -44,8 +48,7 @@ def start_prospect_auto():
                         if job_id and title:
                             print(f"Lancement : {title}")
                             supabase_client.table("prospection_settings").update(
-                                {"is_active": True,
-                                    "has_run_today": True}
+                                {"is_active": True, "has_run_today": True}
                             ).eq("id", job_id).execute()
                             try:
                                 list(run_chrome(title, job))
@@ -68,7 +71,7 @@ def start_prospect_auto():
         except Exception as e:
             print({e})
         time.sleep(600)
-        print('Reload automatique pour verifier les prospect')
+        print("Reload automatique pour verifier les prospect")
 
 
 """

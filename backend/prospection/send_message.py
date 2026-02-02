@@ -17,7 +17,7 @@ def send_message(driver, job_title, message, config_db):
         try:
             time.sleep(random.uniform(5, 8))
 
-            search_url = "https://www.linkedin.com/in/thomas-laroudie/"
+            search_url = "https://www.linkedin.com/in/vinushan-vincent-8064173a4/"
             # search_url = f"https://www.linkedin.com/search/results/people/?keywords={job_title}&origin=GLOBAL_SEARCH_CARD"
             driver.get(search_url)
             yield "On accède aux profils pour envoyer des messages..."

@@ -12,24 +12,31 @@ from database import supabase_client
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
+from lock import prospection_lock
 from postgrest.base_request_builder import APIResponse
 from prospection.start_prospection import run_chrome
 from pydantic import BaseModel
-
-# from workflow.start_prospect_auto import start_prospect_auto
-
-
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     thread = threading.Thread(target=start_prospect_auto, daemon=True)
-#     thread.start()
-#     print("🔥 Serveur prêt, check Supabase au démarrage...")
-#     yield
+from workflow.start_prospect_auto import start_prospect_auto
 
 
-app = FastAPI(title="Fillcloud API", version="1.0.0")  # lifespan=lifespan)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        supabase_client.table("prospection_settings").update({"is_active": False}).neq(
+            "id", -1
+        ).execute()
+        print("🧹 Supabase : Tous les statuts ont été réinitialisés.")
+    except Exception as e:
+        print(f"⚠️ Erreur reset démarrage: {e}")
+    thread = threading.Thread(target=start_prospect_auto, daemon=True)
+    thread.start()
+    print("🔥 Serveur prêt, check Supabase au démarrage...")
+    yield
+
+
+app = FastAPI(title="Fillcloud API", version="1.0.0", lifespan=lifespan)
 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
-prospection_lock = Lock()
+
 
 # Configuration CORS pour autoriser le front React
 app.add_middleware(
@@ -199,6 +206,9 @@ async def get_prospection():
 async def start_prospection(
     request: ProspectionRequest, background_tasks: BackgroundTasks
 ):
+    supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
+        "id", "null"
+    ).execute()
     print(f"DEBUG: Requête reçue pour {request.intitule}")
     if not prospection_lock.acquire(blocking=False):
         print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")
@@ -253,6 +263,14 @@ async def start_prospection(
                             "message": f"Erreur pendant l'exécution : {str(e)}",
                         }
                     finally:
+                        try:
+                            supabase_client.table("prospection_settings").update(
+                                {"is_active": False}
+                            ).not_.is_("id", "null").execute()
+                            print("✅ DB: Statut réinitialisé à False")
+                        except Exception as e:
+                            print(f"❌ ERREUR SUPABASE UPDATE : {e}")
+                            pass
                         if prospection_lock.locked():
                             prospection_lock.release()
                             print("🔓 LOCK LIBÉRÉ")
@@ -261,7 +279,7 @@ async def start_prospection(
                     run_in_background, request.intitule, config_db
                 )
 
-                # return {"status": "success", "message": "Chrome va se lancer"}
+                return {"status": "success", "message": "Chrome va se lancer"}
 
             if not res or res.data is None:
                 return {
@@ -277,42 +295,44 @@ async def start_prospection(
         }
 
 
-# @app.post("/api/prospection/async-stream")
-# async def start_prospection_stream(request: ProspectionRequest):
-#     try:
-#         res = supabase_client.rpc(
-#             "get_decrypted_settings",
-#             {"job_title_input": request.intitule, "key_input": KEY_SECRET},
-#         ).execute()
+@app.post("/api/prospection/async-stream")
+async def start_prospection_stream(request: ProspectionRequest):
+    supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
+        "id", "null"
+    ).execute()
+    try:
+        res = supabase_client.rpc(
+            "get_decrypted_settings",
+            {"job_title_input": request.intitule, "key_input": KEY_SECRET},
+        ).execute()
 
-#         if not res.data:
-#             return {"status": "error", "message": "Config introuvable"}
-#         response = cast(APIResponse, res)
+        if not res.data:
+            return {"status": "error", "message": "Config introuvable"}
+        response = cast(APIResponse, res)
 
-#         data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
-#         data = data_list[0] if data_list else {}
+        data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
+        data = data_list[0] if data_list else {}
 
-#         profile = data.get("profiles", {})
-#         config_db = {
-#             "id": data.get("id"),
-#             "linkedin_email": profile.get("linkedin_email"),
-#             "linkedin_password": profile.get("linkedin_password"),
-#             "job_title": request.intitule,
-#         }
-#     except Exception as e:
-#         return {"status": "error", "message": f"Erreur DB : {str(e)}"}
+        profile = data.get("profiles", {})
+        config_db = {
+            "id": data.get("id"),
+            "linkedin_email": profile.get("linkedin_email"),
+            "linkedin_password": profile.get("linkedin_password"),
+            "job_title": request.intitule,
+        }
+    except Exception as e:
+        return {"status": "error", "message": f"Erreur DB : {str(e)}"}
 
-# def wrapped_generator():
-#     if not prospection_lock.acquire(blocking=False):
-#         yield "⚠️ Déjà en cours"
-#         return
-#     try:
-#         yield from run_chrome(request.intitule, config_db)
-#     finally:
-#         prospection_lock.release()
+    def wrapped_generator():
+        if not prospection_lock.acquire(blocking=False):
+            yield "⚠️ Déjà en cours"
+            return
+        try:
+            yield from run_chrome(request.intitule, config_db)
+        finally:
+            prospection_lock.release()
 
-# # 3. On renvoie le stream direct au front
-# return StreamingResponse(wrapped_generator(), media_type="text/plain")
+    return StreamingResponse(wrapped_generator(), media_type="text/plain")
 
 
 if __name__ == "__main__":

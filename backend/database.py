@@ -10,7 +10,7 @@ env_path = base_dir / "front" / ".env"
 load_dotenv(dotenv_path=env_path)
 
 url = os.environ.get("SUPABASE_URL", "")
-key = os.environ.get("SUPABASE_ANON_KEY", "")
+key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 
 supabase_client = create_client(url, key)
 supabase_client.postgrest.timeout = 60

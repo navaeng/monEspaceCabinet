@@ -40,7 +40,7 @@ def run_chrome(job_title: str, config_db):
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     options = uc.ChromeOptions()
     profil_path = os.path.join(os.getcwd(), "linkedin_profile_access")
-    print(f"📂 [DEBUG] Path profil: {profil_path}")
+    print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")

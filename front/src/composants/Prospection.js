@@ -57,13 +57,14 @@ function Prospection() {
       );
 
       const reader = response.body.getReader();
-      // const decoder = new TextDecoder();
+      const decoder = new TextDecoder();
 
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         // const chunk = decoder.decode(value);
-        // const message = decoder.decode(value);
+        const message = decoder.decode(value);
+        console.log("Message", message);
         // console.log("Morceau reçu :", message);
         console.log("Value brute du reader :", value);
 

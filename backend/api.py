@@ -36,6 +36,10 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Fillcloud API", version="1.0.0", lifespan=lifespan)
+KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
+
+
+# Configuration CORS pour autoriser le front React
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -43,11 +47,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
-
-
-# Configuration CORS pour autoriser le front React
-
 
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)

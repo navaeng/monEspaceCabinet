@@ -10,8 +10,6 @@ import undetected_chromedriver as uc
 from data.prompt.prospection.prompt_message_prospection import (
     prompt_message_prospection,
 )
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from selenium.webdriver.chrome.service import Service
 
@@ -22,16 +20,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
 
 from data.call_groq import call_groq
-
-# app = FastAPI()
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
 
 
 class ProspectionRequest(BaseModel):

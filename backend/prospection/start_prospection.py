@@ -48,7 +48,7 @@ def run_chrome(job_title: str, config_db):
     profil_path = os.path.join(os.getcwd(), "linkedin_profile_access")
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")

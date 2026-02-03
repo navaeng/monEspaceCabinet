@@ -268,7 +268,8 @@ async def start_prospection(request: ProspectionRequest):
                         for step in run_chrome(request.intitule, config_db):
                             yield f"{step}\n"
                     except Exception as e:
-                        yield f"💥 Erreur: {str(e)}\n"
+                        print(f"💥 Erreur critique : {str(e)}")
+                        yield "❌ Erreur lors de la prospection\n"
                     finally:
                         supabase_client.table("prospection_settings").update(
                             {"is_active": False}

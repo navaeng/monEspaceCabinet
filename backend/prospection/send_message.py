@@ -70,7 +70,7 @@ def send_message(driver, job_title, message, config_db):
         except Exception as e:
             traceback.print_exc()
             print(f"Détails : {e}")
-            yield "❌ Échec à l'étape : Recherche Input"
+            yield "Champs de saisie introuvable..."
             time.sleep(random.uniform(6, 9))
             return
             # on ecris le message
@@ -125,12 +125,12 @@ def send_message(driver, job_title, message, config_db):
                 supabase_client.table("prospection_settings").update(
                     {"is_active": False}
                 ).eq("id", config_id).execute()
-                # yield f"✅ Session terminée {config_id}, fermeture navigateur.."
+                yield "Fermeture navigateur.."
             except Exception as e:
                 if "204" not in str(e) and "Missing response" not in str(e):
                     print(f"Erreur DB: {e}")
                 else:
                     print(f"Log technique: {e}")
-        if "driver" in locals():
-            driver.quit()
-            return
+        # if "driver" in locals():
+        #     driver.quit()
+        #     return

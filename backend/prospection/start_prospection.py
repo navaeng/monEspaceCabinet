@@ -35,6 +35,15 @@ def slow_type(element, text):
 
 def run_chrome(job_title: str, config_db):
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
+
+    def run_chrome(job_title: str, config_db):
+        print(f"🔍 [RUN_CHROME] job_title: {job_title}")
+        print(f"🔍 [RUN_CHROME] config_db: {config_db}")
+        print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
+        print(
+            f"🔍 [RUN_CHROME] Password présent: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+        )
+
     options = uc.ChromeOptions()
     profil_path = os.path.join(os.getcwd(), "linkedin_profile_access")
     print(f"[DEBUG] Path profil: {profil_path}")

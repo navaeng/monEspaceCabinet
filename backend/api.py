@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
         supabase_client.table("prospection_settings").update({"is_active": False}).neq(
             "id", -1
         ).execute()
-        print("🧹 Supabase : Tous les statuts ont été réinitialisés.")
+        print("Supabase : Tous les statuts ont été réinitialisés.")
     except Exception as e:
         print(f"⚠️ Erreur reset démarrage: {e}")
     thread = threading.Thread(target=start_prospect_auto, daemon=True)
@@ -37,7 +37,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Fillcloud API", version="1.0.0", lifespan=lifespan)
 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
-
+print(f"KEY: {KEY_SECRET}")
 
 # Configuration CORS pour autoriser le front React
 app.add_middleware(
@@ -193,6 +193,7 @@ async def get_prospection():
             .execute()
         )
         return res.data if res.data else []
+
     except Exception as e:
         print(f"Erreur Supabase List: {e}")
         return []
@@ -202,6 +203,7 @@ async def get_prospection():
 async def start_prospection(
     request: ProspectionRequest, background_tasks: BackgroundTasks
 ):
+    print("⏳ lancement...")
     supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
         "id", "null"
     ).execute()
@@ -214,11 +216,30 @@ async def start_prospection(
         print("🔒 LOCK ACQUIS")
         SELECT_QUERY = f"*,profiles!inner(linkedin_email,linkedin_password:pgp_sym_decrypt(linkedin_password::bytea,'{KEY_SECRET}'))"
         if SELECT_QUERY:
+            try:
+                print("🔒 insert db")
+                supabase_client.table("prospection_settings").insert(
+                    {
+                        "job_title": request.intitule,
+                        "query": request.intitule,
+                        "is_active": True,
+                        "user_id": "b48d5631-7f20-4837-904c-ae55f1e60fd3",
+                        "hour_start": datetime.now().astimezone().isoformat(),
+                    }
+                ).execute()
+            except Exception as e:
+                print(f"❌ ERREUR SUPABASE INSERT : {e}")
+
             print("🔒 select db")
+            print("⏳ Tentative d'appel RPC...")
             res = supabase_client.rpc(
                 "get_decrypted_settings",
                 {"job_title_input": request.intitule, "key_input": KEY_SECRET},
             ).execute()
+            print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
+            print(f"🔍 DEBUG - Type de données: {type(res.data)}")
+
+            print("RPC terminée...")
 
             response = cast(APIResponse, res)
             if res and hasattr(res, "data") and res.data:
@@ -226,6 +247,8 @@ async def start_prospection(
                     cast(List[Dict[str, Any]], response.data) if response.data else []
                 )
                 data = data_list[0] if data_list else {}
+                print(f"🔍 DEBUG - Contenu de data: {data}")
+                print(f"🔍 DEBUG - Clés disponibles: {data.keys() if data else 'VIDE'}")
 
                 config_db = {
                     "id": data.get("id"),
@@ -233,22 +256,14 @@ async def start_prospection(
                     "linkedin_password": data.get("linkedin_password"),
                     "job_title": request.intitule,
                 }
-
-                try:
-                    print("🔒 insert db")
-                    supabase_client.table("prospection_settings").insert(
-                        {
-                            "job_title": request.intitule,
-                            "query": request.intitule,
-                            "is_active": True,
-                            "user_id": "b48d5631-7f20-4837-904c-ae55f1e60fd3",
-                            "hour_start": datetime.now().astimezone().isoformat(),
-                        }
-                    ).execute()
-                except Exception as e:
-                    print(f"❌ ERREUR SUPABASE INSERT : {e}")
+                print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
+                print(
+                    f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+                )
 
                 def run_in_background(job_title, config):
+                    print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
+                    print(f"🔍 Config reçue: {config}")
                     try:
                         for step in run_chrome(request.intitule, config):
                             print(f"🤖 [DEBUG] Étape {step}")
@@ -271,6 +286,7 @@ async def start_prospection(
                             prospection_lock.release()
                             print("🔓 LOCK LIBÉRÉ")
 
+                print(f"DEBUG CONFIG: {config_db}")
                 background_tasks.add_task(
                     run_in_background, request.intitule, config_db
                 )

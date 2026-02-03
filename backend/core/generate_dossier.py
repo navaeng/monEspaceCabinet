@@ -56,7 +56,7 @@ def generate_dossier_api(
         log_progress("Chargement du template...")
 
         # Charger le template Word
-        template_path = ressources_path("ressources/template.docx")
+        template_path = ressources_path("ressources/template_4.docx")
         doc = DocxTemplate(template_path)
 
         # Créer l'environnement Jinja

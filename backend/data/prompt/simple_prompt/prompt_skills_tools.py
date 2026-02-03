@@ -20,6 +20,7 @@ RÈGLES CRITIQUES :
 - Ne crée pas de catégories d'outils vides.
 - Le champ "logiciels_outils" doit être une LISTE de chaînes de caractères.
 - Garde un ton professionnel et synthétique.
+- Ne recupere PAS les langues
 
 CV :
 {cv_text}

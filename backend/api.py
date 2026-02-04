@@ -221,6 +221,16 @@ async def start_prospection(
 
     token = auth_header.replace("Bearer ", "")
 
+    try:
+        user_response = supabase_client.auth.get_user(token)
+        if not user_response or not user_response.user:
+            raise HTTPException(status_code=401, detail="Authentification invalide")
+        current_user_id = user_response.user.id
+        print(f"✅ Utilisateur authentifié : {current_user_id}")
+    except Exception as e:
+        print(f"Erreur Supabase User: {e}")
+        return {"status": "error", "message": "Erreur lors de l'authentification"}
+
     supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
         "id", "null"
     ).execute()
@@ -252,7 +262,7 @@ async def start_prospection(
             print("⏳ Tentative d'appel RPC...")
             res = supabase_client.rpc(
                 "get_decrypted_settings",
-                {"job_title_input": request.intitule, "key_input": KEY_SECRET},
+                {"job_title_input": body.intitule, "key_input": KEY_SECRET},
             ).execute()
             print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
             print(f"🔍 DEBUG - Type de données: {type(res.data)}")
@@ -272,7 +282,7 @@ async def start_prospection(
                     "id": data.get("id"),
                     "linkedin_email": data.get("linkedin_email"),
                     "linkedin_password": data.get("linkedin_password"),
-                    "job_title": request.intitule,
+                    "job_title": body.intitule,
                 }
                 print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
                 print(
@@ -283,7 +293,7 @@ async def start_prospection(
                     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
                     print(f"🔍 Config reçue: {config}")
                     try:
-                        for step in run_chrome(request.intitule, config):
+                        for step in run_chrome(body.intitule, config):
                             print(f"🤖 [DEBUG] Étape {step}")
                     except Exception as e:
                         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
@@ -305,9 +315,7 @@ async def start_prospection(
                             print("🔓 LOCK LIBÉRÉ")
 
                 print(f"DEBUG CONFIG: {config_db}")
-                background_tasks.add_task(
-                    run_in_background, request.intitule, config_db
-                )
+                background_tasks.add_task(run_in_background, body.intitule, config_db)
 
                 return {"status": "success", "message": "Chrome va se lancer"}
 

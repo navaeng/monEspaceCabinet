@@ -1,7 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient";
 
 function Dashboard() {
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const { lgt } = await supabase.auth.signOut();
+    if (lgt) {
+      console.error("Erreur déconnexion:", lgt.message);
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -12,6 +22,12 @@ function Dashboard() {
             Tableau de bord
           </h1>
           <p className="text-xs text-gray-500">Espace cabinet</p>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Déconnexion
+          </button>
         </div>
 
         {/* Actions principales */}

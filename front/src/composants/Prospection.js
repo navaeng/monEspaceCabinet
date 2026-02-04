@@ -30,6 +30,7 @@ function Prospection() {
         },
       );
       const data = await res.json();
+      console.log(data);
       setProspection(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Erreur:", error);

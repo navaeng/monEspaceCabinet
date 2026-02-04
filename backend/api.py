@@ -211,7 +211,7 @@ async def get_prospection(request: Request):
 
         res = (
             supabase_client.table("prospection_settings")
-            .select("id, job_title, created_at, is_active")
+            .select("id, job_title, created_at, is_active, hour_start")
             .eq("user_id", current_user_id)
             .order("created_at", desc=True)
             .execute()

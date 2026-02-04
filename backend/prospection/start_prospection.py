@@ -36,6 +36,11 @@ def slow_type(element, text):
 def run_chrome(job_title: str, config_db):
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     user_id = config_db.get("id", "")
+    if not user_id:
+        print(
+            "❌ ERREUR : Pas d'ID utilisateur, Chrome ne sait pas quel dossier ouvrir !"
+        )
+        return
     print(f"🔍 [RUN_CHROME] job_title: {job_title}")
     print(f"🔍 [RUN_CHROME] config_db: {config_db}")
     print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
@@ -50,7 +55,7 @@ def run_chrome(job_title: str, config_db):
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -75,8 +80,15 @@ def run_chrome(job_title: str, config_db):
     os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
     os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
     chrome_service = Service(log_path="chromedriver.log")
-    if os.path.exists("linkedin_profile_informations/SingletonLock"):
-        os.remove("linkedin_profile_informations/SingletonLock")
+    lock_file = os.path.join(profil_path, "SingletonLock")
+    if os.path.exists(lock_file):
+        try:
+            os.remove(lock_file)
+            print(f"✅ Lock supprimé pour le profil {user_id}")
+        except Exception as e:
+            print(f"❌ Erreur lors de la suppression du lock : {e}")
+    # if os.path.exists("linkedin_profile_informations/SingletonLock"):
+    #     os.remove("linkedin_profile_informations/SingletonLock")
     v_chrome = int(
         next(
             re.finditer(
@@ -102,7 +114,7 @@ def run_chrome(job_title: str, config_db):
 
     try:
         driver.get("https://www.linkedin.com/feed/")
-        time.sleep(120)
+        # time.sleep(120)
         yield "Accès à LinkedIn..."
         time.sleep(random.uniform(3, 6))
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
@@ -111,7 +123,7 @@ def run_chrome(job_title: str, config_db):
         time.sleep(random.uniform(2, 4))
     except Exception as e:
         print(f"Erreur lors du chargement de la page : {e}")
-        yield "Tentative d'accès échoué votre mot de passe à peut être été changé..."
+        # yield "Tentative d'accès échoué votre mot de passe à peut être été changé..."
 
     try:
         yield "🔍 Recherche..."

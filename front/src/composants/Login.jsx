@@ -23,6 +23,7 @@ function Login({ onLoginSuccess }) {
 
       if (onLoginSuccess) onLoginSuccess(data.user);
       navigate("/Dashboard");
+      console.log("Login successful");
     } catch (error) {
       console.error("Erreur:", error);
     } finally {

@@ -5,7 +5,7 @@ import Prospection from "./composants/Prospection";
 import Header from "./composants/Header";
 import Login from "./composants/Login";
 import Home from "./composants/Home";
-// import ProtectedRoute from "./composants/ProtectedRoute";
+import ProtectedRoute from "./composants/ProtectedRoute";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 
@@ -23,14 +23,14 @@ function App() {
       <Header />
 
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Home />} />
         {
           <Route
             path="/Prospection"
             element={
-              // <ProtectedRoute>
-              <Prospection />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <Prospection />
+              </ProtectedRoute>
             }
           />
         }
@@ -42,9 +42,9 @@ function App() {
           <Route
             path="/Dashboard"
             element={
-              // <ProtectedRoute>
-              <Dashboard />
-              // </ProtectedRoute>
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
             }
           />
         }

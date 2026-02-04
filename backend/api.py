@@ -215,6 +215,9 @@ async def start_prospection(
 ):
     print("⏳ lancement...")
     auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        print("❌ Authentification manquante")
+        return {"status": "error", "message": "Authentification manquante"}
 
     token = auth_header.replace("Bearer ", "")
 
@@ -238,7 +241,7 @@ async def start_prospection(
                         "job_title": body.intitule,
                         "query": body.intitule,
                         "is_active": True,
-                        "user_id": "b48d5631-7f20-4837-904c-ae55f1e60fd3",
+                        "user_id": current_user_id,
                         "hour_start": datetime.now().astimezone().isoformat(),
                     }
                 ).execute()

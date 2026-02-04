@@ -8,7 +8,8 @@ import Home from "./composants/Home";
 import ProtectedRoute from "./composants/ProtectedRoute";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import SignupUser from "./composants/SignupUser";
+import EditInfos from "./composants/EditInfos";
+// import SignupUser from "./composants/SignupUser";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,13 +60,21 @@ function App() {
           }
         />
         <Route
+          path="/EditInfos"
+          element={
+            <ProtectedRoute>
+              <EditInfos />
+            </ProtectedRoute>
+          }
+        />
+        {/* <Route
           path="/SignupUser"
           element={
             <ProtectedRoute>
               <SignupUser />
             </ProtectedRoute>
           }
-        />
+        />*/}
       </Routes>
     </BrowserRouter>
   );

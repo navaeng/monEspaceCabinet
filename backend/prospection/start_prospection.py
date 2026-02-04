@@ -109,6 +109,7 @@ def run_chrome(job_title: str, config_db):
         time.sleep(random.uniform(2, 4))
     except Exception as e:
         print(f"Erreur lors du chargement de la page : {e}")
+        yield "Tentative d'accès échoué votre mot de passe à peut être été changé..."
 
     try:
         yield "🔍 Recherche..."

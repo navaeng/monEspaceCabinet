@@ -51,6 +51,12 @@ function Header() {
                 Tableau de bord
               </Link>
               <Link
+                to="/"
+                className="text-xs text-gray-600 hover:text-gray-900"
+              >
+                Rechercher un candidat
+              </Link>
+              <Link
                 to="/Prospection"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
@@ -62,14 +68,14 @@ function Header() {
               >
                 Dossier de compétences
               </Link>
-              <Link
+              {/* <Link
                 to="/SignupUser"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
                 Ajouter une personne
-              </Link>
+              </Link>*/}
               <Link
-                to="/"
+                to="EditInfos"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
                 Modifier mes infos

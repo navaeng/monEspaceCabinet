@@ -10,6 +10,7 @@ function Prospection() {
   // const [statusMessage, setStatusMessage] = useState("");
   const [itemToDelete, setItemToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeId, setActiveId] = useState(null);
 
   const [statusLogs, setStatusLogs] = useState(() => {
     const saved = localStorage.getItem("prospection_logs");
@@ -69,6 +70,7 @@ function Prospection() {
 
     setIsLoading(true);
     setStatusLogs([]);
+    setActiveId("current");
     // const {
     //   data: { session },
     // } = await supabase.auth.getSession();
@@ -88,13 +90,14 @@ function Prospection() {
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-
+      setStatusLogs([]);
+      localStorage.removeItem("prospection_logs");
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         const chunk = decoder.decode(value);
-        const message = decoder.decode(value);
-        console.log("Message", message);
+        // const message = decoder.decode(value);
+        // console.log("Message", message);
         // console.log("Morceau reçu :", message);
         console.log("Value brute du reader :", value);
 
@@ -225,19 +228,6 @@ function Prospection() {
                       strokeWidth={2}
                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     />
-                    {statusLogs.length > 0 && (
-                      <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded text-[10px] font-mono max-h-40 overflow-y-auto">
-                        <p className="text-gray-400 mb-1">Logs en direct :</p>
-                        {statusLogs.map((log, index) => (
-                          <div
-                            key={index}
-                            className="text-blue-600 border-l-2 border-blue-200 pl-2 mb-1"
-                          >
-                            {log}
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -281,12 +271,36 @@ function Prospection() {
                             {p.is_active && (
                               <div className="flex items-center text-blue-600">
                                 <div className="animate-spin rounded-full h-3 w-3 border-2 border-current border-t-transparent"></div>
-                                {/* <p className="text-gray-500 text-xs mt-0.5">
-                                  {statusMessage || "En attente..."}
-                                </p>*/}
                               </div>
                             )}
                           </div>
+                          {p.is_active && statusLogs.length > 0 && (
+                            <div className="mb-3 p-2 bg-gray-50 border border-gray-100 rounded text-[10px] font-mono max-h-32 overflow-y-auto">
+                              {statusLogs.map((log, index) => (
+                                <div
+                                  key={index}
+                                  className="text-blue-600 border-l-2 border-blue-200 pl-2 mb-0.5"
+                                >
+                                  {log}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {/* {statusLogs.length > 0 && (
+                            <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded text-[10px] font-mono max-h-40 overflow-y-auto">
+                              <p className="text-gray-400 mb-1">
+                                Logs en direct :
+                              </p>
+                              {statusLogs.map((log, index) => (
+                                <div
+                                  key={index}
+                                  className="text-blue-600 border-l-2 border-blue-200 pl-2 mb-1"
+                                >
+                                  {log}
+                                </div>
+                              ))}
+                            </div>
+                          )}*/}
 
                           <div className="flex items-center text-gray-400 text-[10px] gap-3">
                             <span className="flex items-center">

@@ -11,6 +11,8 @@ function Prospection() {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeId, setActiveId] = useState(null);
+  const [mode, setMode] = useState("prospection");
+  const [details, setDetails] = useState("");
 
   const [statusLogs, setStatusLogs] = useState(() => {
     const saved = localStorage.getItem("prospection_logs");
@@ -146,7 +148,7 @@ function Prospection() {
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label
+                  {/* <label
                     htmlFor="intitule"
                     className="block text-xs font-normal text-gray-600 mb-1.5"
                   >
@@ -162,6 +164,112 @@ function Prospection() {
                     placeholder="Ex: Développeur Front-end"
                     required
                   />
+                  <label
+                    htmlFor="intitule"
+                    className="block text-xs font-normal text-gray-600 mb-1.5"
+                  >
+                    Donner des détails pour les messages privés généré par le
+                    model
+                  </label>
+                  <input
+                    id="Details_message"
+                    type="text"
+                    value={intitule}
+                    onChange={(e) => setIntitule(e.target.value)}
+                    disabled={isLoading}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
+                    placeholder="Détails"
+                    required
+                  />
+                  <label
+                    htmlFor="type_of_prospect"
+                    className="block text-xs font-normal text-gray-600 mb-1.5"
+                  >
+                    Type de prospection
+                  </label>
+                  <input
+                    id="type_prospection"
+                    type="radio"
+                    // value={type_prospection}
+                    // onChange={(e) => setIntitule(e.target.value)}
+                    disabled={isLoading}
+                    // className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
+                    required
+                  />*/}
+                  <div className="space-y-4">
+                    {/* Input Métier */}
+                    <div>
+                      <label
+                        htmlFor="intitule"
+                        className="block text-xs font-normal text-gray-600 mb-1.5"
+                      >
+                        Intitulé du métier
+                      </label>
+                      <input
+                        id="intitule"
+                        type="text"
+                        value={intitule}
+                        onChange={(e) => setIntitule(e.target.value)}
+                        disabled={isLoading}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
+                        placeholder="Ex: Développeur Front-end"
+                        required
+                      />
+                    </div>
+
+                    {/* Input Détails */}
+                    <div>
+                      <label
+                        htmlFor="details"
+                        className="block text-xs font-normal text-gray-600 mb-1.5"
+                      >
+                        Détails pour les messages privés (IA)
+                      </label>
+                      <input
+                        id="details"
+                        type="text"
+                        value={details}
+                        onChange={(e) => setDetails(e.target.value)}
+                        disabled={isLoading}
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
+                        placeholder="Ex: Mentionner mon portfolio..."
+                        required
+                      />
+                    </div>
+
+                    {/* Radio Buttons Type */}
+                    <div>
+                      <label className="block text-xs font-normal text-gray-600 mb-2">
+                        Type de prospection
+                      </label>
+                      <div className="flex gap-4">
+                        <label className="flex items-center text-xs font-normal text-gray-700 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="type_prospection"
+                            value="prospection"
+                            checked={mode === "prospection"}
+                            onChange={(e) => setMode(e.target.value)}
+                            disabled={isLoading}
+                            className="mr-2 accent-black"
+                          />
+                          Prospection
+                        </label>
+                        <label className="flex items-center text-xs font-normal text-gray-700 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="type_prospection"
+                            value="demarchage"
+                            checked={mode === "demarchage"}
+                            onChange={(e) => setMode(e.target.value)}
+                            disabled={isLoading}
+                            className="mr-2 accent-black"
+                          />
+                          Démarchage
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <button
                   type="submit"

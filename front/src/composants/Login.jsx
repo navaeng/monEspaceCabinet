@@ -8,12 +8,13 @@ function Login({ onLoginSuccess }) {
   const [motDePasse, setMotDePasse] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    // setSuccess(false);
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({

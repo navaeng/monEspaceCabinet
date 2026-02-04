@@ -81,6 +81,12 @@ function Header() {
                 Modifier mes infos
               </Link>
               <Link
+                to="/"
+                className="text-xs text-gray-600 hover:text-gray-900"
+              >
+                Ajouter une personne
+              </Link>
+              <Link
                 onClick={handleLogout}
                 className="text-xs text-gray-600 hover:text-gray-900"
               >

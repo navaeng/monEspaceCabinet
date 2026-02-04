@@ -470,7 +470,8 @@ function Prospection() {
                                     clipRule="evenodd"
                                   />
                                 </svg>
-                                Prévu à : {p.hour_start}
+                                Nouveau lancement demain à :{" "}
+                                {p.hour_start.split("T")[1].slice(0, 5)}
                               </span>
                             )}
                           </div>

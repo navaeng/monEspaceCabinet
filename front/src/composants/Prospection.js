@@ -13,14 +13,12 @@ function Prospection() {
 
   const FetchProspection = async () => {
     try {
+      const headers = await getAuthHeaders();
       const res = await fetch(
         "http://localhost:8000/backend/prospection/list",
         {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "true",
-          },
+          headers,
         },
       );
       const data = await res.json();
@@ -39,26 +37,45 @@ function Prospection() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!intitule.trim()) return;
-
-    setIsLoading(true);
+  const getAuthHeaders = async () => {
     const {
       data: { session },
     } = await supabase.auth.getSession();
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.access_token}`,
+      // "ngrok-skip-browser-warning": "true",
+    };
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // if (!intitule.trim()) return;
+    // const headers = await getAuthHeaders();
+    // const response = await fetch(
+    //   "http://localhost:8000/backend/prospection/list",
+    //   {
+    //     method: "POST",
+    //     headers,
+    //     body: JSON.stringify({ intitule }),
+    //   },
+    // );
+
+    setIsLoading(true);
+    // const {
+    //   data: { session },
+    // } = await supabase.auth.getSession();
 
     // setStatusMessage("En cours...");
 
     try {
+      const headers = await getAuthHeaders();
       const response = await fetch(
         "http://localhost:8000/backend/prospection/start_prospection",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session?.access_token}`,
-          },
+          headers,
           body: JSON.stringify({ intitule }),
         },
       );

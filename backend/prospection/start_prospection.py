@@ -35,20 +35,22 @@ def slow_type(element, text):
 
 def run_chrome(job_title: str, config_db):
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
-
-    def run_chrome(job_title: str, config_db):
-        print(f"🔍 [RUN_CHROME] job_title: {job_title}")
-        print(f"🔍 [RUN_CHROME] config_db: {config_db}")
-        print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
-        print(
-            f"🔍 [RUN_CHROME] Password présent: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
-        )
+    user_id = config_db.get("id", "")
+    print(f"🔍 [RUN_CHROME] job_title: {job_title}")
+    print(f"🔍 [RUN_CHROME] config_db: {config_db}")
+    print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
+    print(
+        f"🔍 [RUN_CHROME] Password présent: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+    )
 
     options = uc.ChromeOptions()
-    profil_path = os.path.join(os.getcwd(), "linkedin_profile_access")
+    profil_path = os.path.abspath(f"cookies/profile_{user_id}")
+
+    # profil_path = os.path.join(os.getcwd(), "linkedin_profile_informations")
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
-    options.add_argument("--headless=new")
+    options.add_argument("--profile-directory=Default")
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -73,8 +75,8 @@ def run_chrome(job_title: str, config_db):
     os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
     os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
     chrome_service = Service(log_path="chromedriver.log")
-    if os.path.exists("linkedin_profile_access/SingletonLock"):
-        os.remove("linkedin_profile_access/SingletonLock")
+    if os.path.exists("linkedin_profile_informations/SingletonLock"):
+        os.remove("linkedin_profile_informations/SingletonLock")
     v_chrome = int(
         next(
             re.finditer(
@@ -100,7 +102,7 @@ def run_chrome(job_title: str, config_db):
 
     try:
         driver.get("https://www.linkedin.com/feed/")
-        # time.sleep(120)
+        time.sleep(120)
         yield "Accès à LinkedIn..."
         time.sleep(random.uniform(3, 6))
         wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))

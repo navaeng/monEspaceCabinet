@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
 function Header() {
   // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleLogout = async () => {
-  //   await supabase.auth.signOut();
-  //   setUser(null);
-  //   navigate("/Connexion");
-  // };
-  //
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    navigate("/Connexion");
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user || null);
@@ -62,6 +62,12 @@ function Header() {
               >
                 Dossier de compétences
               </Link>
+              <Link
+                onClick={handleLogout}
+                className="text-xs text-gray-600 hover:text-gray-900"
+              >
+                Déconnexion
+              </Link>
             </>
           )}
         </div>
@@ -75,8 +81,9 @@ function Header() {
               Connexion
             </Link>
           ) : (
-            <span classname="text-xs text-gray-500">{user.full_name}</span>
+            <span classname="text-xs text-gray-500">{user.email}</span>
           )}
+
           {/* {user ? (
             <button
               onClick={handleLogout}

@@ -27,14 +27,14 @@ function Dashboard() {
     getUserData();
   }, []);
 
-  const handleLogout = async () => {
-    const { lgt } = await supabase.auth.signOut();
-    if (lgt) {
-      console.error("Erreur déconnexion:", lgt.message);
-    } else {
-      navigate("/Connexion");
-    }
-  };
+  // const handleLogout = async () => {
+  //   const { lgt } = await supabase.auth.signOut();
+  //   if (lgt) {
+  //     console.error("Erreur déconnexion:", lgt.message);
+  //   } else {
+  //     navigate("/Connexion");
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -45,12 +45,12 @@ function Dashboard() {
             Tableau de bord {nom ? nom : user ? user.email : ""}
           </h1>
           <p className="text-xs text-gray-500">Espace cabinet</p>
-          <button
+          {/* <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           >
             Déconnexion
-          </button>
+          </button>*/}
         </div>
 
         {/* Actions principales */}

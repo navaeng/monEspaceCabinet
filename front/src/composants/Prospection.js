@@ -12,7 +12,7 @@ function Prospection() {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeId, setActiveId] = useState(null);
-  const [mode, setMode] = useState("prospection");
+  const [mode, setMode] = useState("");
   const [details, setDetails] = useState("");
 
   const [statusLogs, setStatusLogs] = useState(() => {
@@ -235,7 +235,7 @@ function Prospection() {
                         disabled={isLoading}
                         className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
                         placeholder="Ex: Mentionner l'offre..."
-                        required
+                        // required
                       />
                     </div>
 

@@ -190,6 +190,7 @@ async def generate_dossier(
 class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     details: Optional[str]
+    mode: str
 
 
 @app.get("/backend/prospection/list")
@@ -269,6 +270,7 @@ async def start_prospection(
                         "job_title": body.intitule,
                         "query": body.intitule,
                         "details": body.details,
+                        "mode": body.mode,
                         "is_active": True,
                         "user_id": current_user_id,
                         "hour_start": datetime.now().astimezone().isoformat(),
@@ -313,7 +315,7 @@ async def start_prospection(
                     try:
                         print(f"🚀 Lancement Chrome pour {body.intitule}")
                         for step in run_chrome(
-                            body.intitule, body.details or "", config_db
+                            body.intitule, body.details or "", body.mode, config_db
                         ):
                             yield f"{step}\n"
                     except Exception as e:

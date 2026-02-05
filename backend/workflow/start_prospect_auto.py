@@ -46,6 +46,7 @@ def start_prospect_auto():
                         job_id = job.get("id")
                         title = str(job.get("job_title") or "")
                         details = str(job.get("job_details") or "")
+                        mode = str(job.get("mode") or "")
                         print(
                             f"DEBUG - Job ID : {job_id}, Title : {title}, Details : {details}"
                         )
@@ -56,7 +57,7 @@ def start_prospect_auto():
                                 {"is_active": True, "has_run_today": True}
                             ).eq("id", job_id).execute()
                             try:
-                                list(run_chrome(title, details, job))
+                                list(run_chrome(title, details, mode, job))
                             except Exception as e:
                                 print(f"Erreur lors du lancement de {title}: {e}")
 

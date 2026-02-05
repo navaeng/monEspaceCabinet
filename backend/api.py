@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 # from threading import Lock
-from typing import Any, Dict, List, cast
+from typing import Any, Dict, List, Optional, cast
 
 from core.generate_dossier import generate_dossier_api, validate_cv_file
 from database import supabase_client
@@ -189,7 +189,7 @@ async def generate_dossier(
 
 class ProspectionRequest(BaseModel):  # contrat
     intitule: str
-    details: str
+    details: Optional[str]
 
 
 @app.get("/backend/prospection/list")
@@ -268,6 +268,7 @@ async def start_prospection(
                     {
                         "job_title": body.intitule,
                         "query": body.intitule,
+                        "details": body.details,
                         "is_active": True,
                         "user_id": current_user_id,
                         "hour_start": datetime.now().astimezone().isoformat(),
@@ -311,7 +312,7 @@ async def start_prospection(
                 def stream_generator():
                     try:
                         print(f"🚀 Lancement Chrome pour {body.intitule}")
-                        for step in run_chrome(body.intitule, config_db):
+                        for step in run_chrome(body.intitule, body.details, config_db):
                             yield f"{step}\n"
                     except Exception as e:
                         import traceback

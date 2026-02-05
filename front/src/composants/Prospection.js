@@ -3,6 +3,7 @@ import { supabase } from "../supabaseClient";
 
 function Prospection() {
   const [intitule, setIntitule] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
   // const [currentStatus, setCurrentStatus] = useState("");
   const [prospection, setProspection] = useState([]);
@@ -87,7 +88,7 @@ function Prospection() {
         {
           method: "POST",
           headers,
-          body: JSON.stringify({ intitule }),
+          body: JSON.stringify({ intitule, details }),
         },
       );
 

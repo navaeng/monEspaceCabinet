@@ -5,7 +5,8 @@
 import random
 import time
 from datetime import datetime, timedelta
-from threading import Lock
+
+# from threading import Lock
 from typing import Any, cast
 
 # import pytz
@@ -44,6 +45,7 @@ def start_prospect_auto():
                     for job in data:
                         job_id = job.get("id")
                         title = str(job.get("job_title") or "")
+                        details = str(job.get("job_details") or "")
 
                         if job_id and title:
                             print(f"Lancement : {title}")
@@ -51,7 +53,7 @@ def start_prospect_auto():
                                 {"is_active": True, "has_run_today": True}
                             ).eq("id", job_id).execute()
                             try:
-                                list(run_chrome(title, job))
+                                list(run_chrome(title, details, job))
                             except Exception as e:
                                 print(f"Erreur lors du lancement de {title}: {e}")
 

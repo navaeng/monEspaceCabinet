@@ -3,8 +3,8 @@ import random
 import re
 import subprocess
 import time
-import urllib.parse
 
+# import urllib.parse
 # from operator import call
 import undetected_chromedriver as uc
 from data.prompt.prospection.prompt_message_prospection import (
@@ -90,8 +90,11 @@ def run_chrome(job_title: str, details: str, config_db):
         message = "Bonjour"
 
     # os.system("pkill -9 chrome")
-    os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
-    os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
+    # os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
+    # os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
+    #
+    subprocess.run(["pkill", "-9", "chrome"], stderr=subprocess.DEVNULL)
+    subprocess.run(["pkill", "-9", "chromedriver"], stderr=subprocess.DEVNULL)
     chrome_service = Service(log_path="chromedriver.log")
     lock_file = os.path.join(profil_path, "SingletonLock")
     if os.path.exists(lock_file):

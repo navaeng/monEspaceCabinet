@@ -37,7 +37,7 @@ def run_chrome(job_title: str, config_db):
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     uid = config_db.get("user_id")
     print(f"[DEBUG] User ID: {uid}")
-    keyword_exclude = ["Nava", "Nava engineering"]
+
     if not uid:
         print(
             "❌ ERREUR : Pas d'ID utilisateur, Chrome ne sait pas quel dossier ouvrir !"
@@ -154,6 +154,15 @@ def run_chrome(job_title: str, config_db):
 
     for i, bouton in enumerate(boutons_conx):
         try:
+            container = bouton.find_element(By.XPATH, "./ancestor::li")
+            print(f"Container text: {container.text}")
+            infos_profil = container.text.lower()
+            keyword_exclude = ["Nava", "Nava engineering"]
+
+            if any(keyword in infos_profil for keyword in keyword_exclude):
+                yield "Personne chez nava, on prospecte pas ce profil..."
+                continue
+
             driver.execute_script(
                 "arguments[0].scrollIntoView({block: 'center'});", bouton
             )

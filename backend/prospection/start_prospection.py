@@ -4,6 +4,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.parse
 from typing import Optional
 
 import undetected_chromedriver as uc

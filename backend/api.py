@@ -307,7 +307,11 @@ async def start_prospection(
                     "linkedin_email": data.get("linkedin_email"),
                     "linkedin_password": data.get("linkedin_password"),
                     "job_title": body.intitule,
+                    "intitule": body.intitule,
+                    "mode": body.mode,
+                    "offre": body.offre,
                 }
+                print(f"DEBUG OFFRE: {body.offre}")
                 print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
                 print(
                     f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"

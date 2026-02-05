@@ -27,6 +27,7 @@ function Prospection() {
 
     reader.onload = (event) => {
       const text = event.target.result;
+      console.log("Texte lu :", text.substring(0, 50));
       setOffre(text);
     };
     if (file) {
@@ -263,8 +264,7 @@ function Prospection() {
                         <input
                           id="offre"
                           type="file"
-                          onchange={handleFileChange}
-                          // value={offre}
+                          onChange={handleFileChange}
                           disabled={isLoading}
                           accept=".pdf, .doc, .docx"
                           className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50" // required

@@ -14,6 +14,7 @@ function Prospection() {
   const [activeId, setActiveId] = useState(null);
   const [mode, setMode] = useState("");
   const [details, setDetails] = useState("");
+  const [offre, setOffre] = useState("");
 
   const [statusLogs, setStatusLogs] = useState(() => {
     const saved = localStorage.getItem("prospection_logs");
@@ -88,7 +89,7 @@ function Prospection() {
         {
           method: "POST",
           headers,
-          body: JSON.stringify({ intitule, details, mode }),
+          body: JSON.stringify({ intitule, details, mode, offre }),
         },
       );
 
@@ -236,6 +237,24 @@ function Prospection() {
                         className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
                         placeholder="Ex: Mentionner l'offre..."
                         // required
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="offre"
+                        className="block text-xs font-normal text-gray-600 mb-1.5"
+                      >
+                        Uploader l'offre pour facilier la recherche
+                      </label>
+                      <input
+                        id="offre"
+                        type="file"
+                        onchange={(e) => setOffre(e.target.files[0])}
+                        // value={offre}
+                        disabled={isLoading}
+                        accept=".pdf, .doc, .docx"
+                        className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50" // required
                       />
                     </div>
 

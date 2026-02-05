@@ -1,5 +1,5 @@
 # import groq
-from backend.data.call_groq import call_groq
+from data.call_groq import call_groq
 
 
 def prompt_check_ia_profile(job_title, profile_main_content):

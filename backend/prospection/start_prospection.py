@@ -2,6 +2,7 @@ import os
 import random
 import re
 import subprocess
+import sys
 import time
 
 import undetected_chromedriver as uc
@@ -24,6 +25,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
 
 from data.call_groq import call_groq
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class ProspectionRequest(BaseModel):
@@ -71,7 +74,7 @@ def run_chrome(job_title: str, details: str, mode: str, config_db):
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")

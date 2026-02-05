@@ -62,7 +62,7 @@ def send_message(driver, job_title, message, config_db):
                 print("Personne chez nava, on prospecte pas ce profil...")
                 return
 
-            ia_check = prompt_check_ia_profile(profile_main_content)
+            ia_check = prompt_check_ia_profile(job_title, profile_main_content)
             if not ia_check:
                 yield "Candidat non pertinent"
                 return

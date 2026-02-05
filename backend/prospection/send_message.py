@@ -7,6 +7,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from backend.data.prompt.prospection.prompt_check_ia_profile import (
+    prompt_check_ia_profile,
+)
+
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.support.ui import WebDriverWait
 
@@ -17,7 +21,7 @@ def send_message(driver, job_title, message, config_db):
         try:
             time.sleep(random.uniform(5, 8))
 
-            search_url = "https://www.linkedin.com/in/vinushan-vincent-8064173a4/"
+            search_url = "https://www.linkedin.com/in/jouna%C3%AFd-ben-salah-601b77222/"
             # search_url = f"https://www.linkedin.com/search/results/people/?keywords={job_title}&origin=GLOBAL_SEARCH_CARD"
             driver.get(search_url)
             yield "On accède aux profils pour envoyer des messages..."
@@ -48,11 +52,19 @@ def send_message(driver, job_title, message, config_db):
 
         try:
             profile_main_content = driver.find_element(By.TAG_NAME, "main").text.lower()
-            print(profile_main_content)
+            content_lower = profile_main_content.lower()
+
+            print(content_lower)
+
             keyword_exclude = ["nava engineering", "navaengineering"]
-            if any(keyword in profile_main_content for keyword in keyword_exclude):
-                yield "Personne chez nava, on prospecte pas ce profil..."
+            if any(keyword in content_lower for keyword in keyword_exclude):
+                yield "Candidat interne ou exclu, skip..."
                 print("Personne chez nava, on prospecte pas ce profil...")
+                return
+
+            ia_check = prompt_check_ia_profile(profile_main_content)
+            if not ia_check:
+                yield "Candidat non pertinent"
                 return
         except Exception as e:
             print(f"Error checking profile content: {e}")

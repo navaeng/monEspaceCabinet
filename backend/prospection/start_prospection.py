@@ -52,6 +52,14 @@ def run_chrome(job_title: str, config_db):
 
     options = uc.ChromeOptions()
     profil_path = os.path.abspath(f"cookies/profile_{uid}")
+    lock_file = os.path.join(profil_path, "SingletonLock")
+
+    if os.path.exists(lock_file):
+        try:
+            os.remove(lock_file)
+            print("lock supprimé avec succès")
+        except Exception as e:
+            print(f"Erreur lors de la suppression du fichier de verrouillage : {e}")
 
     # profil_path = os.path.join(os.getcwd(), "linkedin_profile_informations")
     print(f"[DEBUG] Path profil: {profil_path}")
@@ -136,9 +144,9 @@ def run_chrome(job_title: str, config_db):
         print(f"❌ Crash avant recherche : {str(e)[:50]}")
     try:
         time.sleep(random.uniform(8, 15))
-        # query_encoded = urllib.parse.quote(job_title)
-        target_url = "https://www.linkedin.com/search/results/people/?keywords=nava%20&origin=FACETED_SEARCH&currentCompany=%5B%2286882974%22%5D"
-        # target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL"
+        query_encoded = urllib.parse.quote(job_title)
+        # target_url = "https://www.linkedin.com/search/results/people/?keywords=nava%20&origin=FACETED_SEARCH&currentCompany=%5B%2286882974%22%5D"
+        target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL"
         driver.get(target_url)
         yield "Filtre personnes..."
     except Exception as e:

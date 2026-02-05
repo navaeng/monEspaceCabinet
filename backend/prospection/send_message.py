@@ -2,14 +2,13 @@ import random
 import time
 import traceback
 
+from data.prompt.prospection.prompt_check_ia_profile import (
+    prompt_check_ia_profile,
+)
 from database import supabase_client
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-from backend.data.prompt.prospection.prompt_check_ia_profile import (
-    prompt_check_ia_profile,
-)
 
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.support.ui import WebDriverWait

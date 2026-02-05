@@ -45,6 +45,18 @@ def send_message(driver, job_title, message, config_db):
         # time.sleep(10)
         # yield "bouton de message trouvé..."
         # driver.execute_script("arguments[0].click();", button)
+
+        try:
+            profile_main_content = driver.find_element(By.TAG_NAME, "main").text.lower()
+            print(profile_main_content)
+            keyword_exclude = ["nava engineering", "navaengineering"]
+            if any(keyword in profile_main_content for keyword in keyword_exclude):
+                yield "Personne chez nava, on prospecte pas ce profil..."
+                print("Personne chez nava, on prospecte pas ce profil...")
+                return
+        except Exception as e:
+            print(f"Error checking profile content: {e}")
+
         button = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located(
                 (

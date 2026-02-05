@@ -8,8 +8,6 @@ def prompt_check_ia_profile(offre, profile_main_content):
         Analyse ce profil LinkedIn : {profile_main_content}
         Est-ce qu'il correspond à cette {offre} ?
         Réponds uniquement par 'OUI' ou 'NON'.
-        et si c'est oui donne un résumé très court qui expliquerais pourquoi il est intéréssant avec les infos pour le contacter.
-        Par exemple : "Tu devrais checker ce profil, il a une expérience de 5 ans dans le domaine ça colle avec l'offre, j'ai trouvé son numéro sur sa page : XXXXXXXXXX."
         """
 
     response_ia = call_groq(prompt) or ""

@@ -40,27 +40,34 @@ export default function EditInfos() {
   };
 
   return (
-    <div>
-      {/* <h2>Profil linkedin</h2>*/}
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email Linkedin"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password Linkedin"
-      />
-      <button onClick={handleSignup}>Signup</button>
-      {error && <p>{error}</p>}
-      {success && (
-        <p className="text-xs text-green-600 font-medium">
-          Profil LinkedIn mis à jour avec succès !
-        </p>
-      )}
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-56">
+        <input
+          type="email"
+          className="w-full p-2 mb-2 text-sm border-b outline-none"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="email"
+        />
+
+        <input
+          type="password"
+          className="w-full p-2 mb-4 text-sm border-b outline-none"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="mot de passe"
+        />
+
+        <button
+          onClick={handleSignup}
+          className="w-full p-2 text-sm text-white bg-gray-800"
+        >
+          enregistrer
+        </button>
+
+        {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
+        {success && <p className="mt-2 text-xs text-gray-600">sauvegardé</p>}
+      </div>
     </div>
   );
 }

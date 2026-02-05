@@ -62,6 +62,7 @@ def send_message(driver, job_title, message, config_db):
 
         if any(keyword in infos_profil for keyword in keyword_exclude):
             yield "Personne chez nava, on prospecte pas ce profil..."
+            print("Personne chez nava, on prospecte pas ce profil...")
             return
 
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)

@@ -21,6 +21,19 @@ function Prospection() {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const text = event.target.result;
+      setOffre(text);
+    };
+    if (file) {
+      reader.readAsText(file);
+    }
+  };
+
   const FetchProspection = async () => {
     try {
       const headers = await getAuthHeaders();
@@ -250,7 +263,7 @@ function Prospection() {
                         <input
                           id="offre"
                           type="file"
-                          onchange={(e) => setOffre(e.target.files[0])}
+                          onchange={handleFileChange}
                           // value={offre}
                           disabled={isLoading}
                           accept=".pdf, .doc, .docx"

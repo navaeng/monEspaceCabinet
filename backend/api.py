@@ -191,7 +191,7 @@ class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     details: Optional[str]
     mode: str
-    offre: str
+    offre: Optional[str]
 
 
 @app.get("/backend/prospection/list")
@@ -340,36 +340,6 @@ async def start_prospection(
 
                 return StreamingResponse(stream_generator(), media_type="text/plain")
 
-                # def run_in_background(job_title, config):
-                #     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
-                #     print(f"🔍 Config reçue: {config}")
-                #     try:
-                #         for step in run_chrome(body.intitule, config):
-                #             print(f"🤖 [DEBUG] Étape {step}")
-                #     except Exception as e:
-                #         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
-                #         return {
-                #             "status": "error",
-                #             "message": f"Erreur pendant l'exécution : {str(e)}",
-                #         }
-                #     finally:
-                #         try:
-                #             supabase_client.table("prospection_settings").update(
-                #                 {"is_active": False}
-                #             ).not_.is_("id", "null").execute()
-                #             print("✅ DB: Statut réinitialisé à False")
-                #         except Exception as e:
-                #             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
-                #             pass
-                #         if prospection_lock.locked():
-                #             prospection_lock.release()
-                #             print("🔓 LOCK LIBÉRÉ")
-
-                # print(f"DEBUG CONFIG: {config_db}")
-                # background_tasks.add_task(run_in_background, body.intitule, config_db)
-
-                # return {"status": "success", "message": "Chrome va se lancer"}
-
             if not res or res.data is None:
                 return {
                     "status": "error",
@@ -382,47 +352,6 @@ async def start_prospection(
             "status": "error",
             "message": f"Erreur base de données : {str(e)}",
         }
-
-
-# @app.post("/api/prospection/async-stream")
-# async def start_prospection_stream(request: ProspectionRequest):
-#     supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
-#         "id", "null"
-#     ).execute()
-#     try:
-#         res = supabase_client.rpc(
-#             "get_decrypted_settings",
-#             {"job_title_input": request.intitule, "key_input": KEY_SECRET},
-#         ).execute()
-
-#         if not res.data:
-#             return {"status": "error", "message": "Config introuvable"}
-#             prospection_lock.release()
-#         response = cast(APIResponse, res)
-
-#         data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
-#         data = data_list[0] if data_list else {}
-
-#         profile = data.get("profiles", {})
-#         config_db = {
-#             "id": data.get("id"),
-#             "linkedin_email": profile.get("linkedin_email"),
-#             "linkedin_password": profile.get("linkedin_password"),
-#             "job_title": request.intitule,
-#         }
-#     except Exception as e:
-#         return {"status": "error", "message": f"Erreur DB : {str(e)}"}
-
-#     def wrapped_generator():
-#         if not prospection_lock.acquire(blocking=False):
-#             yield "⚠️ Déjà en cours"
-#             return
-#         try:
-#             yield from run_chrome(request.intitule, config_db)
-#         finally:
-#             prospection_lock.release()
-
-#     return StreamingResponse(wrapped_generator(), media_type="text/plain")
 
 
 if __name__ == "__main__":

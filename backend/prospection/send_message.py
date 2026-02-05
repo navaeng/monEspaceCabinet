@@ -17,7 +17,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 def send_message(driver, job_title, message, offre, config_db):
     yield f"Démarrage de l'envoi de messages directs pour {job_title}..."
     urls = [
-        "https://www.linkedin.com/in/jouna%C3%AFd-ben-salah-601b77222/",
+        "https://www.linkedin.com/in/jean-christophe-juvet-3446a168/",
         "https://www.linkedin.com/in/niels-sauvignon-b02b611b9/",
     ]
     for url in urls:
@@ -28,7 +28,30 @@ def send_message(driver, job_title, message, offre, config_db):
                 # url = "https://www.linkedin.com/in/jouna%C3%AFd-ben-salah-601b77222/"
                 # search_url = f"https://www.linkedin.com/search/results/people/?keywords={job_title}&origin=GLOBAL_SEARCH_CARD"
                 driver.get(url)
-                yield "On accède aux profils pour envoyer des messages..."
+                yield "On accède au premier profil..."
+
+                profile_main_content = driver.find_element(
+                    By.TAG_NAME, "main"
+                ).text.lower()
+                content_lower = profile_main_content.lower()
+
+                print(content_lower)
+
+                keyword_exclude = ["nava engineering", "navaengineering"]
+                if any(keyword in content_lower for keyword in keyword_exclude):
+                    yield "Candidat interne ou exclu, skip..."
+                    print("Personne chez nava, on prospecte pas ce profil...")
+                    continue
+
+                ia_check = prompt_check_ia_profile(offre, profile_main_content)
+
+                if not ia_check:
+                    print("Candidat non pertinent")
+                    yield "Candidat non pertinent"
+                    continue
+                # except Exception as e:
+                #     print(f"Error checking profile content: {e}")
+
                 time.sleep(random.uniform(6, 8))
             except Exception as e:
                 traceback.print_exc()
@@ -53,29 +76,6 @@ def send_message(driver, job_title, message, offre, config_db):
             # time.sleep(10)
             # yield "bouton de message trouvé..."
             # driver.execute_script("arguments[0].click();", button)
-
-            try:
-                profile_main_content = driver.find_element(
-                    By.TAG_NAME, "main"
-                ).text.lower()
-                content_lower = profile_main_content.lower()
-
-                print(content_lower)
-
-                keyword_exclude = ["nava engineering", "navaengineering"]
-                if any(keyword in content_lower for keyword in keyword_exclude):
-                    yield "Candidat interne ou exclu, skip..."
-                    print("Personne chez nava, on prospecte pas ce profil...")
-                    continue
-
-                ia_check = prompt_check_ia_profile(offre, profile_main_content)
-
-                if not ia_check:
-                    print("Candidat non pertinent")
-                    yield "Candidat non pertinent"
-                    continue
-            except Exception as e:
-                print(f"Error checking profile content: {e}")
 
             button = WebDriverWait(driver, 5).until(
                 EC.presence_of_element_located(
@@ -108,11 +108,11 @@ def send_message(driver, job_title, message, offre, config_db):
             try:
                 xpath_input = "//div[@role='textbox' and contains(@class, 'msg-form__contenteditable')]"
                 time.sleep(10)
-                yield "On cherche l'input..."
+                yield "On cherche le bouton..."
                 message_box = driver.find_element(By.XPATH, xpath_input)
                 message_box.click()
                 time.sleep(random.uniform(4, 7))
-                yield "Input trouvé..."
+                yield "Bouton trouvé..."
             except Exception as e:
                 traceback.print_exc()
                 print(f"Détails : {e}")
@@ -136,7 +136,7 @@ def send_message(driver, job_title, message, offre, config_db):
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Saisie du message"
                 time.sleep(random.uniform(6, 9))
-                return
+                continue
                 # on cherche le bouton
             try:
                 send_btn = (
@@ -148,7 +148,7 @@ def send_message(driver, job_title, message, offre, config_db):
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : localisation bouton"
                 time.sleep(random.uniform(6, 9))
-                return
+                continue
                 # on tente le click
             try:
                 driver.execute_script(
@@ -165,11 +165,11 @@ def send_message(driver, job_title, message, offre, config_db):
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Clic Envoi"
                 time.sleep(random.uniform(6, 9))
-                return
+                continue
 
         except Exception as e:
             print(e)
-            return
+            continue
 
         finally:
             config_id = config_db.get("id")
@@ -184,6 +184,6 @@ def send_message(driver, job_title, message, offre, config_db):
                         print(f"Erreur DB: {e}")
                     else:
                         print(f"Log technique: {e}")
-            if "driver" in locals():
-                driver.quit()
-                return
+    if "driver" in locals():
+        driver.quit()
+        return

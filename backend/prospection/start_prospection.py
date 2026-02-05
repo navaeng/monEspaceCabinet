@@ -44,7 +44,7 @@ def slow_type(element, text):
 
 
 def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
-    print(f"[DEBUG] Entrée dans run_chrome pour: {offre}")
+    print(f"[DEBUG] Offre : {offre}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")
     uid = config_db.get("user_id")
@@ -78,7 +78,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")

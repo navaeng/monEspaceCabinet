@@ -11,7 +11,7 @@ from typing import Any, Dict, List, Optional, cast
 from core.generate_dossier import generate_dossier_api, validate_cv_file
 from database import supabase_client
 from fastapi import (
-    # BackgroundTasks,
+    BackgroundTasks,
     FastAPI,
     File,
     Form,
@@ -34,12 +34,12 @@ async def lifespan(app: FastAPI):
         supabase_client.table("prospection_settings").update({"is_active": False}).neq(
             "id", -1
         ).execute()
-        print("Supabase : Tous les statuts ont été réinitialisés à is active false.")
+        print("Supabase : Tous les statuts ont été réinitialisés.")
     except Exception as e:
         print(f"⚠️ Erreur reset démarrage: {e}")
     thread = threading.Thread(target=start_prospect_auto, daemon=True)
     thread.start()
-    # print("🔥 Serveur prêt, check Supabase au démarrage...")
+    print("🔥 Serveur prêt, check Supabase au démarrage...")
     yield
 
 
@@ -189,8 +189,8 @@ async def generate_dossier(
 
 class ProspectionRequest(BaseModel):  # contrat
     intitule: str
-    details: Optional[str]
     mode: str
+    details: str
     offre: Optional[str]
 
 
@@ -229,7 +229,7 @@ async def get_prospection(request: Request):
 @app.post("/backend/prospection/start_prospection")
 async def start_prospection(
     body: ProspectionRequest,
-    # background_tasks: BackgroundTasks,
+    background_tasks: BackgroundTasks,
     request: Request,
 ):
     print("⏳ lancement...")
@@ -254,7 +254,6 @@ async def start_prospection(
         "id", "null"
     ).execute()
     print(f"DEBUG: Requête reçue pour {body.intitule}")
-    print(f"DEBUG: Détails de la prospection : {body.details}")
     if not prospection_lock.acquire(blocking=False):
         print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")
         return {"status": "error", "message": "Prospection déjà en cours"}
@@ -270,10 +269,9 @@ async def start_prospection(
                     {
                         "job_title": body.intitule,
                         "query": body.intitule,
-                        "details": body.details,
-                        "mode": body.mode,
-                        "offre": body.offre,
                         "is_active": True,
+                        "details": body.details,
+                        "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
                         "hour_start": datetime.now().astimezone().isoformat(),
                     }
@@ -307,11 +305,7 @@ async def start_prospection(
                     "linkedin_email": data.get("linkedin_email"),
                     "linkedin_password": data.get("linkedin_password"),
                     "job_title": body.intitule,
-                    "intitule": body.intitule,
-                    "mode": body.mode,
-                    "offre": body.offre,
                 }
-                print(f"DEBUG OFFRE: {body.offre}")
                 print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
                 print(
                     f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
@@ -322,7 +316,7 @@ async def start_prospection(
                         print(f"🚀 Lancement Chrome pour {body.intitule}")
                         for step in run_chrome(
                             body.intitule,
-                            body.details or "",
+                            body.details,
                             body.mode,
                             body.offre,
                             config_db,
@@ -344,6 +338,36 @@ async def start_prospection(
 
                 return StreamingResponse(stream_generator(), media_type="text/plain")
 
+                # def run_in_background(job_title, config):
+                #     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
+                #     print(f"🔍 Config reçue: {config}")
+                #     try:
+                #         for step in run_chrome(body.intitule, config):
+                #             print(f"🤖 [DEBUG] Étape {step}")
+                #     except Exception as e:
+                #         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
+                #         return {
+                #             "status": "error",
+                #             "message": f"Erreur pendant l'exécution : {str(e)}",
+                #         }
+                #     finally:
+                #         try:
+                #             supabase_client.table("prospection_settings").update(
+                #                 {"is_active": False}
+                #             ).not_.is_("id", "null").execute()
+                #             print("✅ DB: Statut réinitialisé à False")
+                #         except Exception as e:
+                #             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
+                #             pass
+                #         if prospection_lock.locked():
+                #             prospection_lock.release()
+                #             print("🔓 LOCK LIBÉRÉ")
+
+                # print(f"DEBUG CONFIG: {config_db}")
+                # background_tasks.add_task(run_in_background, body.intitule, config_db)
+
+                # return {"status": "success", "message": "Chrome va se lancer"}
+
             if not res or res.data is None:
                 return {
                     "status": "error",
@@ -356,6 +380,47 @@ async def start_prospection(
             "status": "error",
             "message": f"Erreur base de données : {str(e)}",
         }
+
+
+# @app.post("/api/prospection/async-stream")
+# async def start_prospection_stream(request: ProspectionRequest):
+#     supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
+#         "id", "null"
+#     ).execute()
+#     try:
+#         res = supabase_client.rpc(
+#             "get_decrypted_settings",
+#             {"job_title_input": request.intitule, "key_input": KEY_SECRET},
+#         ).execute()
+
+#         if not res.data:
+#             return {"status": "error", "message": "Config introuvable"}
+#             prospection_lock.release()
+#         response = cast(APIResponse, res)
+
+#         data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
+#         data = data_list[0] if data_list else {}
+
+#         profile = data.get("profiles", {})
+#         config_db = {
+#             "id": data.get("id"),
+#             "linkedin_email": profile.get("linkedin_email"),
+#             "linkedin_password": profile.get("linkedin_password"),
+#             "job_title": request.intitule,
+#         }
+#     except Exception as e:
+#         return {"status": "error", "message": f"Erreur DB : {str(e)}"}
+
+#     def wrapped_generator():
+#         if not prospection_lock.acquire(blocking=False):
+#             yield "⚠️ Déjà en cours"
+#             return
+#         try:
+#             yield from run_chrome(request.intitule, config_db)
+#         finally:
+#             prospection_lock.release()
+
+#     return StreamingResponse(wrapped_generator(), media_type="text/plain")
 
 
 if __name__ == "__main__":

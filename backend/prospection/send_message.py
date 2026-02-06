@@ -56,10 +56,13 @@ def send_message(driver, job_title, message, offre, config_db):
                 # search_url = f"https://www.linkedin.com/search/results/people/?keywords={job_title}&origin=GLOBAL_SEARCH_CARD"
                 driver.get(url)
 
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "main"))
+                )
                 profile_main_content = driver.find_element(
                     By.TAG_NAME, "main"
                 ).text.lower()
-                content_lower = profile_main_content.lower()
+                content_lower = profile_main_content
 
                 print(content_lower)
 

@@ -12,9 +12,10 @@ def prompt_check_ia_profile(offre, profile_main_content):
 
     response_ia = call_groq(prompt) or ""
     response_clear = response_ia.strip().lower()
+
     print(f"Reponse IA: {response_clear}")
     print(
         f"✅ [IA CHECK] Verdict: {'Accepté' if 'OUI' in response_clear else 'Refusé'}"
     )
 
-    return "OUI" in response_clear
+    return "oui" in response_clear

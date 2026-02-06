@@ -22,6 +22,7 @@ from selenium.webdriver.chrome.service import Service
 
 # from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
@@ -111,8 +112,8 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     # os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
     # os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
     #
-    subprocess.run(["pkill", "-9", "chrome"], stderr=subprocess.DEVNULL)
-    subprocess.run(["pkill", "-9", "chromedriver"], stderr=subprocess.DEVNULL)
+    # subprocess.run(["pkill", "-9", "chrome"], stderr=subprocess.DEVNULL)
+    # subprocess.run(["pkill", "-9", "chromedriver"], stderr=subprocess.DEVNULL)
     chrome_service = Service(log_path="chromedriver.log")
     lock_file = os.path.join(profil_path, "SingletonLock")
     if os.path.exists(lock_file):
@@ -151,7 +152,15 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
         # time.sleep(120)
         yield "Accès à LinkedIn..."
         time.sleep(random.uniform(3, 6))
-        wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        if "https://www.linkedin.com/login/" in driver.current_url:
+            yield "Nous avons été redirigé vers la page de connexion..."
+            time.sleep(random.uniform(3, 6))
+
+            driver.find_element(By.ID, "username").send_keys("kouicicontact@yahoo.com")
+            driver.find_element(By.ID, "password").send_keys("ishak2301")
+            driver.find_element(By.ID, "password").send_keys(Keys.ENTER)
+
+            wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
         yield "Chargement..."
         human_mouse_move(driver)
         time.sleep(random.uniform(2, 4))

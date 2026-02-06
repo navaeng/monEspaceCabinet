@@ -22,14 +22,14 @@ def send_message(driver, job_title, message, offre, config_db):
     #     "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",
     # )
     try:
-        time.sleep(random.uniform(2, 4))
+        # time.sleep(random.uniform(2, 4))
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
-        time.sleep(random.uniform(5, 10))
+        time.sleep(random.uniform(5, 7))
         links = driver.find_elements(
-            By.XPATH, "//a[contains(@href, '/in/') and @data-test-app-aware-link]"
+            By.XPATH,
+            "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",
         )
-        time.sleep(random.uniform(8, 10))
+        time.sleep(2)
         urls = []
         for link in links:
             url = link.get_attribute("href").split("?")[0]
@@ -38,6 +38,7 @@ def send_message(driver, job_title, message, offre, config_db):
 
         yield f"Nombre de profils trouvés : {len(urls)}"
         print(f"Nombre de profils trouvés : {len(urls)}")
+
     except Exception as e:
         print(f"Erreur lors de la récupération des liens : {e}")
         # yield f"Erreur lors de la récupération des liens : {e}"

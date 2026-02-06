@@ -174,6 +174,9 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                     EC.element_to_be_clickable((By.ID, "username"))
                 )
 
+                email_user = config_db.get("linkedin_email")
+                pass_user = config_db.get("linkedin_password")
+
                 pass_input = driver.find_element(By.ID, "password")
 
                 email_input.clear()
@@ -181,14 +184,30 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
 
                 actions = ActionChains(driver)
                 actions.move_to_element(email_input).click().perform()
-                slow_type(driver, "kouicicontact@yahoo.com")
+
+                if email_user:
+                    slow_type(driver, email_user)
+                else:
+                    print("Email non trouvé dans la configuration")
+                    yield (
+                        "Email linkedin non trouvé, vous devait le renseignez dans la section (modifier mes infos)"
+                    )
+                    time.sleep(6)
+                # slow_type(driver, "kouicicontact@yahoo.com")
 
                 time.sleep(random.uniform(3, 6))
 
                 actions.move_to_element(
                     pass_input
                 ).click().send_keys().click().perform()
-                slow_type(driver, "ishak2301")
+                if pass_user:
+                    slow_type(driver, pass_user)
+                else:
+                    print("Mot de passe non trouvé dans la configuration")
+                    yield (
+                        "Mot de passe linkedin non trouvé, vous devait le renseignez dans la section (modifier mes infos)"
+                    )
+                    time.sleep(6)
 
                 time.sleep(random.uniform(3, 6))
                 yield "Connexion réussie..."

@@ -170,50 +170,30 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                 email_input = wait.until(
                     EC.element_to_be_clickable((By.ID, "username"))
                 )
-                # print("email trouvé")
+
                 pass_input = driver.find_element(By.ID, "password")
-                # print("password trouvé")
 
                 email_input.clear()
                 pass_input.clear()
 
                 actions = ActionChains(driver)
-                actions.move_to_element(email_input).click().send_keys(
-                    "kouicicontact@yahoo.com"
-                ).perform()
-                # print("Email entered")
-                #
+                actions.move_to_element(email_input).click().perform()
+                slow_type(driver, "kouicicontact@yahoo.com")
 
                 time.sleep(random.uniform(3, 6))
 
-                actions.move_to_element(pass_input).click().send_keys(
-                    "ishak2301", Keys.ENTER
-                ).perform()
+                actions.move_to_element(
+                    pass_input
+                ).click().send_keys().click().perform()
+                slow_type(driver, "ishak2301")
 
                 time.sleep(random.uniform(3, 6))
                 yield "Connexion réussie..."
 
-                # print("Login successful")
             except Exception as e:
                 print(f"Échec de la connexion{e}]...")
-                # driver.quit()
                 raise
 
-            # # driver.find_element(By.ID, "username").send_keys("kouicicontact@yahoo.com")
-            # WebDriverWait(driver, 10).until(
-            #     EC.presence_of_element_located((By.ID, "username"))
-            # ).send_keys("kouicicontact@yahoo.com")
-
-            # WebDriverWait(driver, 10).until(
-            #     EC.presence_of_element_located((By.ID, "password"))
-            # ).send_keys("ishak2301")
-
-            # # driver.find_element(By.ID, "password").send_keys("ishak2301")
-
-            # driver.find_element(By.ID, "password").send_keys(Keys.ENTER)
-
-        # wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-        # yield "Chargement..."
         human_mouse_move(driver)
         time.sleep(random.uniform(2, 4))
     except Exception as e:

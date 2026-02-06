@@ -9,6 +9,7 @@ from database import supabase_client
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from treatment.send_mail import send_mail
 
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.support.ui import WebDriverWait
@@ -29,9 +30,9 @@ def send_message(driver, job_title, message, offre, config_db):
                 # search_url = f"https://www.linkedin.com/search/results/people/?keywords={job_title}&origin=GLOBAL_SEARCH_CARD"
                 driver.get(url)
 
-                for i, url in enumerate(urls, start=1):
-                    yield f"On accède au profil {i}/{len(urls)}..."
-                    time.sleep(random.uniform(5, 8))
+                # for i, url in enumerate(urls, start=1):
+                #     yield f"On accède au profil {i}/{len(urls)}..."
+                #     time.sleep(random.uniform(5, 8))
 
                 profile_main_content = driver.find_element(
                     By.TAG_NAME, "main"
@@ -55,7 +56,7 @@ def send_message(driver, job_title, message, offre, config_db):
                     yield "Candidat non pertinent"
                     continue
                 if is_top:
-                    send_mail(profil_url)
+                    send_mail(url)
                 # except Exception as e:
                 #     print(f"Error checking profile content: {e}")
 

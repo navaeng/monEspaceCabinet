@@ -64,7 +64,7 @@ def send_message(driver, job_title, message, offre, config_db):
                 ).text.lower()
                 content_lower = profile_main_content
 
-                print(content_lower)
+                print(f"Contenu pour checker les candidats chez nava: {content_lower}")
 
                 keyword_exclude = ["nava engineering", "navaengineering"]
                 if any(keyword in content_lower for keyword in keyword_exclude):
@@ -80,6 +80,8 @@ def send_message(driver, job_title, message, offre, config_db):
                     print("Candidat non pertinent")
                     yield "Candidat non pertinent"
                     continue
+                print("Candidat validé par l'IA")
+                yield "Ce profil semble pertinent"
                 # except Exception as e:
                 #     print(f"Error checking profile content: {e}")
 
@@ -88,7 +90,7 @@ def send_message(driver, job_title, message, offre, config_db):
                 traceback.print_exc()
                 print(f"Détails : {e}")
                 time.sleep(random.uniform(6, 9))
-                yield "Erreur au premier try"
+                yield "Traitement des profils impossibles"
 
             # buton message
             # button = driver.find_element(

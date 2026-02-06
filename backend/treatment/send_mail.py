@@ -1,4 +1,4 @@
-def send_mail(url):
+def send_mail(argument, url):
     print(f"✅ [MAIL] Sent email with URL: {url}")
     import yagmail
 
@@ -6,6 +6,6 @@ def send_mail(url):
     yag.send(
         to="kouicicontact@yahoo.com",
         subject="Profil Top",
-        contents=f"Check ce profil : {url}",
+        contents=f"{argument}, {url}",
     )
     print("✅ [MAIL] Email sent successfully")

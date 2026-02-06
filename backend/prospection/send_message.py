@@ -74,7 +74,9 @@ def send_message(driver, job_title, message, offre, config_db):
                     print("Personne chez nava, on prospecte pas ce profil...")
                     continue
 
-                ia_check, is_top = prompt_check_ia_profile(offre, profile_main_content)
+                ia_check, is_top, argument = prompt_check_ia_profile(
+                    offre, profile_main_content
+                )
                 yield "On analyse son profil avec l'offre..."
                 time.sleep(random.uniform(3, 5))
 
@@ -83,7 +85,7 @@ def send_message(driver, job_title, message, offre, config_db):
                     yield "Candidat non pertinent"
                     continue
                 if is_top:
-                    send_mail(url)
+                    send_mail(argument, url)
                 # except Exception as e:
                 #     print(f"Error checking profile content: {e}")
 

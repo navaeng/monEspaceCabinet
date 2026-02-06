@@ -136,6 +136,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
             )
         ).group()
     )
+    time.sleep(random.randint(10, 30))
     driver = uc.Chrome(
         options=options,
         service=chrome_service,

@@ -22,9 +22,11 @@ def send_message(driver, job_title, message, offre, config_db):
     #     "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",
     # )
     try:
+        time.sleep(random.uniform(2, 4))
         links = driver.find_elements(
             By.XPATH, "//a[contains(@href, '/in/') and @data-test-app-aware-link]"
         )
+        time.sleep(random.uniform(8, 10))
         urls = []
         for link in links:
             url = link.get_attribute("href").split("?")[0]

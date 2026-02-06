@@ -1,8 +1,8 @@
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 from supabase import create_client
 
-from backend.prospection.start_prospection import run_selenium
+from backend.prospection.start_prospection import run_chrome
 
 supabase = create_client("URL", "KEY")
 
@@ -23,6 +23,9 @@ def get_infos_prospect():
 
         profile = row.get("profiles", {})
         job_title = str(row.get("job_title", ""))
+        intitule = str(row.get("intitule", ""))
+        mode = str(row.get("mode", ""))
+        offre = str(row.get("offre", ""))
 
         config_db = {
             "id": row.get("id"),
@@ -32,5 +35,5 @@ def get_infos_prospect():
         }
 
         print(f" Lancement pour {config_db['linkedin_email']}")
-        for update in run_selenium(config_db["job_title"], config_db):
+        for update in run_chrome(job_title, intitule, mode, offre, config_db):
             print(update)

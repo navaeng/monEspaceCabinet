@@ -2,52 +2,89 @@ import os
 import random
 import re
 import subprocess
+import sys
 import time
 import urllib.parse
 
-# from operator import call
+# from sqlite3.dbapi2 import Time
+from typing import Optional
+
 import undetected_chromedriver as uc
+from data.prompt.prospection.prompt_message_demarchage import (
+    prompt_message_demarchage,
+)
+
+# import urllib.parse
+# from operator import call
 from data.prompt.prospection.prompt_message_prospection import (
     prompt_message_prospection,
 )
 from pydantic import BaseModel
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 
 # from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
 
 from data.call_groq import call_groq
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# from locks import user_lock
+
 
 class ProspectionRequest(BaseModel):
     intitule: str
+    details: Optional[str] = None
+    offre: Optional[str] = None
 
 
-def slow_type(element, text):
+def slow_type(driver, text):
+
+    actions = ActionChains(driver)
     for char in text:
-        element.send_keys(char)
-
+        actions.send_keys(char).perform()
         time.sleep(random.uniform(0.1, 0.3))
 
 
-def run_chrome(job_title: str, config_db):
+def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
+    print(f"[DEBUG] Offre : {offre}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
+    print(f"[DEBUG] Détails de la prospection : {details}")
+    uid = config_db.get("user_id")
+    # offre = body.offre
+    print(f"[DEBUG] User ID: {uid}")
 
-    def run_chrome(job_title: str, config_db):
-        print(f"🔍 [RUN_CHROME] job_title: {job_title}")
-        print(f"🔍 [RUN_CHROME] config_db: {config_db}")
-        print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
+    if not uid:
         print(
-            f"🔍 [RUN_CHROME] Password présent: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+            "❌ ERREUR : Pas d'ID utilisateur, Chrome ne sait pas quel dossier ouvrir !"
         )
+        return
+    print(f"🔍 [RUN_CHROME] job_title: {job_title}")
+    print(f"🔍 [RUN_CHROME] config_db: {config_db}")
+    print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
+    print(
+        f"🔍 [RUN_CHROME] Password présent: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+    )
 
     options = uc.ChromeOptions()
-    profil_path = os.path.join(os.getcwd(), "linkedin_profile_access")
+    profil_path = os.path.abspath(f"cookies/profile_{uid}")
+    lock_file = os.path.join(profil_path, "SingletonLock")
+
+    if os.path.exists(lock_file):
+        try:
+            os.remove(lock_file)
+            print("lock supprimé avec succès")
+        except Exception as e:
+            print(f"Erreur lors de la suppression du fichier de verrouillage : {e}")
+
+    # profil_path = os.path.join(os.getcwd(), "linkedin_profile_informations")
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
+    options.add_argument("--profile-directory=Default")
     # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
@@ -58,23 +95,40 @@ def run_chrome(job_title: str, config_db):
     options.add_argument("--media-cache-size=1")
 
     job_title = config_db.get("job_title")
+
     try:
+        yield "Lancemenent..."
         print("🤖 [DEBUG] Appel Groq pour le message...")
-        instruction = prompt_message_prospection(job_title)
+        time.sleep(3)
+        instruction = ""
+        if mode == "prospection":
+            instruction = prompt_message_prospection(job_title, details, offre)
+        elif mode == "demarchage":
+            instruction = prompt_message_demarchage(job_title, details)
         message = call_groq(instruction)
         print(f"{message}")
-        yield "On prépare un message..."
+        yield "Traitement des informations fournies..."
 
     except Exception as e:
         yield f"⚠️ Erreur IA : {str(e)[:50]}. Utilisation du message par défaut."
         message = "Bonjour"
 
     # os.system("pkill -9 chrome")
-    os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
-    os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
+    # os.system("taskkill /f /im chrome.exe /t >nul 2>&1")
+    # os.system("taskkill /f /im chromedriver.exe /t >nul 2>&1")
+    #
+    # subprocess.run(["pkill", "-9", "chrome"], stderr=subprocess.DEVNULL)
+    # subprocess.run(["pkill", "-9", "chromedriver"], stderr=subprocess.DEVNULL)
     chrome_service = Service(log_path="chromedriver.log")
-    if os.path.exists("linkedin_profile_access/SingletonLock"):
-        os.remove("linkedin_profile_access/SingletonLock")
+    lock_file = os.path.join(profil_path, "SingletonLock")
+    if os.path.exists(lock_file):
+        try:
+            os.remove(lock_file)
+            print(f"✅ Lock supprimé pour le profil {uid}")
+        except Exception as e:
+            print(f"❌ Erreur lors de la suppression du lock : {e}")
+    # if os.path.exists("linkedin_profile_informations/SingletonLock"):
+    #     os.remove("linkedin_profile_informations/SingletonLock")
     v_chrome = int(
         next(
             re.finditer(
@@ -82,6 +136,7 @@ def run_chrome(job_title: str, config_db):
             )
         ).group()
     )
+    time.sleep(random.randint(10, 30))
     driver = uc.Chrome(
         options=options,
         service=chrome_service,
@@ -96,19 +151,57 @@ def run_chrome(job_title: str, config_db):
         },
     )
 
-    wait = WebDriverWait(driver, 15)
+    # wait = WebDriverWait(driver, 15)
 
     try:
         driver.get("https://www.linkedin.com/feed/")
         # time.sleep(120)
         yield "Accès à LinkedIn..."
         time.sleep(random.uniform(3, 6))
-        wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-        yield "Chargement..."
+        current_url = driver.current_url
+        print("Current URL:", current_url)
+        if "login" in driver.current_url or "uas" in driver.current_url:
+            # from selenium.webdriver.common.action_chains import ActionChains
+
+            try:
+                yield "Nous avons été redirigé vers la page de connexion..."
+                time.sleep(random.uniform(3, 6))
+
+                print("Page de login...")
+                yield "Nous allons nous connecter..."
+                wait = WebDriverWait(driver, 10)
+                email_input = wait.until(
+                    EC.element_to_be_clickable((By.ID, "username"))
+                )
+
+                pass_input = driver.find_element(By.ID, "password")
+
+                email_input.clear()
+                pass_input.clear()
+
+                actions = ActionChains(driver)
+                actions.move_to_element(email_input).click().perform()
+                slow_type(driver, "kouicicontact@yahoo.com")
+
+                time.sleep(random.uniform(3, 6))
+
+                actions.move_to_element(
+                    pass_input
+                ).click().send_keys().click().perform()
+                slow_type(driver, "ishak2301")
+
+                time.sleep(random.uniform(3, 6))
+                yield "Connexion réussie..."
+
+            except Exception as e:
+                print(f"Échec de la connexion{e}]...")
+                raise
+
         human_mouse_move(driver)
         time.sleep(random.uniform(2, 4))
     except Exception as e:
         print(f"Erreur lors du chargement de la page : {e}")
+        # yield "Tentative d'accès échoué votre mot de passe à peut être été changé..."
 
     try:
         yield "🔍 Recherche..."
@@ -120,6 +213,7 @@ def run_chrome(job_title: str, config_db):
     try:
         time.sleep(random.uniform(8, 15))
         query_encoded = urllib.parse.quote(job_title)
+        # target_url = "https://www.linkedin.com/search/results/people/?keywords=nava%20&origin=FACETED_SEARCH&currentCompany=%5B%2286882974%22%5D"
         target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL"
         driver.get(target_url)
         yield "Filtre personnes..."
@@ -128,71 +222,86 @@ def run_chrome(job_title: str, config_db):
 
     time.sleep(random.uniform(4, 8))
 
-    # boutons_conx = driver.find_elements(
-    #     By.XPATH,
-    #     "//a[contains(@aria-label, 'Inviter') and contains(@aria-label, 'rejoindre votre réseau')]",
-    # )
+    boutons_conx = driver.find_elements(
+        By.XPATH,
+        "//a[contains(@aria-label, 'Inviter') and contains(@aria-label, 'rejoindre votre réseau')]",
+    )
 
-    # yield f"✓ {len(boutons_conx)} personnes trouvés en première page..."
+    yield f"✓ {len(boutons_conx)} personnes trouvés en première page..."
 
-    # for i, bouton in enumerate(boutons_conx):
-    #     try:
-    #         driver.execute_script(
-    #             "arguments[0].scrollIntoView({block: 'center'});", bouton
-    #         )
+    for i, bouton in enumerate(boutons_conx):
+        try:
+            # container = bouton.find_element(
+            #     By.XPATH,
+            #     "./ancestor::div[contains(@class, 'cf2a0fad') or @data-view-name='search-result-lockup-title']/../..",
+            # )
+            container = bouton.find_element(
+                By.XPATH, "./ancestor::div[@role='listitem'][1]"
+            )
+            print(f"Container text: {container.text}")
+            infos_profil = container.text.lower().replace("\n", "").strip()
+            keyword_exclude = ["nava engineering", "navaengineering"]
 
-    #         time.sleep(random.uniform(2, 4))
+            if any(keyword in infos_profil for keyword in keyword_exclude):
+                yield "Personne chez nava, on prospecte pas ce profil..."
+                continue
 
-    #         driver.execute_script("arguments[0].click();", bouton)
-    #         yield f"[{i + 1}] Ouverture popup invitation"
+            driver.execute_script(
+                "arguments[0].scrollIntoView({block: 'center'});", bouton
+            )
 
-    #         time.sleep(random.uniform(2, 4))
+            time.sleep(random.uniform(2, 4))
 
-    #         try:
-    #             time.sleep(5)
-    #             script_final = """
-    #                                         function findButton() {
-    #                                             // 1. Check standard
-    #                                             let btn = document.querySelector('button[aria-label="Envoyer sans note"]');
-    #                                             if (btn) return btn;
+            driver.execute_script("arguments[0].click();", bouton)
+            yield f"[{i + 1}] Ouverture popup invitation"
 
-    #                                             // 2. Check dans le Shadow DOM (interop-outlet)
-    #                                             let host = document.querySelector('#interop-outlet');
-    #                                             if (host && host.shadowRoot) {
-    #                                                 return host.shadowRoot.querySelector('button[aria-label="Envoyer sans note"]');
-    #                                             }
+            time.sleep(random.uniform(2, 4))
 
-    #                                             // 3. Check par texte si aria-label a sauté
-    #                                             return Array.from(document.querySelectorAll('button')).find(b => b.innerText.includes('sans note'));
-    #                                         }
+            try:
+                time.sleep(5)
+                script_final = """
+                                            function findButton() {
+                                                // 1. Check standard
+                                                let btn = document.querySelector('button[aria-label="Envoyer sans note"]');
+                                                if (btn) return btn;
 
-    #                                         let target = findButton();
-    #                                         if (target) {
-    #                                             target.click();
-    #                                             return true;
-    #                                         }
-    #                                         return false;
-    #                                         """
+                                                // 2. Check dans le Shadow DOM (interop-outlet)
+                                                let host = document.querySelector('#interop-outlet');
+                                                if (host && host.shadowRoot) {
+                                                    return host.shadowRoot.querySelector('button[aria-label="Envoyer sans note"]');
+                                                }
 
-    #             success = driver.execute_script(script_final)
-    #             if success:
-    #                 yield "✅ Invitation envoyée !"
-    #             else:
-    #                 yield " Bouton introuvable même en recherche profonde."
+                                                // 3. Check par texte si aria-label a sauté
+                                                return Array.from(document.querySelectorAll('button')).find(b => b.innerText.includes('sans note'));
+                                            }
 
-    #             yield " Invitation envoyée avec succès !"
-    #         except Exception as e:
-    #             error_type = type(e).__name__
-    #             yield f"Erreur précise [{error_type}] : {str(e)[:100]}"
-    #     except Exception as e:
-    #         yield f"  ⚠ Erreur bouton Envoyer : {e}"
+                                            let target = findButton();
+                                            if (target) {
+                                                target.click();
+                                                return true;
+                                            }
+                                            return false;
+                                            """
 
-    # yield "--- Invitations terminées ---"
+                success = driver.execute_script(script_final)
+                if success:
+                    yield "✅ Invitation envoyée !"
+                else:
+                    yield " Bouton introuvable même en recherche profonde."
+
+                yield " Invitation envoyée avec succès !"
+            except Exception as e:
+                error_type = type(e).__name__
+                yield f"Erreur précise [{error_type}] : {str(e)[:100]}"
+        except Exception as e:
+            yield f"  ⚠ Erreur bouton Envoyer : {e}"
+
+    yield "--- Invitations terminées ---"
 
     try:
         from prospection.send_message import send_message
 
-        for update in send_message(driver, job_title, message, config_db):
+        for update in send_message(driver, job_title, message, offre, config_db):
             yield update
     except Exception as e:
         print(f"Erreur passage messages : {e}")

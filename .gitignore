@@ -324,8 +324,10 @@ pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,node,venv
 
-# --- Tes dossiers spécifiques ---
-backend/linkedin_profile_access/
+
+backend/cookies
+user_data/
+*.lock
 backend/output/
 backend/prospection/output/
 **/*.tflite

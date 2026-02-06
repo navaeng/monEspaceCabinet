@@ -6,14 +6,23 @@ from datetime import datetime
 from pathlib import Path
 
 # from threading import Lock
-from typing import Any, Dict, List, cast
+from typing import Any, Dict, List, Optional, cast
 
 from core.generate_dossier import generate_dossier_api, validate_cv_file
 from database import supabase_client
-from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import (
+    # BackgroundTasks,
+    FastAPI,
+    File,
+    Form,
+    HTTPException,
+    Request,
+    UploadFile,
+)
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 from lock import prospection_lock
+from locks import user_lock
 from postgrest.base_request_builder import APIResponse
 from prospection.start_prospection import run_chrome
 from pydantic import BaseModel
@@ -38,6 +47,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Fillcloud API", version="1.0.0", lifespan=lifespan)
 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
 print(f"KEY: {KEY_SECRET}")
+
 
 # Configuration CORS pour autoriser le front React
 app.add_middleware(
@@ -181,129 +191,193 @@ async def generate_dossier(
 
 class ProspectionRequest(BaseModel):  # contrat
     intitule: str
+    mode: str
+    details: str
+    offre: Optional[str]
 
 
-# @app.get("/backend/prospection/list")
-# async def get_prospection():
-#     try:
-#         res = (
-#             supabase_client.table("prospection_settings")
-#             .select("id, job_title, created_at, is_active")
-#             .order("created_at", desc=True)
-#             .execute()
-#         )
-#         return res.data if res.data else []
+@app.get("/backend/prospection/list")
+async def get_prospection(request: Request):
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        print("❌ Authentification manquante")
+        raise HTTPException(status_code=401)
+
+    token = auth_header.replace("Bearer ", "")
+
+    try:
+        user_response = supabase_client.auth.get_user(token)
+        if not user_response or not user_response.user:
+            raise HTTPException(status_code=401, detail="Authentification invalide")
+        # if not user_response.user:
+        #     return []
+        current_user_id = user_response.user.id
+        print(f"👤 Utilisateur connecté: {current_user_id}")
+
+        res = (
+            supabase_client.table("prospection_settings")
+            .select("id, job_title, created_at, is_active, hour_start")
+            .eq("user_id", current_user_id)
+            .order("created_at", desc=True)
+            .execute()
+        )
+        return res.data if res.data else []
 
 #     except Exception as e:
 #         print(f"Erreur Supabase List: {e}")
 #         return []
 
 
-# @app.post("/backend/prospection/start_prospection")
-# async def start_prospection(request: ProspectionRequest):
-#     # async def start_prospection(
-#     #     request: ProspectionRequest, background_tasks: BackgroundTasks
-#     # ):
-#     print("⏳ lancement...")
-#     supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
-#         "id", "null"
-#     ).execute()
-#     print(f"DEBUG: Requête reçue pour {request.intitule}")
-#     if not prospection_lock.acquire(blocking=False):
-#         print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")
-#         return {"status": "error", "message": "Prospection déjà en cours"}
+@app.post("/backend/prospection/start_prospection")
+async def start_prospection(
+    body: ProspectionRequest,
+    # background_tasks: BackgroundTasks,
+    request: Request,
+):
 
-#     try:
-#         print("🔒 LOCK ACQUIS")
-#         SELECT_QUERY = f"*,profiles!inner(linkedin_email,linkedin_password:pgp_sym_decrypt(linkedin_password::bytea,'{KEY_SECRET}'))"
-#         if SELECT_QUERY:
-#             try:
-#                 print("🔒 insert db")
-#                 supabase_client.table("prospection_settings").insert(
-#                     {
-#                         "job_title": request.intitule,
-#                         "query": request.intitule,
-#                         "is_active": True,
-#                         "user_id": "b48d5631-7f20-4837-904c-ae55f1e60fd3",
-#                         "hour_start": datetime.now().astimezone().isoformat(),
-#                     }
-#                 ).execute()
-#             except Exception as e:
-#                 print(f"❌ ERREUR SUPABASE INSERT : {e}")
+    print("⏳ lancement...")
 
-#             print("🔒 select db")
-#             print("⏳ Tentative d'appel RPC...")
-#             res = supabase_client.rpc(
-#                 "get_decrypted_settings",
-#                 {"job_title_input": request.intitule, "key_input": KEY_SECRET},
-#             ).execute()
-#             print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
-#             print(f"🔍 DEBUG - Type de données: {type(res.data)}")
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        print("❌ Authentification manquante")
+        return {"status": "error", "message": "Authentification manquante"}
+
+    token = auth_header.replace("Bearer ", "")
+
+    try:
+        user_response = supabase_client.auth.get_user(token)
+        if not user_response or not user_response.user:
+            raise HTTPException(status_code=401, detail="Authentification invalide")
+        current_user_id = user_response.user.id
+        print(f"✅ Utilisateur authentifié : {current_user_id}")
+    except Exception as e:
+        print(f"Erreur Supabase User: {e}")
+        return {"status": "error", "message": "Erreur lors de l'authentification"}
+
+    if current_user_id not in user_lock:
+        user_lock[current_user_id] = threading.Lock()
+
+    supabase_client.table("prospection_settings").update({"is_active": False}).eq(
+        "user_id", current_user_id
+    ).execute()
+    # supabase_client.table("prospection_settings").update({"is_active": False}).eq(
+    #     "user_id", current_user_id
+    # ).execute()
+    print(f"DEBUG: Requête reçue pour {body.intitule}")
+    if not user_lock[current_user_id].acquire(blocking=False):
+        # print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")
+        print(f"❌{current_user_id} vous avez déja un lancement en cours")
+        return {"status": "error", "message": "Prospection déjà en cours"}
+
+    try:
+        print("🔒 LOCK ACQUIS")
+
+        SELECT_QUERY = f"*,profiles!inner(linkedin_email,linkedin_password:pgp_sym_decrypt(linkedin_password::bytea,'{KEY_SECRET}'))"
+        if SELECT_QUERY:
+            try:
+                print("🔒 insert db")
+                supabase_client.table("prospection_settings").insert(
+                    {
+                        "job_title": body.intitule,
+                        "query": body.intitule,
+                        "is_active": True,
+                        "details": body.details,
+                        "offre": body.offre or "".replace("\x00", ""),
+                        "user_id": current_user_id,
+                        "hour_start": datetime.now().astimezone().isoformat(),
+                    }
+                ).execute()
+            except Exception as e:
+                print(f"❌ ERREUR SUPABASE INSERT : {e}")
+
+            print("🔒 select db")
+            print("⏳ Tentative d'appel RPC...")
+            res = supabase_client.rpc(
+                "get_decrypted_settings",
+                {"job_title_input": body.intitule, "key_input": KEY_SECRET},
+            ).execute()
+            print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
+            print(f"🔍 DEBUG - Type de données: {type(res.data)}")
 
 #             print("RPC terminée...")
 
-#             response = cast(APIResponse, res)
-#             if res and hasattr(res, "data") and res.data:
-#                 data_list = (
-#                     cast(List[Dict[str, Any]], response.data) if response.data else []
-#                 )
-#                 data = data_list[0] if data_list else {}
-#                 print(f"🔍 DEBUG - Contenu de data: {data}")
-#                 print(f"🔍 DEBUG - Clés disponibles: {data.keys() if data else 'VIDE'}")
+            response = cast(APIResponse, res)
+            if res and hasattr(res, "data") and res.data:
+                data_list = (
+                    cast(List[Dict[str, Any]], response.data) if response.data else []
+                )
+                data = data_list[0] if data_list else {}
+                print(f"🔍 DEBUG - Contenu de data: {data}")
+                print(f"🔍 DEBUG - Clés disponibles: {data.keys() if data else 'VIDE'}")
 
-#                 config_db = {
-#                     "id": data.get("id"),
-#                     "linkedin_email": data.get("linkedin_email"),
-#                     "linkedin_password": data.get("linkedin_password"),
-#                     "job_title": request.intitule,
-#                 }
-#                 print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
-#                 print(
-#                     f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
-#                 )
+                config_db = {
+                        "id": data.get("id"),
+                        "user_id": current_user_id,
+                        "linkedin_email": data.get("linkedin_email"),
+                        "linkedin_password": data.get("linkedin_password"),
+                        "job_title": body.intitule,
+                    }
+                print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
+                print(
+                        f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+                    )
 
-#                 def stream_generator():
-#                     try:
-#                         print(f"🚀 Lancement Chrome pour {request.intitule}")
-#                         for step in run_chrome(request.intitule, config_db):
-#                             yield f"{step}\n"
-#                     except Exception as e:
-#                         print(f"💥 Erreur critique : {str(e)}")
-#                         yield "❌ Erreur lors de la prospection\n"
-#                     finally:
-#                         supabase_client.table("prospection_settings").update(
-#                             {"is_active": False}
-#                         ).not_.is_("id", "null").execute()
-#                         if prospection_lock.locked():
-#                             prospection_lock.release()
-#                         print("🔓 Session terminée")
+                def stream_generator():
+                    try:
+                        print(f"🚀 Lancement Chrome pour {body.intitule}")
+                        for step in run_chrome(
+                                body.intitule,
+                                body.details,
+                                body.mode,
+                                body.offre,
+                                config_db,
+                            ):
+                            yield f"{step}\n"
+                    except Exception as e:
+                            import traceback
 
-#                 return StreamingResponse(stream_generator(), media_type="text/plain")
+                            traceback.print_exc()
+                            print(f"Erreur lors de la prospection : {str(e)}")
+                            # yield f"❌ Erreur : {str(e)}\n"
+                    finally:
+                            supabase_client.table("prospection_settings").update(
+                                {"is_active": False}
+                            ).not_.is_("id", "null").execute()
+                            if prospection_lock.locked():
+                                prospection_lock.release()
+                            print("🔓 Session terminée")
 
-# def run_in_background(job_title, config):
-#     print(f"BACKGROUND TASK STARTED pour {job_title}")
-#     print(f"🔍 Config reçue: {config}")
-#     try:
-#         for step in run_chrome(request.intitule, config):
-#             print(f"🤖 [DEBUG] Étape {step}")
-#     except Exception as e:
-#         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
-#         return {
-#             "status": "error",
-#             "message": f"Erreur pendant l'exécution : {str(e)}",
-#         }
-#     finally:
-#         try:
-#             supabase_client.table("prospection_settings").update(
-#                 {"is_active": False}
-#             ).not_.is_("id", "null").execute()
-#             print("✅ DB: Statut réinitialisé à False")
-#         except Exception as e:
-#             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
-#             pass
-#         if prospection_lock.locked():
-#             prospection_lock.release()
-#             print("🔓 LOCK LIBÉRÉ")
+                return StreamingResponse(stream_generator(), media_type="text/plain")
+
+                # def run_in_background(job_title, config):
+                #     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
+                #     print(f"🔍 Config reçue: {config}")
+                #     try:
+                #         for step in run_chrome(body.intitule, config):
+                #             print(f"🤖 [DEBUG] Étape {step}")
+                #     except Exception as e:
+                #         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
+                #         return {
+                #             "status": "error",
+                #             "message": f"Erreur pendant l'exécution : {str(e)}",
+                #         }
+                #     finally:
+                #         try:
+                #             supabase_client.table("prospection_settings").update(
+                #                 {"is_active": False}
+                #             ).not_.is_("id", "null").execute()
+                #             print("✅ DB: Statut réinitialisé à False")
+                #         except Exception as e:
+                #             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
+                #             pass
+                #         if prospection_lock.locked():
+                #             prospection_lock.release()
+                #             print("🔓 LOCK LIBÉRÉ")
+
+                # print(f"DEBUG CONFIG: {config_db}")
+                # background_tasks.add_task(run_in_background, body.intitule, config_db)
+
+                # return {"status": "success", "message": "Chrome va se lancer"}
 
 # print(f"DEBUG CONFIG: {config_db}")
 # background_tasks.add_task(

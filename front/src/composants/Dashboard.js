@@ -1,7 +1,40 @@
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [nom, setNom] = useState(null);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+      }
+      setUser(user);
+
+      const { data } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .single();
+
+      if (data) setNom(data.full_name);
+    };
+    getUserData();
+  }, []);
+
+  // const handleLogout = async () => {
+  //   const { lgt } = await supabase.auth.signOut();
+  //   if (lgt) {
+  //     console.error("Erreur déconnexion:", lgt.message);
+  //   } else {
+  //     navigate("/Connexion");
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -9,9 +42,15 @@ function Dashboard() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-lg font-normal text-gray-900 mb-1">
-            Tableau de bord
+            Tableau de bord {nom ? nom : user ? user.email : ""}
           </h1>
           <p className="text-xs text-gray-500">Espace cabinet</p>
+          {/* <button
+            onClick={handleLogout}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Déconnexion
+          </button>*/}
         </div>
 
         {/* Actions principales */}

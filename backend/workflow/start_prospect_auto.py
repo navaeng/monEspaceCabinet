@@ -38,6 +38,7 @@ def start_prospect_auto():
             )
             data = cast(list[dict[str, Any]], res.data or [])
             print(f"DEBUG - Nombre de jobs trouvés : {len(data)}")
+            time.sleep(60)
             # prospection_lock = Lock()
 
             # Pour recuperer le verrou si il est pas pris

@@ -258,8 +258,11 @@ async def start_prospection(
         user_lock[current_user_id] = threading.Lock()
 
     supabase_client.table("prospection_settings").update({"is_active": False}).eq(
-        "id", current_user_id
+        "user_id", current_user_id
     ).execute()
+    # supabase_client.table("prospection_settings").update({"is_active": False}).eq(
+    #     "user_id", current_user_id
+    # ).execute()
     print(f"DEBUG: Requête reçue pour {body.intitule}")
     if not user_lock[current_user_id].acquire(blocking=False):
         # print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")

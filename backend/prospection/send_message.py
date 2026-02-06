@@ -23,12 +23,13 @@ def send_message(driver, job_title, message, offre, config_db):
     # )
     try:
         # time.sleep(random.uniform(2, 4))
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
+        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
         time.sleep(random.uniform(5, 7))
-        links = driver.find_elements(
-            By.XPATH,
-            "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",
-        )
+        # links = driver.find_elements(
+        #     By.XPATH,
+        #     "//a[contains(@href, '/in/') and not(contains(@class, 'scale-down'))]",
+        # )
+        links = driver.find_elements(By.CSS_SELECTOR, "a[href*='/in/']")
         time.sleep(2)
         urls = []
         for link in links:

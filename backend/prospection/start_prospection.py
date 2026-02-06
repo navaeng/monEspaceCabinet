@@ -101,7 +101,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
             instruction = prompt_message_demarchage(job_title, details)
         message = call_groq(instruction)
         print(f"{message}")
-        yield "Le modèle va généré un message..."
+        yield "Traitement des informations fournies..."
 
     except Exception as e:
         yield f"⚠️ Erreur IA : {str(e)[:50]}. Utilisation du message par défaut."

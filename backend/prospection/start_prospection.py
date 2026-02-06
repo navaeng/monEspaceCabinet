@@ -19,7 +19,9 @@ from data.prompt.prospection.prompt_message_demarchage import (
 from data.prompt.prospection.prompt_message_prospection import (
     prompt_message_prospection,
 )
-from data.supabase_client import supabase_client
+from database import supabase_client
+
+# from data.supabase_client import supabase_client
 from pydantic import BaseModel
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
@@ -86,7 +88,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")

@@ -246,8 +246,8 @@ async def start_prospection(
 
     try:
         user_response = supabase_client.auth.get_user(token)
-        print(user_response)
-        print("Nous avons reçu une réponse")
+        print(f"User response: {user_response}")
+        print(f"token:{token}")
         if not user_response or not user_response.user:
             raise HTTPException(status_code=401, detail="Authentification invalide")
         current_user_id = user_response.user.id

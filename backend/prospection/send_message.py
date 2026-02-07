@@ -197,6 +197,12 @@ def send_message(driver, job_title, message, offre, config_db):
                 time.sleep(random.uniform(6, 9))
                 yield "✅ Message envoyé !"
                 time.sleep(random.uniform(5, 9))
+
+                try:
+                    supabase_client.table("prospection_settings").insert({"url": url, "user_id": id}).execute()
+                except Exception as e:
+                    print(f'Erreur: {e}')
+
             except Exception as e:
                 traceback.print_exc()
                 print(f"Détails : {e}")

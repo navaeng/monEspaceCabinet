@@ -3,9 +3,10 @@ import random
 import threading
 import unicodedata
 from contextlib import asynccontextmanager
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+# from time import timezone
 # from threading import Lock
 from typing import Any, Dict, List, Optional, cast
 
@@ -193,7 +194,7 @@ async def generate_dossier(
 class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     mode: str
-    details: str
+    details: Optional[str]
     offre: Optional[str]
 
 
@@ -279,12 +280,22 @@ async def start_prospection(
         if SELECT_QUERY:
             try:
                 print("🔒 insert db")
-                maintenant = datetime.now().astimezone()
-                demain = maintenant + timedelta(days=1)
-                prochaine_heure = demain.replace(
+
+                # demain = maintenant + timedelta(days=1)
+                # tz_paris = timezone(timedelta(hours=1))
+                # maintenant = datetime.now().astimezone()
+
+                prochaine_heure = (
+                    datetime.now().astimezone() + timedelta(days=1)
+                ).replace(
                     hour=random.randint(8, 19),
                     minute=random.randint(0, 59),
                 )
+
+                # prochaine_heure = demain.replace(
+                #     hour=random.randint(8, 19),
+                #     minute=random.randint(0, 59),
+                # )
                 supabase_client.table("prospection_settings").insert(
                     {
                         "job_title": body.intitule,
@@ -293,7 +304,7 @@ async def start_prospection(
                         "details": body.details,
                         "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
-                        "hour_start": prochaine_heure.isoformat(),
+                        "hour_start": prochaine_heure.replace(tzinfo=None).isoformat(),
                         # "hour_start": datetime.now().astimezone().isoformat(),
                     }
                 ).execute()

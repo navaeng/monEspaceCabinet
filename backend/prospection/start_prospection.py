@@ -389,12 +389,33 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                 By.XPATH, "./ancestor::div[@role='listitem'][1]"
             )
             print(f"Container text: {container.text}")
-            infos_profil = container.text.lower().replace("\n", "").strip()
-            keyword_exclude = ["nava engineering", "navaengineering"]
 
-            if any(keyword in infos_profil for keyword in keyword_exclude):
-                yield "Personne chez nava, on prospecte pas ce profil..."
-                continue
+            infos_profil = container.text.lower().replace("\n", "").strip()
+
+            current_user_id = config_db.get("user_id")
+            res = (
+                supabase_client.table("profiles")
+                .select("*, cabinets(nom)")
+                .eq("id", current_user_id)
+                .single()
+                .execute()
+            )
+
+            cabinet_data = res.data.get("cabinets", {})
+            cabinet_name = cabinet_data.get("nom", "").lower().strip()
+            print(f"Cabinet name: {cabinet_name}")
+
+            yield "On va vérifier si la personne est chez nous"
+            print("On va vérifier si la personne est chez nous")
+            time.sleep(6)
+            if cabinet_name:
+                exclusions = [cabinet_name, cabinet_name.replace(" ", "")]
+
+                if any(excl in infos_profil for excl in exclusions):
+                    yield f"Candidat de chez {cabinet_name}, skip..."
+                    print(f"Interne ({cabinet_name}), on zappe.")
+                    time.sleep(random.uniform(3, 5))
+                    continue
 
             driver.execute_script(
                 "arguments[0].scrollIntoView({block: 'center'});", bouton

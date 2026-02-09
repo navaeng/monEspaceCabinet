@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from treatment.send_mail import send_mail
+from uvicorn import config
 
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.support.ui import WebDriverWait
@@ -68,10 +69,26 @@ def send_message(driver, job_title, message, offre, config_db):
 
                 print(f"Contenu pour checker les candidats chez nava: {content_lower}")
 
-                keyword_exclude = ["nava engineering", "navaengineering"]
-                if any(keyword in content_lower for keyword in keyword_exclude):
+                current_user_id = config_db.get("user_id")
+                res = (
+                    supabase_client.table("profiles")
+                    .select("*, cabinets(nom)")
+                    .eq("id", current_user_id)
+                    .single()
+                    .execute()
+                )
+
+                config_db = res.data
+                cabinet_name = config_db.get("nom")
+                print(f"Nom du cabinet: {cabinet_name}")
+
+                print("On va vérifier si cette personne est chez nous...")
+                yield "On va vérifier si cette personne est chez nous..."
+                time.sleep(random.uniform(3, 5))
+
+                if any(keyword in content_lower for keyword in cabinet_name):
                     yield "Candidat interne ou exclu, skip..."
-                    print("Personne chez nava, on prospecte pas ce profil...")
+                    print("Personne chez nous, on ne prospecte pas ce profil...")
                     continue
 
                 ia_check, is_top, argument = prompt_check_ia_profile(
@@ -85,7 +102,9 @@ def send_message(driver, job_title, message, offre, config_db):
                     yield "Candidat non pertinent"
                     continue
                 if is_top:
+                    print("Candidat top, on envoie un mail")
                     send_mail(argument, url, config_db)
+                    yield "Mail envoyé"
                 # except Exception as e:
                 #     print(f"Error checking profile content: {e}")
 

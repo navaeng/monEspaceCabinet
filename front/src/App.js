@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./composants/Dashboard";
 import CVUploadForm from "./composants/dossier_competences";
-import Prospection from "./composants/Prospection";
+import ProspectionSourcing from "./composants/ProspectionSourcing";
 import Header from "./composants/Header";
 import Login from "./composants/Login";
 import Home from "./composants/Home";
@@ -28,10 +28,10 @@ function App() {
         <Route path="/" element={<Home />} />
         {
           <Route
-            path="/Prospection"
+            path="/ProspectionSourcing"
             element={
               <ProtectedRoute>
-                <Prospection />
+                <ProspectionSourcing />
               </ProtectedRoute>
             }
           />

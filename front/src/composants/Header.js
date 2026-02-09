@@ -57,10 +57,10 @@ function Header() {
                 Rechercher un candidat
               </Link>
               <Link
-                to="/Prospection"
+                to="/ProspectionSourcing"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
-                Prospection
+                Prospection et sourcing
               </Link>
               <Link
                 to="/Dossier_competences"

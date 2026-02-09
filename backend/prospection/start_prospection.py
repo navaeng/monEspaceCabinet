@@ -10,14 +10,14 @@ import urllib.parse
 from typing import Optional
 
 import undetected_chromedriver as uc
-from data.prompt.prospection.prompt_message_demarchage import (
-    prompt_message_demarchage,
-)
 
 # import urllib.parse
 # from operator import call
 from data.prompt.prospection.prompt_message_prospection import (
     prompt_message_prospection,
+)
+from data.prompt.prospection.prompt_message_sourcing import (
+    prompt_message_sourcing,
 )
 from database import supabase_client
 
@@ -105,9 +105,9 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
         time.sleep(3)
         instruction = ""
         if mode == "prospection":
-            instruction = prompt_message_prospection(job_title, details, offre)
+            instruction = prompt_message_prospection(job_title, details)
         elif mode == "demarchage":
-            instruction = prompt_message_demarchage(job_title, details)
+            instruction = prompt_message_sourcing(job_title, details)
         message = call_groq(instruction)
         print(f"{message}")
         yield "Traitement des informations fournies..."

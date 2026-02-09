@@ -133,7 +133,7 @@ def send_message(driver, job_title, message, offre, config_db):
                         print(f"Interne ({cabinet_name}), on zappe.")
                         time.sleep(random.uniform(3, 5))
                         continue
-                    else
+                    else:
                         print(
                             f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
                         )

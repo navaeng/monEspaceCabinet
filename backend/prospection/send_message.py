@@ -117,6 +117,9 @@ def send_message(driver, job_title, message, offre, config_db):
                 yield "On va vérifier si la personne est chez nous..."
                 print("On va vérifier si la personne est chez nous...")
                 time.sleep(6)
+
+                infos_profil = driver.find_element(By.TAG_NAME, "body").text.lower()
+
                 if cabinet_name:
                     exclusions = [cabinet_name, cabinet_name.replace(" ", "")]
 

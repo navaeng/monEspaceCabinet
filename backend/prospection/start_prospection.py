@@ -106,7 +106,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
         instruction = ""
         if mode == "prospection":
             instruction = prompt_message_prospection(job_title, details)
-        elif mode == "demarchage":
+        elif mode == "sourcing":
             instruction = prompt_message_sourcing(job_title, details)
         message = call_groq(instruction)
         print(f"{message}")

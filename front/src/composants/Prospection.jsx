@@ -334,17 +334,17 @@ function Prospection() {
                           <input
                             type="radio"
                             name="type_prospection"
-                            value="demarchage"
-                            checked={mode === "demarchage"}
+                            value="sourcing"
+                            checked={mode === "sourcing"}
                             onChange={(e) => setMode(e.target.value)}
                             disabled={isLoading}
                             className="mr-2 accent-black"
                           />
-                          Démarchage
+                          Sourcing
                         </label>
                       </div>
                     </div>
-                    {mode === "prospection" && (
+                    {mode === "Sourcing" && (
                       <div>
                         <label
                           htmlFor="offre"

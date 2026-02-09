@@ -1,12 +1,20 @@
-def prompt_message_sourcing(job_title, details):
+def prompt_message_sourcing(job_title, details, telephone, full_name):
     return f"""
-    Nous somme un cabinet et on fais du sourcing
-    Rédige un message d'approche LinkedIn ultra-court (2 phrases max) pour tenter de trouver des candidats.
-    Prends en compte les détails suivants : {details}
-    Le but est de susciter la curiosité sans avoir l'air d'un robot.
-    Pas de "Cher/Chère", sois direct et moderne.
-    Laisse les informations de contact à la fin du message.
-    INTERDICTION : Ne mets pas d'accolades, de crochets [ ] ou de texte explicatif.
-    Il ne faut pas qu'on sache que c'est généré par une IA, Il doit être prêt à être envoyé.
-    Réponds UNIQUEMENT avec le texte du message.
-    """.strip()
+Tu es un expert en recrutement et sourcing de talents. Rédige un message LinkedIn naturel pour approcher un candidat potentiel.
+
+Contexte :
+- Poste ciblé : {job_title}
+- Informations complémentaires : {details}
+
+Consignes STRICTES :
+1. Maximum 2 phrases courtes et engageantes
+2. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")
+3. Objectif : donner envie d'échanger sans être insistant
+4. Terminer par les coordonnées : {telephone} - {full_name}
+5. CRUCIAL : Le message doit être prêt à envoyer TEL QUEL sans aucune modification
+6. INTERDIT : crochets [], accolades {{}}, placeholders type [nom]/[entreprise], texte explicatif, formules génériques
+
+Le message doit sembler rédigé spontanément par un recruteur humain, pas généré par une IA.
+
+Réponds UNIQUEMENT avec le texte final du message, rien d'autre.
+""".strip()

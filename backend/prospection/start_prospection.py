@@ -43,6 +43,8 @@ class ProspectionRequest(BaseModel):
     intitule: str
     details: Optional[str] = None
     offre: Optional[str] = None
+    telephone: Optional[int] = None
+    full_name: Optional[str] = None
 
 
 def slow_type(element, text):
@@ -97,6 +99,8 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     options.add_argument("--media-cache-size=1")
 
     job_title = config_db.get("job_title")
+    telephone = config_db.get("telephone")
+    full_name = config_db.get("full_name")
     KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
     print(f"KEY: {KEY_SECRET}")
     try:
@@ -105,9 +109,13 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
         time.sleep(3)
         instruction = ""
         if mode == "prospection":
-            instruction = prompt_message_prospection(job_title, details)
+            instruction = prompt_message_prospection(
+                job_title, details, telephone, full_name
+            )
         elif mode == "sourcing":
-            instruction = prompt_message_sourcing(job_title, details)
+            instruction = prompt_message_sourcing(
+                job_title, details, telephone, full_name
+            )
         message = call_groq(instruction)
         print(f"{message}")
         yield "Traitement des informations fournies..."

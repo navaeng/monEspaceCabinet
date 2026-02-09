@@ -92,15 +92,17 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          {/* Prospection */}
+          {/* Prospection and sourcing */}
           <div
-            onClick={() => navigate("/prospection")}
+            onClick={() => navigate("/ProspectionSourcing")}
             className="border border-gray-200 rounded p-4 cursor-pointer hover:bg-gray-50 transition-colors"
           >
             <div className="flex items-start mb-3">
               <div className="text-gray-400 mr-3">🔍</div>
               <div>
-                <h3 className="text-sm font-normal mb-1">Prospection</h3>
+                <h3 className="text-sm font-normal mb-1">
+                  Prospection et sourcing
+                </h3>
                 <p className="text-xs text-gray-500">Gérez vos prospections</p>
               </div>
             </div>

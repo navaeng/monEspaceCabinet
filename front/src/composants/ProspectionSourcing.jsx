@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import mammoth from "mammoth";
 
-function Prospection() {
+function ProspectionSourcing() {
   const [intitule, setIntitule] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -176,11 +176,9 @@ function Prospection() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-6">
           <h1 className="text-lg font-normal text-gray-900 tracking-tight">
-            Prospection
+            Prospection et sourcing
           </h1>
-          <p className="text-gray-500 text-xs mt-0.5">
-            Gestion des prospections
-          </p>
+          <p className="text-gray-500 text-xs mt-0.5">Gestion</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -188,7 +186,7 @@ function Prospection() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded border border-gray-200 p-4">
               <h2 className="text-sm font-normal text-gray-900 mb-4">
-                Nouvelle prospection
+                Nouveau lancement
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -315,7 +313,7 @@ function Prospection() {
                     {/* Radio Buttons Type */}
                     <div>
                       <label className="block text-xs font-normal text-gray-600 mb-2">
-                        Type de prospection
+                        Type de lancement
                       </label>
                       <div className="flex gap-4">
                         <label className="flex items-center text-xs font-normal text-gray-700 cursor-pointer">
@@ -392,11 +390,11 @@ function Prospection() {
                       Traitement...
                     </span>
                   ) : (
-                    "Lancer la prospection"
+                    "Lancer"
                   )}
                 </button>
                 <p className="text-gray-500 text-xs mt-0.5">
-                  N'actualisez pas la page durant une prospection
+                  N'actualisez pas la page au lancement
                 </p>
               </form>
             </div>
@@ -615,9 +613,7 @@ function Prospection() {
       {itemToDelete && (
         <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white border border-gray-200 rounded-lg p-6 max-w-sm w-full shadow-xl">
-            <h3 className="text-sm font-medium text-gray-900">
-              Supprimer la prospection ?
-            </h3>
+            <h3 className="text-sm font-medium text-gray-900">Supprimer ?</h3>
             <p className="text-xs text-gray-500 mt-2">
               La suppression est définitive
             </p>
@@ -649,4 +645,4 @@ function Prospection() {
   );
 }
 
-export default Prospection;
+export default ProspectionSourcing;

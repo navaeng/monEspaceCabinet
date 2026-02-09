@@ -5,13 +5,12 @@ from dotenv import load_dotenv
 from supabase import create_client
 
 base_dir = Path(__file__).resolve().parent.parent
-env_path = base_dir / ".env"
+env_path = base_dir / "front" / ".env"
 
 load_dotenv(dotenv_path=env_path)
-print(env_path)
 
 url = os.environ.get("SUPABASE_URL", "")
-key = os.environ.get("SUPABASE_KEY", "")
+key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 
 supabase_client = create_client(url, key)
 supabase_client.postgrest.timeout = 60

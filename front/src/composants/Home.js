@@ -14,7 +14,7 @@ function Home() {
       <section className="py-20 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-2xl font-normal text-gray-900 mb-4">
-            Gestion simplifiée pour cabinets de conseils
+            Gestion simplifiée
           </h1>
           <p className="text-sm text-gray-600 mb-8 max-w-md mx-auto">
             Centralisez vos candidats, générez des dossiers professionnels,

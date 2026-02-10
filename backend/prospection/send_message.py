@@ -21,6 +21,8 @@ def send_message(driver, job_title, message, offre, mode, config_db):
     print("Début de l'envoi de messages directs...")
     print(f"Mode dans send message : {mode}")
     yield f"Démarrage de l'envoi de messages directs pour {job_title}..."
+
+    offre_content = str(offre).strip() if offre else ""
     # links = driver.find_elements(
     #     By.XPATH,
     #     "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",
@@ -143,30 +145,32 @@ def send_message(driver, job_title, message, offre, mode, config_db):
 
                 # can_proceed = True
                 if mode == "sourcing":
-                    ia_check, is_top, argument = prompt_check_ia_profile(
-                        offre, profile_main_content
-                    )
-                    yield "On analyse son profil avec l'offre..."
-                    print(
-                        f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}"
-                    )
+                    if len(offre_content) > 10:
+                        print("Offre Transmise...")
+                        ia_check, is_top, argument = prompt_check_ia_profile(
+                            offre, profile_main_content
+                        )
+                        yield "On analyse son profil avec l'offre..."
+                        print(
+                            f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}"
+                        )
 
-                    time.sleep(random.uniform(3, 5))
-
-                    if not ia_check:
-                        print("Candidat non pertinent")
-                        yield "Candidat non pertinent"
-                        continue
-                    else:
-                        yield "Ce candidat semble être pertinent pour l'offre..."
                         time.sleep(random.uniform(3, 5))
-                        print("Candidat pertinent...")
 
-                    if is_top:
-                        print("Candidat top, on envoie un mail...")
-                        send_mail(argument, url, config_db)
-                        yield "Mail envoyé"
-                        # continue
+                        if not ia_check:
+                            print("Candidat non pertinent")
+                            yield "Candidat non pertinent"
+                            continue
+                        else:
+                            yield "Ce candidat semble être pertinent pour l'offre..."
+                            time.sleep(random.uniform(3, 5))
+                            print("Candidat pertinent...")
+
+                        if is_top:
+                            print("Candidat top, on envoie un mail...")
+                            send_mail(argument, url, config_db)
+                            yield "Mail envoyé"
+                            # continue
 
                 # except Exception as e:
                 #     print(f"Error checking profile content: {e}")

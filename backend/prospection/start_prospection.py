@@ -61,6 +61,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     uid = config_db.get("user_id")
     # offre = body.offre
     print(f"[DEBUG] User ID: {uid}")
+
     # tel_final = config_db.get("telephone") or ""
     # name_final = config_db.get("full_name") or ""
 

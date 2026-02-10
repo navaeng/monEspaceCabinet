@@ -16,7 +16,7 @@ function ProspectionSourcing() {
   const [mode, setMode] = useState("");
   const [details, setDetails] = useState("");
   const [offre, setOffre] = useState("");
-  const [people, Setpeople_precise] = useState("");
+  // const [people, Setpeople_precise] = useState("");
 
   const [statusLogs, setStatusLogs] = useState(() => {
     const saved = localStorage.getItem("prospection_logs");
@@ -130,7 +130,7 @@ function ProspectionSourcing() {
         {
           method: "POST",
           headers,
-          body: JSON.stringify({ intitule, details, mode, offre, people }),
+          body: JSON.stringify({ intitule, details, mode, offre }),
         },
       );
 
@@ -278,7 +278,7 @@ function ProspectionSourcing() {
                         // required
                       />
                     </div>
-                    <div>
+                    {/* <div>
                       <label className="block text-xs font-normal text-gray-600 mb-2">
                         Type d'analyse
                       </label>
@@ -308,7 +308,7 @@ function ProspectionSourcing() {
                           Contacter du monde
                         </label>
                       </div>
-                    </div>
+                    </div>*/}
 
                     {/* Radio Buttons Type */}
                     <div>

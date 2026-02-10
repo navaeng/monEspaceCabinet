@@ -24,8 +24,8 @@ from database import supabase_client
 # from data.supabase_client import supabase_client
 from pydantic import BaseModel
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.action_chains import ActionChains
 
+# from selenium.webdriver.common.action_chains import ActionChains
 # from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys

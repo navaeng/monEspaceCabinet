@@ -16,8 +16,9 @@ from uvicorn import config
 # from selenium.webdriver.support.ui import WebDriverWait
 
 
-def send_message(driver, job_title, message, offre, config_db):
+def send_message(driver, job_title, message, offre, mode, config_db):
     print("Début de l'envoi de messages directs...")
+    print(f"Mode : {mode}")
     yield f"Démarrage de l'envoi de messages directs pour {job_title}..."
     # links = driver.find_elements(
     #     By.XPATH,
@@ -139,21 +140,24 @@ def send_message(driver, job_title, message, offre, config_db):
                         )
                         yield f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
 
-                ia_check, is_top, argument = prompt_check_ia_profile(
-                    offre, profile_main_content
-                )
-                yield "On analyse son profil avec l'offre..."
-                print(f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}")
-                time.sleep(random.uniform(3, 5))
+                if mode == "sourcing":
+                    ia_check, is_top, argument = prompt_check_ia_profile(
+                        offre, profile_main_content
+                    )
+                    yield "On analyse son profil avec l'offre..."
+                    print(
+                        f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}"
+                    )
+                    time.sleep(random.uniform(3, 5))
 
-                if not ia_check:
-                    print("Candidat non pertinent")
-                    yield "Candidat non pertinent"
-                    continue
-                if is_top:
-                    print("Candidat top, on envoie un mail")
-                    send_mail(argument, url, config_db)
-                    yield "Mail envoyé"
+                    if not ia_check:
+                        print("Candidat non pertinent")
+                        yield "Candidat non pertinent"
+                        continue
+                    if is_top:
+                        print("Candidat top, on envoie un mail")
+                        send_mail(argument, url, config_db)
+                        yield "Mail envoyé"
                 # except Exception as e:
                 #     print(f"Error checking profile content: {e}")
 

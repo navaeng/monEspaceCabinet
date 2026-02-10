@@ -1,19 +1,17 @@
 import os
-import random
 import threading
 import unicodedata
 from contextlib import asynccontextmanager
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
-# from time import timezone
 # from threading import Lock
 from typing import Any, Dict, List, Optional, cast
 
 from core.generate_dossier import generate_dossier_api, validate_cv_file
 from database import supabase_client
 from fastapi import (
-    # BackgroundTasks,
+    BackgroundTasks,
     FastAPI,
     File,
     Form,
@@ -24,7 +22,6 @@ from fastapi import (
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 from lock import prospection_lock
-from locks import user_lock
 from postgrest.base_request_builder import APIResponse
 from prospection.start_prospection import run_chrome
 from pydantic import BaseModel
@@ -49,7 +46,6 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Fillcloud API", version="1.0.0", lifespan=lifespan)
 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
 print(f"KEY: {KEY_SECRET}")
-
 
 # Configuration CORS pour autoriser le front React
 app.add_middleware(
@@ -195,7 +191,7 @@ class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     mode: str
     details: str
-    offre: str
+    offre: Optional[str]
 
 
 @app.get("/backend/prospection/list")
@@ -233,13 +229,10 @@ async def get_prospection(request: Request):
 @app.post("/backend/prospection/start_prospection")
 async def start_prospection(
     body: ProspectionRequest,
-    # background_tasks: BackgroundTasks,
+    background_tasks: BackgroundTasks,
     request: Request,
 ):
-
     print("⏳ lancement...")
-    res = None
-
     auth_header = request.headers.get("Authorization")
     if not auth_header:
         print("❌ Authentification manquante")
@@ -249,8 +242,6 @@ async def start_prospection(
 
     try:
         user_response = supabase_client.auth.get_user(token)
-        print(f"User response: {user_response}")
-        print(f"token:{token}")
         if not user_response or not user_response.user:
             raise HTTPException(status_code=401, detail="Authentification invalide")
         current_user_id = user_response.user.id
@@ -259,19 +250,12 @@ async def start_prospection(
         print(f"Erreur Supabase User: {e}")
         return {"status": "error", "message": "Erreur lors de l'authentification"}
 
-    if current_user_id not in user_lock:
-        user_lock[current_user_id] = threading.Lock()
-
-    supabase_client.table("prospection_settings").update({"is_active": False}).eq(
-        "user_id", current_user_id
+    supabase_client.table("prospection_settings").update({"is_active": False}).not_.is_(
+        "id", "null"
     ).execute()
-    # supabase_client.table("prospection_settings").update({"is_active": False}).eq(
-    #     "user_id", current_user_id
-    # ).execute()
     print(f"DEBUG: Requête reçue pour {body.intitule}")
-    if not user_lock[current_user_id].acquire(blocking=False):
-        # print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")
-        print(f"❌{current_user_id} vous avez déja un lancement en cours")
+    if not prospection_lock.acquire(blocking=False):
+        print("❌ LOCK BLOQUÉ : Une autre instance tourne déjà")
         return {"status": "error", "message": "Prospection déjà en cours"}
 
     try:
@@ -281,161 +265,121 @@ async def start_prospection(
         if SELECT_QUERY:
             try:
                 print("🔒 insert db")
-
-                # demain = maintenant + timedelta(days=1)
-                # tz_paris = timezone(timedelta(hours=1))
-                # maintenant = datetime.now().astimezone()
-
-                prochaine_heure = (
-                    (datetime.now().astimezone() + timedelta(days=1))
-                    .replace(
-                        hour=random.randint(8, 19),
-                        minute=random.randint(0, 59),
-                        tzinfo=None,
-                    )
-                    .isoformat()
-                )
-
-                # prochaine_heure = demain.replace(
-                #     hour=random.randint(8, 19),
-                #     minute=random.randint(0, 59),
-                # )
-
                 supabase_client.table("prospection_settings").insert(
                     {
                         "job_title": body.intitule,
                         "query": body.intitule,
                         "is_active": True,
                         "details": body.details,
-                        "mode": body.mode,
-                        "offre": body.offre or "",
+                        "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
-                        "hour_start": prochaine_heure,
-                        "has_run_today": False,
-                    },
+                        "hour_start": datetime.now().astimezone().isoformat(),
+                    }
                 ).execute()
-
-                print(f"offre : {body.offre}")
-
-                print("🔒 select db")
-                print("⏳ Tentative d'appel RPC...")
-
-                res = supabase_client.rpc(
-                    "get_decrypted_settings",
-                    {"job_title_input": body.intitule, "key_input": KEY_SECRET},
-                ).execute()
-                print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
-                print(f"🔍 DEBUG - Type de données: {type(res.data)}")
-
             except Exception as e:
                 print(f"❌ ERREUR SUPABASE INSERT : {e}")
 
+            print("🔒 select db")
+            print("⏳ Tentative d'appel RPC...")
+            res = supabase_client.rpc(
+                "get_decrypted_settings",
+                {"job_title_input": body.intitule, "key_input": KEY_SECRET},
+            ).execute()
+            print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
+            print(f"🔍 DEBUG - Type de données: {type(res.data)}")
+
+            print("RPC terminée...")
+
+            response = cast(APIResponse, res)
+            if res and hasattr(res, "data") and res.data:
+                data_list = (
+                    cast(List[Dict[str, Any]], response.data) if response.data else []
+                )
+                data = data_list[0] if data_list else {}
+                print(f"🔍 DEBUG - Contenu de data: {data}")
+                print(f"🔍 DEBUG - Clés disponibles: {data.keys() if data else 'VIDE'}")
+
+                config_db = {
+                    "id": data.get("id"),
+                    "user_id": current_user_id,
+                    "linkedin_email": data.get("linkedin_email"),
+                    "linkedin_password": data.get("linkedin_password"),
+                    "job_title": body.intitule,
+                }
+                print(f"📧 Email récupéré: {config_db.get('linkedin_email')}")
+                print(
+                    f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+                )
+
+                def stream_generator():
+                    try:
+                        print(f"🚀 Lancement Chrome pour {body.intitule}")
+                        for step in run_chrome(
+                            body.intitule,
+                            body.details,
+                            body.mode,
+                            body.offre,
+                            config_db,
+                        ):
+                            yield f"{step}\n"
+                    except Exception as e:
+                        import traceback
+
+                        traceback.print_exc()
+                        print(f"Erreur lors de la prospection : {str(e)}")
+                        # yield f"❌ Erreur : {str(e)}\n"
+                    finally:
+                        supabase_client.table("prospection_settings").update(
+                            {"is_active": False}
+                        ).not_.is_("id", "null").execute()
+                        if prospection_lock.locked():
+                            prospection_lock.release()
+                        print("🔓 Session terminée")
+
+                return StreamingResponse(stream_generator(), media_type="text/plain")
+
+                # def run_in_background(job_title, config):
+                #     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
+                #     print(f"🔍 Config reçue: {config}")
+                #     try:
+                #         for step in run_chrome(body.intitule, config):
+                #             print(f"🤖 [DEBUG] Étape {step}")
+                #     except Exception as e:
+                #         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
+                #         return {
+                #             "status": "error",
+                #             "message": f"Erreur pendant l'exécution : {str(e)}",
+                #         }
+                #     finally:
+                #         try:
+                #             supabase_client.table("prospection_settings").update(
+                #                 {"is_active": False}
+                #             ).not_.is_("id", "null").execute()
+                #             print("✅ DB: Statut réinitialisé à False")
+                #         except Exception as e:
+                #             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
+                #             pass
+                #         if prospection_lock.locked():
+                #             prospection_lock.release()
+                #             print("🔓 LOCK LIBÉRÉ")
+
+                # print(f"DEBUG CONFIG: {config_db}")
+                # background_tasks.add_task(run_in_background, body.intitule, config_db)
+
+                # return {"status": "success", "message": "Chrome va se lancer"}
+
+            if not res or res.data is None:
+                return {
+                    "status": "error",
+                    "message": "Impossible de charger les données",
+                }
     except Exception as e:
-        print(f"❌ ERREUR RPC : {e}")
-        # res = None
-
-    config_db = {}
-
-    if res and hasattr(res, "data") and res.data:
-        response = cast(APIResponse, res)
-        data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
-        data = data_list[0] if data_list else {}
-        print(f"🔍 DEBUG - Contenu de data: {data}")
-        print(f"🔍 DEBUG - Clés disponibles: {data.keys() if data else 'VIDE'}")
-
-        config_db = {
-            "id": data.get("id"),
-            "user_id": current_user_id,
-            "linkedin_email": data.get("linkedin_email"),
-            "linkedin_password": data.get("linkedin_password"),
-            "job_title": body.intitule,
-            "telephone": data.get("telephone"),
-            "full_name": data.get("full_name"),
-            "email": data.get("email"),
+        print(f"❌ ERREUR SUPABASE SELECT : {e}")
+        prospection_lock.release()
+        return {
+            "status": "error",
+            "message": f"Erreur base de données : {str(e)}",
         }
-        print(f"📧 Email linkedin récupéré: {config_db.get('linkedin_email')}")
-        print(f"📧 Email récupéré: {config_db.get('email')}")
-        print(
-            f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
-        )
-
-    def stream_generator():
-        try:
-            print(f"🚀 Lancement Chrome pour {body.intitule}")
-            for step in run_chrome(
-                body.intitule,
-                body.details,
-                body.mode,
-                body.offre,
-                config_db,
-            ):
-                yield f"{step}\n"
-        except Exception as e:
-            import traceback
-
-            traceback.print_exc()
-            print(f"Erreur lors de la prospection : {str(e)}")
-            # yield f"❌ Erreur : {str(e)}\n"
-        finally:
-            supabase_client.table("prospection_settings").update(
-                {"is_active": False}
-            ).not_.is_("id", "null").execute()
-            if prospection_lock.locked():
-                prospection_lock.release()
-            print("🔓 Session terminée")
-
-    return StreamingResponse(stream_generator(), media_type="text/plain")
-
-    # def run_in_background(job_title, config):
-    #     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
-    #     print(f"🔍 Config reçue: {config}")
-    #     try:
-    #         for step in run_chrome(body.intitule, config):
-    #             print(f"🤖 [DEBUG] Étape {step}")
-    #     except Exception as e:
-    #         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
-    #         return {
-    #             "status": "error",
-    #             "message": f"Erreur pendant l'exécution : {str(e)}",
-    #         }
-    #     finally:
-    #         try:
-    #             supabase_client.table("prospection_settings").update(
-    #                 {"is_active": False}
-    #             ).not_.is_("id", "null").execute()
-    #             print("✅ DB: Statut réinitialisé à False")
-    #         except Exception as e:
-    #             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
-    #             pass
-    #         if prospection_lock.locked():
-    #             prospection_lock.release()
-    #             print("🔓 LOCK LIBÉRÉ")
-
-    # print(f"DEBUG CONFIG: {config_db}")
-    # background_tasks.add_task(run_in_background, body.intitule, config_db)
-
-    # return {"status": "success", "message": "Chrome va se lancer"}
-
-
-# print(f"DEBUG CONFIG: {config_db}")
-# background_tasks.add_task(
-#     run_in_background, request.intitule, config_db
-# )
-
-#                 return {"status": "success", "message": "Chrome va se lancer"}
-
-#             if not res or res.data is None:
-#                 return {
-#                     "status": "error",
-#                     "message": "Impossible de charger les données",
-#                 }
-#     except Exception as e:
-#         print(f"❌ ERREUR SUPABASE SELECT : {e}")
-#         prospection_lock.release()
-#         return {
-#             "status": "error",
-#             "message": f"Erreur base de données : {str(e)}",
-#         }
 
 
 # @app.post("/api/prospection/async-stream")

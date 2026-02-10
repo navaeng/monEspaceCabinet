@@ -13,7 +13,7 @@ function Prospection() {
 
   const FetchProspection = async () => {
     try {
-      const res = await fetch("http://localhost:8000/backend/prospection/list");
+      const res = await fetch("http://192.168.122.1/backend/prospection/list");
       const data = await res.json();
       setProspection(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -39,7 +39,7 @@ function Prospection() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/backend/prospection/start_prospection",
+        "http://192.168.122.1/backend/prospection/qtart_prospection",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

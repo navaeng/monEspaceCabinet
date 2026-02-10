@@ -95,7 +95,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -105,7 +105,8 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     options.add_argument("--media-cache-size=1")
 
     job_title = config_db.get("query")
-    print(f"Titre du poste: {job_title}")
+
+    print(f"🔍 [DEBUG] Valeur récupérée depuis 'query' : {job_title}")
 
     if not job_title:
         job_title = config_db.get("job_title")
@@ -296,16 +297,14 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                         {"job_title_input": job_title, "key_input": KEY_SECRET},
                     ).execute()
                     data = rpc_res.data
-                    pass_user = ""
                     print(f"DEBUG DATA BRUTE: {rpc_res.data}")
-
                     if isinstance(data, list) and len(data) > 0:
                         first_item = data[0]
                         if isinstance(first_item, dict):
-                            # if data and len(data) > 0:
                             pass_user = str(first_item.get("linkedin_password", ""))
+                        pass_user = str(data[0].get("linkedin_password", ""))
                     else:
-                        print("⚠️ Le premier élément n'est pas un dictionnaire")
+                        pass_user = ""
                     print(
                         f"✅ Pass récupéré via RPC (longueur: {(pass_user) if pass_user else 0})"
                     )

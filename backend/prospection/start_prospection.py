@@ -58,6 +58,9 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     print(f"[DEBUG] Offre : {offre}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")
+    # if not user_id:
+    #     yield "❌ Erreur : ID utilisateur manquant"
+    #     return
     uid = config_db.get("user_id")
     # offre = body.offre
     print(f"[DEBUG] User ID: {uid}")

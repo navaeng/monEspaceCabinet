@@ -23,6 +23,7 @@ def send_message(driver, job_title, message, offre, mode, config_db):
     yield f"Démarrage de l'envoi de messages directs pour {job_title}..."
 
     offre_content = str(offre).strip() if offre else ""
+
     # links = driver.find_elements(
     #     By.XPATH,
     #     "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",

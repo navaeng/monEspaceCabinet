@@ -7,7 +7,7 @@ Contexte :
 - Informations complémentaires : {details}
 
 Consignes STRICTES :
-1. Maximum 2 phrases courtes et engageantes
+1. Maximum 2 phrases courtes et engageantes et ne tutoie pas
 2. Indique que nous avons des profils de candidats qualifiés prêts à être présentés.
 3. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")
 4. Change à chaque fois ce que tu dis car j'appelle ce prompt plusieurs fois

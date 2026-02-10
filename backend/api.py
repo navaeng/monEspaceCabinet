@@ -3,7 +3,7 @@ import random
 import threading
 import unicodedata
 from contextlib import asynccontextmanager
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from pathlib import Path
 
 # from time import timezone
@@ -195,7 +195,7 @@ class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     mode: str
     details: str
-    offre: Optional[str]
+    offre: str
 
 
 @app.get("/backend/prospection/list")
@@ -287,16 +287,20 @@ async def start_prospection(
                 # maintenant = datetime.now().astimezone()
 
                 prochaine_heure = (
-                    datetime.now().astimezone() + timedelta(days=1)
-                ).replace(
-                    hour=random.randint(8, 19),
-                    minute=random.randint(0, 59),
+                    (datetime.now().astimezone() + timedelta(days=1))
+                    .replace(
+                        hour=random.randint(8, 19),
+                        minute=random.randint(0, 59),
+                        tzinfo=None,
+                    )
+                    .isoformat()
                 )
 
                 # prochaine_heure = demain.replace(
                 #     hour=random.randint(8, 19),
                 #     minute=random.randint(0, 59),
                 # )
+
                 supabase_client.table("prospection_settings").insert(
                     {
                         "job_title": body.intitule,
@@ -304,22 +308,27 @@ async def start_prospection(
                         "is_active": True,
                         "details": body.details,
                         "mode": body.mode,
-                        "offre": body.offre or "".replace("\x00", ""),
+                        "offre": body.offre or "",
                         "user_id": current_user_id,
-                        "hour_start": prochaine_heure.replace(tzinfo=None).isoformat(),
-                    }
+                        "hour_start": prochaine_heure,
+                        "has_run_today": False,
+                    },
                 ).execute()
+
+                print(f"offre : {body.offre}")
+
+                print("🔒 select db")
+                print("⏳ Tentative d'appel RPC...")
+
+                res = supabase_client.rpc(
+                    "get_decrypted_settings",
+                    {"job_title_input": body.intitule, "key_input": KEY_SECRET},
+                ).execute()
+                print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
+                print(f"🔍 DEBUG - Type de données: {type(res.data)}")
+
             except Exception as e:
                 print(f"❌ ERREUR SUPABASE INSERT : {e}")
-
-            print("🔒 select db")
-            print("⏳ Tentative d'appel RPC...")
-            res = supabase_client.rpc(
-                "get_decrypted_settings",
-                {"job_title_input": body.intitule, "key_input": KEY_SECRET},
-            ).execute()
-            print(f"🔍 DEBUG - Données brutes RPC: {res.data}")
-            print(f"🔍 DEBUG - Type de données: {type(res.data)}")
 
     except Exception as e:
         print(f"❌ ERREUR RPC : {e}")

@@ -7,7 +7,7 @@ Contexte :
 - Informations complémentaires : {details}
 
 Consignes STRICTES :
-1. Maximum 2 phrases courtes et percutantes
+1. Maximum 2 phrases courtes et percutantes, ne tutoie pas
 2. Ton moderne et professionnel (pas de "Cher/Chère", "Madame", "Monsieur")
 3. Change à chaque fois ce que tu dis car j'appelle ce prompt plusieurs fois
 4. Objectif : piquer la curiosité sans être intrusif

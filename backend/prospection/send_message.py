@@ -155,8 +155,12 @@ def send_message(driver, job_title, message, offre, mode, config_db):
                         print("Candidat non pertinent")
                         yield "Candidat non pertinent"
                         continue
+                    else:
+                        yield f"Ce candidat semble être pertinent pour l'offre {offre['title']}"
+                        time.sleep(random.uniform(3, 5))
+                        print("Candidat pertinent...")
                     if is_top:
-                        print("Candidat top, on envoie un mail")
+                        print("Candidat top, on envoie un mail...")
                         send_mail(argument, url, config_db)
                         yield "Mail envoyé"
                         continue

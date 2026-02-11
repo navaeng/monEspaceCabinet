@@ -4,9 +4,6 @@ import threading
 import unicodedata
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-
-# from time import timezone
-# from threading import Lock
 from typing import Any, Dict, List, Optional, cast
 
 import uvicorn
@@ -23,8 +20,6 @@ from fastapi import (
 )
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
-
-# from lock import prospection_lock
 from locks import user_lock
 from postgrest.base_request_builder import APIResponse
 from prospection.start_prospect_auto import start_prospect_auto
@@ -330,8 +325,9 @@ async def start_prospection(
             supabase_client.table("prospection_settings").update(
                 {"is_active": False}
             ).not_.is_("id", "null").execute()
-            if prospection_lock.locked():
-                prospection_lock.release()
+
+            if user_lock.locked():
+                user_lock.release()
             print("Session terminée")
 
     return StreamingResponse(stream_generator(), media_type="text/plain")

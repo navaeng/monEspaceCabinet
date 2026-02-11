@@ -6,6 +6,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [nom, setNom] = useState(null);
+  const [cabinet, setCabinet] = useState(null);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -18,23 +19,17 @@ function Dashboard() {
 
       const { data } = await supabase
         .from("profiles")
-        .select("full_name")
+        .select("full_name, cabinets(nom)")
         .eq("id", user.id)
         .single();
 
-      if (data) setNom(data.full_name);
+      if (data) {
+        setNom(data.full_name);
+        setCabinet(data.cabinets?.nom);
+      }
     };
     getUserData();
   }, []);
-
-  // const handleLogout = async () => {
-  //   const { lgt } = await supabase.auth.signOut();
-  //   if (lgt) {
-  //     console.error("Erreur déconnexion:", lgt.message);
-  //   } else {
-  //     navigate("/Connexion");
-  //   }
-  // };
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -44,7 +39,7 @@ function Dashboard() {
           <h1 className="text-lg font-normal text-gray-900 mb-1">
             Tableau de bord {nom ? nom : user ? user.email : ""}
           </h1>
-          <p className="text-xs text-gray-500">Espace cabinet</p>
+          <p className="text-xs text-gray-500">Espace cabinet {cabinet}</p>
           {/* <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

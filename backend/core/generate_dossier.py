@@ -18,18 +18,11 @@ def generate_dossier_api(
     selected_file: str,
     output_path: str,
     add_skills: bool,
-    english_cv: bool = False,
+    english_cv: bool,
     progress_callback=None,
 ) -> dict:
-    def log_progress(message: str):
-        """Helper pour logger la progression"""
-        if progress_callback:
-            progress_callback(message)
-        print(f"📊 {message}")
 
     try:
-        log_progress("Extraction des données du CV...")
-
         # Appeler la version API de extract_and_call_prompt
         all_data, data_skills_tools, data_infos, data_diplomes, data_experiences = (
             extract_and_call_prompt_api(
@@ -39,8 +32,6 @@ def generate_dossier_api(
                 progress_callback=progress_callback,
             )
         )
-
-        log_progress("Fusion des données extraites...")
 
         data = {
             "cv_texte_propre": all_data,

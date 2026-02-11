@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
-function Header() {
+function Header({ cabinetName }) {
   // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ function Header() {
                 Tableau de bord
               </Link>
               <Link
-                to="/"
+                to="RechercheCandidat"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
                 Rechercher un candidat
@@ -69,6 +69,7 @@ function Header() {
               >
                 Prospection et sourcing
               </Link>
+
               <Link
                 to="/Dossier_competences"
                 className="text-xs text-gray-600 hover:text-gray-900"
@@ -77,7 +78,7 @@ function Header() {
               </Link>
 
               <Link
-                to="/"
+                to="Email_auto"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
                 Email automatisé
@@ -86,7 +87,7 @@ function Header() {
                 to="/SignupUser"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
-                Ajouter une personne
+                Ajouter des personne
               </Link>*/}
               <Link
                 to="EditInfos"
@@ -95,10 +96,10 @@ function Header() {
                 Modifier mes infos
               </Link>
               <Link
-                to="/"
+                to="AjouterPersonne"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
-                Ajouter une personne
+                Ajouter des personne
               </Link>
               <Link
                 onClick={handleLogout}
@@ -106,6 +107,9 @@ function Header() {
               >
                 Déconnexion
               </Link>
+              {/* <p to="/" className="text-xs text-gray-600 hover:text-gray-900">
+                Cabinet {cabinetName || "Chargement..."}
+              </p>*/}
             </>
           )}
         </div>

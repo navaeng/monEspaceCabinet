@@ -9,6 +9,9 @@ import ProtectedRoute from "./composants/ProtectedRoute";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import EditInfos from "./composants/EditInfos";
+import RechercheCandidat from "./composants/RechercheCandidat";
+import EmailAuto from "./composants/EmailAuto";
+import AjouterPersonne from "./composants/AjouterPersonne";
 // import SignupUser from "./composants/SignupUser";
 
 function App() {
@@ -36,6 +39,30 @@ function App() {
             }
           />
         }
+        <Route
+          path="/RechercheCandidat"
+          element={
+            <ProtectedRoute>
+              <RechercheCandidat />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/EmailAuto"
+          element={
+            <ProtectedRoute>
+              <EmailAuto />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AjouterPersonne"
+          element={
+            <ProtectedRoute>
+              <AjouterPersonne />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/Connexion"
           element={<Login onLoginSuccess={(u) => setUser(u)} />}

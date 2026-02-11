@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
+import Header from "./Header";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -25,7 +26,11 @@ function Dashboard() {
 
       if (data) {
         setNom(data.full_name);
-        setCabinet(data.cabinets?.nom);
+        const nomcabinet = Array.isArray(data.cabinets)
+          ? data.cabinets[0]?.nom
+          : data.cabinets?.nom;
+
+        setCabinet(nomcabinet);
       }
     };
     getUserData();
@@ -33,8 +38,8 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-white font-sans">
+      {/* <Header cabinetName={cabinet} />;*/}
       <div className="max-w-4xl mx-auto p-4 md:p-6">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-lg font-normal text-gray-900 mb-1">
             Tableau de bord {nom ? nom : user ? user.email : ""}

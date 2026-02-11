@@ -326,8 +326,8 @@ async def start_prospection(
                 {"is_active": False}
             ).not_.is_("id", "null").execute()
 
-            if user_lock.locked():
-                user_lock.release()
+            if user_lock[current_user_id].locked():
+                user_lock[current_user_id].release()
             print("Session terminée")
 
     return StreamingResponse(stream_generator(), media_type="text/plain")

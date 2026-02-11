@@ -1,3 +1,4 @@
 import threading
+from collections import defaultdict
 
-user_lock = threading.Lock()
+user_lock = defaultdict(threading.Lock)

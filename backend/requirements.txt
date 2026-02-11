@@ -13,4 +13,4 @@ python-docx
 PyMuPDF
 docxtpl
 undetected_chromedriver
-distutils
+setuptools

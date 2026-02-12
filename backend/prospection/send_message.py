@@ -295,6 +295,9 @@ def send_message(
             print(e)
             continue
 
+        finally:
+            yield "✅FIn de programme, nous avons contacté {count} utilisateurs"
+
     if "driver" in locals():
         driver.quit()
         return

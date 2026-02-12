@@ -419,7 +419,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                 else:
                     print(f"Log technique: {e}")
 
-    yield "--- Invitations terminées ---"
+    yield "--- Invitations terminées, Nous avons envoyé {count} invitations ---"
 
     try:
         from prospection.send_message import send_message

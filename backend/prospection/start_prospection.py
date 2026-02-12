@@ -9,6 +9,8 @@ from typing import Optional
 
 import undetected_chromedriver as uc
 from database import supabase_client
+from httpx import post
+from prospection.post_message import post_message
 from pydantic import BaseModel
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -255,6 +257,10 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     #     print(f"Erreur lors du chargement de la page : {e}")
 
     try:
+        post_message(driver, post)
+        yield "Nous allons saisir un post..."
+        time.sleep(5)
+
         yield "🔍 Recherche..."
 
         for page in range(1, 4):
@@ -347,6 +353,8 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                             print(f"Interne ({cabinet_name}), on zappe.")
                             time.sleep(random.uniform(3, 5))
                             continue
+                        else:
+                            yield f"Pas de mention à {cabinet_name}..."
 
                     driver.execute_script(
                         "arguments[0].scrollIntoView({block: 'center'});", bouton

@@ -276,7 +276,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
                     By.CSS_SELECTOR,
                     "button[data-control-name='close_messaging_bubble'], .msg-overlay-bubble-header__control--close",
                 )
-                print(f"Nombre de boutons de fermeture trouvés : {len(close_buttons)}")
+                print(f"nombre de boutons de fermeture trouvés : {len(close_buttons)}")
 
                 for btn in close_buttons:
                     print(f"Bouton de fermeture trouvé : {btn}")

@@ -28,11 +28,29 @@ def post_message(driver, post):
         time.sleep(random.uniform(3, 5))
         print("Message ouvert")
 
-        editor = wait.until(
-            EC.presence_of_element_located(
-                (By.CSS_SELECTOR, "div[role='textbox'], .ql-editor")
-            )
-        )
+        js_find_editor = """
+                function findDeep(sel, root = document) {
+                    let n = root.querySelector(sel);
+                    if (n) return n;
+                    let all = root.querySelectorAll('*');
+                    for (let e of all) {
+                        if (e.shadowRoot) {
+                            let res = findDeep(sel, e.shadowRoot);
+                            if (res) return res;
+                        }
+                    }
+                    return null;
+                }
+                return findDeep("div[contenteditable='true'], div[role='textbox'], .ql-editor");
+                """
+
+        # editor = wait.until(
+        #     EC.presence_of_element_located(
+        #         (By.CSS_SELECTOR, "div[role='textbox'], .ql-editor")
+        #     )
+        # )
+        #
+        editor = driver.execute_script(js_find_editor)
         print("Editor found")
 
         if message_ia:
@@ -49,7 +67,7 @@ def post_message(driver, post):
             for char in message_ia:
                 actions.send_keys(char)
                 actions.perform()
-                time.sleep(random.uniform(0.02, 0.06))
+                time.sleep(random.uniform(0.10, 0.15))
                 print(f"Char sent: {char}")
 
     except Exception as e:

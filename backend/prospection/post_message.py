@@ -63,12 +63,28 @@ def post_message(driver, post):
             actions.perform()
 
             print("Editor clicked")
+            yield "Messag reçu de la part du modèle.."
+            time.sleep(5)
 
             for char in message_ia:
                 actions.send_keys(char)
                 actions.perform()
                 time.sleep(random.uniform(0.10, 0.15))
-                print(f"Char sent: {char}")
+                # print(f"Char sent: {char}")
+
+            publish_xpath = "//button[contains(., 'Publier')]"
+            publish_btn = wait.until(
+                EC.element_to_be_clickable((By.XPATH, publish_xpath))
+            )
+            try:
+                time.sleep(random.uniform(0.50, 0.90))
+                driver.execute_script("arguments[0].click();", publish_btn)
+                print("Message published")
+                yield "Message publié..."
+                time.sleep(5)
+
+            except Exception as e:
+                print(f"Erreur lors de la publication du message : {e}")
 
     except Exception as e:
         print(f"Erreur : {e}")

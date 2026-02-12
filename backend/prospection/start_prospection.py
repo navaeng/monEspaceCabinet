@@ -257,8 +257,7 @@ def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
     #     print(f"Erreur lors du chargement de la page : {e}")
 
     try:
-        post_message(driver, post)
-        yield "Nous allons saisir un post..."
+        yield from post_message(driver, post)
         time.sleep(5)
 
         yield "🔍 Recherche..."

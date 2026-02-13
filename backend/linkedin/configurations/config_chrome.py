@@ -1,10 +1,9 @@
-def config_chrome():
+import os
+import re
+import subprocess
 
-    print(f"[DEBUG] Offre : {offre}")
-    print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
-    print(f"[DEBUG] Détails de la prospection : {details}")
-    print(f"[DEBUG] Mode : {mode}")
-    print(f"CONFIG DB: {config_db}")
+
+def config_chrome(config_db):
 
     uid = config_db.get("user_id")
     print(f"[DEBUG] User ID: {uid}")
@@ -14,8 +13,7 @@ def config_chrome():
             "❌ ERREUR : Pas d'ID utilisateur, Chrome ne sait pas quel dossier ouvrir !"
         )
         return
-    # print(f"🔍 [RUN_CHROME] job_title: {job_title}")
-    # print(f"🔍 [RUN_CHROME] config_db: {config_db}")
+
     print(f"🔍 [RUN_CHROME] Email: {config_db.get('linkedin_email')}")
     print(
         f"🔍 [RUN_CHROME] Password présent: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
@@ -68,8 +66,7 @@ def config_chrome():
             )
         ).group()
     )
-    time.sleep(random.randint(10, 30))
-    print("temps choisi : ", random.randint(10, 30))
+
     driver = uc.Chrome(
         options=options,
         # service=chrome_service,

@@ -9,7 +9,6 @@ import uvicorn
 from core.generate_dossier import generate_dossier_api
 from database import supabase_client
 from fastapi import (
-    BackgroundTasks,
     FastAPI,
     File,
     Form,
@@ -19,25 +18,18 @@ from fastapi import (
 )
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
+from linkedin.run_chrome import run_chrome
+from linkedin.start_prospect_auto import start_prospect_auto
 from locks import user_lock
 from postgrest.base_request_builder import APIResponse
-from prospection.start_prospect_auto import start_prospect_auto
-from prospection.start_prospection import run_chrome
 from pydantic import BaseModel
 
 
 @asynccontextmanager
 async def thread_(app: FastAPI):
-    # try:
-    #     supabase_client.table("prospection_settings").update(
-    #         {"is_active": False}
-    #     ).execute()
-    #     print("Supabase : Tous les statuts ont été réinitialisés.")
-    # except Exception as e:
-    #     print(f"⚠️ Erreur reset démarrage: {e}")
     thread = threading.Thread(target=start_prospect_auto, daemon=True)
     thread.start()
-    print("Lancement de thread...")
+    print("Lancement de thread pour les lancements automatique...")
     yield
 
 
@@ -320,36 +312,6 @@ async def start_prospection(
                         print("🔓 Session terminée")
 
                 return StreamingResponse(stream_generator(), media_type="text/plain")
-
-                # def run_in_background(job_title, config):
-                #     print(f"🚀🚀🚀 BACKGROUND TASK STARTED pour {job_title}")
-                #     print(f"🔍 Config reçue: {config}")
-                #     try:
-                #         for step in run_chrome(body.intitule, config):
-                #             print(f"🤖 [DEBUG] Étape {step}")
-                #     except Exception as e:
-                #         print(f"💥 CRASH DANS LE BACKGROUND : {e}")
-                #         return {
-                #             "status": "error",
-                #             "message": f"Erreur pendant l'exécution : {str(e)}",
-                #         }
-                #     finally:
-                #         try:
-                #             supabase_client.table("prospection_settings").update(
-                #                 {"is_active": False}
-                #             ).not_.is_("id", "null").execute()
-                #             print("✅ DB: Statut réinitialisé à False")
-                #         except Exception as e:
-                #             print(f"❌ ERREUR SUPABASE UPDATE : {e}")
-                #             pass
-                #         if prospection_lock.locked():
-                #             prospection_lock.release()
-                #             print("🔓 LOCK LIBÉRÉ")
-
-                # print(f"DEBUG CONFIG: {config_db}")
-                # background_tasks.add_task(run_in_background, body.intitule, config_db)
-
-                # return {"status": "success", "message": "Chrome va se lancer"}
 
             if not res or res.data is None:
                 return {

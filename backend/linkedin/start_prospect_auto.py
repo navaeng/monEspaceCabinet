@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 from typing import Any, cast
 
 from database import supabase_client
+from linkedin.run_chrome import run_chrome
 from locks import user_lock
-from prospection.start_prospection import run_chrome
 
 # prospection_lock = Lock()
 

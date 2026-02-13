@@ -4,14 +4,14 @@ import sys
 import time
 from typing import Optional
 
-from configurations.config_chrome import config_chrome
 from database import supabase_client
 from httpx import post
+from linkedin.configurations.config_chrome import config_chrome
+from linkedin.login_linkedin import login_linkedin
 from linkedin.post_message import post_message
+from linkedin.request_connexion import request_connexion
 from linkedin.send_message import send_message
-from login_linkedin import login_linkedin
 from pydantic import BaseModel
-from request_connexion import request_connexion
 from selenium.webdriver.common.by import By
 from treatment.behavior.mouse import human_mouse_move
 

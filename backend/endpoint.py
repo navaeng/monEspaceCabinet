@@ -180,7 +180,7 @@ async def get_prospection(request: Request):
         return []
 
 
-@app.post("/backend/prospection/start_chrome")
+@app.post("/backend/linkedin/start_chrome")
 async def start_chrome(
     body: ProspectionRequest,
     request: Request,

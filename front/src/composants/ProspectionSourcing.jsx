@@ -125,7 +125,7 @@ function ProspectionSourcing() {
     try {
       const headers = await getAuthHeaders();
       const response = await fetch(
-        "http://localhost:8003/backend/prospection/start_prospection",
+        "http://localhost:8003/backend/linkedin/start_chrome",
         {
           method: "POST",
           headers,
@@ -134,7 +134,7 @@ function ProspectionSourcing() {
       );
 
       // const response = await fetch(
-      //   "http://192.168.122.1:8000/backend/prospection/start_prospection",
+      //   "http://192.168.122.1:8000/backend/prospection/start_chrome",
       //   {
       //     method: "POST",
       //     headers,

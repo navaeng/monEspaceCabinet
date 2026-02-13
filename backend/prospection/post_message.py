@@ -55,7 +55,7 @@ def post_message(driver, post):
 
         if message_ia:
             driver.execute_script("arguments[0].focus();", editor)
-            time.sleep(5)
+            time.sleep(random.uniform(5, 10))
             editor.click()
             actions = ActionChains(driver)
             actions.move_to_element(editor)
@@ -64,7 +64,7 @@ def post_message(driver, post):
 
             print("Editor clicked")
             yield "Nous allons saisir un post..."
-            time.sleep(2)
+            time.sleep(random.uniform(5, 10))
             yield "✍️ Écriture du message en cours..."
 
             for char in message_ia:
@@ -72,17 +72,17 @@ def post_message(driver, post):
                 actions.send_keys(char)
                 actions.perform()
                 time.sleep(random.uniform(0.25, 0.35))
-            time.sleep(5)
+            time.sleep(random.uniform(5, 10))
 
             try:
-                time.sleep(5)
+                time.sleep(random.uniform(5, 10))
                 from script_element_xpath.post_button import post_button
 
                 resultat = driver.execute_script(post_button())
                 if resultat == "BOUTON_CLIQUE":
                     print("✅ Message publié !")
-                    yield "Message publié..."
-                    time.sleep(5)
+                    yield "✅ Post publié..."
+                    time.sleep(random.uniform(5, 10))
                 else:
                     print("❌ Bouton introuvable par le script JS")
 

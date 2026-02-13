@@ -244,8 +244,8 @@ async def start_chrome(
                         "details": body.details,
                         "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
-                        "telephone": body.telephone or "",
-                        "full_name": body.full_name or "",
+                        # "telephone": body.telephone or "",
+                        # "full_name": body.full_name or "",
                         "hour_start": prochaine_heure.isoformat(),
                     }
                 ).execute()
@@ -269,6 +269,7 @@ async def start_chrome(
                     cast(List[Dict[str, Any]], response.data) if response.data else []
                 )
                 data = data_list[0] if data_list else {}
+                data["user_id"] = current_user_id
                 print(f"🔍 DEBUG - Contenu de data: {data}")
                 print(f"🔍 DEBUG - Clés disponibles: {data.keys() if data else 'VIDE'}")
 
@@ -288,13 +289,14 @@ async def start_chrome(
                     try:
                         print(f"🚀 Lancement Chrome pour {body.intitule}")
                         for step in run_chrome(
-                            body.intitule,
-                            body.details,
-                            body.mode,
-                            body.offre or "",
-                            body.telephone or "",
-                            body.full_name,
-                            config_db,
+                            driver=None,
+                            job_title=body.intitule,
+                            details=body.details,
+                            mode=body.mode,
+                            offre=body.offre or "",
+                            config_db=config_db,
+                            telephone=body.telephone or "",
+                            full_name=body.full_name or "",
                         ):
                             yield f"{step}\n"
                     except Exception as e:
@@ -322,59 +324,61 @@ async def start_chrome(
     except Exception as e:
         print(f"❌ ERREUR RPC : {e}")
 
-    config_db = {}
+    # config_db = {}
 
-    if res and hasattr(res, "data") and res.data:
-        response = cast(APIResponse, res)
-        data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
-        data = data_list[0] if data_list else {}
-        print(f"Contenu de data: {data}")
+    # if res and hasattr(res, "data") and res.data:
+    #     response = cast(APIResponse, res)
+    #     data_list = cast(List[Dict[str, Any]], response.data) if response.data else []
+    #     data = data_list[0] if data_list else {}
+    #     print(f"Contenu de data: {data}")
 
-        config_db = {
-            "id": data.get("id"),
-            "user_id": current_user_id,
-            "linkedin_email": data.get("linkedin_email"),
-            "linkedin_password": data.get("linkedin_password"),
-            "job_title": body.intitule,
-            "telephone": data.get("telephone"),
-            "full_name": data.get("full_name"),
-            "email": data.get("email"),
-        }
-        print(f"📧 Email linkedin récupéré: {config_db.get('linkedin_email')}")
-        print(f"📧 Email récupéré: {config_db.get('email')}")
-        print(
-            f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
-        )
+    #     config_db = {
+    #         "id": data.get("id"),
+    #         "user_id": current_user_id,
+    #         "linkedin_email": data.get("linkedin_email"),
+    #         "linkedin_password": data.get("linkedin_password"),
+    #         "job_title": body.intitule,
+    #         "telephone": data.get("telephone"),
+    #         "full_name": data.get("full_name"),
+    #         "email": data.get("email"),
+    #     }
+    #     print(f"📧 Email linkedin récupéré: {config_db.get('linkedin_email')}")
+    #     print(f"📧 Email récupéré: {config_db.get('email')}")
+    #     print(
+    #         f"Password récupéré: {'OUI' if config_db.get('linkedin_password') else 'NON'}"
+    #     )
 
-    def stream_generator():
-        try:
-            print(f"Lancement Chrome pour {body.intitule}")
-            for step in run_chrome(
-                body.intitule,
-                body.details,
-                body.mode,
-                body.offre or "",
-                body.telephone,
-                body.full_name,
-                config_db,
-            ):
-                yield f"{step}\n"
-        except Exception as e:
-            import traceback
+    # def stream_generator():
+    #     try:
+    #         print(f"DEBUG: type de config_db est {type(config_db)}")
+    #         print(f"Lancement Chrome pour {body.intitule}")
+    #         for step in run_chrome(
+    #             driver=None,
+    #             job_title=body.intitule,
+    #             details=body.details,
+    #             mode=body.mode,
+    #             offre=body.offre or "",
+    #             config_db=config_db,
+    #             telephone=body.telephone,
+    #             full_name=body.full_name,
+    #         ):
+    #             yield f"{step}\n"
+    #     except Exception as e:
+    #         import traceback
 
-            traceback.print_exc()
-            print(f"Erreur lors de la prospection : {str(e)}")
+    #         traceback.print_exc()
+    #         print(f"Erreur lors de la prospection : {str(e)}")
 
-        finally:
-            supabase_client.table("prospection_settings").update(
-                {"is_active": False}
-            ).not_.is_("id", "null").execute()
+    #     finally:
+    #         supabase_client.table("prospection_settings").update(
+    #             {"is_active": False}
+    #         ).not_.is_("id", "null").execute()
 
-            if user_lock[current_user_id].locked():
-                user_lock[current_user_id].release()
-            print("Session terminée")
+    #         if user_lock[current_user_id].locked():
+    #             user_lock[current_user_id].release()
+    #         print("Session terminée")
 
-    return StreamingResponse(stream_generator(), media_type="text/plain")
+    # return StreamingResponse(stream_generator(), media_type="text/plain")
 
 
 if __name__ == "__main__":

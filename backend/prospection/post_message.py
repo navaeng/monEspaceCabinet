@@ -63,7 +63,7 @@ def post_message(driver, post):
             actions.perform()
 
             print("Editor clicked")
-            yield "Message reçu de la part du modèle..."
+            yield "Nous allons saisir un post..."
             time.sleep(2)
             yield "✍️ Écriture du message en cours..."
 
@@ -82,19 +82,9 @@ def post_message(driver, post):
                 if resultat == "BOUTON_CLIQUE":
                     print("✅ Message publié !")
                     yield "Message publié..."
+                    time.sleep(5)
                 else:
                     print("❌ Bouton introuvable par le script JS")
-
-                # trouver_button_post = post_button(driver)
-                # button_post = wait.until(
-                #     EC.presence_of_element_located((By.XPATH, trouver_button_post))
-                # )
-                # button_post = driver.find_element(By.XPATH, trouver_button_post)
-                # time.sleep(5)
-                # driver.execute_script("arguments[0].click();", button_post)
-                # print("Message publié")
-                # yield "Message publié..."
-                # time.sleep(5)
 
             except Exception:
                 traceback.print_exc()

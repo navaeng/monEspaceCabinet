@@ -145,6 +145,8 @@ class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     mode: str
     details: str
+    telephone: str
+    full_name: str
     offre: Optional[str]
 
 
@@ -161,8 +163,6 @@ async def get_prospection(request: Request):
         user_response = supabase_client.auth.get_user(token)
         if not user_response or not user_response.user:
             raise HTTPException(status_code=401, detail="Authentification invalide")
-        # if not user_response.user:
-        #     return []
         current_user_id = user_response.user.id
         print(f"👤 Utilisateur connecté : {current_user_id}")
 
@@ -180,12 +180,11 @@ async def get_prospection(request: Request):
         return []
 
 
-@app.post("/backend/prospection/start_prospection")
-async def start_prospection(
+@app.post("/backend/prospection/start_chrome")
+async def start_chrome(
     body: ProspectionRequest,
     request: Request,
 ):
-
     print("lancement...")
     res = None
 
@@ -224,13 +223,13 @@ async def start_prospection(
 
     try:
         print("LOCK ACQUIS")
-
         print("On lance la requête")
 
         SELECT_QUERY = f"*,profiles!inner(linkedin_email,linkedin_password:pgp_sym_decrypt(linkedin_password::bytea,'{KEY_SECRET}'))"
         if SELECT_QUERY:
             try:
-                print("insert db")
+                print("insert db...")
+                import random
 
                 prochaine_heure = (
                     datetime.now().astimezone() + timedelta(days=1)
@@ -247,7 +246,9 @@ async def start_prospection(
                         "details": body.details,
                         "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
-                        "hour_start": datetime.now().astimezone().isoformat(),
+                        "telephone": body.telephone or "",
+                        "full_name": body.full_name or "",
+                        "hour_start": prochaine_heure.isoformat(),
                     }
                 ).execute()
             except Exception as e:
@@ -293,6 +294,8 @@ async def start_prospection(
                             body.details,
                             body.mode,
                             body.offre,
+                            body.telephone,
+                            body.full_name,
                             config_db,
                         ):
                             yield f"{step}\n"
@@ -351,7 +354,9 @@ async def start_prospection(
                 body.intitule,
                 body.details,
                 body.mode,
-                body.offre,
+                body.offre or "",
+                body.telephone,
+                body.full_name,
                 config_db,
             ):
                 yield f"{step}\n"

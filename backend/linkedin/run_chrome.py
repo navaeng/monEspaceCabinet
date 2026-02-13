@@ -32,7 +32,7 @@ def run_chrome(
     offre,
     config_db,
     telephone,
-    full_name,
+    full_name: str = "",
 ):
     config_chrome(config_db)
 
@@ -47,6 +47,7 @@ def run_chrome(
     try:
         yield "Lancement..."
         time.sleep(random.uniform(3, 6))
+        yield "On tente l'accès à notre "
         driver.get("https://www.linkedin.com/feed/")
         yield "Accès à LinkedIn..."
         time.sleep(random.uniform(3, 6))

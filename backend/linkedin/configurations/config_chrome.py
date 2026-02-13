@@ -2,6 +2,8 @@ import os
 import re
 import subprocess
 
+import undetected_chromedriver as uc
+
 
 def config_chrome(config_db):
 

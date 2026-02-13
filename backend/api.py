@@ -156,6 +156,7 @@ class ProspectionRequest(BaseModel):  # contrat
     intitule: str
     mode: str
     details: str
+    post: Optional[str]
     offre: Optional[str]
 
 
@@ -260,6 +261,7 @@ async def start_prospection(
                         "is_active": True,
                         "details": body.details,
                         "mode": body.mode,
+                        "post": body.post,
                         "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
                         "hour_start": prochaine_heure.replace(tzinfo=None).isoformat(),
@@ -311,7 +313,8 @@ async def start_prospection(
                 body.intitule,
                 body.details,
                 body.mode,
-                body.offre,
+                body.offre or "",
+                body.post or "",
                 config_db,
             ):
                 yield f"{step}\n"

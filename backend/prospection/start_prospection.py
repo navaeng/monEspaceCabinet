@@ -9,7 +9,8 @@ from typing import Optional
 
 import undetected_chromedriver as uc
 from database import supabase_client
-from httpx import post
+
+# from httpx import post
 from prospection.post_message import post_message
 from pydantic import BaseModel
 from selenium.webdriver.common.by import By
@@ -25,6 +26,7 @@ class ProspectionRequest(BaseModel):
     intitule: str
     details: Optional[str] = None
     offre: Optional[str] = None
+    post: Optional[str] = None
 
 
 def slow_type(element, text):
@@ -34,12 +36,15 @@ def slow_type(element, text):
         time.sleep(random.uniform(0.1, 0.3))
 
 
-def run_chrome(job_title: str, details: str, mode: str, offre, config_db):
+def run_chrome(
+    job_title: str, details: str, mode: str, offre: str, post: str, config_db
+):
 
     print(f"[DEBUG] Offre : {offre}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")
     print(f"[DEBUG] Mode : {mode}")
+    print(f"[DEBUG] Post : {post}")
     print(f"CONFIG DB: {config_db}")
 
     uid = config_db.get("user_id")

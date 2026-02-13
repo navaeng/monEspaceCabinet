@@ -16,12 +16,15 @@ from data.call_groq import call_groq
 def post_message(driver, post):
 
     try:
-        instruction = "Donne un message court en une phrase"
-        prompt = post_prompt(instruction)
+        # instruction = "Donne un message court en une phrase"
+        prompt = post_prompt(post)
+        print(f"POST : {post}")
+
         message_ia = call_groq(prompt)
         print(f"Message généré : {message_ia}")
 
-        wait = WebDriverWait(driver, 30)
+        # wait = WebDriverWait(driver, 30)
+        time.sleep(random.uniform(5, 10))
         post_input = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, "//p[contains(text(), 'Commencer un post')]")
@@ -68,20 +71,30 @@ def post_message(driver, post):
                 # time.sleep(3)
                 actions.send_keys(char)
                 actions.perform()
-                time.sleep(random.uniform(0.14, 0.22))
-            time.sleep(2)
+                time.sleep(random.uniform(0.25, 0.35))
+            time.sleep(5)
 
             try:
-                wait = WebDriverWait(driver, 10)
-                # xpath_button_post = "//button//span[contains(text(), 'Publier')]/.."
-                xpath_button_post = "//button[.//span[contains(text(), 'Publier')]]"
-                button_post = wait.until(
-                    EC.presence_of_element_located((By.XPATH, xpath_button_post))
-                )
+                time.sleep(5)
+                from script_element_xpath.post_button import post_button
 
-                time.sleep(1)
-                button_post.click()
-                print("Message publié")
+                resultat = driver.execute_script(post_button())
+                if resultat == "BOUTON_CLIQUE":
+                    print("✅ Message publié !")
+                    yield "Message publié..."
+                else:
+                    print("❌ Bouton introuvable par le script JS")
+
+                # trouver_button_post = post_button(driver)
+                # button_post = wait.until(
+                #     EC.presence_of_element_located((By.XPATH, trouver_button_post))
+                # )
+                # button_post = driver.find_element(By.XPATH, trouver_button_post)
+                # time.sleep(5)
+                # driver.execute_script("arguments[0].click();", button_post)
+                # print("Message publié")
+                # yield "Message publié..."
+                # time.sleep(5)
 
             except Exception:
                 traceback.print_exc()

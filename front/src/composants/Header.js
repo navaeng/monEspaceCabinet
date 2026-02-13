@@ -93,7 +93,7 @@ function Header({ cabinetName }) {
                 to="EditInfos"
                 className="text-xs text-gray-600 hover:text-gray-900"
               >
-                Identifications linkedin
+                Identifiants linkedin
               </Link>
               <Link
                 to="AjouterPersonne"

@@ -24,9 +24,6 @@ class ProspectionRequest(BaseModel):
     offre: Optional[str] = None
 
 
-config_chrome(config_db)
-
-
 def run_chrome(
     driver,
     job_title: str,
@@ -37,6 +34,7 @@ def run_chrome(
     telephone,
     full_name,
 ):
+    config_chrome(config_db)
 
     uid = config_db.get("user_id")
     print(f"[DEBUG] User ID: {uid}")

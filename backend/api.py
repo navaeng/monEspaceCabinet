@@ -33,7 +33,7 @@ async def thread_(app: FastAPI):
     yield
 
 
-app = FastAPI(title="API local", version="1.0.0", lifespan=thread_)
+app = FastAPI(title="API workCabinet", version="1.0.0", lifespan=thread_)
 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
 print(f"KEY: {KEY_SECRET}")
 
@@ -79,7 +79,6 @@ async def generate_dossier(
     allowed_types = [  # allowlist
         "application/pdf",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        # "application/msword",
     ]
 
     if cv.content_type not in allowed_types:

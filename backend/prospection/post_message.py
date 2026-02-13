@@ -5,7 +5,8 @@ import traceback
 from data.prompt.post_prompt import post_prompt
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+
+# from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -67,45 +68,18 @@ def post_message(driver, post):
                 # time.sleep(3)
                 actions.send_keys(char)
                 actions.perform()
-                time.sleep(0.01)
+                time.sleep(random.uniform(0.05, 0.15))
             time.sleep(2)
-            # print(f"Char sent: {char}")
-            #
-            # editor.send_keys(Keys.ENTER)
-            # publish_xpath = "//button[contains(@class, 'share-actions__primary-action') and not(contains(@class, 'disabled'))]"
-            # publish_xpath = "//button[contains(normalize-space(.), 'Publier')]"
-            print("Publish button tentative")
-            publish_xpath = (
-                "//button[contains(@class, 'share-actions__primary-action')]"
-            )
-            # publish_btn = wait.until(
-            #     EC.element_to_be_clickable((By.XPATH, publish_xpath))
-            # )
-            try:
-                publish_btn = wait.until(
-                    EC.presence_of_element_located((By.XPATH, publish_xpath))
-                )
-                driver.execute_script(
-                    "arguments[0].scrollIntoView({block: 'center'});", publish_btn
-                )
-                driver.execute_script(
-                    "arguments[0].removeAttribute('disabled');", publish_btn
-                )
-                time.sleep(1)
-                driver.execute_script("arguments[0].click();", publish_btn)
-                # except Exception as e:
-                #     print(f"Erreur lors de la recherche du bouton de publication : {e}")
 
-                # try:
-                #     publish_btn.click()
-                # except Exception as e:
-                #     print(f"Erreur lors du clic sur le bouton de publication : {e}")
-                #     driver.execute_script("arguments[0].click();", publish_btn)
-                time.sleep(3)
-                # driver.execute_script("arguments[0].click();", publish_btn)
-                print("Message published")
-                yield "Message publié avec succès..."
+            try:
+                wait = WebDriverWait(driver, 10)
+                xpath_button_post = "//button//span[contains(text(), 'Publier')]/.."
+                button_post = wait.until(
+                    EC.element_to_be_clickable((By.XPATH, xpath_button_post))
+                )
                 time.sleep(5)
+                button_post.click()
+                print("Message publié")
 
             except Exception:
                 traceback.print_exc()

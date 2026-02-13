@@ -68,16 +68,18 @@ def post_message(driver, post):
                 # time.sleep(3)
                 actions.send_keys(char)
                 actions.perform()
-                time.sleep(random.uniform(0.05, 0.15))
+                time.sleep(random.uniform(0.14, 0.22))
             time.sleep(2)
 
             try:
                 wait = WebDriverWait(driver, 10)
-                xpath_button_post = "//button//span[contains(text(), 'Publier')]/.."
+                # xpath_button_post = "//button//span[contains(text(), 'Publier')]/.."
+                xpath_button_post = "//button[.//span[contains(text(), 'Publier')]]"
                 button_post = wait.until(
-                    EC.element_to_be_clickable((By.XPATH, xpath_button_post))
+                    EC.presence_of_element_located((By.XPATH, xpath_button_post))
                 )
-                time.sleep(5)
+
+                time.sleep(1)
                 button_post.click()
                 print("Message publié")
 

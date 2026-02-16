@@ -272,7 +272,7 @@ async def start_prospection(
                 )
 
             try:
-                supabase_client.table("posts").insert(
+                supabase_client.table("posts").upsert(
                     {
                         "user_id": current_user_id,
                         "instruction_post": body.post,

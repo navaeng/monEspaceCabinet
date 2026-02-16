@@ -38,6 +38,7 @@ def start_prospect_auto():
 
             # Pour recuperer le verrou si il est pas pris
             try:
+                # get_post_instruction = None
                 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
                 print(f"KEY: {KEY_SECRET}")
 
@@ -55,6 +56,24 @@ def start_prospect_auto():
                         "get_decrypted_settings",
                         {"job_title_input": title, "key_input": KEY_SECRET},
                     ).execute()
+
+                    if post == "":
+                        get_post_instruction = (
+                            supabase_client.table("post")
+                            .select("instruction_post")
+                            .eq("user_id", uid)
+                            .order("created_at", descending=True)
+                            .limit(1)
+                        ).execute()
+                        if (
+                            get_post_instruction
+                            and get_post_instruction.data
+                            and len(get_post_instruction.data) > 0
+                        ):
+                            post = (
+                                get_post_instruction.data[0].get("instruction_post")
+                                or ""
+                            )
                     # data = rpc_res.data
 
                     # if rpc_res.data and len(rpc_res.data) > 0:

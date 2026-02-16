@@ -92,9 +92,9 @@ def run_chrome(
     if job_title:
         print(f"Titre du poste: {job_title}")
 
-    if not job_title:
-        job_title = config_db.get("job_title")
-        print(f"Titre du poste: {job_title}")
+    # if not job_title:
+    #     job_title = config_db.get("job_title")
+    #     print(f"Titre du poste: {job_title}")
 
     full_name = config_db.get("full_name")
     telephone = config_db.get("telephone")

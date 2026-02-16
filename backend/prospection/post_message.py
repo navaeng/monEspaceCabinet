@@ -13,11 +13,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from data.call_groq import call_groq
 
 
-def post_message(driver, post):
+def post_message(driver, post, config_db):
+
+    full_name = config_db.get("full_name")
+    telephone = config_db.get("telephone")
+    print(f"Full Name: {full_name}, Telephone: {telephone}")
 
     try:
         # instruction = "Donne un message court en une phrase"
-        prompt = post_prompt(post)
+        prompt = post_prompt(post, full_name, telephone)
         print(f"POST : {post}")
 
         message_ia = call_groq(prompt)

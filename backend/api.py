@@ -185,6 +185,19 @@ async def get_prospection(request: Request):
             .order("created_at", desc=True)
             .execute()
         )
+
+        res_cabinet = (
+            supabase_client.table("profiles")
+            .select("cabinet_id")
+            .eq("id", current_user_id)
+            .single()
+            .execute()
+        )
+
+        cabinet_id = None
+        if res_cabinet.data and isinstance(res_cabinet.data, dict):
+            cabinet_id = res_cabinet.data.get("cabinet_id")
+
         return res.data if res.data else []
 
     except Exception as e:
@@ -260,6 +273,7 @@ async def start_prospection(
                         "query": body.intitule,
                         "is_active": True,
                         "details": body.details,
+                        "cabinet_id": cabinet_id,
                         "mode": body.mode,
                         "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
@@ -304,6 +318,7 @@ async def start_prospection(
 
         config_db = {
             "id": data.get("id"),
+            "cabinet_id": data.get("cabinet_id"),
             "user_id": current_user_id,
             "linkedin_email": data.get("linkedin_email"),
             "linkedin_password": data.get("linkedin_password"),

@@ -24,8 +24,9 @@ def post_button():
             btn.removeAttribute('disabled');
             btn.disabled = false;
             btn.classList.remove('artdeco-button--disabled');
+            const success = "BOUTON_CLIQUE";
             btn.click();
-            return "BOUTON_CLIQUE";
+            return success;
         }
 
 

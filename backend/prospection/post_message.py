@@ -87,6 +87,7 @@ def post_message(driver, post):
                     print("❌ Bouton introuvable par le script JS")
 
             except Exception:
+                print("❌ Bouton introuvable par le script JS")
                 traceback.print_exc()
                 print("------------------------")
 

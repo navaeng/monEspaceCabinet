@@ -40,6 +40,9 @@ def run_chrome(
     job_title: str, details: str, mode: str, offre: str, post: str, config_db
 ):
 
+    if not post or post == "":
+        post = config_db.get("post")
+
     print(f"[DEBUG] Offre : {offre}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")

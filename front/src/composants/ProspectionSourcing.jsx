@@ -65,7 +65,7 @@ function ProspectionSourcing() {
     try {
       const headers = await getAuthHeaders();
       const res = await fetch(
-        "http://localhost:8003/backend/prospection/list",
+        "http://localhost:8001/backend/prospection/list",
         {
           method: "GET",
           headers,
@@ -125,7 +125,7 @@ function ProspectionSourcing() {
     try {
       const headers = await getAuthHeaders();
       const response = await fetch(
-        "http://localhost:8003/backend/prospection/start_prospection",
+        "http://localhost:8001/backend/prospection/start_prospection",
         {
           method: "POST",
           headers,

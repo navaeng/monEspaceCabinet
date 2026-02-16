@@ -13,7 +13,7 @@ function Prospection() {
 
   const FetchProspection = async () => {
     try {
-      const res = await fetch("http://localhost:8000/backend/prospection/list");
+      const res = await fetch("http://localhost:8001/backend/prospection/list");
       const data = await res.json();
       setProspection(Array.isArray(data) ? data : []);
     } catch (error) {

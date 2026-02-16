@@ -275,9 +275,10 @@ async def start_prospection(
                 supabase_client.table("posts").insert(
                     {
                         "user_id": current_user_id,
-                        "post": body.post,
+                        "instruction_post": body.post,
                     }
                 ).execute()
+                print("✅ POST INSERTE dans la table POSTS")
             except Exception as e:
                 print(f" ERREUR SUPABASE INSERT DANS LA TABLE POSTS : {e}")
 

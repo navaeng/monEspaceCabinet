@@ -51,7 +51,7 @@ def send_message(
 
     except Exception as e:
         print(f"Erreur lors de la récupération des liens : {e}")
-        return
+        continue
 
     for u, url in enumerate(urls, start=1):
         message = ""
@@ -232,7 +232,7 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Recherche Input"
                 time.sleep(random.uniform(6, 9))
-                return
+                continue
                 # on ecris le message
             try:
 

@@ -79,7 +79,7 @@ def run_chrome(
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -179,27 +179,27 @@ def run_chrome(
                 raise e
 
             # Récupération mot de passe
-            print(f"DEBUG: Récupération pass pour UID: {uid}")
-            try:
-                rpc_res = supabase_client.rpc(
-                    "get_decrypted_settings",
-                    {"job_title_input": job_title, "key_input": KEY_SECRET},
-                ).execute()
-                data = rpc_res.data
-                print(f"DEBUG DATA BRUTE: {rpc_res.data}")
-                if isinstance(data, list) and len(data) > 0:
-                    first_item = data[0]
-                    if isinstance(first_item, dict):
-                        pass_user = str(first_item.get("linkedin_password", ""))
-                    else:
-                        pass_user = ""
-                else:
-                    pass_user = ""
-                print(f"Mot de passe récupéré via RPC {pass_user}")
-            except Exception as e:
-                print(f"❌ Erreur RPC password: {e}")
-                yield "Erreur technique lors du décryptage du mot de passe."
-                raise e
+            # print(f"DEBUG: Récupération pass pour UID: {uid}")
+            # try:
+            #     rpc_res = supabase_client.rpc(
+            #         "get_decrypted_settings",
+            #         {"job_title_input": job_title, "key_input": KEY_SECRET},
+            #     ).execute()
+            #     data = rpc_res.data
+            #     print(f"DEBUG DATA BRUTE: {rpc_res.data}")
+            #     if isinstance(data, list) and len(data) > 0:
+            #         first_item = data[0]
+            #         if isinstance(first_item, dict):
+            #             pass_user = str(first_item.get("linkedin_password", ""))
+            #         else:
+            #             pass_user = ""
+            #     else:
+            #         pass_user = ""
+            #     print(f"Mot de passe récupéré via RPC {pass_user}")
+            # except Exception as e:
+            #     print(f"❌ Erreur RPC password: {e}")
+            #     yield "Erreur technique lors du décryptage du mot de passe."
+            #     raise e
 
             try:
                 pass_input = driver.find_element(
@@ -228,6 +228,8 @@ def run_chrome(
             time.sleep(random.uniform(2, 4))
 
             # Saisie Password
+            pass_user = config_db.get("linkedin_password", "")
+            print(f"VALEUR REELLE password : '{pass_user}'")
             if pass_user:
                 print(f"DEBUG: Saisie du mot de passe {pass_user}...")
 

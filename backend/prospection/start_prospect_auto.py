@@ -43,12 +43,12 @@ def start_prospect_auto():
 
                 for job in data:
                     uid = job.get("user_id")
-                    job_title = str(job.get("job_title") or "")
                     job_id = job.get("id")
                     title = str(job.get("job_title") or "")
                     details = str(job.get("details") or "")
                     mode = str(job.get("mode") or "")
                     offre = str(job.get("offre") or "")
+                    post = str(job.get("post") or "")
                     config_db = job.get("config_db") or {}
 
                     rpc_res = supabase_client.rpc(
@@ -98,12 +98,23 @@ def start_prospect_auto():
                                     {"is_active": True, "has_run_today": True}
                                 ).eq("id", job_id).execute()
                                 try:
+                                    if not isinstance(config_db, dict):
+                                        config_db = {}
+                                    config_db = {
+                                        **job,
+                                        **(
+                                            config_db
+                                            if isinstance(config_db, dict)
+                                            else {}
+                                        ),
+                                    }
+
                                     for step in run_chrome(
                                         title,
                                         details,
                                         mode,
                                         offre,
-                                        job_title,
+                                        post,
                                         config_db,
                                     ):
                                         print(f"LOG [{title}]: {step}")

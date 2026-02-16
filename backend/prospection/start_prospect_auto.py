@@ -59,10 +59,9 @@ def start_prospect_auto():
 
                     if post == "":
                         get_post_instruction = (
-                            supabase_client.table("post")
+                            supabase_client.table("posts")
                             .select("instruction_post")
                             .eq("user_id", uid)
-                            .order("created_at", descending=True)
                             .limit(1)
                         ).execute()
                         if (

@@ -64,15 +64,24 @@ def start_prospect_auto():
                             .eq("user_id", uid)
                             .limit(1)
                         ).execute()
+                        post_data = get_post_instruction.data
                         if (
-                            get_post_instruction
-                            and get_post_instruction.data
-                            and len(get_post_instruction.data) > 0
+                            post_data
+                            and isinstance(post_data, list)
+                            and len(post_data) > 0
                         ):
-                            post = str(
-                                get_post_instruction.data[0].get("instruction_post")
-                                or ""
-                            )
+                            first_item = post_data[0]
+                            if isinstance(first_item, dict):
+                                post = str(first_item.get("instruction_post") or "")
+                        # if (
+                        #     get_post_instruction
+                        #     and get_post_instruction.data
+                        #     and len(get_post_instruction.data) > 0
+                        # ):
+                        #     post = str(
+                        #         get_post_instruction.data[0].get("instruction_post")
+                        #         or ""
+                        #     )
                     # data = rpc_res.data
 
                     # if rpc_res.data and len(rpc_res.data) > 0:

@@ -51,7 +51,6 @@ def send_message(
 
     except Exception as e:
         print(f"Erreur lors de la récupération des liens : {e}")
-        continue
 
     for u, url in enumerate(urls, start=1):
         message = ""
@@ -83,7 +82,7 @@ def send_message(
                     yield f"⏭️ Déjà contacté ({url}), skip..."
                     print("Déjà dans la base, on passe au suivant.")
                     time.sleep(random.uniform(5, 8))
-                    continue
+                    return
                 yield "Pas encore contacté..."
 
                 profile_main_content = driver.find_element(
@@ -232,7 +231,7 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Recherche Input"
                 time.sleep(random.uniform(6, 9))
-                continue
+                return
                 # on ecris le message
             try:
 
@@ -250,7 +249,7 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Saisie du message"
                 time.sleep(random.uniform(6, 9))
-                continue
+                return
                 # on cherche le bouton
             try:
                 send_btn = (
@@ -262,7 +261,7 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : localisation bouton"
                 time.sleep(random.uniform(6, 9))
-                continue
+                return
                 # on tente le click
             try:
                 driver.execute_script(
@@ -289,11 +288,11 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Clic Envoi"
                 time.sleep(random.uniform(6, 9))
-                continue
+                return
 
         except Exception as e:
             print(e)
-            continue
+            return
 
         finally:
             yield "✅FIn de programme, nous avons contacté {count} utilisateurs"

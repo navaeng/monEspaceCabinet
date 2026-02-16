@@ -75,6 +75,7 @@ def post_message(driver, post, config_db):
             time.sleep(random.uniform(5, 10))
             yield "✍️ Écriture du message en cours..."
 
+            print("[DEBUG-STEP] Lancement post message")
             for char in message_ia:
                 # time.sleep(3)
                 actions.send_keys(char)
@@ -86,13 +87,17 @@ def post_message(driver, post, config_db):
                 time.sleep(random.uniform(5, 10))
                 from script_element_xpath.post_button import post_button
 
-                resultat = driver.execute_script(post_button())
-                if resultat == "BOUTON_CLIQUE":
-                    print("✅ Message publié !")
-                    yield "✅ Post publié..."
-                    time.sleep(random.uniform(5, 10))
-                else:
-                    print("❌ Bouton introuvable par le script JS")
+                driver.execute_script(post_button())
+                # if resultat == "BOUTON_CLIQUE":
+                print("✅ Message publié !")
+                yield "✅ Post publié..."
+                time.sleep(random.uniform(5, 10))
+                # else:
+                #     if (
+                #         len(driver.find_elements(By.CSS_SELECTOR, "div[role='dialog']"))
+                #         == 0
+                #     ):
+                #         print("✅ Le post semble être parti tout seul !")
 
             except Exception:
                 print("❌ Bouton introuvable par le script JS")

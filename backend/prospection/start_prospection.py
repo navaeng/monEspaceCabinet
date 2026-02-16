@@ -39,6 +39,7 @@ def slow_type(element, text):
 def run_chrome(
     job_title: str, details: str, mode: str, offre: str, post: str, config_db
 ):
+    print("[DEBUG-STEP] Lancement chrome")
 
     if not post or post == "":
         post = config_db.get("post")
@@ -79,7 +80,7 @@ def run_chrome(
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -122,8 +123,8 @@ def run_chrome(
             )
         ).group()
     )
-    time.sleep(random.randint(10, 30))
-    print("temps choisi : ", random.randint(10, 30))
+    # time.sleep(random.randint(10, 30))
+    # print("temps choisi : ", random.randint(10, 30))
     driver = uc.Chrome(
         options=options,
         # service=chrome_service,
@@ -237,7 +238,7 @@ def run_chrome(
                 slow_type(pass_input, pass_user)
                 time.sleep(1)
             else:
-                print("Mot de passe vide après RPC")
+                print("Mot de passe linkedin vide ")
                 yield "Mot de passe linkedin vide ou incorrect."
                 return
 
@@ -267,35 +268,40 @@ def run_chrome(
     #     print(f"Erreur lors du chargement de la page : {e}")
 
     try:
+        print("[DEBUG-STEP] Lancement post_message")
         yield from post_message(driver, post, config_db)
         time.sleep(5)
+        print("[DEBUG-STEP] Lancement recherche personne")
 
         yield "🔍 Recherche..."
 
-        for page in range(1, 4):
+        for page in range(1, 2):
             time.sleep(random.uniform(8, 12))
             human_mouse_move(driver)
+            print("accès a la recherche de personnes ")
+
+            # try:
+            #     yield "On va nettoyer les fenêtres encore ouvertes..."
+            #     print("On nettoie les fenêtres")
+            #     time.sleep(6)
+
+            #     close_buttons = driver.find_elements(
+            #         By.CSS_SELECTOR,
+            #         "button[data-control-name='close_messaging_bubble'], .msg-overlay-bubble-header__control--close",
+            #     )
+            #     print(f"nombre de boutons de fermeture trouvés : {len(close_buttons)}")
+
+            #     for btn in close_buttons:
+            #         print(f"Bouton de fermeture trouvé : {btn}")
+            #         driver.execute_script("arguments[0].click();", btn)
+            # except Exception as e:
+            #     print(f"Crash lors de la fermeture des fenêtres : {str(e)[:50]}")
 
             try:
-                yield "On va nettoyer les fenêtres encore ouvertes..."
-                print("On nettoie les fenêtres")
-                time.sleep(6)
-
-                close_buttons = driver.find_elements(
-                    By.CSS_SELECTOR,
-                    "button[data-control-name='close_messaging_bubble'], .msg-overlay-bubble-header__control--close",
-                )
-                print(f"nombre de boutons de fermeture trouvés : {len(close_buttons)}")
-
-                for btn in close_buttons:
-                    print(f"Bouton de fermeture trouvé : {btn}")
-                    driver.execute_script("arguments[0].click();", btn)
-            except Exception as e:
-                print(f"Crash lors de la fermeture des fenêtres : {str(e)[:50]}")
-
-            try:
+                print("Début de la recherche")
                 time.sleep(random.uniform(8, 15))
-                query_encoded = urllib.parse.quote(job_title)
+                driver.refresh()
+                query_encoded = urllib.parse.quote(str(job_title or "recrutement"))
                 target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
                 driver.get(target_url)
                 driver.execute_script(
@@ -303,7 +309,11 @@ def run_chrome(
                 )
                 yield "Recherches de personnes..."
             except Exception as e:
-                print(f"{str(e)}")
+                import traceback
+
+                print(f"CRASH NAVIGATION : {e}")
+                traceback.print_exc()
+                continue
 
             time.sleep(random.uniform(4, 8))
 

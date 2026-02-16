@@ -17,11 +17,14 @@ def post_message(driver, post, config_db):
 
     full_name = config_db.get("full_name")
     telephone = config_db.get("telephone")
-    print(f"Full Name: {full_name}, Telephone: {telephone}")
+    cabinet_name = config_db.get("cabinets", {}).get("nom") if config_db else None
+    print(
+        f"Full Name: {full_name}, Telephone: {telephone}, Cabinet Name: {cabinet_name}"
+    )
 
     try:
         # instruction = "Donne un message court en une phrase"
-        prompt = post_prompt(post, full_name, telephone)
+        prompt = post_prompt(post, full_name, telephone, cabinet_name)
         print(f"POST : {post}")
 
         message_ia = call_groq(prompt)

@@ -294,7 +294,8 @@ async def start_prospection(
                     {
                         "user_id": current_user_id,
                         "instruction_post": body.post,
-                    }
+                    },
+                    on_conflict="user_id",
                 ).execute()
                 print("✅ POST INSERTE dans la table POSTS")
             except Exception as e:

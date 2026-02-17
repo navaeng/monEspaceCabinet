@@ -51,6 +51,9 @@ def start_prospect_auto():
                     offre = str(job.get("offre") or "")
                     post = str(job.get("post") or "")
                     config_db = job.get("config_db") or {}
+                    cabinet_name = str(job.get("cabinet_name") or "")
+
+                    print(f"cabinet_name: {cabinet_name}")
 
                     rpc_res = supabase_client.rpc(
                         "get_decrypted_settings",
@@ -143,6 +146,7 @@ def start_prospect_auto():
                                         offre,
                                         post,
                                         config_db,
+                                        cabinet_name,
                                     ):
                                         print(f"LOG [{title}]: {step}")
 

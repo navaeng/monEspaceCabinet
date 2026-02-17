@@ -429,9 +429,6 @@ function ProspectionSourcing() {
                     "Lancer"
                   )}
                 </button>
-                <p className="text-gray-500 text-xs mt-0.5">
-                  N'actualisez pas la page au lancement
-                </p>
               </form>
             </div>
           </div>

@@ -314,6 +314,7 @@ async def start_prospection(
         print(f"❌ ERREUR RPC : {e}")
 
     config_db = {}
+    cabinet_name = None
 
     if res and hasattr(res, "data") and res.data:
         response = cast(APIResponse, res)
@@ -328,7 +329,6 @@ async def start_prospection(
             .execute()
         )
 
-        cabinet_name = None
         if isinstance(res_cabinet.data, List) and len(res_cabinet.data) > 0:
             first_row = cast(Dict[str, Any], res_cabinet.data[0])
             cabinet_data = first_row.get("cabinets", {})
@@ -362,6 +362,7 @@ async def start_prospection(
                 body.mode,
                 body.offre or "",
                 body.post or "",
+                # cabinet_name,
                 config_db,
             ):
                 yield f"{step}\n"

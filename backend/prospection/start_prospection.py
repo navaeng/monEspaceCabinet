@@ -275,7 +275,7 @@ def run_chrome(
 
         yield "🔍 Recherche..."
 
-        for page in range(1, 2):
+        for page in range(1, 4):
             time.sleep(random.uniform(8, 12))
             human_mouse_move(driver)
             print("accès a la recherche de personnes ")

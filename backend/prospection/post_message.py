@@ -31,7 +31,10 @@ def post_message(driver, post, config_db):
     if list(res.data) and len(res.data) > 0:
         row: dict = data[0]
 
-        post_recent = (datetime.now() - row["created_at"]).days < 2
+        post_recent = (
+            datetime.fromisoformat(row["created_at"].replace("Z", "+00:00"))
+            - datetime.now()
+        ).days < 2
         print(f"post_recent : {post_recent}")
 
         if post_recent:

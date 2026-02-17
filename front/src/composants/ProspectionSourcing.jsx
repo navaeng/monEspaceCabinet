@@ -174,6 +174,10 @@ function ProspectionSourcing() {
 
       if (response.ok) {
         setIntitule("");
+        setDetails("");
+        setOffre("");
+        setPost("");
+        setMode("");
         FetchProspection();
       }
     } catch (error) {

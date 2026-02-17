@@ -173,6 +173,7 @@ async def get_prospection(request: Request):
             .order("created_at", desc=True)
             .execute()
         )
+
         return res.data if res.data else []
 
     except Exception as e:
@@ -221,6 +222,23 @@ async def start_chrome(
 
     try:
         print("LOCK ACQUIS")
+
+        print("Recuperation de l'id du cabinet")
+
+        cabinet_id = None
+        res_cabinet = (
+            supabase_client.table("profiles")
+            .select("cabinet_id")
+            .eq("id", current_user_id)
+            .single()
+            .execute()
+        )
+
+        if res_cabinet.data and isinstance(res_cabinet.data, dict):
+            cabinet_id = res_cabinet.data.get("cabinet_id")
+
+            print(f"ID du cabinet récupéré : {cabinet_id}")
+
         print("On lance la requête")
 
         SELECT_QUERY = f"*,profiles!inner(linkedin_email,linkedin_password:pgp_sym_decrypt(linkedin_password::bytea,'{KEY_SECRET}'))"
@@ -242,13 +260,29 @@ async def start_chrome(
                         "query": body.intitule,
                         "is_active": True,
                         "details": body.details,
+                        "cabinet_id": cabinet_id,
+                        "mode": body.mode,
                         "offre": body.offre or "".replace("\x00", ""),
                         "user_id": current_user_id,
                         "hour_start": prochaine_heure.isoformat(),
                     }
                 ).execute()
             except Exception as e:
-                print(f" ERREUR SUPABASE INSERT : {e}")
+                print(
+                    f" ERREUR SUPABASE INSERT DANS LA TABLE PROSPECTION_SETTINGS : {e}"
+                )
+
+            try:
+                supabase_client.table("posts").upsert(
+                    {
+                        "user_id": current_user_id,
+                        "instruction_post": body.post,
+                    },
+                    on_conflict="user_id",
+                ).execute()
+                print("✅ POST INSERTE dans la table POSTS")
+            except Exception as e:
+                print(f" ERREUR SUPABASE INSERT DANS LA TABLE POSTS : {e}")
 
             print("⏳ Tentative d'appel RPC...")
             res = supabase_client.rpc(

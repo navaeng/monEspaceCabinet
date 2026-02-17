@@ -1,0 +1,34 @@
+/home/ishak/Bureau/ERP/.venv/lib/python3.12/site-packages/docxcompose/properties.py:18: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+INFO:     Started server process [124984]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+KEY: kkkijjfKOJefhefe444
+KEY: kkkijjfKOJefhefe444
+Lancement de thread...
+CONTENU BRUT SUPABASE : []
+DEBUG - Nombre de jobs trouvés : 0
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:53842 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:54806 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:39822 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:58862 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:35140 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:58556 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+KEY: kkkijjfKOJefhefe444
+CONTENU BRUT SUPABASE : []
+DEBUG - Nombre de jobs trouvés : 0
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:35106 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     127.0.0.1:35324 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [124984]

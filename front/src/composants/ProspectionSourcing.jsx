@@ -65,7 +65,7 @@ function ProspectionSourcing() {
     try {
       const headers = await getAuthHeaders();
       const res = await fetch(
-        "http://localhost:8003/backend/prospection/list",
+        "http://localhost:8002/backend/prospection/list",
         {
           method: "GET",
           headers,
@@ -125,7 +125,7 @@ function ProspectionSourcing() {
     try {
       const headers = await getAuthHeaders();
       const response = await fetch(
-        "http://localhost:8003/backend/linkedin/start_chrome",
+        "http://localhost:8002/backend/linkedin/start_chrome",
         {
           method: "POST",
           headers,
@@ -436,7 +436,6 @@ function ProspectionSourcing() {
               </form>
             </div>
           </div>
-
           {/* Liste sobre */}
           <div className="lg:col-span-2">
             <div className="bg-white border border-gray-200 rounded">

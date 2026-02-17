@@ -34,12 +34,12 @@ function Header({ cabinetName }) {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 font-sans">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link
+        {/* <Link
           to="/"
           className="text-sm font-normal text-gray-900 hover:text-gray-700"
         >
           Acceuil
-        </Link>
+        </Link>*/}
 
         {/* <Link
           to="/"

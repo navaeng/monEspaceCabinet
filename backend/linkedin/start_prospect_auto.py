@@ -38,6 +38,7 @@ def start_prospect_auto():
 
             # Pour recuperer le verrou si il est pas pris
             try:
+                # get_post_instruction = None
                 KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
                 print(f"KEY: {KEY_SECRET}")
 
@@ -48,11 +49,39 @@ def start_prospect_auto():
                     details = str(job.get("details") or "")
                     mode = str(job.get("mode") or "")
                     offre = str(job.get("offre") or "")
+                    post = str(job.get("post") or "")
+                    config_db = job.get("config_db") or {}
 
                     rpc_res = supabase_client.rpc(
                         "get_decrypted_settings",
                         {"job_title_input": title, "key_input": KEY_SECRET},
                     ).execute()
+
+                    if post == "":
+                        get_post_instruction = (
+                            supabase_client.table("posts")
+                            .select("instruction_post")
+                            .eq("user_id", uid)
+                            .limit(1)
+                        ).execute()
+                        post_data = get_post_instruction.data
+                        if (
+                            post_data
+                            and isinstance(post_data, list)
+                            and len(post_data) > 0
+                        ):
+                            first_item = post_data[0]
+                            if isinstance(first_item, dict):
+                                post = str(first_item.get("instruction_post") or "")
+                        # if (
+                        #     get_post_instruction
+                        #     and get_post_instruction.data
+                        #     and len(get_post_instruction.data) > 0
+                        # ):
+                        #     post = str(
+                        #         get_post_instruction.data[0].get("instruction_post")
+                        #         or ""
+                        #     )
                     # data = rpc_res.data
 
                     # if rpc_res.data and len(rpc_res.data) > 0:
@@ -96,10 +125,26 @@ def start_prospect_auto():
                                     {"is_active": True, "has_run_today": True}
                                 ).eq("id", job_id).execute()
                                 try:
+                                    if not isinstance(config_db, dict):
+                                        config_db = {}
+                                    config_db = {
+                                        **job,
+                                        **(
+                                            config_db
+                                            if isinstance(config_db, dict)
+                                            else {}
+                                        ),
+                                    }
+
                                     for step in run_chrome(
-                                        title, details, mode, offre, job
+                                        driver,
+                                        title,
+                                        details,
+                                        mode,
+                                        offre,
+                                        post,
+                                        config_db,
                                     ):
-                                        print(f"LOG [{title}]: {step}")
 
                                 except Exception as e:
                                     print(f"Erreur lors du lancement de {title}: {e}")
@@ -124,11 +169,11 @@ def start_prospect_auto():
                         #     print("Reload automatique pour verifier les prospect")
             except Exception as e:
                 print({e})
-                time.sleep(600)
+                time.sleep(15)
                 print("Reload automatique pour verifier les prospect")
         except Exception as e:
             print({e})
-            time.sleep(600)
+            time.sleep(15)
             print("Reload automatique pour verifier les prospect")
 
         # finally:

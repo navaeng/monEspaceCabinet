@@ -416,7 +416,8 @@ def run_chrome(
                         if success:
                             yield "✅ Invitation envoyée !"
                         else:
-                            yield " Bouton introuvable même en recherche profonde."
+                            yield "On ne trouve pas le bouton Envoyer, on va actualiser la page"
+                            driver.refresh()
 
                         yield " Invitation envoyée avec succès !"
                     except Exception as e:

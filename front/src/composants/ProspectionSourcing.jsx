@@ -552,10 +552,10 @@ function ProspectionSourcing() {
                             </div>
                           )}*/}
 
-                          <div className="flex items-center text-gray-400 text-[10px] gap-3">
-                            <span className="flex items-center">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <div className="flex items-center gap-1.5 px-2 py-1 bg-gray-100 rounded-md text-gray-700 text-xs">
                               <svg
-                                className="w-2.5 h-2.5 mr-1"
+                                className="w-3.5 h-3.5 text-gray-500"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -567,53 +567,42 @@ function ProspectionSourcing() {
                                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                 />
                               </svg>
-                              {new Date(p.created_at).toLocaleDateString(
-                                "fr-FR",
-                                {
-                                  day: "numeric",
-                                  month: "short",
-                                  year: "numeric",
-                                },
-                              )}
-                            </span>
-                            <span className="flex items-center">
-                              <svg
-                                className="w-2.5 h-2.5 mr-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                              </svg>
-                              {new Date(p.created_at).toLocaleTimeString(
-                                "fr-FR",
-                                {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                },
-                              )}
-                            </span>
+                              <span>
+                                {new Date(p.created_at).toLocaleDateString(
+                                  "fr-FR",
+                                  {
+                                    day: "numeric",
+                                    month: "short",
+                                    year: "numeric",
+                                  },
+                                )}
+                              </span>
+                              <span className="text-gray-400 mx-0.5">à</span>
+                              <span className="font-medium">
+                                {new Date(p.created_at).toLocaleTimeString(
+                                  "fr-FR",
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  },
+                                )}
+                              </span>
+                            </div>
+
                             {p.hour_start && (
-                              <span className="flex items-center text-indigo-600 font-semibold bg-indigo-50 px-1.5 py-0.5 rounded">
+                              <div className="flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 rounded-md text-xs border border-indigo-100">
                                 <svg
-                                  className="w-2.5 h-2.5 mr-1"
+                                  className="w-3.5 h-3.5"
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                 >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                    clipRule="evenodd"
-                                  />
+                                  <path d="M11.3 3.046l1.396-1.408a.75.75 0 011.06 0l1.408 1.408a.75.75 0 010 1.06l-1.408 1.408a.75.75 0 01-1.06 0L11.3 4.106a.75.75 0 010-1.06zM15.956 7.75l-1.408-1.408a.75.75 0 00-1.06 0L12.08 7.75a.75.75 0 000 1.06l1.408 1.408a.75.75 0 001.06 0l1.408-1.408a.75.75 0 000-1.06zM6.02 4.106a.75.75 0 010 1.06L4.61 6.575a.75.75 0 01-1.06 0L2.142 5.166a.75.75 0 010-1.06L3.55 2.698a.75.75 0 011.06 0l1.409 1.408zM8.25 10.5a.75.75 0 00-.75.75v4.5a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75z" />
                                 </svg>
-                                Lancement automatique demain à :{" "}
-                                {p.hour_start.split("T")[1].slice(0, 5)}
-                              </span>
+                                <span>
+                                  Auto • demain{" "}
+                                  {p.hour_start.split("T")[1].slice(0, 5)}
+                                </span>
+                              </div>
                             )}
                           </div>
                         </div>

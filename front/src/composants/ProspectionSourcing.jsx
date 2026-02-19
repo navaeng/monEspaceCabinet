@@ -209,55 +209,15 @@ function ProspectionSourcing() {
                 Nouveau lancement
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
+                <h6>Filtres de recherche</h6>
+
+                <label>
+                  <input type="checkbox" value="comptes" /> Comptes
+                </label>
+                <label>
+                  <input type="checkbox" value="personnes" /> Personnes
+                </label>
                 <div>
-                  {/* <label
-                    htmlFor="intitule"
-                    className="block text-xs font-normal text-gray-600 mb-1.5"
-                  >
-                    Intitulé du métier
-                  </label>
-                  <input
-                    id="intitule"
-                    type="text"
-                    value={intitule}
-                    onChange={(e) => setIntitule(e.target.value)}
-                    disabled={isLoading}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
-                    placeholder="Ex: Développeur Front-end"
-                    required
-                  />
-                  <label
-                    htmlFor="intitule"
-                    className="block text-xs font-normal text-gray-600 mb-1.5"
-                  >
-                    Donner des détails pour les messages privés généré par le
-                    model
-                  </label>
-                  <input
-                    id="Details_message"
-                    type="text"
-                    value={intitule}
-                    onChange={(e) => setIntitule(e.target.value)}
-                    disabled={isLoading}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
-                    placeholder="Détails"
-                    required
-                  />
-                  <label
-                    htmlFor="type_of_prospect"
-                    className="block text-xs font-normal text-gray-600 mb-1.5"
-                  >
-                    Type de prospection
-                  </label>
-                  <input
-                    id="type_prospection"
-                    type="radio"
-                    // value={type_prospection}
-                    // onChange={(e) => setIntitule(e.target.value)}
-                    disabled={isLoading}
-                    // className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"
-                    required
-                  />*/}
                   <div className="space-y-4">
                     <div>
                       <label

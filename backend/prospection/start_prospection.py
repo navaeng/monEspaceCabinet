@@ -224,6 +224,7 @@ def run_chrome(
             else:
                 print("Email manquant dans config_db")
                 yield "Email linkedin non trouvé dans vos infos..."
+                time.sleep(7)
                 return
 
             time.sleep(random.uniform(2, 4))
@@ -240,6 +241,7 @@ def run_chrome(
             else:
                 print("Mot de passe linkedin vide ")
                 yield "Mot de passe linkedin vide ou incorrect."
+                time.sleep(7)
                 return
 
             time.sleep(random.uniform(2, 4))

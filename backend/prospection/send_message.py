@@ -13,6 +13,7 @@ from data.prompt.prospection.prompt_message_sourcing import (
     prompt_message_sourcing,
 )
 from database import supabase_client
+from prospection.script_js.bouton_close_discussion import close_discussion
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -297,17 +298,17 @@ def send_message(
             try:
                 print("On va tenter de fermer la fenêtre")
                 yield "On va fermer la fenêtre de discussion..."
+                time.sleep(4)
+                # close_xpath = "//*[@data-test-icon='close-small']/ancestor::button"
 
-                # close_xpath = "//button[contains(@class, 'msg-overlay') and .//span[contains(text(), 'Fermer votre conversation')]]"
-                close_xpath = "//button[.//svg[@data-test-icon='close-small']]"
+                # close_btn = WebDriverWait(driver, 10).until(
+                #     EC.element_to_be_clickable((By.XPATH, close_xpath))
+                # )
 
-                close_btn = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, close_xpath))
-                )
-
-                driver.execute_script("arguments[0].click();", close_btn)
-                time.sleep(random.uniform(5, 10))
-
+                # driver.execute_script("arguments[0].click();", close_btn)
+                # time.sleep(random.uniform(5, 10))
+                close_discussion(driver)
+                time.sleep(6)
                 print("la fenêtre de discussion a été fermée.")
                 yield "Fenêtre fermée... On passe au profil suivant"
                 time.sleep(random.uniform(5, 10))

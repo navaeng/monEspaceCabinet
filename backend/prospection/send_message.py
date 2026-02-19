@@ -298,15 +298,15 @@ def send_message(
                 print("On va tenter de fermer la fenêtre")
                 yield "On va fermer la fenêtre de discussion..."
 
-                close_buttons = driver.find_elements(
-                    By.XPATH,
-                    "//button[starts-with(@aria-label, 'Fermer votre conversation')]",
+                close_button = driver.find_elements(
+                    By.XPATH, "//button[.//svg[@data-test-icon='close-small']]"
                 )
-
-                for btn in close_buttons:
-                    driver.execute_script("arguments[0].click();", btn)
-                    print("Une fenêtre de discussion a été fermée.")
-                    yield "Fenêtre fermée... On passe au profil suivant"
+                WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable(close_button[0])
+                )
+                driver.execute_script("arguments[0].click();", close_button[0])
+                print("Une fenêtre de discussion a été fermée.")
+                yield "Fenêtre fermée... On passe au profil suivant"
 
             except Exception as e:
                 print(f"Erreur lors de la fermeture des fenêtres : {e}")

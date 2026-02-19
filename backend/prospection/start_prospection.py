@@ -101,13 +101,13 @@ def run_chrome(
     telephone = config_db.get("telephone")
 
     filtre_map = {
-        "personnes": "people",
-        "entreprises": "companies",
-        "offres": "offers",
-        "annonces": "ads",
+        "Personnes": "people",
+        "Entreprises": "companies",
+        "Offres": "offers",
+        "Annonces": "ads",
     }
 
-    segment = config_db.get("search_type", "personnes")
+    segment = config_db.get("segment", "Personnes")
     segment = filtre_map.get(segment, "people")
 
     print(f"Segment: {segment}")

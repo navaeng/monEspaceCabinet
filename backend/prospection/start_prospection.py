@@ -107,6 +107,9 @@ def run_chrome(
         "annonces": "ads",
     }
 
+    search_type = config_db.get("search_type", "personnes")
+    segment = filtre_map.get(search_type, "people")
+
     print(f"Nom complet: {full_name}")
     print(f"Numéro de téléphone: {telephone}")
 
@@ -298,7 +301,7 @@ def run_chrome(
                 time.sleep(random.uniform(8, 15))
                 driver.refresh()
                 query_encoded = urllib.parse.quote(str(job_title or "recrutement"))
-                target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
+                target_url = f"https://www.linkedin.com/search/results/{segment}/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
                 driver.get(target_url)
                 print(target_url)
                 driver.execute_script(

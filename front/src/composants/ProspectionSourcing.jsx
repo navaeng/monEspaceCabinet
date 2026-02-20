@@ -8,52 +8,18 @@ function ProspectionSourcing() {
   const [segment, setSegment] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [currentStatus, setCurrentStatus] = useState("");
   const [prospection, setProspection] = useState([]);
-  // const [expandedProspection, setExpandedProspection] = useState(null);
-  // const [statusMessage, setStatusMessage] = useState("");
   const [itemToDelete, setItemToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeId, setActiveId] = useState(null);
   const [mode, setMode] = useState("");
   const [details, setDetails] = useState("");
-  const [candidatrecherche, Setcandidatrecherche] = useState("");
+  const [candidatrecherche, setcandidatrecherche] = useState("");
   const [post, setPost] = useState("");
   const [statusLogs, setStatusLogs] = useState(() => {
     const saved = localStorage.getItem("prospection_logs");
     return saved ? JSON.parse(saved) : [];
   });
-
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file) return;
-
-  // const reader = new FileReader();
-  // const isDocx = file.name.endsWith(".docx");
-
-  //   reader.onload = async (event) => {
-  //     try {
-  //       if (isDocx) {
-  //         const { value } = await mammoth.extractRawText({
-  //           arrayBuffer: event.target.result,
-  //         });
-  //         set(value);
-  //       } else {
-  //         setOffre(event.target.result);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error processing file:", error);
-  //     }
-  //   };
-  //   file.name.endsWith("docx")
-  //     ? reader.readAsArrayBuffer(file)
-  //     : reader.readAsText(file);
-  // };
-
-  // const [statusLogs, setStatusLogs] = useState(() => {
-  //   const saved = localStorage.getItem("prospection_logs");
-  //   return saved ? JSON.parse(saved) : [];
-  // });
 
   useEffect(() => {
     const activeProspection = prospection.find((p) => p.is_active === true);
@@ -104,25 +70,9 @@ function ProspectionSourcing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!intitule.trim()) return;
-    // const headers = await getAuthHeaders();
-    // const response = await fetch(
-    //   "http://localhost:8000/backend/prospection/list",
-    //   {
-    //     method: "POST",
-    //     headers,
-    //     body: JSON.stringify({ intitule }),
-    //   },
-    // );
-
     setIsLoading(true);
     setStatusLogs([]);
     setActiveId("current");
-    // const {
-    //   data: { session },
-    // } = await supabase.auth.getSession();
-
-    // setStatusMessage("En cours...");
 
     try {
       const headers = await getAuthHeaders();
@@ -144,15 +94,6 @@ function ProspectionSourcing() {
         },
       );
 
-      // const response = await fetch(
-      //   "http://192.168.122.1:8000/backend/prospection/start_chrome",
-      //   {
-      //     method: "POST",
-      //     headers,
-      //     body: JSON.stringify({ intitule, details, mode, offre }),
-      //   },
-      // );
-
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       setStatusLogs([]);
@@ -161,9 +102,7 @@ function ProspectionSourcing() {
         const { value, done } = await reader.read();
         if (done) break;
         const chunk = decoder.decode(value);
-        // const message = decoder.decode(value);
-        // console.log("Message", message);
-        // console.log("Morceau reçu :", message);
+
         console.log("Value brute du reader :", value);
 
         setStatusLogs((prev) => {
@@ -171,15 +110,13 @@ function ProspectionSourcing() {
           localStorage.setItem("prospection_logs", JSON.stringify(newLogs));
           return newLogs;
         });
-
-        // setStatusMessage(message);
       }
 
       if (response.ok) {
         setIntitule("");
         setDetails("");
         setSegment("");
-        Setcandidatrecherche("");
+        setcandidatrecherche("");
         setPost("");
         setMode("");
         FetchProspection();
@@ -369,7 +306,7 @@ function ProspectionSourcing() {
                               type="text"
                               value={candidatrecherche}
                               onChange={(e) =>
-                                Setcandidatrecherche(e.target.value)
+                                setcandidatrecherche(e.target.value)
                               }
                               disabled={isLoading}
                               className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"

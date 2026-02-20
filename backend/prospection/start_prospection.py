@@ -1,3 +1,4 @@
+import json
 import os
 import random
 import re
@@ -10,8 +11,6 @@ from typing import Optional
 import undetected_chromedriver as uc
 from data.prompt.prospection.prompt_sourcing import prompt_sourcing
 from database import supabase_client
-
-# from httpx import post
 from prospection.post_message import post_message
 from pydantic import BaseModel
 from selenium.webdriver.common.by import By
@@ -19,6 +18,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
+
+from data.call_groq import call_groq
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -60,6 +61,8 @@ def run_chrome(
     uid = config_db.get("user_id")
     print(f"[DEBUG] User ID: {uid}")
 
+    target_url = ""
+
     if not uid:
         print(
             "❌ ERREUR : Pas d'ID utilisateur, Chrome ne sait pas quel dossier ouvrir !"
@@ -86,7 +89,7 @@ def run_chrome(
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -118,22 +121,46 @@ def run_chrome(
     )
 
     if mode == "sourcing":
-        candidatrecherche = config_db.get("candidatrecherche")
+        # candidatrecherche = config_db.get("candidatrecherche")
         print(
             f"DEBUG FRONT: Valeur reçue dans config_db['candidatrecherche'] -> {candidatrecherche}"
         )
-        target_url = prompt_sourcing(candidatrecherche)
-        print(f"Target url générée (le prompt) : {target_url}")
+        prompt = prompt_sourcing(candidatrecherche)
+
+        response = call_groq(prompt)
+        if response:
+            try:
+                clean_response = re.sub(r"```json\s*|\s*```", "", response).strip()
+                data = json.loads(clean_response)
+
+                target_url = data.get("target_url", "").strip()
+                print(f"url renvoyé {target_url}")
+
+                if not isinstance(target_url, str):
+                    target_url = str(target_url)
+
+                print(f"DEBUG: target_url -> {target_url}")
+
+            except json.JSONDecodeError:
+                match = re.search(r'https?://[^\s"\'}]+', response)
+                target_url = (
+                    match.group(0)
+                    if match
+                    else "[https://www.linkedin.com/search/results/people/](https://www.linkedin.com/search/results/people/)"
+                )
+                print(f"Erreur lors du décodage JSON : {response}")
 
     else:
         candidatrecherche = ""
+        segment_code = filtre_map.get(config_db.get("segment"), "people")
+        target_url = f"https://www.linkedin.com/search/results/{segment_code}/?keywords={urllib.parse.quote(job_title)}"
 
-    segment = config_db.get("segment", "Personnes")
-    print(f"DEBUG LOGIC: segment_brut après extraction -> {segment}")
-    segment = filtre_map.get(segment, "people")
-    print(f"DEBUG FINAL: Valeur injectée dans l'URL -> {segment}")
+        segment = config_db.get("segment", "Personnes")
+        print(f"DEBUG LOGIC: segment_brut après extraction -> {segment}")
+        segment = filtre_map.get(segment, "people")
+        print(f"DEBUG FINAL: Valeur injectée dans l'URL -> {segment}")
 
-    print(f"Segment: {segment}")
+        print(f"Segment: {segment}")
 
     print(f"Nom complet: {full_name}")
     print(f"Numéro de téléphone: {telephone}")
@@ -329,11 +356,12 @@ def run_chrome(
                 driver.refresh()
                 query_encoded = urllib.parse.quote(str(job_title or "recrutement"))
                 if mode == "sourcing":
-                    target_url = config_db.get("target_url")
+                    pass
                 else:
                     target_url = f"https://www.linkedin.com/search/results/{segment}/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
                 driver.get(target_url)
                 print(f"DEBUG URL: {target_url}")
+                print("Page LinkedIn chargée avec succès !")
                 driver.execute_script(
                     "window.scrollTo(0, document.body.scrollHeight/2);"
                 )

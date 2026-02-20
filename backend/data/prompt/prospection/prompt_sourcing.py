@@ -1,10 +1,20 @@
-def prompt_sourcing(candidatrecherche, target_url):
+def prompt_sourcing(candidatrecherche):
     return f"""
-    Génére l'url linkedin filtré pour rechercher des candidats selon les critères suivants :
-    - Les compétences recherchées sont : {candidatrecherche}
+    ### ROLE
+    Expert en Sourcing Recrutement (LinkedIn Boolean Search).
 
-    Format de sortie (JSON uniquement sans commentaires) :
+    ### MISSION
+    Génère une URL de recherche LinkedIn optimisée pour ces critères :
+    "{candidatrecherche}"
 
-Réponds UNIQUEMENT avec le texte final du message, rien d'autre.
-return target_url
-""".strip()
+    ### CONTRAINTES
+    1. Utilise les opérateurs booléens (AND, OR, NOT) pour les compétences.
+    2. L'URL doit pointer vers 'https://www.linkedin.com/search/results/people/'.
+    3. Ajoute les mots-clés dans le paramètre 'keywords'.
+
+    ### FORMAT DE SORTIE
+    Réponds UNIQUEMENT avec un JSON brut (pas de markdown, pas de texte) :
+    {{
+      "target_url": "https://www.linkedin.com/search/results/people/?keywords=..."
+    }}
+    """.strip()

@@ -8,6 +8,7 @@ import urllib.parse
 from typing import Optional
 
 import undetected_chromedriver as uc
+from data.prompt.prospection.prompt_sourcing import prompt_sourcing
 from database import supabase_client
 
 # from httpx import post
@@ -18,7 +19,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
-from data.prompt.prospection.prompt_sourcing import prompt_sourcing
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -26,7 +26,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 class ProspectionRequest(BaseModel):
     intitule: str
     details: Optional[str] = None
-    promptSourcing: Optional[str] = None
+    candidatrecherche: Optional[str] = None
     post: Optional[str] = None
 
 
@@ -119,14 +119,14 @@ def run_chrome(
 
     if mode == "sourcing":
         candidatrecherche = config_db.get("candidatrecherche")
-        print(f"DEBUG FRONT: Valeur reçue dans config_db['candidatrecherche'] -> {candidatrecherche}")
-        target_url = ""
-        prompt_sourcing(candidatrecherche, target_url)
-        print(f"Target url : {target_url}")
+        print(
+            f"DEBUG FRONT: Valeur reçue dans config_db['candidatrecherche'] -> {candidatrecherche}"
+        )
+        target_url = prompt_sourcing(candidatrecherche)
+        print(f"Target url générée (le prompt) : {target_url}")
 
     else:
         candidatrecherche = ""
-
 
     segment = config_db.get("segment", "Personnes")
     print(f"DEBUG LOGIC: segment_brut après extraction -> {segment}")
@@ -418,7 +418,7 @@ def run_chrome(
 
                     try:
                         time.sleep(5)
-                        script_final = """
+                        script_to_find_button_envoyer_sans_note = """
                                                                 function findButton() {
                                                                     // 1. Check standard
                                                                     let btn = document.querySelector('button[aria-label="Envoyer sans note"]');
@@ -442,7 +442,9 @@ def run_chrome(
                                                                 return false;
                                                                 """
 
-                        success = driver.execute_script(script_final)
+                        success = driver.execute_script(
+                            script_to_find_button_envoyer_sans_note
+                        )
                         if success:
                             yield "✅ Invitation envoyée !"
                         else:
@@ -478,12 +480,12 @@ def run_chrome(
         for update in send_message(
             driver,
             job_title,
-            candidatrecherche,
-            mode=mode,
+            mode,
             config_db,
             details,
             telephone,
             full_name,
+            candidatrecherche,
         ):
             yield update
     except Exception as e:

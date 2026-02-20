@@ -24,7 +24,6 @@ from data.call_groq import call_groq
 def send_message(
     driver,
     job_title,
-    offre,
     mode,
     config_db,
     details,
@@ -149,24 +148,22 @@ def send_message(
                     #         f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}"
                     #     )
 
-                    time.sleep(random.uniform(3, 5))
+                    # if not ia_check:
+                    #     print("Candidat non pertinent")
+                    #     yield "Candidat non pertinent"
+                    #     continue
+                    # else:
+                    #     yield "Ce candidat semble être pertinent pour l'offre..."
+                    #     time.sleep(random.uniform(3, 5))
+                    #     print("Candidat pertinent...")
 
-                    if not ia_check:
-                        print("Candidat non pertinent")
-                        yield "Candidat non pertinent"
-                        continue
-                    else:
-                        yield "Ce candidat semble être pertinent pour l'offre..."
-                        time.sleep(random.uniform(3, 5))
-                        print("Candidat pertinent...")
-
-                    if is_top:
-                        print("Candidat top, on envoie un mail...")
-                        send_mail(argument, url, config_db)
-                        yield "Mail envoyé"
-                        # continue
-                        #
-
+                    # if is_top:
+                    #     print("Candidat top, on envoie un mail...")
+                    #     send_mail(argument, url, config_db)
+                    #     yield "Mail envoyé"
+                    #     # continue
+                    #     #
+                time.sleep(random.uniform(3, 5))
                 yield "🤖 Appel du modèle pour générer un message..."
                 print("🤖 [DEBUG] Appel Groq pour le message...")
                 time.sleep(random.uniform(6, 8))

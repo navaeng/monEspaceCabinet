@@ -354,7 +354,7 @@ async def start_prospection(
             "full_name": data.get("full_name"),
             "email": data.get("email"),
             "segment": body.segment,
-            "PromptSourcing": body.PromptSourcing,
+            # "PromptSourcing": body.PromptSourcing,
         }
         print(f"📧 Email linkedin récupéré: {config_db.get('linkedin_email')}")
         print(f"📧 Email récupéré: {config_db.get('email')}")
@@ -369,7 +369,7 @@ async def start_prospection(
                 body.intitule,
                 body.details,
                 body.mode,
-                body.PromptSourcing or "",
+                body.candidatrecherche or "",
                 body.post or "",
                 # cabinet_name,
                 config_db,

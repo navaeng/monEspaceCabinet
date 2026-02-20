@@ -18,6 +18,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from treatment.behavior.mouse import human_mouse_move
+from data.prompt.prospection.prompt_sourcing import prompt_sourcing
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -25,7 +26,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 class ProspectionRequest(BaseModel):
     intitule: str
     details: Optional[str] = None
-    offre: Optional[str] = None
+    promptSourcing: Optional[str] = None
     post: Optional[str] = None
 
 
@@ -40,7 +41,7 @@ def run_chrome(
     job_title: str,
     details: str,
     mode: str,
-    offre: str,
+    candidatrecherche: str,
     post: str,
     config_db,
 ):
@@ -49,7 +50,7 @@ def run_chrome(
     if not post or post == "":
         post = config_db.get("post")
 
-    print(f"[DEBUG] Offre : {offre}")
+    print(f"[DEBUG] candidatrecherche : {candidatrecherche}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")
     print(f"[DEBUG] Mode : {mode}")
@@ -115,6 +116,18 @@ def run_chrome(
     print(
         f"DEBUG FRONT: Valeur reçue dans config_db['segment'] -> {config_db.get('segment')}"
     )
+
+    if mode == "sourcing":
+        candidatrecherche = config_db.get("candidatrecherche")
+        print(f"DEBUG FRONT: Valeur reçue dans config_db['candidatrecherche'] -> {candidatrecherche}")
+        target_url = ""
+        prompt_sourcing(candidatrecherche, target_url)
+        print(f"Target url : {target_url}")
+
+    else:
+        candidatrecherche = ""
+
+
     segment = config_db.get("segment", "Personnes")
     print(f"DEBUG LOGIC: segment_brut après extraction -> {segment}")
     segment = filtre_map.get(segment, "people")
@@ -315,7 +328,10 @@ def run_chrome(
                 time.sleep(random.uniform(8, 15))
                 driver.refresh()
                 query_encoded = urllib.parse.quote(str(job_title or "recrutement"))
-                target_url = f"https://www.linkedin.com/search/results/{segment}/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
+                if mode == "sourcing":
+                    target_url = config_db.get("target_url")
+                else:
+                    target_url = f"https://www.linkedin.com/search/results/{segment}/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
                 driver.get(target_url)
                 print(f"DEBUG URL: {target_url}")
                 driver.execute_script(
@@ -460,7 +476,14 @@ def run_chrome(
         from prospection.send_message import send_message
 
         for update in send_message(
-            driver, job_title, offre, mode, config_db, details, telephone, full_name
+            driver,
+            job_title,
+            candidatrecherche,
+            mode=mode,
+            config_db,
+            details,
+            telephone,
+            full_name,
         ):
             yield update
     except Exception as e:

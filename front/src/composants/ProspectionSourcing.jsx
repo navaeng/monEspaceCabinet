@@ -17,7 +17,7 @@ function ProspectionSourcing() {
   const [activeId, setActiveId] = useState(null);
   const [mode, setMode] = useState("");
   const [details, setDetails] = useState("");
-  const [PromptSourcing, SetPromptSourcing] = useState("");
+  const [candidatrecherche, Setcandidatrecherche] = useState("");
   const [post, setPost] = useState("");
   const [statusLogs, setStatusLogs] = useState(() => {
     const saved = localStorage.getItem("prospection_logs");
@@ -135,7 +135,7 @@ function ProspectionSourcing() {
             intitule,
             details,
             mode,
-            PromptSourcing,
+            candidatrecherche,
             post,
             segment,
             telephone: "",
@@ -179,7 +179,7 @@ function ProspectionSourcing() {
         setIntitule("");
         setDetails("");
         setSegment("");
-        SetPromptSourcing("");
+        Setcandidatrecherche("");
         setPost("");
         setMode("");
         FetchProspection();
@@ -367,9 +367,9 @@ function ProspectionSourcing() {
                             <input
                               id="post"
                               type="text"
-                              value={PromptSourcing}
+                              value={candidatrecherche}
                               onChange={(e) =>
-                                SetPromptSourcing(e.target.value)
+                                Setcandidatrecherche(e.target.value)
                               }
                               disabled={isLoading}
                               className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:border-gray-400 disabled:bg-gray-50"

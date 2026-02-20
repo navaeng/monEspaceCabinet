@@ -159,7 +159,7 @@ class ProspectionRequest(BaseModel):  # contrat
     segment: str
     # cabinet_name: str
     post: Optional[str]
-    offre: Optional[str]
+    PromptSourcing: Optional[str]
 
 
 @app.get("/backend/prospection/list")
@@ -281,7 +281,7 @@ async def start_prospection(
                         "details": body.details,
                         "cabinet_id": cabinet_id,
                         "mode": body.mode,
-                        "PromptSourcing": body.PromptSourcing or "".replace("\x00", ""),
+                        "PromptSourcing": body.PromptSourcing,
                         "user_id": current_user_id,
                         "hour_start": prochaine_heure.replace(tzinfo=None).isoformat(),
                     }
@@ -355,6 +355,7 @@ async def start_prospection(
             "full_name": data.get("full_name"),
             "email": data.get("email"),
             "segment": body.segment,
+            "PromptSourcing": body.PromptSourcing,
         }
         print(f"📧 Email linkedin récupéré: {config_db.get('linkedin_email')}")
         print(f"📧 Email récupéré: {config_db.get('email')}")
@@ -369,7 +370,7 @@ async def start_prospection(
                 body.intitule,
                 body.details,
                 body.mode,
-                body.offre or "",
+                body.PromptSourcing or "",
                 body.post or "",
                 # cabinet_name,
                 config_db,

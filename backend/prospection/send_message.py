@@ -3,14 +3,14 @@ import time
 import traceback
 
 from core.send_mail import send_mail
-from data.prompt.prospection.prompt_check_ia_profile import (
-    prompt_check_ia_profile,
-)
 from data.prompt.prospection.prompt_message_prospection import (
     prompt_message_prospection,
 )
 from data.prompt.prospection.prompt_message_sourcing import (
     prompt_message_sourcing,
+)
+from data.prompt.prospection.prompt_sourcing import (
+    prompt_sourcing,
 )
 from database import supabase_client
 from prospection.script_js.bouton_close_discussion import close_discussion
@@ -22,7 +22,15 @@ from data.call_groq import call_groq
 
 
 def send_message(
-    driver, job_title, offre, mode, config_db, details, telephone, full_name
+    driver,
+    job_title,
+    offre,
+    mode,
+    config_db,
+    details,
+    telephone,
+    full_name,
+    candidatrecherche,
 ):
     print("Début de l'envoi de messages directs...")
     print(f"Mode dans send message : {mode}")
@@ -134,14 +142,12 @@ def send_message(
                         )
                         yield f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
 
-                if mode == "sourcing":
-                    ia_check, is_top, argument = prompt_check_ia_profile(
-                        offre, profile_main_content
-                    )
-                    yield "On analyse son profil avec l'offre..."
-                    print(
-                        f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}"
-                    )
+                    # if mode == "sourcing":
+                    #     ia_check, is_top, argument = prompt_sourcing(candidatrecherche)
+                    #     yield "On analyse son profil avec l'offre..."
+                    #     print(
+                    #         f"ia_check: {ia_check}, is_top: {is_top}, argument: {argument}"
+                    #     )
 
                     time.sleep(random.uniform(3, 5))
 
@@ -171,7 +177,7 @@ def send_message(
                     )
                 elif mode == "sourcing":
                     instruction = prompt_message_sourcing(
-                        job_title, details, telephone, full_name
+                        job_title, details, telephone, full_name, candidatrecherche
                     )
                 message = call_groq(instruction)
                 print(f"{message}")

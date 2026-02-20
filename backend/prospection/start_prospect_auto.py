@@ -48,7 +48,7 @@ def start_prospect_auto():
                     title = str(job.get("job_title") or "")
                     details = str(job.get("details") or "")
                     mode = str(job.get("mode") or "")
-                    offre = str(job.get("offre") or "")
+                    promptSourcing = str(job.get("promptSourcing") or "")
                     post = str(job.get("post") or "")
                     config_db = job.get("config_db") or {}
                     cabinet_name = str(job.get("cabinet_name") or "")
@@ -143,7 +143,7 @@ def start_prospect_auto():
                                         title,
                                         details,
                                         mode,
-                                        offre,
+                                        promptSourcing,
                                         post,
                                         config_db,
                                         # cabinet_name,

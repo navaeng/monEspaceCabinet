@@ -1,10 +1,13 @@
-def prompt_message_sourcing(job_title, details, telephone, full_name):
+def prompt_message_sourcing(
+    job_title, details, telephone, full_name, candidatrecherche
+):
     return f"""
 Nous sommes un cabinet de conseil pécialisé en ingénierie,
 nous recherchons des talents pour un besoin en {job_title}. Rédige un message LinkedIn naturel pour approcher de futur candidats potentiel.
 
 Contexte :
 - Informations complémentaires : {details}
+- Les compétences recherchées sont : {candidatrecherche}
 
 Consignes STRICTES :
 3. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")

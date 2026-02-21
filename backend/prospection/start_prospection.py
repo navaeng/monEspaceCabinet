@@ -47,6 +47,7 @@ def run_chrome(
     config_db,
 ):
     print("[DEBUG-STEP] Lancement chrome")
+    print("suppression des processus")
 
     if not post or post == "":
         post = config_db.get("post")
@@ -179,6 +180,8 @@ def run_chrome(
     #         print(f"❌ Erreur lors de la suppression du lock : {e}")
     # # if os.path.exists("linkedin_profile_informations/SingletonLock"):
     # #     os.remove("linkedin_profile_informations/SingletonLock")
+    os.system(f"pgrep -f 'user-data-dir={profil_path}' | xargs -r kill -9")
+
     v_chrome = int(
         next(
             re.finditer(

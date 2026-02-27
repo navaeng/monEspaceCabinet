@@ -482,14 +482,15 @@ def run_chrome(
                             script_to_find_button_envoyer_sans_note
                         )
                         if success:
+                            from prospection.insert_db import insert_db
+
+                            insert_db(container, mode, config_db)
                             yield "✅ Invitation envoyée !"
                         else:
                             yield "On ne trouve pas le bouton Envoyer, on va actualiser la page, dans ce cas on actualise la page..."
                             driver.refresh()
 
                         yield " Invitation envoyée avec succès !"
-
-                        yield "--- On va envoyer des messages privés... ---"
 
                     except Exception as e:
                         error_type = type(e).__name__

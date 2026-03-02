@@ -93,6 +93,16 @@ def send_message(
                     continue
                 yield "Pas encore contacté..."
 
+                check_mode = (
+                    supabase_client.table("linkedin_contacts")
+                    .select("origin_mode")
+                    .eq("profile_url", url)
+                    .eq("user_id", current_user_id)
+                    .execute()
+                )
+
+                print(check_mode)
+
                 profile_main_content = driver.find_element(
                     By.TAG_NAME, "main"
                 ).text.lower()

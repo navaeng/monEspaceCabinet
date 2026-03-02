@@ -371,15 +371,25 @@ async def start_prospection(
                 body.mode,
                 body.candidatrecherche or "",
                 body.post or "",
-                # cabinet_name,
                 config_db,
             ):
-                yield f"{step}\n"
+                try:
+                    yield f"{step}\n"
+                except Exception as e:
+                    print(f"❌ Erreur yield: {e}")
+                    import traceback
+
+                    traceback.print_exc()
+                    break
         except Exception as e:
             import traceback
 
             traceback.print_exc()
             print(f"Erreur lors de la prospection : {str(e)}")
+            try:
+                print(f"❌ Erreur: {str(e)[:100]}\n")
+            except:
+                pass
 
         finally:
             supabase_client.table("prospection_settings").update(

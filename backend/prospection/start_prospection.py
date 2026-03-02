@@ -1,7 +1,10 @@
+# import atexit
 import json
 import os
 import random
 import re
+
+# import signal
 import subprocess
 import sys
 import time
@@ -68,6 +71,7 @@ def run_chrome(
         print(
             "❌ ERREUR : Pas d'ID utilisateur, Chrome ne sait pas quel dossier ouvrir !"
         )
+        yield "❌ Erreur : Données utilisateur manquantes en base de données"
         return
     # print(f"🔍 [RUN_CHROME] job_title: {job_title}")
     # print(f"🔍 [RUN_CHROME] config_db: {config_db}")

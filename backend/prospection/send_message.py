@@ -89,7 +89,7 @@ def send_message(
                     yield f"⏭️ Déjà contacté ({url}), skip..."
                     print("Déjà dans la base, on passe au suivant.")
                     time.sleep(random.uniform(5, 8))
-                    continue
+                    return
                 yield "Pas encore contacté..."
 
                 profile_main_content = driver.find_element(
@@ -133,7 +133,7 @@ def send_message(
                         yield f"Candidat de chez {cabinet_name}, skip..."
                         print(f"Interne ({cabinet_name}), on zappe.")
                         time.sleep(random.uniform(3, 5))
-                        continue
+                        return
                     else:
                         print(
                             f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
@@ -251,10 +251,10 @@ def send_message(
             except Exception as e:
                 traceback.print_exc()
                 print(f"Détails : {e}")
-                yield "❌ Échec à l'étape : Recherche Input"
+                # yield "❌ Échec à l'étape : Recherche Input"
                 time.sleep(random.uniform(6, 9))
-                yield "On a rencontré un soucis lors de la recherche du bouton d'envoi, rien de grave on continue avec d'autres profils..."
-                continue
+                # yield "On a rencontré un soucis lors de la recherche du bouton d'envoi, rien de grave on continue avec d'autres profils..."
+                return
                 # on ecris le message
             try:
 
@@ -272,8 +272,8 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Saisie du message"
                 time.sleep(random.uniform(6, 9))
-                yield "On a rencontré un soucis au moment de saisir le message, rien de grave on continue avec d'autres profils..."
-                continue
+                # yield "On a rencontré un soucis au moment de saisir le message, rien de grave on continue avec d'autres profils..."
+                return
                 # on cherche le bouton
             try:
                 send_btn = (
@@ -285,8 +285,8 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : localisation bouton"
                 time.sleep(random.uniform(6, 9))
-                yield "On a rencontré un soucis au moment de localiser le bouton d'envoi, rien de grave on continue avec d'autres profils..."
-                continue
+                # yield "On a rencontré un soucis au moment de localiser le bouton d'envoi, rien de grave on continue avec d'autres profils..."
+                return
                 # on tente le click
             try:
                 driver.execute_script(
@@ -313,8 +313,8 @@ def send_message(
                 print(f"Détails : {e}")
                 yield "❌ Échec à l'étape : Clic Envoi"
                 time.sleep(random.uniform(6, 9))
-                yield "On a rencontré un soucis lors de l'envoi du message, rien de grave on continue avec d'autres profils..."
-                continue
+                # yield "On a rencontré un soucis lors de l'envoi du message, rien de grave on continue avec d'autres profils..."
+                return
 
             try:
                 print("On va tenter de fermer la fenêtre")
@@ -346,7 +346,7 @@ def send_message(
         except Exception as e:
             print(f"Erreur : {e}")
             print(f"Erreur :\n{traceback.format_exc()}")
-            continue
+            return
 
         finally:
             print("bloc finally")

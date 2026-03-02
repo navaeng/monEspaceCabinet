@@ -2,14 +2,14 @@ def prompt_message_sourcing(
     job_title, details, telephone, full_name, candidatrecherche
 ):
     return f"""
-Nous sommes un cabinet de conseil pécialisé en ingénierie,
+Nous sommes un cabinet de conseil pécialisé en ingénierie et nous souhaitons placer des candidats sur des besoins que nous reçevons,
 nous recherchons des talents pour un besoin en {job_title}. Rédige un message LinkedIn naturel pour approcher de futur candidats potentiel.
 
 Contexte :
 - Informations complémentaires : {details}
 - Les compétences recherchées sont : {candidatrecherche}
 
-Consignes STRICTES :
+Consignes :
 3. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")
 4. Change à chaque fois ce que tu dis car j'appelle ce prompt plusieurs fois.
 5. Objectif : donner envie d'échanger sans être insistant.

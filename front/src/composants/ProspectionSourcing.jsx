@@ -98,7 +98,7 @@ function ProspectionSourcing() {
       while (true) {
         try {
           const { value, done } = await reader.read();
-          if (done) break;
+          // if (done) break;
           const chunk = decoder.decode(value);
 
           console.log("Value brute du reader :", value);

@@ -30,10 +30,9 @@ def send_message(
 ):
     print("Début de l'envoi de messages directs...")
     yield f"Démarrage envoi de messages pour {job_title}..."
-    # links = driver.find_elements(
-    #     By.XPATH,
-    #     "//span[contains(@class, 'entity-result__title-line')]//a[contains(@href, '/in/')]",
-    # )
+
+    urls = []  # Initialiser urls avant le try
+
     try:
         # time.sleep(random.uniform(2, 4))
         # driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
@@ -47,7 +46,6 @@ def send_message(
         links = driver.find_elements(By.CSS_SELECTOR, "a[href*='/in/']")
         yield "✅ Profils trouvés dans le DOM"
         time.sleep(2)
-        urls = []
         for link in links:
             url = link.get_attribute("href").split("?")[0]
             if url not in urls:

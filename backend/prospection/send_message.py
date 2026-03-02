@@ -93,16 +93,6 @@ def send_message(
                     continue
                 yield "Pas encore contacté..."
 
-                check_mode = (
-                    supabase_client.table("linkedin_contacts")
-                    .select("origin_mode")
-                    .eq("profile_url", url)
-                    .eq("user_id", current_user_id)
-                    .execute()
-                )
-
-                print(check_mode)
-
                 profile_main_content = driver.find_element(
                     By.TAG_NAME, "main"
                 ).text.lower()
@@ -178,11 +168,30 @@ def send_message(
                 print("🤖 [DEBUG] Appel Groq pour le message...")
                 time.sleep(random.uniform(6, 8))
                 instruction = ""
-                if mode == "prospection":
+
+                check_mode = (
+                    supabase_client.table("linkedin_contacts")
+                    .select("origin_mode")
+                    .eq("profile_url", url)
+                    .eq("user_id", current_user_id)
+                    .execute()
+                )
+
+                print(check_mode)
+
+                origin_mode = (
+                    check_mode.data[0]["origin_mode"]
+                    if (check_mode.data and len(check_mode.data) > 0)
+                    else mode
+                )
+
+                print(f"origin mode: {origin_mode}")
+
+                if origin_mode == "prospection":
                     instruction = prompt_message_prospection(
                         job_title, details, telephone, full_name
                     )
-                elif mode == "sourcing":
+                elif origin_mode == "sourcing":
                     instruction = prompt_message_sourcing(
                         job_title, details, telephone, full_name, candidatrecherche
                     )

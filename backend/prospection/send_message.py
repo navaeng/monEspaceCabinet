@@ -37,6 +37,7 @@ def send_message(
     try:
         # time.sleep(random.uniform(2, 4))
         # driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
+        yield "⏳ Chargement de la page des acceptations..."
         time.sleep(random.uniform(5, 7))
         # links = driver.find_elements(
         #     By.XPATH,
@@ -50,11 +51,18 @@ def send_message(
             if url not in urls:
                 urls.append(url)
 
-        yield f"{len(urls)} profils trouvés..."
+        if len(urls) == 0:
+            yield "⚠️ Aucun nouveau contact à ce moment"
+            print("Aucun profil trouvé")
+            return
+
+        yield f"✅ {len(urls)} profils trouvés..."
         print(f"{len(urls)} profils trouvés")
 
     except Exception as e:
         print(f"Erreur lors de la récupération des liens : {e}")
+        yield f"⚠️ Erreur: {str(e)[:60]}"
+        return
 
     for u, url in enumerate(urls, start=1):
         message = ""

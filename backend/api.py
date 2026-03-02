@@ -363,35 +363,18 @@ async def start_prospection(
         )
 
     def stream_generator():
-        driver_ref = {"instance": None}
         try:
             print(f"Lancement Chrome pour {body.intitule}")
-            chrome_gen = run_chrome(
+            for step in run_chrome(
                 body.intitule,
                 body.details,
                 body.mode,
                 body.candidatrecherche or "",
                 body.post or "",
+                # cabinet_name,
                 config_db,
-            )
-
-            for step in chrome_gen:
-                if hasattr(chrome_gen, "gi_frame") and chrome_gen.gi_frame:
-                    frame_locals = chrome_gen.gi_frame.f_locals
-                    if "driver" in frame_locals:
-                        driver_ref["instance"] = frame_locals["driver"]
-
+            ):
                 yield f"{step}\n"
-
-        except GeneratorExit:
-            print("⚠️ Client déconnecté, fermeture forcée du driver...")
-            if driver_ref["instance"]:
-                try:
-                    driver_ref["instance"].quit()
-                    print("✅ Driver fermé après déconnexion client")
-                except:
-                    pass
-            raise
         except Exception as e:
             import traceback
 
@@ -399,14 +382,6 @@ async def start_prospection(
             print(f"Erreur lors de la prospection : {str(e)}")
 
         finally:
-            # Fermeture de sécurité du driver
-            if driver_ref["instance"]:
-                try:
-                    driver_ref["instance"].quit()
-                    print("✅ Driver fermé (finally API)")
-                except #ignore :
-                    pass
-
             supabase_client.table("prospection_settings").update(
                 {"is_active": False}
             ).not_.is_("id", "null").execute()

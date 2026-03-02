@@ -56,7 +56,7 @@ def send_message(
         if len(urls) == 0:
             yield "⚠️ Aucun nouveau contact à ce moment"
             print("Aucun profil trouvé")
-            return
+            pass
 
         yield f"✅ {len(urls)} profils trouvés..."
         print(f"{len(urls)} profils trouvés")
@@ -64,7 +64,7 @@ def send_message(
     except Exception as e:
         print(f"Erreur lors de la récupération des liens : {e}")
         yield f"⚠️ Erreur: {str(e)[:60]}"
-        return
+        pass
 
     for u, url in enumerate(urls, start=1):
         message = ""
@@ -140,7 +140,7 @@ def send_message(
                         yield f"Candidat de chez {cabinet_name}, skip..."
                         print(f"Interne ({cabinet_name}), on zappe.")
                         time.sleep(random.uniform(3, 5))
-                        return
+                        continue
                     else:
                         print(
                             f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
@@ -353,7 +353,7 @@ def send_message(
         except Exception as e:
             print(f"Erreur : {e}")
             print(f"Erreur :\n{traceback.format_exc()}")
-            return
+            continue
 
         finally:
             print("bloc finally")

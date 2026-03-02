@@ -357,7 +357,3 @@ def send_message(
 
         finally:
             print("bloc finally")
-
-    if "driver" in locals():
-        driver.quit()
-        return

@@ -207,17 +207,17 @@ def run_chrome(
         use_subprocess=True,
         version_main=v_chrome,
     )
-    driver.maximize_window()
-    driver.execute_cdp_cmd(
-        "Page.addScriptToEvaluateOnNewDocument",
-        {
-            "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        },
-    )
-
-    # wait = WebDriverWait(driver, 15)
 
     try:
+        driver.maximize_window()
+        driver.execute_cdp_cmd(
+            "Page.addScriptToEvaluateOnNewDocument",
+            {
+                "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            },
+        )
+
+        # wait = WebDriverWait(driver, 15)
         yield "Lancement..."
         time.sleep(random.uniform(3, 6))
         driver.get("https://www.linkedin.com/feed/")
@@ -563,3 +563,11 @@ def run_chrome(
     except Exception as e:
         print(f"Erreur lors du check des nouveaux amis : {e}")
         yield "Erreur lors de la vérification des acceptations."
+
+    finally:
+        print("🛑 Fermeture du driver Chrome...")
+        try:
+            driver.quit()
+            print("✅ Driver fermé avec succès")
+        except Exception as e:
+            print(f"⚠️ Erreur fermeture driver: {e}")

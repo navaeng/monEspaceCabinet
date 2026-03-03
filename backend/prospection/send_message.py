@@ -32,6 +32,7 @@ def send_message(
     yield f"Démarrage envoi de messages pour {job_title}..."
 
     urls = []  # Initialiser urls avant le try
+    button = None
 
     try:
         # time.sleep(random.uniform(2, 4))
@@ -124,7 +125,7 @@ def send_message(
                         By.TAG_NAME, "main"
                     ).text.lower()
                     content_lower = profile_main_content
-                    print(f"[DEBUG] ✅ Élément <main> trouvé")
+                    print("[DEBUG] ✅ Élément <main> trouvé")
                 except Exception as main_error:
                     print(f"[DEBUG] ⚠️ Élément <main> introuvable: {main_error}")
                     print("[DEBUG] Utilisation du body entier comme fallback")
@@ -292,7 +293,8 @@ def send_message(
                 )
                 print("[DEBUG] Clic sur le bouton 'Message'...")
                 driver.execute_script("arguments[0].click();", button)
-                yield "✅ Bouton 'Message' cliqué"
+                yield "✅ Bouton 'Message' cliqué..."
+                print("Boutton de message cliqué")
                 time.sleep(random.uniform(6, 8))
 
             except Exception as e:

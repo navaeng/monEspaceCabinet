@@ -4,6 +4,7 @@ def prompt_sourcing(candidatrecherche):
     Expert en Sourcing Recrutement (LinkedIn Boolean Search).
 
     ### MISSION
+    Si {candidatrecherche} n'est pas vide !
     Génère une URL de recherche LinkedIn optimisée pour ces critères :
     "{candidatrecherche}"
 

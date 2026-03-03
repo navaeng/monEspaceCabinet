@@ -67,7 +67,10 @@ def run_chrome(
     print(f"[DEBUG] User ID: {uid}")
 
     target_url = ""
+    drivers = {}
+    print("driver initialisé...")
     current_user_id = None
+    port = random.randint(9000, 9999)
 
     if not uid:
         print(
@@ -88,6 +91,7 @@ def run_chrome(
 
     profil_path = os.path.abspath(f"cookies/profile_{uid}")
     counter_file = os.path.join(profil_path, ".counter")
+    print(f"profil path : {profil_path}")
 
     count = 0
     if os.path.exists(counter_file):
@@ -120,7 +124,7 @@ def run_chrome(
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
     options.add_argument("--profile-directory=Default")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-setuid-sandbox")
@@ -128,6 +132,7 @@ def run_chrome(
     options.add_argument("--disable-software-rasterizer")
     options.add_argument("--disk-cache-size=1")
     options.add_argument("--media-cache-size=1")
+    options.add_argument(f"--remote-debugging-port={port}")
 
     # job_title = config_db.get("query")
     # if job_title:
@@ -210,7 +215,7 @@ def run_chrome(
     #         print(f"❌ Erreur lors de la suppression du lock : {e}")
     # # if os.path.exists("linkedin_profile_informations/SingletonLock"):
     # #     os.remove("linkedin_profile_informations/SingletonLock")
-    os.system(f"pgrep -f 'user-data-dir={profil_path}' | xargs -r kill -9")
+    # os.system(f"pgrep -f 'user-data-dir={profil_path}' | xargs -r kill -9")
 
     v_chrome = int(
         next(
@@ -221,9 +226,6 @@ def run_chrome(
     )
     # time.sleep(random.randint(10, 30))
     # print("temps choisi : ", random.randint(10, 30))
-    if "drivers" not in globals():
-        global drivers
-        drivers = {}
 
     if current_user_id not in drivers:
         drivers[current_user_id] = uc.Chrome(
@@ -251,7 +253,11 @@ def run_chrome(
         # wait = WebDriverWait(driver, 15)
         yield "Lancement..."
         time.sleep(random.uniform(3, 6))
-        driver.get("https://www.linkedin.com/feed/")
+        current_url = "https://www.linkedin.com/feed/"
+        driver.get(current_url)
+        if "linkedin.com/feed" not in current_url:
+            print("Page inattendue...")
+            yield "Page innattendu détécté..."
         yield "Accès à LinkedIn..."
         time.sleep(random.uniform(3, 6))
         current_url = driver.current_url

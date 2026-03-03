@@ -10,12 +10,13 @@ Contexte :
 - Les compétences recherchées sont : {candidatrecherche}
 
 Consignes :
-3. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")
-4. Change à chaque fois ce que tu dis car j'appelle ce prompt plusieurs fois.
-5. Objectif : donner envie d'échanger sans être insistant.
-6. Terminer par les coordonnées : {telephone} - {full_name}
-7. CRUCIAL : Le message doit être prêt à envoyer TEL QUEL sans aucune modification
-8. INTERDIT : crochets [], accolades {{}}, placeholders type [nom]/[entreprise], texte explicatif, formules génériques
+1.  Soi court, fait 2 phrases maximum.
+2. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")
+3. Change à chaque fois ce que tu dis car j'appelle ce prompt plusieurs fois.
+4. Objectif : donner envie d'échanger sans être insistant.
+5. Terminer par les coordonnées : {telephone} - {full_name}
+6. CRUCIAL : Le message doit être prêt à envoyer TEL QUEL sans aucune modification
+7. INTERDIT : crochets [], accolades {{}}, placeholders type [nom]/[entreprise], texte explicatif, formules génériques
 
 Le message doit sembler rédigé spontanément par un recruteur humain, pas généré par une IA.
 Soit preudent car le message sera envoyé directement sans vérification.

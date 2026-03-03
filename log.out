@@ -1,0 +1,187 @@
+ishak@Linuxishak:~/Bureau/ERP/backend$ git add .
+ishak@Linuxishak:~/Bureau/ERP/backend$ git commit -m 'add driver personnal'
+[feature 4a8b823] add driver personnal
+ 1 file changed, 23 insertions(+), 13 deletions(-)
+ishak@Linuxishak:~/Bureau/ERP/backend$ uvicorn api:app --host 0.0.0.0 --port 8002 --reload
+INFO:     Will watch for changes in these directories: ['/home/ishak/Bureau/ERP/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
+INFO:     Started reloader process [26813] using StatReload
+KEY: kkkijjfKOJefhefe444
+INFO:     Started server process [26815]
+INFO:     Waiting for application startup.
+Lancement de thread...
+INFO:     Application startup complete.
+INFO:     192.168.10.112:48870 - "OPTIONS /backend/prospection/list HTTP/1.1" 200 OK
+INFO:     192.168.10.112:48872 - "OPTIONS /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:48870 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+CONTENU BRUT SUPABASE : []
+DEBUG - Nombre de jobs trouvés : 0
+KEY: kkkijjfKOJefhefe444
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:48872 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:56742 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:56742 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+INFO:     192.168.10.112:56742 - "OPTIONS /backend/prospection/start_prospection HTTP/1.1" 200 OK
+lancement...
+User response: user=User(id='b48d5631-7f20-4837-904c-ae55f1e60fd3', app_metadata={'provider': 'email', 'providers': ['email']}, user_metadata={'email_verified': True}, aud='authenticated', confirmation_sent_at=None, recovery_sent_at=None, email_change_sent_at=None, new_email=None, new_phone=None, invited_at=None, action_link=None, email='i.kouici@insta.fr', phone='', created_at=datetime.datetime(2026, 1, 29, 13, 58, 37, 268015, tzinfo=TzInfo(0)), confirmed_at=datetime.datetime(2026, 1, 29, 13, 58, 37, 271140, tzinfo=TzInfo(0)), email_confirmed_at=datetime.datetime(2026, 1, 29, 13, 58, 37, 271140, tzinfo=TzInfo(0)), phone_confirmed_at=None, last_sign_in_at=datetime.datetime(2026, 3, 3, 9, 45, 35, 834031, tzinfo=TzInfo(0)), role='authenticated', updated_at=datetime.datetime(2026, 3, 3, 9, 45, 35, 900445, tzinfo=TzInfo(0)), identities=[UserIdentity(id='b48d5631-7f20-4837-904c-ae55f1e60fd3', identity_id='0d0616f9-bd22-446f-ba0d-f8a0ebb6ff56', user_id='b48d5631-7f20-4837-904c-ae55f1e60fd3', identity_data={'email': 'i.kouici@insta.fr', 'email_verified': False, 'phone_verified': False, 'sub': 'b48d5631-7f20-4837-904c-ae55f1e60fd3'}, provider='email', created_at=datetime.datetime(2026, 1, 29, 13, 58, 37, 269563, tzinfo=TzInfo(0)), last_sign_in_at=datetime.datetime(2026, 1, 29, 13, 58, 37, 269513, tzinfo=TzInfo(0)), updated_at=datetime.datetime(2026, 1, 29, 13, 58, 37, 269563, tzinfo=TzInfo(0)))], is_anonymous=False, is_sso_user=False, factors=None, deleted_at=None, banned_until=None)
+token:eyJhbGciOiJFUzI1NiIsImtpZCI6IjI4MTI3MGFhLTZiZjAtNGE1NS1iZGI2LTJkOTZhYTY1NDIzMyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2N6dm9kaXFvdGN5dXJta3dnYWhzLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJiNDhkNTYzMS03ZjIwLTQ4MzctOTA0Yy1hZTU1ZjFlNjBmZDMiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzcyNTM0NTU4LCJpYXQiOjE3NzI1MzA5NTgsImVtYWlsIjoiaS5rb3VpY2lAaW5zdGEuZnIiLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImVtYWlsX3ZlcmlmaWVkIjp0cnVlfSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3MjUzMDk1OH1dLCJzZXNzaW9uX2lkIjoiMWVlODAwMjItMWY3ZS00ZjI5LWFlMzctMzBhOGRmYmVmYWM0IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.83ccADIP7CVxUDK7hxZOKJo9sdAPAXFXKh7gYrhejvsnLBRD9kI1LM2oRc4HxmUygdMa5zKqQ_ee9NMFvhk-Xg
+Utilisateur authentifié : b48d5631-7f20-4837-904c-ae55f1e60fd3
+Requête supabase reçue pour commercial
+LOCK ACQUIS
+Recuperation de l id du cabinet
+ID du cabinet récupéré : 9
+On lance la requête
+insert db
+Body :  aucun
+✅ POST INSERTE dans la table POSTS
+⏳ Tentative d'appel RPC...
+🔍 DEBUG - Données brutes RPC: [{'id': 755, 'linkedin_email': 'kouicicontact@yahoo.com', 'linkedin_password': 'ishak2301', 'telephone': '0689784512', 'full_name': 'Ishak', 'email': 'i.kouici@insta.fr'}]
+🔍 DEBUG - Type de données: <class 'list'>
+Contenu de data: {'id': 755, 'linkedin_email': 'kouicicontact@yahoo.com', 'linkedin_password': 'ishak2301', 'telephone': '0689784512', 'full_name': 'Ishak', 'email': 'i.kouici@insta.fr'}
+📧 Email linkedin récupéré: kouicicontact@yahoo.com
+📧 Email récupéré: i.kouici@insta.fr
+Password récupéré: OUI
+INFO:     192.168.10.112:56742 - "POST /backend/prospection/start_prospection HTTP/1.1" 200 OK
+Lancement Chrome pour commercial
+[DEBUG-STEP] Lancement chrome
+suppression des processus
+[DEBUG] candidatrecherche :
+[DEBUG] Entrée dans run_chrome pour: commercial
+[DEBUG] Détails de la prospection : aucun
+[DEBUG] Mode : prospection
+[DEBUG] Détails pour le post linkedin : aucun
+CONFIG DB: {'id': 755, 'cabinet_id': None, 'cabinet_name': 'Nava Engineering', 'user_id': 'b48d5631-7f20-4837-904c-ae55f1e60fd3', 'linkedin_email': 'kouicicontact@yahoo.com', 'linkedin_password': 'ishak2301', 'job_title': 'commercial', 'telephone': '0689784512', 'full_name': 'Ishak', 'email': 'i.kouici@insta.fr', 'segment': 'Personnes'}
+[DEBUG] User ID: b48d5631-7f20-4837-904c-ae55f1e60fd3
+🔍 [RUN_CHROME] Email: kouicicontact@yahoo.com
+🔍 [RUN_CHROME] Password présent: OUI
+[DEBUG] Path profil: /home/ishak/Bureau/ERP/backend/cookies/profile_b48d5631-7f20-4837-904c-ae55f1e60fd3
+DEBUG FRONT: Valeur reçue dans config_db['segment'] -> Personnes
+DEBUG LOGIC: segment_brut après extraction -> Personnes
+DEBUG FINAL: Valeur injectée dans l'URL -> people
+Segment: people
+Nom complet: Ishak
+Numéro de téléphone: 0689784512
+KEY: kkkijjfKOJefhefe444
+[DEBUG] ✅ Timeouts configurés: page=30s, script=30s, implicit=15s
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:48246 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49635 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49635 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49638 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+Current URL: https://www.linkedin.com/feed/
+[DEBUG-STEP] Lancement post_message
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:48154 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49639 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+[DEBUG-STEP] Lancement recherche personne
+lancement...
+User response: user=User(id='50941315-e829-4d91-95f5-bb0ae5690167', app_metadata={'provider': 'email', 'providers': ['email']}, user_metadata={'email_verified': True}, aud='authenticated', confirmation_sent_at=None, recovery_sent_at=None, email_change_sent_at=None, new_email=None, new_phone=None, invited_at=None, action_link=None, email='kouicicontact@yahoo.com', phone='', created_at=datetime.datetime(2026, 3, 3, 9, 44, 12, 502149, tzinfo=TzInfo(0)), confirmed_at=datetime.datetime(2026, 3, 3, 9, 44, 12, 511559, tzinfo=TzInfo(0)), email_confirmed_at=datetime.datetime(2026, 3, 3, 9, 44, 12, 511559, tzinfo=TzInfo(0)), phone_confirmed_at=None, last_sign_in_at=datetime.datetime(2026, 3, 3, 9, 45, 51, 936102, tzinfo=TzInfo(0)), role='authenticated', updated_at=datetime.datetime(2026, 3, 3, 9, 45, 51, 938967, tzinfo=TzInfo(0)), identities=[UserIdentity(id='50941315-e829-4d91-95f5-bb0ae5690167', identity_id='3615a30b-6a21-4cc9-8a73-ca3f5c903992', user_id='50941315-e829-4d91-95f5-bb0ae5690167', identity_data={'email': 'kouicicontact@yahoo.com', 'email_verified': False, 'phone_verified': False, 'sub': '50941315-e829-4d91-95f5-bb0ae5690167'}, provider='email', created_at=datetime.datetime(2026, 3, 3, 9, 44, 12, 508231, tzinfo=TzInfo(0)), last_sign_in_at=datetime.datetime(2026, 3, 3, 9, 44, 12, 508176, tzinfo=TzInfo(0)), updated_at=datetime.datetime(2026, 3, 3, 9, 44, 12, 508231, tzinfo=TzInfo(0)))], is_anonymous=False, is_sso_user=False, factors=None, deleted_at=None, banned_until=None)
+token:eyJhbGciOiJFUzI1NiIsImtpZCI6IjI4MTI3MGFhLTZiZjAtNGE1NS1iZGI2LTJkOTZhYTY1NDIzMyIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2N6dm9kaXFvdGN5dXJta3dnYWhzLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI1MDk0MTMxNS1lODI5LTRkOTEtOTVmNS1iYjBhZTU2OTAxNjciLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzcyNTM0NzUxLCJpYXQiOjE3NzI1MzExNTEsImVtYWlsIjoia291aWNpY29udGFjdEB5YWhvby5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImVtYWlsX3ZlcmlmaWVkIjp0cnVlfSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3MjUzMTE1MX1dLCJzZXNzaW9uX2lkIjoiMTIwYmIyZWEtNmY2Ni00MTc5LWIyOWYtZWQ3MGMwZDQ3NDY1IiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.WPNqGY7dW_mTzzLUnMUlWZReUOw1xuD66-5-V83kI9YiyOW9CV8RPZZTsNVsdGMIMJbHcARviRNGL61zvppV1g
+Utilisateur authentifié : 50941315-e829-4d91-95f5-bb0ae5690167
+Requête supabase reçue pour Développeur JS
+LOCK ACQUIS
+Recuperation de l id du cabinet
+ID du cabinet récupéré : 9
+On lance la requête
+insert db
+Body :  Aucun
+✅ POST INSERTE dans la table POSTS
+⏳ Tentative d'appel RPC...
+🔍 DEBUG - Données brutes RPC: [{'id': 756, 'linkedin_email': None, 'linkedin_password': None, 'telephone': None, 'full_name': 'kouici', 'email': 'kouicicontact@yahoo.com'}]
+🔍 DEBUG - Type de données: <class 'list'>
+Contenu de data: {'id': 756, 'linkedin_email': None, 'linkedin_password': None, 'telephone': None, 'full_name': 'kouici', 'email': 'kouicicontact@yahoo.com'}
+📧 Email linkedin récupéré: None
+📧 Email récupéré: kouicicontact@yahoo.com
+Password récupéré: NON
+INFO:     192.168.10.103:49639 - "POST /backend/prospection/start_prospection HTTP/1.1" 200 OK
+Lancement Chrome pour Développeur JS
+[DEBUG-STEP] Lancement chrome
+suppression des processus
+[DEBUG] candidatrecherche :
+[DEBUG] Entrée dans run_chrome pour: Développeur JS
+[DEBUG] Détails de la prospection : aucun
+[DEBUG] Mode : prospection
+[DEBUG] Détails pour le post linkedin : Aucun
+CONFIG DB: {'id': 756, 'cabinet_id': None, 'cabinet_name': 'Nava Engineering', 'user_id': '50941315-e829-4d91-95f5-bb0ae5690167', 'linkedin_email': None, 'linkedin_password': None, 'job_title': 'Développeur JS', 'telephone': None, 'full_name': 'kouici', 'email': 'kouicicontact@yahoo.com', 'segment': 'Offres'}
+[DEBUG] User ID: 50941315-e829-4d91-95f5-bb0ae5690167
+🔍 [RUN_CHROME] Email: None
+🔍 [RUN_CHROME] Password présent: NON
+[DEBUG] Path profil: /home/ishak/Bureau/ERP/backend/cookies/profile_50941315-e829-4d91-95f5-bb0ae5690167
+DEBUG FRONT: Valeur reçue dans config_db['segment'] -> Offres
+DEBUG LOGIC: segment_brut après extraction -> Offres
+DEBUG FINAL: Valeur injectée dans l'URL -> offers
+Segment: offers
+Nom complet: kouici
+Numéro de téléphone: None
+KEY: kkkijjfKOJefhefe444
+[DEBUG] ✅ Timeouts configurés: page=30s, script=30s, implicit=15s
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:33924 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+accès a la recherche...
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49640 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+Début de la recherche
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:38814 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+Current URL: https://www.linkedin.com/feed/
+[DEBUG-STEP] Lancement post_message
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49641 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+[DEBUG-STEP] Lancement recherche personne
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:50124 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+CONTENU BRUT SUPABASE : []
+DEBUG - Nombre de jobs trouvés : 0
+KEY: kkkijjfKOJefhefe444
+INFO:     192.168.10.103:49642 - "OPTIONS /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49642 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+DEBUG URL: https://www.linkedin.com/search/results/people/?keywords=commercial&origin=SWITCH_SEARCH_VERTICAL&page=0
+Page LinkedIn chargée avec succès !
+accès a la recherche...
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:58286 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+Début de la recherche
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49643 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:41032 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49644 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:55846 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+DEBUG URL: https://www.linkedin.com/search/results/offers/?keywords=D%C3%A9veloppeur%20JS&origin=SWITCH_SEARCH_VERTICAL&page=0
+Page LinkedIn chargée avec succès !
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49645 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+accès a la recherche...
+Début de la recherche
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:43604 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49646 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:35970 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49647 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+DEBUG URL: https://www.linkedin.com/search/results/people/?keywords=commercial&origin=SWITCH_SEARCH_VERTICAL&page=1
+Page LinkedIn chargée avec succès !
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:49860 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+CONTENU BRUT SUPABASE : []
+DEBUG - Nombre de jobs trouvés : 0
+KEY: kkkijjfKOJefhefe444
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49648 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : b48d5631-7f20-4837-904c-ae55f1e60fd3
+INFO:     192.168.10.112:56190 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+👤 Utilisateur connecté : 50941315-e829-4d91-95f5-bb0ae5690167
+INFO:     192.168.10.103:49649 - "GET /backend/prospection/list HTTP/1.1" 200 OK
+accès a la recherche...

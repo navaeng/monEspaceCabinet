@@ -14,8 +14,7 @@ from typing import Optional
 import undetected_chromedriver as uc
 from data.prompt.prospection.prompt_sourcing import prompt_sourcing
 from database import supabase_client
-
-# from prospection.post_message import post_message
+from prospection.post_message import post_message
 from pydantic import BaseModel
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys

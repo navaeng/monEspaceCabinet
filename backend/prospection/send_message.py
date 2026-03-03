@@ -272,7 +272,7 @@ def send_message(
                 yield "🔍 Recherche du bouton de message..."
 
                 try:
-                    button = WebDriverWait(driver, 5).until(
+                    button = WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located(
                             (
                                 By.XPATH,
@@ -286,22 +286,6 @@ def send_message(
                         f"[DEBUG] ⚠️ Timeout attente bouton 'Message': {timeout_error}"
                     )
                     print(f"[DEBUG] URL actuelle: {driver.current_url}")
-
-                    # Stratégie alternative: chercher le bouton directement
-                    try:
-                        print("[DEBUG] Tentative de recherche directe du bouton...")
-                        button = driver.find_element(
-                            By.XPATH,
-                            "//*[contains(@href, 'messaging/compose')]//*[contains(text(), 'Message')] | //button[contains(., 'Message')]",
-                        )
-                        print("[DEBUG] ✅ Bouton trouvé via find_element")
-                    except Exception as find_error:
-                        print(
-                            f"[DEBUG] ❌ Impossible de trouver le bouton Message: {find_error}"
-                        )
-                        yield f"❌ Bouton 'Message' non trouvé. Passage au profil suivant..."
-                        time.sleep(random.uniform(3, 5))
-                        continue
 
                 driver.execute_script(
                     "arguments[0].scrollIntoView({block: 'center'});", button

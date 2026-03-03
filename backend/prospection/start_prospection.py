@@ -14,7 +14,8 @@ from typing import Optional
 import undetected_chromedriver as uc
 from data.prompt.prospection.prompt_sourcing import prompt_sourcing
 from database import supabase_client
-from prospection.post_message import post_message
+
+# from prospection.post_message import post_message
 from pydantic import BaseModel
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -226,6 +227,12 @@ def run_chrome(
         version_main=v_chrome,
     )
 
+    # ✅ FIX BUG #2: Ajout timeouts explicites pour éviter les blocages indéfinis
+    driver.set_page_load_timeout(30)  # Timeout chargement de page: 30 secondes
+    driver.set_script_timeout(30)  # Timeout exécution script JS: 30 secondes
+    driver.implicitly_wait(15)  # Timeout recherche élément implicite: 15 secondes
+    print("[DEBUG] ✅ Timeouts configurés: page=30s, script=30s, implicit=15s")
+
     try:
         driver.maximize_window()
         driver.execute_cdp_cmd(
@@ -368,7 +375,7 @@ def run_chrome(
     try:
         print("[DEBUG-STEP] Lancement post_message")
 
-        yield from post_message(driver, post, config_db)
+        # yield from post_message(driver, post, config_db)
         time.sleep(5)
         print("[DEBUG-STEP] Lancement recherche personne")
 

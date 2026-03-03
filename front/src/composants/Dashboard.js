@@ -42,7 +42,7 @@ function Dashboard() {
       <div className="max-w-4xl mx-auto p-4 md:p-6">
         <div className="mb-8">
           <h1 className="text-lg font-normal text-gray-900 mb-1">
-            Tableau de bord {nom ? nom : user ? user.email : ""}
+            Tableau de bord {nom ? nom : user ? user.nom : ""}
           </h1>
           <p className="text-xs text-gray-500">Espace cabinet {cabinet}</p>
           {/* <button

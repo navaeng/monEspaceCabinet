@@ -69,8 +69,9 @@ def run_chrome(
     target_url = ""
     drivers = {}
     print("driver initialisé...")
-    current_user_id = None
+    current_user_id = uid
     port = random.randint(9000, 9999)
+    error_type = ""
 
     if not uid:
         print(
@@ -338,8 +339,8 @@ def run_chrome(
                 print("Email manquant dans config_db")
                 yield "Email linkedin non trouvé dans vos infos..."
                 time.sleep(7)
-                drivers.pop(current_user_id, None)
-                driver.quit()
+                drivers[current_user_id].quit()
+                del drivers[current_user_id]
                 return
 
             time.sleep(random.uniform(2, 4))
@@ -357,8 +358,8 @@ def run_chrome(
                 print("Mot de passe linkedin vide ")
                 yield "Mot de passe linkedin vide ou incorrect."
                 time.sleep(7)
-                drivers.pop(current_user_id, None)
-                driver.quit()
+                drivers[current_user_id].quit()
+                del drivers[current_user_id]
                 return
 
             time.sleep(random.uniform(2, 4))
@@ -380,7 +381,7 @@ def run_chrome(
 
         except Exception as e:
             print(f"CRASH BLOC LOGIN: {str(e)}")
-            yield f"Erreur de connexion : {type(e).__name__}"
+            # yield f"Erreur de connexion : {type(e).__name__}"
             raise e
 
     # except Exception as e:
@@ -541,9 +542,11 @@ def run_chrome(
 
                     except Exception as e:
                         error_type = type(e).__name__
-                        yield f"Erreur précise [{error_type}] : {str(e)[:100]}"
+                        print(f"Erreur précise [{error_type}] : {str(e)[:100]}")
+                        # yield f"Erreur précise [{error_type}] : {str(e)[:100]}"
                 except Exception as e:
-                    yield f"  ⚠ Erreur bouton Envoyer : {e}"
+                    print(f"Erreur précise [{error_type}] : {str(e)[:100]}")
+                    # yield f"  ⚠ Erreur bouton Envoyer : {e}"
 
             # try:
             #     from prospection.send_message import send_message

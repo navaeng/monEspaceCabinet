@@ -33,6 +33,24 @@ def send_message(
 
     urls = []  # Initialiser urls avant le try
     button = None
+    current_user_id = config_db.get("user_id")
+
+    # ✅ FIX OPTIMISATION: Récupérer les URLs contactées UNE SEULE FOIS
+    contacted_urls = set()
+    try:
+        res = (
+            supabase_client.table("url_contactees")
+            .select("url")
+            .eq("user_id", current_user_id)
+            .execute()
+        )
+        if res.data:
+            contacted_urls = set(
+                item.get("url") for item in res.data if item.get("url")
+            )
+        print(f"[DEBUG] {len(contacted_urls)} URLs déjà contactées en cache")
+    except Exception as e:
+        print(f"[WARN] Erreur récupération URLs contactées: {e}")
 
     try:
         # time.sleep(random.uniform(2, 4))
@@ -49,7 +67,7 @@ def send_message(
         time.sleep(2)
         for link in links:
             url = link.get_attribute("href").split("?")[0]
-            if url not in urls:
+            if url not in urls and url not in contacted_urls:  # ✅ FIX: Filtrer ici
                 urls.append(url)
 
         if len(urls) == 0:
@@ -57,8 +75,10 @@ def send_message(
             print("Aucun profil trouvé")
             pass
 
-        yield f"✅ {len(urls)} profils trouvés..."
-        print(f"{len(urls)} profils trouvés")
+        yield f"✅ {len(urls)} profils trouvés (après filtre)..."
+        print(
+            f"{len(urls)} profils à traiter (après filtre des {len(contacted_urls)} déjà contactés)"
+        )
 
     except Exception as e:
         print(f"Erreur lors de la récupération des liens : {e}")
@@ -96,27 +116,9 @@ def send_message(
                         30
                     )  # Réinitialiser au timeout par défaut
 
-                current_user_id = config_db.get("user_id")
-                print(f"current_user_id: {current_user_id}")
-
-                yield "On va vérifier si le profil à été contacté récemment..."
-                print("On va vérifier si le profil à été contacté récemment...")
-                time.sleep(random.uniform(5, 8))
-                check_contact = (
-                    supabase_client.table("url_contactees")
-                    .select("id")
-                    .eq("url", url)
-                    .eq("user_id", current_user_id)
-                    .execute()
-                )
-                print(f"check_contact: {check_contact}")
-
-                if check_contact.data:
-                    yield f"⏭️ Déjà contacté ({url}), skip..."
-                    print("Déjà dans la base, on passe au suivant.")
-                    time.sleep(random.uniform(5, 8))
-                    continue
-                yield "Pas encore contacté..."
+                # ✅ FIX OPTIMISATION: Vérification DB déjà faite au début (contacted_urls)
+                print(f"✅ URL {url} non contactée (validée en cache)")
+                yield "✅ Profil valide, traitement..."
 
                 # ✅ CORRECTION BUG: Gestion du cas où <main> n'existe pas
                 try:
@@ -204,11 +206,6 @@ def send_message(
                     #     yield "Mail envoyé"
                     #     # continue
                     #     #
-                time.sleep(4)
-                yield "🤖 Appel du modèle pour générer un message..."
-                print("🤖 [DEBUG] Appel Groq pour le message...")
-                time.sleep(random.uniform(6, 8))
-                instruction = ""
 
                 check_mode = (
                     supabase_client.table("linkedin_contacts")
@@ -228,6 +225,12 @@ def send_message(
 
                 origin_mode = check_mode.data[0]["origin_mode"]  # type: ignore
                 print(f"origin mode: {origin_mode}")
+
+                time.sleep(4)
+                yield "🤖 Appel du modèle pour générer un message..."
+                print("🤖 [DEBUG] Appel Groq pour le message...")
+                time.sleep(random.uniform(6, 8))
+                instruction = ""
 
                 if origin_mode == "prospection":
                     instruction = prompt_message_prospection(
@@ -369,7 +372,7 @@ def send_message(
                 # is_still_here = driver.find_elements(By.XPATH, xpath_input)
 
                 # if not is_still_here:
-                current_user_id = config_db.get("user_id")
+                # ✅ current_user_id déjà disponible depuis le début
                 print(f"User ID: {current_user_id}")
                 supabase_client.table("url_contactees").insert(
                     {"url": url, "user_id": current_user_id}

@@ -11,7 +11,7 @@ Consignes STRICTES :
 1. Soi court, fait 2 phrases maximum.
 2. Ton moderne et professionnel (pas de "Cher/Chère", "Madame", "Monsieur")
 3. Objectif : piquer la curiosité sans être intrusif
-4. Terminer par : {telephone} - {full_name}
+4. Terminer par : {telephone} - {full_name} si indiqué sinon pas grave n'indique rien
 5. CRUCIAL : Le message doit être prêt à envoyer TEL QUEL
 6. INTERDIT : crochets [], accolades {{}}, placeholders, texte explicatif, formules génériques type [prénom]
 

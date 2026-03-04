@@ -255,11 +255,11 @@ def send_message(
 
                 if origin_mode == "prospection":
                     instruction = prompt_message_prospection(
-                        job_title, details, telephone, full_name
+                        job_title, details, telephone, full_name, previous_message
                     )
                 elif origin_mode == "sourcing":
                     instruction = prompt_message_sourcing(
-                        job_title, details, telephone, full_name, candidatrecherche
+                        job_title, details, telephone, full_name, candidatrecherche, previous_message
                     )
 
                 message = call_groq(instruction)

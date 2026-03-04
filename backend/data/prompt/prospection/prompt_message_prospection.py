@@ -1,4 +1,4 @@
-def prompt_message_prospection(job_title, details, telephone, full_name):
+def prompt_message_prospection(job_title, details, telephone, full_name, previous_message):
     return f"""
 Tu nous aide à généré un message LinkedIn, nous sommes un cabinet de conseil pécialisé en ingénierie,
 nous recherchons de nouvelles enseignes afin de leurs proposer des talents pour leurs besoins.

@@ -1,5 +1,5 @@
 def prompt_message_sourcing(
-    job_title, details, telephone, full_name, candidatrecherche
+    job_title, details, telephone, full_name, candidatrecherche, previous_message
 ):
     return f"""
 Nous sommes un cabinet de conseil pécialisé en ingénierie et nous souhaitons placer des candidats sur des besoins que nous reçevons,

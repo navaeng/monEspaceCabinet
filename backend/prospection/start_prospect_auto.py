@@ -257,15 +257,15 @@ def start_prospect_auto():
 
     while True:
         try:
-            maintenant = datetime.now().astimezone()
+            from pytz import timezone
+            paris_tz = timezone("Europe/Paris")
+            maintenant = datetime.now(paris_tz).isoformat()
 
-            res = (
-                supabase_client.table("prospection_settings")
-                .select("*")
-                .eq("has_run_today", False)
-                .lte("hour_start", maintenant.isoformat())
+            res = supabase_client.table("prospection_settings")\
+                .select("*")\
+                .eq("has_run_today", False)\
+                .lte("hour_start", maintenant)\
                 .execute()
-            )
 
             print(f"CONTENU BRUT SUPABASE : {res.data}")
             data = cast(list[dict[str, Any]], res.data or [])

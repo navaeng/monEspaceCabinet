@@ -570,7 +570,7 @@ def run_chrome(
 
     yield "--- Invitations terminées... ---"
 
-    yield "--- Vérification des nouvelles acceptations ---"
+    yield "On va vérifier nos nouvelles relations..."
     try:
         driver.get("https://www.linkedin.com/mynetwork/invite-connect/connections/")
         time.sleep(random.uniform(5, 8))

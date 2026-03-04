@@ -41,7 +41,7 @@ if url not in urls and url not in contacted_urls:  # ✅ Filtrer ici
 
 ---
 
-#### **LIGNE 3: Supprimer la boucle de vérification inutile**
+#### **LIGNE 3: Supprimer la boucle de  inutile**
 ```python
 # SUPPRIMÉ (≈15 lignes):
 check_contact = supabase_client.table("url_contactees")

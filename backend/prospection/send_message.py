@@ -10,7 +10,6 @@ from data.prompt.prospection.prompt_message_sourcing import (
     prompt_message_sourcing,
 )
 from database import supabase_client
-from prospection.script_js.bouton_close_discussion import close_discussion
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait

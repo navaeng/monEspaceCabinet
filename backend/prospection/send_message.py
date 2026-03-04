@@ -117,8 +117,10 @@ def send_message(
         yield f"⚠️ Erreur: {str(e)[:60]}"
         pass
 
+    previous_message = []
+    print (f"{previous_message}")
     for u, url in enumerate(urls, start=1):
-        previous_message = []
+
 
         try:
             try:
@@ -264,6 +266,7 @@ def send_message(
 
                 message = call_groq(instruction)
                 previous_message.append(message)
+                print(f"message ajouté a previous: {message}")
                 print(f"{message}")
                 yield "Message reçu..."
 

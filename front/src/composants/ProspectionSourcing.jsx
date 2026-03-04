@@ -487,6 +487,12 @@ function ProspectionSourcing() {
                           </div>
                         </div>
 
+                        <div className="text-[10px] text-gray-500 mt-1">
+                          {p.total_connexions ?? 0} demandes de connexions
+                          envoyés · {p.total_messages ?? 0} personnes contactés
+                          par messages
+                        </div>
+
                         <button
                           onClick={() => setItemToDelete(p.id)}
                           className="text-gray-300 hover:text-red-500 p-1 transition-colors ml-2"

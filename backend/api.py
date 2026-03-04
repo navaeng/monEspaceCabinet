@@ -195,22 +195,18 @@ async def get_prospection(request: Request):
         )
 
         try:
-            total_connexions = (supabase_client
-                .table("linkedin_contacts")
-                .select("id", count="exact")
-                .eq("user_id", current_user_id)
-                .execute())
+            total_connexions = supabase_client.table("linkedin_contacts").select("id", count="exact").eq("user_id", current_user_id).execute()
+            total_messages = supabase_client.table("url_contactees").select("id", count="exact").eq("user_id", current_user_id).execute()
 
-            total_messages = (supabase_client
-                .table("url_contactees")
-                .select("id", count="exact")
-                .eq("user_id", current_user_id)
-                .execute())
+            data = res.data if res.data else []
+            for item in data:
+                item["total_connexions"] = total_connexions.count or 0
+                item["total_messages"] = total_messages.count or 0
+            return data
         except Exception as e:
             print (f'erreur {e}')
 
-        return {"data": res.data if res.data else [], "total_connexions": total_connexions.count, "total_messages": total_messages.count}
-        print(f"total connexion et message : {total_connexions}")
+        # return res.data if res.data else []
 
     except Exception as e:
         print(f"Erreur Supabase: {e}")

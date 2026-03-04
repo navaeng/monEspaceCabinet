@@ -94,7 +94,12 @@ def send_message(
         time.sleep(2)
         for link in links:
             url = link.get_attribute("href").split("?")[0]
+            print(f"[DEBUG] Checking URL: {url}")
+            print(f"[DEBUG] Already in urls: {url in urls}")
+            print(f"[DEBUG] In db_profiles_map: {url in db_profiles_map}")
+            print(f"[DEBUG] In contacted_urls: {url in contacted_urls}")
             if url not in urls and url in db_profiles_map and url not in contacted_urls:
+                print(f"[DEBUG] Adding URL to process: {url}")
                 urls.append(url)
 
         if len(urls) == 0:

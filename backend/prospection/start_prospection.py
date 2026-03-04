@@ -394,7 +394,7 @@ def run_chrome(
 
         yield "🔍 Recherche..."
         segment_final = filtre_map.get(config_db.get("segment"), "people")
-        for page in range(10):
+        for page in range(1):
             time.sleep(random.uniform(8, 12))
             human_mouse_move(driver)
             print("accès a la recherche... ")

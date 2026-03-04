@@ -10,9 +10,9 @@ Contexte :
 - Les compétences recherchées sont : {candidatrecherche}
 
 Consignes :
-1.  Soi court, fait 2 phrases maximum.
-2. Ton moderne et direct (pas de "Cher/Chère", "Madame", "Monsieur")
-3. Change à chaque fois ce que tu dis car j'appelle ce prompt plusieurs fois.
+1. Soi court, fait 2 phrases maximum.
+2. Ton moderne et professionnel, vouvoiement.
+3. Rédige autre chose que les messages précedent : {previous_message}
 4. Objectif : donner envie d'échanger sans être insistant.
 5. Terminer par les coordonnées : {telephone} - {full_name}
 6. CRUCIAL : Le message doit être prêt à envoyer TEL QUEL sans aucune modification

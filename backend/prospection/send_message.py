@@ -441,3 +441,4 @@ def send_message(
 
         finally:
             print("bloc finally")
+            print("[CERTITUDE] Fin de la boucle principale dans send_message. Tous les profils ont été traités.")

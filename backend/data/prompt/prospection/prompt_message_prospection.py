@@ -1,5 +1,5 @@
 def prompt_message_prospection(job_title, details, telephone, full_name, previous_message):
-print(f"Prompt message proespection : job_title: {job_title}, details: {details}, telephone: {telephone}, full_name: {full_name}, previous_message: {previous_message}")
+    print(f"Prompt message proespection : job_title: {job_title}, details: {details}, telephone: {telephone}, full_name: {full_name}, previous_message: {previous_message}")
 
     return f"""
 Tu nous aide à généré un message LinkedIn, nous sommes un cabinet de conseil pécialisé en ingénierie,

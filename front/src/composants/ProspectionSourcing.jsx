@@ -346,6 +346,12 @@ function ProspectionSourcing() {
                   )}
                 </button>
               </form>
+              <div className="text-[10px] text-gray-500 mt-1">
+                {prospection.reduce((a, c) => a + (c.total_connexions || 0), 0)}{" "}
+                connexions envoyées ·{" "}
+                {prospection.reduce((a, c) => a + (c.total_messages || 0), 0)}{" "}
+                personnes contactées
+              </div>
             </div>
           </div>
           {/* Liste sobre */}
@@ -358,11 +364,13 @@ function ProspectionSourcing() {
                     <h2 className="text-sm font-normal text-gray-900">
                       Historique
                     </h2>
+
                     <p className="text-gray-500 text-xs mt-0.5">
                       {prospection.length} prospection
                       {prospection.length !== 1 ? "s" : ""}
                     </p>
                   </div>
+
                   <div className="relative">
                     <input
                       type="text"
@@ -419,6 +427,7 @@ function ProspectionSourcing() {
                               </div>
                             )}
                           </div>
+
                           {p.is_active && statusLogs.length > 0 && (
                             <div className="mb-3 p-2 bg-gray-50 border border-gray-100 rounded text-[10px] font-mono max-h-32 overflow-y-auto">
                               {statusLogs.map((log, index) => (
@@ -486,6 +495,11 @@ function ProspectionSourcing() {
                             )}
                           </div>
                         </div>
+
+                        {/* <div className="text-[10px] text-gray-500 mt-1">
+                          {p.total_connexions ?? 0} connexions envoyés ·{" "}
+                          {p.total_messages ?? 0} personnes contactés
+                        </div>*/}
 
                         <button
                           onClick={() => setItemToDelete(p.id)}

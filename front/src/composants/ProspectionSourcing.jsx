@@ -358,6 +358,7 @@ function ProspectionSourcing() {
                     <h2 className="text-sm font-normal text-gray-900">
                       Historique
                     </h2>
+                    <h1></h1>
                     <p className="text-gray-500 text-xs mt-0.5">
                       {prospection.length} prospection
                       {prospection.length !== 1 ? "s" : ""}

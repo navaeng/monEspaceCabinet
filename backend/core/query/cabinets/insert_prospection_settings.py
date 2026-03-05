@@ -11,7 +11,6 @@ def insert_prospection_settings(body, cabinet_id, current_user_id, generate_next
                 "details": body.details,
                 "cabinet_id": cabinet_id,
                 "mode": body.mode,
-                "offre": body.offre or "".replace("\x00", ""),
                 "user_id": current_user_id,
                 "hour_start": generate_next_hour.isoformat(),
             }

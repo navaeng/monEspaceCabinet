@@ -10,7 +10,6 @@ def stream_generator(body, config_db):
             job_title=body.intitule,
             details=body.details,
             mode=body.mode,
-            offre=body.offre or "",
             post=body.post or "",
             config_db=config_db,
             telephone=body.telephone or "",

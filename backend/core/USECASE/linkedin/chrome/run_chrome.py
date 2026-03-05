@@ -15,17 +15,10 @@ from pydantic import BaseModel
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-class ProspectionRequest(BaseModel):
-    intitule: str
-    details: Optional[str] = None
-    offre: Optional[str] = None
-
-
 def run_chrome(
     job_title: str,
     details: str,
     mode: str,
-    offre,
     post,
     config_db,
     telephone,
@@ -38,7 +31,6 @@ def run_chrome(
     current_url = ""
 
     print(f"[DEBUG] User ID: {uid}")
-    print(f"[DEBUG] Offre : {offre}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")
     print(f"[DEBUG] Mode : {mode}")
@@ -67,7 +59,7 @@ def run_chrome(
             time.sleep(5)
             yield from request_connexion(job_title, driver, config_db)
             yield from send_message(
-                driver, job_title, offre, mode, config_db, details, telephone, full_name
+                driver, job_title, mode, config_db, details, telephone, full_name
             )
 
         finally:

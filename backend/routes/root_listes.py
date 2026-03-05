@@ -1,10 +1,9 @@
-from fastapi import Depends
-
-from core.app import app
+from fastapi import Depends, APIRouter
 from query.linkedin.get_listes import get_listes
 from query.user.get_user_id import get_user_id
 
+router_listes = APIRouter()
 
-@app.get("/backend/prospection/list")
+@router_listes.get("/backend/prospection/list")
 async def root_listes(current_user_id: str = Depends(get_user_id)):
     return get_listes(current_user_id)

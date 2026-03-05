@@ -5,13 +5,12 @@ import time
 from typing import Optional
 
 from database import supabase_client
-from core.linkedin.configurations.config_chrome import config_chrome
+from core.configurations.config_chrome import config_chrome
 from core.linkedin.login_linkedin import login_linkedin
 from core.linkedin.post_message import post_message
 from core.linkedin.request_connexion import request_connexion
 from core.linkedin.send_message import send_message
 from pydantic import BaseModel
-from selenium.webdriver.common.by import By
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 

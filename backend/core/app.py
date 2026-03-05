@@ -5,7 +5,7 @@ from fastapi import FastAPI
 
 from contextlib import asynccontextmanager
 
-from core.linkedin.start_auto import start_auto
+from core.USECASE.linkedin.start_auto import start_auto
 
 
 @asynccontextmanager

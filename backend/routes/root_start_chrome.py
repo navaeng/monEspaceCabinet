@@ -1,18 +1,19 @@
-from fastapi import Depends
+from fastapi import Depends, APIRouter
 
-from classes.UserRequest import  UserRequest
-from core.app import app, KEY_SECRET
-from generate_next_hour import generatehour
-from query.cabinets.get_cabinet_id import get_cabinet_id
-from query.cabinets.insert_prospection_settings import insert_prospection_settings
-from query.user.get_user_id import get_user_id
+from core.USECASE.linkedin.classes.UserRequest import  UserRequest
+from core.app import KEY_SECRET
+from core.USECASE.linkedin.generate_next_hour import generatehour
+from core.query.cabinets.get_cabinet_id import get_cabinet_id
+from core.query.cabinets.insert_prospection_settings import insert_prospection_settings
+from core.query.user.get_user_id import get_user_id
 
 
 def get_cabinet_informations(current_user_id, cabinet_id):
     pass
 
+router_start_chrome = APIRouter()
 
-@app.post("/backend/linkedin/start_chrome")
+@router_start_chrome.post("/backend/linkedin/start_chrome")
 async def root_start_chrome(
     body: UserRequest,
     current_user_id: str = Depends(get_user_id),

@@ -1,11 +1,11 @@
-from fastapi import UploadFile, HTTPException, Form, File
+from fastapi import UploadFile, HTTPException, Form, File, APIRouter
 from starlette.responses import FileResponse
 
-from core.app import app
-from core.DC.generate_dossier import generate_dossier
+from core.USECASE.dossier_competences.generate_dossier import generate_dossier
 
+router_start_generate_dossier = APIRouter()
 
-@app.post("/endpoint/generate-dossier")
+@router_start_generate_dossier.post("/endpoint/generate-dossier")
 async def root_generate_dossier(
     cv: UploadFile = File(..., description="Fichier CV (PDF ou DOCX)"),
     add_skills: bool = Form(..., description="Ajouter plus de compétences"),

@@ -1,6 +1,6 @@
 from fastapi import Depends, APIRouter
-from query.linkedin.get_listes import get_listes
-from query.user.get_user_id import get_user_id
+from core.query.linkedin.get_listes import get_listes
+from core.query.user.get_user_id import get_user_id
 
 router_listes = APIRouter()
 

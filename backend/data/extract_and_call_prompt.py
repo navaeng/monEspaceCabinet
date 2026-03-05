@@ -1,8 +1,8 @@
-from data.extract_data.extract_and_read_cv import extract_and_read_cv
-from data.extract_data.extract_diplomes import extract_diplomes_from_cv
-from data.extract_data.extract_experiences import extract_experiences_from_cv
-from data.extract_data.extract_infos import extract_infos_from_cv
-from data.extract_data.extract_skills_tools import extract_skills_tools_from_cv
+from data.extract_data_from_cv.extract_and_read_cv import extract_and_read_cv
+from data.extract_data_from_cv.extract_diplomes import extract_diplomes_from_cv
+from data.extract_data_from_cv.extract_experiences import extract_experiences_from_cv
+from data.extract_data_from_cv.extract_infos import extract_infos_from_cv
+from data.extract_data_from_cv.extract_skills_tools import extract_skills_tools_from_cv
 
 
 def extract_and_call_prompt(

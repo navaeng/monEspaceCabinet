@@ -270,7 +270,9 @@ def start_prospect_auto():
             print(f"CONTENU BRUT SUPABASE : {res.data}")
             data = cast(list[dict[str, Any]], res.data or [])
             print(f"DEBUG - Nombre de jobs trouvés : {len(data)}")
-            time.sleep(60)
+            if Any (lock.locked() for lock in user_lock.values()):
+                time.sleep(60)
+                continue
 
             # Pour recuperer le verrou si il est pas pris
             try:

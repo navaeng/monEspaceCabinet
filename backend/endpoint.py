@@ -10,11 +10,8 @@ config_CORS()
 @app.get("/")
 async def root():
     return {
-        "message": "L'application tourne !",
-        "status": "ok",
-        "version": "1.0.0",
+        "status": "OK",
     }
-
 
 app.include_router(router_listes)
 app.include_router(router_start_chrome)

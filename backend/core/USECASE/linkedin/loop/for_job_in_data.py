@@ -1,4 +1,4 @@
-def for_job_in_data():
+def for_job_in_data(data):
                 for job in data:
                     uid = job.get("user_id")
                     job_id = job.get("id")
@@ -11,3 +11,4 @@ def for_job_in_data():
                     full_name = str(job.get("full_name") or "")
                     config_db = job.get("config_db") or {}
                     cabinet_name = str(job.get("cabinet_name") or "")
+

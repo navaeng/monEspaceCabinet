@@ -1,31 +1,31 @@
 import os
-import random
 import threading
 import time
-from datetime import timedelta
 from core.query.linkedin.check_start import check_start
-from data.database import supabase_client
+from core.query.linkedin.get_job_and_email_password import get_job_and_email_password
+from core.query.linkedin.update_has_run_today_true import update_has_run_today_true
+from core.query.linkedin.update_is_active_false import update_is_active_false
+from core.query.linkedin.update_new_date_to_start import update_new_date_to_start
 from core.USECASE.linkedin.chrome.run_chrome import run_chrome
-from core.USECASE.linkedin.locks import user_lock
+from core.USECASE.linkedin.components.locks import user_lock
 from core.query.linkedin.get_job_title import get_job_title
 from core.query import get_post_instruction
+from core.query.user.get_user_informations import get_user_informations
+
 
 def start_auto(cabinet_name=None, uid=None, post=None, title=None, job=None, job_id=None, details=None, config_db=None, mode=None,
-               maintenant=None, rpc_res=None):
-    supabase_client.table("prospection_settings").update({"is_active": False}).eq(
-        "is_active", True
-    ).execute()
+               rpc_res=None):
+
+    update_is_active_false(config_db)
 
     while True:
         try:
-
             check_start()
-
             try:
-                # get_post_instruction = None
-                KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
-                print(f"KEY: {KEY_SECRET}")
 
+                KEY_SECRET = os.getenv("ENCRYPTION_SECRET")
+
+                print(f"KEY: {KEY_SECRET}")
                 print(f"cabinet_name: {cabinet_name}")
 
                 get_job_title(title, KEY_SECRET)
@@ -36,25 +36,9 @@ def start_auto(cabinet_name=None, uid=None, post=None, title=None, job=None, job
                     data_list = rpc_res.data
 
                 if isinstance(data_list, list) and len(data_list) > 0:
-                        decrypted_data = data_list[0]
-                        if isinstance(decrypted_data, dict):
-                            print("DEBUG - Settings linkedin successfully")
-                            job["linkedin_email"] = decrypted_data.get("linkedin_email")
-                            job["linkedin_password"] = decrypted_data.get(
-                                "linkedin_password"
-                            )
-                            job["full_name"] = decrypted_data.get("full_name")
-                            job["telephone"] = decrypted_data.get("telephone")
-
-                            print(f"linkedin_email: {job['linkedin_email']}")
-                            print(f"linkedin_password: {job['linkedin_password']}")
-                            print(f"full_name: {job['full_name']}")
-                            print(f"telephone: {job['telephone']}")
-                        else:
-                            print("DEBUG - Invalid settings format")
+                        get_user_informations(job)
                 else:
                     print("DEBUG - No settings linkedin found")
-
                     print(
                         f"DEBUG - Job ID : {job_id}, Title : {title}, Details : {details}"
                     )
@@ -70,47 +54,24 @@ def start_auto(cabinet_name=None, uid=None, post=None, title=None, job=None, job
 
                             if job_id and title:
                                 print(f"Lancement : {title}")
-                                supabase_client.table("prospection_settings").update(
-                                    {"is_active": True, "has_run_today": True}
-                                ).eq("id", job_id).execute()
+                                update_has_run_today_true(job_id)
 
                                 try:
-                                    if not isinstance(config_db, dict):
-                                        config_db = {}
-                                    config_db = {
-                                        **job,
-                                        **(
-                                            config_db
-                                            if isinstance(config_db, dict)
-                                            else {}
-                                        ),
-                                    }
+                                    get_job_and_email_password(config_db, job)
 
                                     for step in run_chrome(
                                         title,
                                         details,
                                         mode,
-                                        # candidatrecherche,
                                         post,
                                         config_db,
-                                        # cabinet_name,
                                     ):
                                         print(step)
+                                    update_new_date_to_start(job_id)
 
                                 except Exception as e:
                                     print(f"Erreur lors du lancement de {title}: {e}")
-                                demain = maintenant + timedelta(days=1)
-                                prochaine_heure = demain.replace(
-                                    hour=random.randint(8, 19),
-                                    minute=random.randint(0, 59),
-                                )
-                                supabase_client.table("prospection_settings").update(
-                                    {
-                                        "is_active": False,
-                                        # "has_run_today": True,
-                                        "hour_start": prochaine_heure.isoformat(),
-                                    }
-                                ).eq("id", job_id).execute()
+
                         except Exception as e:
                             print(f"erreur lors du lancement de {title}: {e}")
                         finally:
@@ -120,7 +81,7 @@ def start_auto(cabinet_name=None, uid=None, post=None, title=None, job=None, job
         except Exception as e:
                 print(f"{e}")
                 time.sleep(15)
-                print("Reload automatique pour verifier les prospect")
+                print("Reload automatique pour verifier les jobs")
 
 if __name__ == "__main__":
     start_auto()

@@ -4,6 +4,7 @@ import sys
 import time
 from typing import Optional
 
+from core.query.linkedin.update_is_active_false import is_active_false
 from data.database import supabase_client
 from core.configurations.config_chrome import config_chrome
 from core.USECASE.linkedin.login_linkedin import login_linkedin
@@ -63,17 +64,6 @@ def run_chrome(
             )
 
         finally:
-            config_id = config_db.get("id")
-            if config_id:
-                try:
-                    supabase_client.table("prospection_settings").update(
-                        {"is_active": False}
-                    ).eq("id", config_id).execute()
-
-                except Exception as e:
-                    if "204" not in str(e) and "Missing response" not in str(e):
-                        print(f"Erreur DB: {e}")
-                    else:
-                        print(f"Log technique: {e}")
+            is_active_false(config_db)
 
         yield "--- Invitations terminées, Nous avons envoyé {count} invitations ---"

@@ -2,7 +2,7 @@ from fastapi import Depends, APIRouter
 
 from core.USECASE.linkedin.classes.UserRequest import  UserRequest
 from core.app import KEY_SECRET
-from core.USECASE.linkedin.generate_next_hour import generatehour
+from core.USECASE.linkedin.components.generate_hour import generatehour
 from core.query.cabinets.get_cabinet_id import get_cabinet_id
 from core.query.cabinets.insert_prospection_settings import insert_prospection_settings
 from core.query.user.get_user_id import get_user_id

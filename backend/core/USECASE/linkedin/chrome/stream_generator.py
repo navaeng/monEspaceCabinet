@@ -24,5 +24,3 @@ def stream_generator(body, user_data):
     finally:
         update_is_active_false()
         print("🔓 Session terminée")
-
-    return StreamingResponse(stream_generator(body, user_data), media_type="text/plain")

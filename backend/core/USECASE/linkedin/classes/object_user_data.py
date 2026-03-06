@@ -1,5 +1,5 @@
-def object_user_data(data, body, current_user_id):
-
+def object_user_data(body, current_user_id):
+    data = body.model_dump()
     user_data = {
         "id": data.get("id"),
         "user_id": current_user_id,

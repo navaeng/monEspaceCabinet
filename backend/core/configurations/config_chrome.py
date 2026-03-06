@@ -1,6 +1,7 @@
 import os
 import re
 import subprocess
+import traceback
 
 import undetected_chromedriver as uc
 
@@ -69,16 +70,17 @@ def config_chrome(config_db):
         ).group()
     )
 
-    driver = uc.Chrome(
-        options=options,
-        use_subprocess=True,
-        version_main=v_chrome,
-    )
-    driver.maximize_window()
-    driver.execute_cdp_cmd(
-        "Page.addScriptToEvaluateOnNewDocument",
-        {
-            "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        },
-    )
+    try:
+        print('Nous lançons chrome...')
+        driver = uc.Chrome(
+            options=options,
+            use_subprocess=True,
+            version_main=v_chrome,
+        )
+
+    except Exception as e:
+        print(f"❌ Erreur lancement Chrome : {traceback.format_exc()}")  # Affiche toute la pile d'erreurs
+        return None
+    print('fin de lancement chrome')
+
     return driver

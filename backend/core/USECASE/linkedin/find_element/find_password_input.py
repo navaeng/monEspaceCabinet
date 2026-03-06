@@ -6,6 +6,7 @@ def find_password_input(driver):
             "input#password, input[name='session_password']",
         )
         print("Champ password trouvé")
+        return pass_input
     except Exception as e:
         print("Champ password introuvable")
         raise e

@@ -16,10 +16,9 @@ def find_email_input(driver):
             )
         )
         print("✅ Champ email trouvé")
+        return email_input
     except Exception as e:
         print(
             f"❌ Erreur: Impossible de trouver le champ email. URL: {driver.current_url}"
         )
         raise e
-
-    return email_input

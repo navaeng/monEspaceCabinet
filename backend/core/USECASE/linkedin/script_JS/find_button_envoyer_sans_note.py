@@ -1,10 +1,6 @@
-from datetime import time
-
-
-def button_envoyer_sans_note(driver):
+def find_button_envoyer_sans_note():
 
     try:
-        time.sleep(5)
         script_find_button_envoyer_sans_note = """
                                                 function findButton() {
                                                     // 1. Check standard
@@ -29,13 +25,10 @@ def button_envoyer_sans_note(driver):
                                                 return false;
                                                 """
 
-        success = driver.execute_script(script_find_button_envoyer_sans_note)
-        if success:
-            yield "✅ Invitation envoyée !"
-        else:
-            yield " Bouton introuvable même en recherche profonde."
 
-        yield " Invitation envoyée avec succès !"
+
     except Exception as e:
         error_type = type(e).__name__
-        yield f"Erreur précise [{error_type}] : {str(e)[:100]}"
+        print (f"Erreur précise [{error_type}] : {str(e)[:100]}")
+
+    return script_find_button_envoyer_sans_note

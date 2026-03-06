@@ -2,7 +2,7 @@ import random
 import time
 import urllib.parse
 
-from core.USECASE.linkedin.script_JS.button_envoyer_sans_note import button_envoyer_sans_note
+from core.USECASE.linkedin.script_JS.find_button_envoyer_sans_note import find_button_envoyer_sans_note
 from core.query.cabinets.get_cabinets_name import get_cabinets_name
 from selenium.webdriver.common.by import By
 
@@ -66,6 +66,13 @@ def request_connexion(driver, job_title, user_data):
 
                 time.sleep(random.uniform(2, 4))
 
-                button_envoyer_sans_note(driver)
+                button = find_button_envoyer_sans_note()
+                success = driver.execute_script(button)
+                if success:
+                    yield "✅ Invitation envoyée !"
+                else:
+                    yield " Bouton introuvable même en recherche profonde."
+
+                yield " Invitation envoyée avec succès !"
             except Exception as e:
                 yield f"  ⚠ Erreur bouton Envoyer : {e}"

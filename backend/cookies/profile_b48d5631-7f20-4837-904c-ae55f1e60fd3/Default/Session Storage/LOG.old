@@ -1,3 +1,5 @@
-2026/03/06-15:38:10.755 dff6 Reusing MANIFEST /home/ishak/Bureau/version local/ERP/backend/cookies/profile_b48d5631-7f20-4837-904c-ae55f1e60fd3/Default/Session Storage/MANIFEST-000001
-2026/03/06-15:38:10.756 dff6 Recovering log #3
-2026/03/06-15:38:10.756 dff6 Reusing old log /home/ishak/Bureau/version local/ERP/backend/cookies/profile_b48d5631-7f20-4837-904c-ae55f1e60fd3/Default/Session Storage/000003.log 
+2026/03/06-15:51:38.047 ed26 Reusing MANIFEST /home/ishak/Bureau/version local/ERP/backend/cookies/profile_b48d5631-7f20-4837-904c-ae55f1e60fd3/Default/Session Storage/MANIFEST-000001
+2026/03/06-15:51:38.048 ed26 Recovering log #3
+2026/03/06-15:51:38.048 ed26 Level-0 table #3: started
+2026/03/06-15:51:38.052 ed26 Level-0 table #3: 16509 bytes OK
+2026/03/06-15:51:38.057 ed26 Delete type=0 #3

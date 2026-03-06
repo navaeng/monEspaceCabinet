@@ -66,12 +66,11 @@ def request_connexion(driver, job_title, user_data):
 
                 time.sleep(random.uniform(2, 4))
 
-                button = find_button_envoyer_sans_note()
-                success = driver.execute_script(button)
+                success = find_button_envoyer_sans_note(driver)
                 if success:
                     yield "✅ Invitation envoyée !"
                 else:
-                    yield " Bouton introuvable même en recherche profonde."
+                    yield "Bouton introuvable."
 
                 yield " Invitation envoyée avec succès !"
             except Exception as e:

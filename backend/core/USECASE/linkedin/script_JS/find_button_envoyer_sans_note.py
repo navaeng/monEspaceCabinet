@@ -1,4 +1,4 @@
-def find_button_envoyer_sans_note():
+def find_button_envoyer_sans_note(driver):
 
     try:
         script_find_button_envoyer_sans_note = """
@@ -31,4 +31,4 @@ def find_button_envoyer_sans_note():
         error_type = type(e).__name__
         print (f"Erreur précise [{error_type}] : {str(e)[:100]}")
 
-    return script_find_button_envoyer_sans_note
+    return driver.execute_script(script_find_button_envoyer_sans_note)

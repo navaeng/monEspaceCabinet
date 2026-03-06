@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 
 def request_connexion(driver, job_title, user_data):
 
-    for page in range(1, 10):
+    for page in range(1, 2):
         try:
             time.sleep(random.uniform(8, 15))
             query_encoded = urllib.parse.quote(job_title)

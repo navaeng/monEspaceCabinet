@@ -4,6 +4,7 @@ import sys
 import time
 
 from core.USECASE.linkedin.request_connexion import request_connexion
+from core.USECASE.linkedin.send_message import send_message
 from data.database import supabase_client
 from core.configurations.config_chrome import config_chrome
 from core.USECASE.linkedin.login_linkedin import login_linkedin
@@ -44,6 +45,7 @@ def run_chrome(
                 yield from login_linkedin(driver, user_data)
 
             yield from request_connexion(driver, job_title, user_data)
+            yield from send_message(driver, job_title, user_data)
 
         except Exception as e:
             print(f"Erreur réseau : {e}")

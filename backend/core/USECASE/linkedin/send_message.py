@@ -11,17 +11,17 @@ from core.USECASE.linkedin.selenium_actions.click_on_message import click_on_mes
 from core.USECASE.linkedin.components.slow_type import slow_type
 from core.USECASE.linkedin.selenium_actions.write_and_send_message import write_and_send_message
 from core.query.linkedin.insert_url_contactees import insert_url_contactees
-from selenium.webdriver.common.by import By
 from data.call_groq import call_groq
 
 def send_message(
     driver,
     job_title,
+    user_data
 ):
     print("Début de l'envoi de messages directs...")
     yield f"Démarrage envoi de messages pour {job_title}..."
 
-    urls, db_profiles_map = find_profiles_links(driver)
+    urls, db_profiles_map = find_profiles_links(driver, user_data)
 
     for u, url in enumerate(urls, start=1):
         try:

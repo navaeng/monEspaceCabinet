@@ -3,9 +3,9 @@ from datetime import time
 from core.query.linkedin.get_linkedin_contacts import get_linkedin_contacts
 
 
-def check_profiles_in_db():
+def check_profiles_in_db(user_data):
     db_profiles_map = {}
-    current_user_id = config_db.get("user_id")
+    current_user_id = user_data.get("user_id")
     contacts_res = get_linkedin_contacts(current_user_id)
 
     if contacts_res.data:
@@ -18,7 +18,6 @@ def check_profiles_in_db():
             print(
                 f"[DEBUG] {len(db_profiles_map)} Profils trouvé depuis notre base de données"
             )
-            yield f"[DEBUG] {len(db_profiles_map)} Profils trouvé depuis notre base de données..."
             time.sleep(3)
         except Exception as e:
             print(f"[WARN] Erreur {e}")

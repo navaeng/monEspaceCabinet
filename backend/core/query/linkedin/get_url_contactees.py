@@ -3,8 +3,8 @@ from datetime import time
 from data.database import supabase_client
 
 
-def get_url_contactees():
-    current_user_id = config_db.get("user_id")
+def get_url_contactees(user_data):
+    current_user_id = user_data.get("user_id")
     contacted_urls = set()
     try:
         res = (
@@ -20,7 +20,7 @@ def get_url_contactees():
                 if item.get("url")
             )
         print(f"[DEBUG] {len(contacted_urls)} URLs déjà contactées en cache")
-        yield (f"[DEBUG] {len(contacted_urls)} Profils ont déjà été contactées...")
+        print (f"[DEBUG] {len(contacted_urls)} Profils ont déjà été contactées...")
         time.sleep(3)
     except Exception as e:
         print(f"[WARN] Erreur récupération URLs contactées: {e}")

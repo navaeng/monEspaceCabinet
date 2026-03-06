@@ -1,7 +1,7 @@
 import html
 import json
 
-from core.json.extract_json import extract_json
+from core.USECASE.dossier_competences.json import extract_json
 
 from backend.data.read_cv import read_cv
 from data.call_groq import call_groq

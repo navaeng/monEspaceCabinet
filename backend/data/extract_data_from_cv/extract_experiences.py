@@ -1,7 +1,7 @@
 import html
 import json
 
-from core.json.extract_json import extract_json
+from core.USECASE.dossier_competences.json import extract_json
 
 from data.call_groq import call_groq
 from data.prompt.simple_prompt.prompt_experiences import prompt_experiences

@@ -6,8 +6,8 @@ from data.extract_and_call_prompt import (
 )
 from docxtpl import DocxTemplate
 from core.USECASE.dossier_competences.jinja2 import create_jinra_env
-from core.json.replace_json_element.replace_empersand import replace_ampersand
-from core.json.replace_json_element.replace_level_language import (
+from core.USECASE.dossier_competences.json.replace_json_element.replace_empersand import replace_ampersand
+from core.USECASE.dossier_competences.json.replace_json_element.replace_level_language import (
     replace_level_language,
 )
 from core.ressources_path import ressources_path

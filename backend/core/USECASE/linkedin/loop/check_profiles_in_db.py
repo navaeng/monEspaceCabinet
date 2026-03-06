@@ -1,4 +1,4 @@
-from datetime import time
+import time
 
 from core.query.linkedin.get_linkedin_contacts import get_linkedin_contacts
 

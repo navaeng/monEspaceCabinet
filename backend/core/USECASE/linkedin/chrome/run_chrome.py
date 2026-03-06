@@ -3,11 +3,10 @@ import random
 import sys
 import time
 
-from core.USECASE.linkedin.request_connexion import request_connexion
-from core.USECASE.linkedin.send_message import send_message
-from data.database import supabase_client
+from core.USECASE.linkedin.generator.request_connexion import request_connexion
+from core.USECASE.linkedin.generator.send_message import send_message
 from core.configurations.config_chrome import config_chrome
-from core.USECASE.linkedin.login_linkedin import login_linkedin
+from core.USECASE.linkedin.generator.login_linkedin import login_linkedin
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 

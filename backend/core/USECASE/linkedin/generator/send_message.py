@@ -2,8 +2,9 @@ import random
 import time
 import traceback
 
+from selenium.webdriver.common.by import By
+
 from core.USECASE.linkedin.components.check_mode_and_get_instruction import check_mode_and_get_instruction
-from core.USECASE.linkedin.components.get_cabinet_name import get_cabinet_name
 from core.USECASE.linkedin.find_element.find_profiles_links import find_profiles_links
 from core.USECASE.linkedin.find_element.find_send_btn import find_send_btn
 from core.USECASE.linkedin.find_element.get_textbox import get_textbox
@@ -11,6 +12,7 @@ from core.USECASE.linkedin.selenium_actions.click_on_message import click_on_mes
 from core.USECASE.linkedin.components.slow_type import slow_type
 from core.USECASE.linkedin.selenium_actions.write_and_send_message import write_and_send_message
 from core.query.linkedin.insert_url_contactees import insert_url_contactees
+from core.query.cabinets.get_cabinets_name import get_cabinets_name as get_cabinet_name
 from data.call_groq import call_groq
 
 def send_message(
@@ -20,6 +22,8 @@ def send_message(
 ):
     print("Début de l'envoi de messages directs...")
     yield f"Démarrage envoi de messages pour {job_title}..."
+
+    message = None
 
     urls, db_profiles_map = find_profiles_links(driver, user_data)
 
@@ -55,7 +59,7 @@ def send_message(
                 infos_profil = driver.find_element(By.TAG_NAME, "body").text.lower()
                 print(f"infos_profil: {infos_profil}")
 
-                cabinet_name, exclusions = get_cabinet_name()
+                cabinet_name, exclusions = get_cabinet_name(user_data)
                 if any(excl in infos_profil for excl in exclusions):
                     yield f"Candidat de chez {cabinet_name}, skip..."
                     print(f"Interne ({cabinet_name}), on zappe.")

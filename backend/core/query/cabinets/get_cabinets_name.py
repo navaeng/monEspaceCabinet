@@ -1,4 +1,3 @@
-from core.query import config_db
 from data.database import supabase_client
 
 
@@ -26,7 +25,3 @@ def get_cabinets_name():
                 print(f"Cabinet name: {cabinet_name}")
 
     return cabinet_name
-
-
-def get_cabinets_informations():
-    return None

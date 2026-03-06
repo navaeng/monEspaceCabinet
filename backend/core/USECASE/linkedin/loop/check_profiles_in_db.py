@@ -1,6 +1,5 @@
 from datetime import time
 
-from core.query import config_db
 from core.query.linkedin.get_linkedin_contacts import get_linkedin_contacts
 
 

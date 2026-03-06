@@ -1,4 +1,3 @@
-from core.query import config_db
 from data.database import supabase_client
 
 

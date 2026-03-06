@@ -1,6 +1,3 @@
-from core.query import config_db
-
-
 def fill_email(find_email_input, slow_type):
     email_user = config_db.get("linkedin_email")
     if email_user:

@@ -1,9 +1,9 @@
 from fastapi.responses import StreamingResponse
 from core.USECASE.linkedin.chrome.run_chrome import run_chrome
-from core.query.linkedin.update_state_of_elements import update_state_of_elements
+from core.query.linkedin.update_is_active_false import update_is_active_false
 
 
-def stream_generator(body, config_db):
+def stream_generator(body, user_data):
     try:
         print(f"🚀 Lancement Chrome pour {body.intitule}")
         for step in run_chrome(
@@ -11,10 +11,7 @@ def stream_generator(body, config_db):
             details=body.details,
             mode=body.mode,
             post=body.post or "",
-            config_db=config_db,
-            telephone=body.telephone or "",
-            full_name=body.full_name or "",
-            cabinet_name=config_db.get("cabinet_name") or "",
+            user_data=user_data,
         ):
             print(f"{step}\n")
             yield f"{step}\n"
@@ -25,7 +22,7 @@ def stream_generator(body, config_db):
         print(f"Erreur lors de la prospection : {str(e)}")
 
     finally:
-        update_state_of_elements()
+        update_is_active_false()
         print("🔓 Session terminée")
 
-    return StreamingResponse(stream_generator(body, config_db), media_type="text/plain")
+    return StreamingResponse(stream_generator(body, user_data), media_type="text/plain")

@@ -1,6 +1,6 @@
 from starlette.middleware.cors import CORSMiddleware
 
-from core.app import app
+from core.USECASE.linkedin.app import app
 
 
 def config_CORS():

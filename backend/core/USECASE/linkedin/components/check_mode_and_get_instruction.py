@@ -4,8 +4,6 @@ from data.prompt.prospection.prompt_message_sourcing import prompt_message_sourc
 
 def check_mode_and_get_instruction(origin_mode,     driver,
     job_title,
-    mode,
-    config_db,
     details,
     telephone,
     full_name,

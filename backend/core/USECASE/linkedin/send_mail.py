@@ -3,12 +3,12 @@ import os
 import yagmail
 
 
-def send_mail(argument, url, config_db):
+def send_mail(argument, url, user_data):
     print(f"✅ [MAIL] Sent email with URL: {url}")
 
     email = os.environ.get("our_email")
     password = os.environ.get("our_pass")
-    email_user = config_db.get("email")
+    email_user = user_data.get("email")
 
     print(f"Email: {email}, Password: {password}, Email User: {email_user}")
 

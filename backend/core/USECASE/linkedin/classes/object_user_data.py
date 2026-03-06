@@ -1,5 +1,5 @@
-def config_db(data, current_user_id, body):
-    config_db = {
+def object_user_data(data, current_user_id, body):
+    user_data = {
         "id": data.get("id"),
         "user_id": current_user_id,
         "linkedin_email": data.get("linkedin_email"),
@@ -9,4 +9,5 @@ def config_db(data, current_user_id, body):
         "telephone": data.get("telephone"),
         "cabinet_name": data.get("cabinet_name"),
     }
-    return config_db
+    print(user_data)
+    return user_data

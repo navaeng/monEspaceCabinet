@@ -2,7 +2,7 @@ from data.database import supabase_client
 
 
 def get_post_instruction(uid):
-    get_post_instruction = (
+    select_instruction_post = (
         supabase_client.table("posts")
         .select("instruction_post")
         .eq("user_id", uid)
@@ -17,3 +17,4 @@ def get_post_instruction(uid):
         first_item = post_data[0]
         if isinstance(first_item, dict):
             post = str(first_item.get("instruction_post") or "")
+    return select_instruction_post

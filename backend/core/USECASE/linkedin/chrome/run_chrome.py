@@ -2,16 +2,14 @@ import os
 import random
 import sys
 import time
-from typing import Optional
 
-from core.query.linkedin.update_is_active_false import is_active_false
+from core.query.linkedin.update_is_active_false import update_is_active_false
 from data.database import supabase_client
 from core.configurations.config_chrome import config_chrome
 from core.USECASE.linkedin.login_linkedin import login_linkedin
 from core.USECASE.linkedin.post_message import post_message
 from core.USECASE.linkedin.request_connexion import request_connexion
 from core.USECASE.linkedin.send_message import send_message
-from pydantic import BaseModel
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -21,21 +19,17 @@ def run_chrome(
     details: str,
     mode: str,
     post,
-    config_db,
-    telephone,
-    full_name: str = "",
-    cabinet_name: str = "",
+    user_data,
 ):
 
-    uid = config_db.get("user_id")
-    driver = config_chrome(config_db)
-    current_url = ""
+    uid = user_data.get("user_id")
+    driver = config_chrome(user_data)
 
     print(f"[DEBUG] User ID: {uid}")
     print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
     print(f"[DEBUG] Détails de la prospection : {details}")
     print(f"[DEBUG] Mode : {mode}")
-    print(f"CONFIG DB: {config_db}")
+    print(f"CONFIG DB: {user_data}")
 
     if driver is not None:
         try:
@@ -53,17 +47,17 @@ def run_chrome(
             print(f"Erreur réseau : {e}")
 
         if "login" in driver.current_url or "uas" in driver.current_url:
-            login_linkedin(driver, uid, job_title, supabase_client, config_db)
+            login_linkedin(driver, uid, job_title, supabase_client, user_data)
 
         try:
-            yield from post_message(driver, post, config_db)
+            yield from post_message(driver, post, user_data)
             time.sleep(5)
-            yield from request_connexion(job_title, driver, config_db)
+            yield from request_connexion(job_title, driver, user_data)
             yield from send_message(
-                driver, job_title, mode, config_db, details, telephone, full_name
+                driver, job_title
             )
 
         finally:
-            is_active_false(config_db)
+            update_is_active_false()
 
         yield "--- Invitations terminées, Nous avons envoyé {count} invitations ---"

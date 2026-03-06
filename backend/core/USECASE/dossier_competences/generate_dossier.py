@@ -12,7 +12,7 @@ from core.json.replace_json_element.replace_level_language import (
 )
 from core.ressources_path import ressources_path
 
-from core.fix_logiciels_outils import fix_logiciels_outils
+from core.USECASE.dossier_competences.fix_logiciels_outils import fix_logiciels_outils
 
 
 def generate_dossier(

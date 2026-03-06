@@ -1,4 +1,4 @@
-from core.app import app
+from core.USECASE.linkedin.app import app
 
 from core.configurations.config_CORS import config_CORS
 from routes.root_generate_dossier import router_start_generate_dossier

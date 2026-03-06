@@ -71,7 +71,6 @@ def config_chrome(config_db):
 
     driver = uc.Chrome(
         options=options,
-        # service=chrome_service,
         use_subprocess=True,
         version_main=v_chrome,
     )

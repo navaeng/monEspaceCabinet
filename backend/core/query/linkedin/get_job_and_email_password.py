@@ -1,9 +1,9 @@
-def get_job_and_email_password(config_db, job):
-        config_db = {
+def get_job_and_email_password(user_data, job):
+        user_data = {
                                         **job,
                                         **(
-                                            config_db
-                                            if isinstance(config_db, dict)
+                                            user_data
+                                            if isinstance(user_data, dict)
                                             else {}
                                         ),
                                     }

@@ -13,3 +13,4 @@ def call_groq(prompt):
         return completion.choices[0].message.content
     except Exception as e:
         print(f"Error calling Groq API: {e}")
+

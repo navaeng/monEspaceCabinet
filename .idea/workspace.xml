@@ -2,40 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/main_prompt.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/groq/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/call_openrouter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/dict/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/dict/build_cv_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_diplomes_with_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_experiences_with_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_infos_with_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_skills_tools_with_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/analyse_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/fonctionnalites/generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/fonctionnalites/generate_dossier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/delete_accent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/clean/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/read_cv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/read_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/read_pdf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/fix_logiciels_outils.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/fix_logiciels_outils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/clean_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/clean/clean_prompt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_diplomes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_experiences.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_infos.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_skills_tools.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render/render_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/translate/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/translate/translator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/services/api_externes/groq.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/groq/call_groq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/analyse_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/analyse_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/main_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/main_prompt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/fix_logiciels_outils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render/render_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/dossier_cv_KOUICI_ISHAK (1).pdf.docx" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/dossier_cv_KOUICI_ISHAK (1).pdf.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/services/api_externes/groq/call_groq.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/groq/call_groq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/call_openrouter.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/call_openrouter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,40 +27,40 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Ishak-devs"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ishak-devs&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:Ishak-devs/monEspaceCabinet.git",
-    "accountId": "34fa8e8f-6d7c-4fee-8119-9611f4fdf61e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Ishak-devs/monEspaceCabinet.git&quot;,
+    &quot;accountId&quot;: &quot;34fa8e8f-6d7c-4fee-8119-9611f4fdf61e&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="3AcEi7H5OAyPVN67U1rU4pIhYV6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "git-widget-placeholder": "feature",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\services\api_externes\groq" />
@@ -110,7 +85,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772883585553</updated>
-      <workItem from="1772883587975" duration="11698000" />
+      <workItem from="1772883587975" duration="12679000" />
+      <workItem from="1772902017892" duration="305000" />
     </task>
     <servers />
   </component>

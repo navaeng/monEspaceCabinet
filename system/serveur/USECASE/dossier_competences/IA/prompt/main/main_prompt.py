@@ -1,4 +1,4 @@
-def prompt_global(cv_text):
+def main_prompt(cv_text):
     return f"""Extrais les informations du CV suivant et retourne un JSON valide en français.
 
 CV :

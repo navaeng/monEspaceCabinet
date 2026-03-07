@@ -1,9 +1,11 @@
 import os
 from openai import OpenAI
 
+
 def call_openrouter(prompt):
     try:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ.get("OPENROUTER_API"))
+        print("Calling OpenRouter API...")
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ.get("OPENROUTERAPI"))
         completion = client.chat.completions.create(
             model="nousresearch/hermes-3-llama-3.1-405b",
             messages=[{"role": "user", "content": prompt}],

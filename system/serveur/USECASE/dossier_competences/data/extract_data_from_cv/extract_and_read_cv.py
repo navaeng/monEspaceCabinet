@@ -1,6 +1,6 @@
 from services.api_externes.groq import call_groq
-from USECASE.dossier_competences.services.prompt.simple_prompt.clean_prompt import clean_prompt
-from USECASE.dossier_competences.services.read_cv import read_cv
+from USECASE.dossier_competences.services.prompt.clean_prompt import clean_prompt
+from USECASE.dossier_competences.services.cv.read_cv import read_cv
 
 
 def extract_and_read_cv(file_path):

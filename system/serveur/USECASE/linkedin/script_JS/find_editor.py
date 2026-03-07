@@ -1,9 +1,9 @@
 def find_editor():
     js_find_editor = """
-                                            function findDeep(sel, root = document) {
-                                                let n = root.querySelector(sel);
+                                            function findDeep(sel, APIRouter = document) {
+                                                let n = APIRouter.querySelector(sel);
                                                 if (n) return n;
-                                                let all = root.querySelectorAll('*');
+                                                let all = APIRouter.querySelectorAll('*');
                                                 for (let e of all) {
                                                     if (e.shadowRoot) {
                                                         let res = findDeep(sel, e.shadowRoot);

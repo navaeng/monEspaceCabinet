@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 import uvicorn
 from configurations.config_CORS import config_CORS
-from USECASE.dossier_competences.root.root_generate_dossier import router_start_generate_dossier
-from USECASE.linkedin.root.root_start_chrome import router_start_chrome
-from USECASE.linkedin.root.root_listes import router_listes
+from USECASE.dossier_competences.APIRouter.root_generate_dossier import router_start_generate_dossier
+from USECASE.linkedin.APIRouter.root_start_chrome import router_start_chrome
+from USECASE.linkedin.APIRouter.root_listes import router_listes
 
 app = FastAPI()
 config_CORS(app)

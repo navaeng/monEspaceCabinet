@@ -2,18 +2,26 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
+.venv
+venv/
 
 # Node
 node_modules/
+dist/
 .next/
+
+# Env
 .env
+.env.local
+.env.*.local
 
 # Logs
 *.log
 
 # Chrome / Selenium
-backend/cookies/
-backend/venv
+system/serveur/cookies/
+system/serveur/outputs/
+
 # Divers
 *.lock
 user_data/

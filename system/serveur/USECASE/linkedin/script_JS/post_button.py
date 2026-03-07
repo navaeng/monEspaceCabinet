@@ -1,14 +1,14 @@
 def post_button():
     return """
     (function() {
-        function findDeep(root, targetText) {
-            const buttons = Array.from(root.querySelectorAll('button'));
+        function findDeep(APIRouter, targetText) {
+            const buttons = Array.from(APIRouter.querySelectorAll('button'));
             for (let btn of buttons) {
                 const txt = (btn.innerText || btn.textContent || "").toLowerCase().trim();
                 if (txt === targetText) return btn;
             }
 
-            const allElements = root.querySelectorAll('*');
+            const allElements = APIRouter.querySelectorAll('*');
             for (let el of allElements) {
                 if (el.shadowRoot) {
                     const found = findDeep(el.shadowRoot, targetText);

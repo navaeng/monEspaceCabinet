@@ -1,9 +1,9 @@
 import json
 
-from USECASE.dossier_competences.json import extract_json
+from USECASE.dossier_competences.json.extract_json import extract_json
 
 from services.api_externes.groq import call_groq
-from USECASE.dossier_competences.services.prompt.simple_prompt.prompt_skills_tools import prompt_skills_tools
+from USECASE.dossier_competences.services.prompt.prompt_skills_tools import prompt_skills_tools
 from USECASE.dossier_competences.services.prompt.special_prompt.add_skills import prompt_add_skills
 
 

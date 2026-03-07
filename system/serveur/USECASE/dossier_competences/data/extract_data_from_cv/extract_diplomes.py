@@ -1,9 +1,9 @@
 import json
 
-from USECASE.dossier_competences.json import extract_json
+from USECASE.dossier_competences.json.extract_json import extract_json
 
 from services.api_externes.groq import call_groq
-from USECASE.dossier_competences.services.prompt.simple_prompt.prompt_diplomes import prompt_diplomes
+from USECASE.dossier_competences.services.prompt.prompt_diplomes import prompt_diplomes
 
 
 def extract_diplomes_from_cv(cv_text):

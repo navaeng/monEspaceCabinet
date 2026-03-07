@@ -1,10 +1,10 @@
 import html
 import json
 
-from USECASE.dossier_competences.json import extract_json
+from USECASE.dossier_competences.json.extract_json import extract_json
 
 from services.api_externes.groq import call_groq
-from USECASE.dossier_competences.services.prompt.simple_prompt.prompt_experiences import prompt_experiences
+from USECASE.dossier_competences.services.prompt.prompt_experiences import prompt_experiences
 
 
 def extract_experiences_from_cv(cv_text):

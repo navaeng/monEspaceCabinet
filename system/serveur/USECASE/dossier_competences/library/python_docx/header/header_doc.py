@@ -7,7 +7,7 @@ POLICE = "Arial"
 COULEUR_PRINCIPALE = RGBColor(0x1B, 0x4A, 0x8A)
 COULEUR_GRIS = RGBColor(0x77, 0x77, 0x77)
 
-def header_doc(doc, data, output_path):
+def header_doc(doc, data, logo_path):
     section = doc.sections[0]
     header = section.header
 

@@ -1,7 +1,7 @@
 import traceback
 
 from USECASE.dossier_competences.IA.analyse.analyse_data import analyse_data
-from USECASE.dossier_competences.services.render.render_document import render_document
+from USECASE.dossier_competences.services.dossier.render.render_document import render_document
 
 def generate_dossier(
     selected_file: str,
@@ -9,12 +9,14 @@ def generate_dossier(
 ) -> dict:
 
     try:
+        logo_path = "templates/logo_entreprise.png
+
         #EXTRACT
         all_data = analyse_data(file_path=selected_file)
         #BUILD
         data = all_data
         #RENDER
-        render_document(data, output_path)
+        render_document(data, output_path, logo_path)
 
         return {
             "success": True,

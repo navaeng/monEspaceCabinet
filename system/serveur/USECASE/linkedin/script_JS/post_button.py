@@ -18,7 +18,7 @@ def post_button():
             return null;
         }
 
-        const btn = findDeep(document, 'publier');
+        const btn = findDeep(dossier, 'publier');
 
         if (btn) {
             btn.removeAttribute('disabled');
@@ -30,7 +30,7 @@ def post_button():
         }
 
 
-        const sample = Array.from(document.querySelectorAll('button'))
+        const sample = Array.from(dossier.querySelectorAll('button'))
                         .slice(0, 10)
                         .map(b => b.innerText.trim())
                         .join(' | ');

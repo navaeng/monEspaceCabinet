@@ -15,7 +15,7 @@ def request_connexion(driver, job_title, user_data):
             query_encoded = urllib.parse.quote(job_title)
             target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}"
             driver.get(target_url)
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
+            driver.execute_script("window.scrollTo(0, dossier.body.scrollHeight/2);")
             yield "Recherches de personnes..."
         except Exception as e:
             print(f"{str(e)}")

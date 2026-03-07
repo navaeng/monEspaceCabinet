@@ -1,7 +1,7 @@
 from fastapi import HTTPException, UploadFile, File, APIRouter
 from starlette.responses import FileResponse
 
-from USECASE.dossier_competences.services.build.process_cv_to_dossier import process_cv_to_dossier
+from USECASE.dossier_competences.services.dossier.build import process_cv_to_dossier
 
 router_start_generate_dossier = APIRouter()
 
@@ -14,4 +14,4 @@ async def root_generate_dossier(cv: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="error.")
 
     return FileResponse(path=str(output_path),
-                        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.dossier")

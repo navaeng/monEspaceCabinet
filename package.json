@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "crypto-js": "^4.2.0",
-    "mammoth": "^1.11.0"
-  }
-}

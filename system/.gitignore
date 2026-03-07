@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+.env
+
+# Logs
+*.log
+
+# Chrome / Selenium
+backend/cookies/
+backend/venv
+# Divers
+*.lock
+user_data/
+.DS_Store

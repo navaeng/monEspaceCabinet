@@ -1,6 +1,0 @@
-2026/03/06-16:42:11.539 11dee Reusing MANIFEST /home/ishak/Bureau/version local/ERP/backend/cookies/profile_b48d5631-7f20-4837-904c-ae55f1e60fd3/Default/Local Storage/leveldb/MANIFEST-000001
-2026/03/06-16:42:11.545 11dee Recovering log #3
-2026/03/06-16:42:11.546 11dee Reusing old log /home/ishak/Bureau/version local/ERP/backend/cookies/profile_b48d5631-7f20-4837-904c-ae55f1e60fd3/Default/Local Storage/leveldb/000003.log 
-2026/03/06-16:43:30.070 11df0 Level-0 table #5: started
-2026/03/06-16:43:30.074 11df0 Level-0 table #5: 32941 bytes OK
-2026/03/06-16:43:30.077 11df0 Delete type=0 #3

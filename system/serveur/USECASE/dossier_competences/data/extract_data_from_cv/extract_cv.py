@@ -2,7 +2,7 @@ from services.api_externes.groq import call_groq
 from USECASE.dossier_competences.services.prompt.clean_prompt import clean_prompt
 from USECASE.dossier_competences.services.documents.read_cv import read_cv
 
-def extract_and_read_cv(file_path):
+def extract_cv(file_path):
     print("Début de extract_diplomes_from_cv")
     cv_text = read_cv(file_path)
     if not cv_text:

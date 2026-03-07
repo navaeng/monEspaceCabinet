@@ -7,8 +7,7 @@ from services.api_externes.groq import call_groq
 from USECASE.dossier_competences.services.prompt.prompt_experiences import prompt_experiences
 
 
-def extract_experiences_from_cv(cv_text):
-    print("Début de extract_experiences_from_cv")
+def analyse_experiences_with_model(cv_text):
 
     prompt = prompt_experiences(cv_text)
     print("⚡ travail en cours du modele (experiences)…")

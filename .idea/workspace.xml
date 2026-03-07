@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/extract_data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/extract_data/extract_native_text.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/extract_data/extract_ocr_text.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_and_read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_and_read_cv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_and_read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_cv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_diplomes.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_diplomes_with_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_experiences_with_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_infos.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_infos_with_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_offer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_skills_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_skills_tools_with_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,11 +69,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\loops\extractdata" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\documents" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\cv" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\prompt" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\linkedin\services" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -82,7 +91,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772883585553</updated>
-      <workItem from="1772883587975" duration="8125000" />
+      <workItem from="1772883587975" duration="9180000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-from xml.dom.minidom import Document
+from docx import Document
 
 
 def read_docx(file_path):

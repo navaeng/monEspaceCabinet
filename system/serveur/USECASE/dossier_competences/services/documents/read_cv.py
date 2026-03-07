@@ -1,6 +1,5 @@
 import os
 
-
 def read_cv(file_path):
     ext = os.path.splitext(file_path)[1].lower()
     text = read_pdf(file_path) if ext == ".pdf" else read_docx(file_path)

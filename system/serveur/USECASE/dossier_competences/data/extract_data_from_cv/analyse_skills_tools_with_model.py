@@ -3,14 +3,12 @@ import json
 from USECASE.dossier_competences.json.extract_json import extract_json
 
 from services.api_externes.groq import call_groq
-from USECASE.dossier_competences.services.prompt.prompt_skills_tools import prompt_skills_tools
 
 
-def extract_skills_tools_from_cv(cv_text):
-    prompt = prompt_skills_tools(cv_text)
+def analyse_skills_tools_with_model(cv_text):
 
     print("⚡  travail en cours du modele (compétences)…")
-    output = call_groq(prompt)
+    output = call_groq(cv_text)
 
     if output:
         json_text = extract_json(output).strip()

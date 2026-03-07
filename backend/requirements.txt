@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+supabase
+python-dotenv
+python-multipart
+requests
+beautifulsoup4
+anthropic
+groq
+httpx
+pydantic
+python-docx
+PyMuPDF
+docxtpl
+undetected_chromedriver
+setuptools

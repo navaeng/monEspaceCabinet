@@ -3,6 +3,7 @@ from groq import Groq
 
 def call_groq(prompt):
     try:
+        print('groq est appelé...')
         client = Groq(api_key=os.environ.get("GROQ_API"))
         completion = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],

@@ -1,9 +1,8 @@
-from services.api_externes.groq import call_groq
-from USECASE.dossier_competences.services.prompt.clean_prompt import clean_prompt
-from USECASE.dossier_competences.services.documents.read_cv import read_cv
+from services.api_externes.groq.call_groq import call_groq
+from USECASE.dossier_competences.IA.prompt.clean.clean_prompt import clean_prompt
+from USECASE.dossier_competences.services.data.read_cv import read_cv
 
-def extract_cv(file_path):
-    print("Début de extract_diplomes_from_cv")
+def analyse_data(file_path):
     cv_text = read_cv(file_path)
     if not cv_text:
         print("Erreur : Impossible de lire le texte du CV")
@@ -13,6 +12,7 @@ def extract_cv(file_path):
 
     if output:
         print(" CV ordonné et nettoyé avec succès.")
+        print(output)
         return output
 
     return cv_text

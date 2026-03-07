@@ -1,9 +1,7 @@
 import traceback
-from USECASE.dossier_competences.data.dict.build_cv_data import build_cv_data
-from USECASE.dossier_competences.data.extract_and_call_prompt import (
-    extract_and_call_prompt,
-)
-from USECASE.dossier_competences.services.render_document import render_document
+
+from USECASE.dossier_competences.IA.analyse.analyse_data import analyse_data
+from USECASE.dossier_competences.services.render.render_document import render_document
 
 def generate_dossier(
     selected_file: str,
@@ -12,9 +10,9 @@ def generate_dossier(
 
     try:
         #EXTRACT
-        all_data, data_skills_tools, data_infos, data_diplomes, data_experiences = extract_and_call_prompt(cv_file_path=selected_file)
+        all_data = analyse_data(file_path=selected_file)
         #BUILD
-        data = build_cv_data(data_skills_tools, data_infos, data_diplomes, data_experiences, all_data)
+        data = all_data
         #RENDER
         render_document(data, output_path)
 

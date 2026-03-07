@@ -29,13 +29,12 @@ function CVUploadForm() {
 
       setSelectedFile(file);
       setAddSkills(null);
-      // setModelusing(null);
       setEnglishCV(false);
     }
   };
 
   const handleGenerate = async (model = "openai/gpt-oss-120b") => {
-    if (!selectedFile || addSkills === null) {
+    if (!selectedFile) {
       setStatus({
         message: "Veuillez sélectionner un fichier et choisir une option",
         type: "error",
@@ -47,11 +46,7 @@ function CVUploadForm() {
       setStatus({ message: "", type: "" });
 
       const formData = new FormData();
-      formData.append("build", selectedFile);
-      formData.append("add_skills", addSkills === "yes");
-      formData.append("english_cv", englishCV);
-      formData.append("extra_instructions", extraInstructions);
-      formData.append("model", model);
+      formData.append("cv", selectedFile);
 
       console.log(extraInstructions);
 
@@ -219,7 +214,7 @@ function CVUploadForm() {
         {/* Generate Button */}
         <button
           onClick={() => handleGenerate()}
-          disabled={!selectedFile || addSkills === null || isGenerating}
+          disabled={!selectedFile || isGenerating}
           className="w-full py-2 text-xs font-normal bg-black text-white rounded hover:bg-gray-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed mb-4"
         >
           Générer le dossier

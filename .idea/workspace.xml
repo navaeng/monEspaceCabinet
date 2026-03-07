@@ -2,21 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/extract_data/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/extract_data/extract_native_text.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/loops/extract_data/extract_ocr_text.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/main_prompt.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/groq/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/call_openrouter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_and_read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_cv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_diplomes.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_diplomes_with_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_experiences_with_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_infos.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_infos_with_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_offer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_skills_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_skills_tools_with_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/dict/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/dict/build_cv_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_diplomes_with_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_experiences_with_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_infos_with_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/analyse_skills_tools_with_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/analyse_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/fonctionnalites/generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/fonctionnalites/generate_dossier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/delete_accent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/clean/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/read_cv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/read_docx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/documents/read_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/read_pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/fix_logiciels_outils.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/fix_logiciels_outils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/clean_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/clean/clean_prompt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_diplomes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_experiences.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_infos.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_skills_tools.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render/render_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/translate/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/data/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/translate/translator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/services/api_externes/groq.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/groq/call_groq.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,11 +88,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\loops\extractdata" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\documents" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\cv" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\prompt" />
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\services\api_externes\groq" />
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\build" />
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\render" />
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\services\data" />
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\USECASE\dossier_competences\IA\prompt\main" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -91,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772883585553</updated>
-      <workItem from="1772883587975" duration="9180000" />
+      <workItem from="1772883587975" duration="11698000" />
     </task>
     <servers />
   </component>

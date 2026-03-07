@@ -1,13 +1,12 @@
-from fastapi import HTTPException, UploadFile, File, Form, APIRouter
+from fastapi import HTTPException, UploadFile, File, APIRouter
 from starlette.responses import FileResponse
 
-from USECASE.dossier_competences.services.cv.process_cv_to_dossier import process_cv_to_dossier
+from USECASE.dossier_competences.services.build.process_cv_to_dossier import process_cv_to_dossier
 
 router_start_generate_dossier = APIRouter()
 
 @router_start_generate_dossier.post("/endpoint/generate_dossier")
-async def root_generate_dossier(cv: UploadFile = File(...), add_skills: bool = Form(...),
-                                english_cv: bool = Form(False)):
+async def root_generate_dossier(cv: UploadFile = File(...)):
 
     output_path = await process_cv_to_dossier(await cv.read(), cv.filename)
 

@@ -6,8 +6,6 @@ import numpy as np
 import pytesseract
 from docx import Document
 
-# from PIL import Image
-
 
 def read_cv(file_path):
     ext = os.path.splitext(file_path)[1].lower()

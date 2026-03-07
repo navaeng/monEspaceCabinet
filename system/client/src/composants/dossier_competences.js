@@ -55,7 +55,7 @@ function CVUploadForm() {
 
       console.log(extraInstructions);
 
-      const response = await fetch(`${API_URL}/endpoint/generate-dossier`, {
+      const response = await fetch(`${API_URL}/endpoint/generate_dossier`, {
         method: "POST",
         body: formData,
       });
@@ -131,50 +131,6 @@ function CVUploadForm() {
                 {(selectedFile.size / 1024).toFixed(0)} Ko
               </p>
             )}
-          </div>
-        </div>
-
-        {/* Skills Option */}
-        <div className="mb-5">
-          <label className="block text-xs font-normal text-gray-700">
-            Ajouter des compétences supplémentaires
-          </label>
-          {/* <span className="text-[10px] px-2 py-0.5 bg-green-100 text-green-800 border border-green-200 rounded font-semibold uppercase tracking-wider">
-            Opérationnel
-          </span>*/}
-          <div className="flex gap-4">
-            <div className="flex items-center">
-              <input
-                type="radio"
-                id="skills-yes"
-                checked={addSkills === "yes"}
-                onChange={() => setAddSkills("yes")}
-                disabled={isGenerating}
-                className="w-3 h-3 text-gray-900 border-gray-300 focus:ring-0 disabled:opacity-30"
-              />
-              <label
-                htmlFor="skills-yes"
-                className="ml-1.5 text-xs text-gray-700"
-              >
-                Oui
-              </label>
-            </div>
-            <div className="flex items-center">
-              <input
-                type="radio"
-                id="skills-no"
-                checked={addSkills === "no"}
-                onChange={() => setAddSkills("no")}
-                disabled={isGenerating}
-                className="w-3 h-3 text-gray-900 border-gray-300 focus:ring-0 disabled:opacity-30"
-              />
-              <label
-                htmlFor="skills-no"
-                className="ml-1.5 text-xs text-gray-700"
-              >
-                Non
-              </label>
-            </div>
           </div>
         </div>
 

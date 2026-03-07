@@ -2,42 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/dict/build_cv_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/process_cv_to_dossier.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render_Document.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/system/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/root_generate_dossier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_and_call_prompt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_and_read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_and_read_cv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_diplomes.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_diplomes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_experiences.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_infos.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_infos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_skills_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/extract_data_from_cv/extract_skills_tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/fonctionnalites/generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/fonctionnalites/generate_dossier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/json/replace_json_element/replace_level_language.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/root/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/APIRouter/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/root/root_generate_dossier.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/delete_accent.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/delete_accent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/data/dict/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/add_skills_" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/clean_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/clean_prompt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/prompt_diplomes.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_diplomes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/prompt_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_experiences.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/prompt_infos.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_infos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/simple_prompt/prompt_skills_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/prompt_skills_tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/special_prompt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/prompt/special_prompt/add_skills.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/read_cv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/ressources_path.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/root/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/APIRouter/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/root/get_post_instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/APIRouter/get_post_instruction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/root/root_listes.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/APIRouter/root_listes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/root/root_start_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/APIRouter/root_start_chrome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/script_JS/find_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/script_JS/find_editor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/script_JS/post_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/linkedin/script_JS/post_button.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/endpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/endpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/process_cv_to_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/process_cv_to_dossier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/read_cv.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/cv/read_cv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render_Document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/services/render_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/services/api_externes/groq.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/groq.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +59,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "git-widget-placeholder": "separation__element",
+    "git-widget-placeholder": "feature",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -112,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772883585553</updated>
-      <workItem from="1772883587975" duration="5851000" />
+      <workItem from="1772883587975" duration="7797000" />
     </task>
     <servers />
   </component>

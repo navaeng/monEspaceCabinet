@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/text/json/json_template.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/analyse_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/analyse/analyse_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/dossier_cv_KOUICI_ISHAK (1).pdf.docx" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/dossier_cv_KOUICI_ISHAK (1).pdf.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/call_openrouter.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/services/api_externes/openrouter/call_openrouter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/main_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/USECASE/dossier_competences/IA/prompt/main/main_prompt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,19 +42,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\services\api_externes\groq" />

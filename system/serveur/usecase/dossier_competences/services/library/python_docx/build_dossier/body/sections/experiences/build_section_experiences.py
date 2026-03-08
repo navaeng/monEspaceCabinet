@@ -9,7 +9,7 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_mission import display_mission
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_tasks import display_tasks
 
-def section_experiences(doc, data):
+def build_section_experiences(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run("Expériences")

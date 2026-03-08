@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/display_mission.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/display_tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/formations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/formations/build_formation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/langues/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/langues/build_section_langues.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_experiences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/competences/build_competences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/competences/build_section_competences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_section_experiences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/formations/build_formation.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/formations/build_section_formation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/outils/build_outils.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/outils/build_section_secteurs_activites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/secteurs_activites/build_secteurs_activites.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/secteurs_activites/build_secteurs_activites.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +87,7 @@
       <updated>1772883585553</updated>
       <workItem from="1772883587975" duration="12679000" />
       <workItem from="1772902017892" duration="1503000" />
-      <workItem from="1772963232692" duration="22325000" />
+      <workItem from="1772963232692" duration="23726000" />
     </task>
     <servers />
   </component>

@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/temp_cv_KOUICI_ISHAK (1).pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/IA/analyse/analyse_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/IA/analyse/analyse_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/IA/prompt/main/main_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/IA/prompt/main/main_prompt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/left/header_left.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/left/header_left.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/main/header_doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/main/header_doc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/right/header_right.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/right/header_right.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/text/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/text/json/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/section_competences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/text/json/json_template.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/json/json_template.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,11 +65,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\json" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\header\main" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\header" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\header\right\main" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\traitement" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\traitement\dossier_competences" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -83,7 +89,7 @@
       <updated>1772883585553</updated>
       <workItem from="1772883587975" duration="12679000" />
       <workItem from="1772902017892" duration="1503000" />
-      <workItem from="1772963232692" duration="13301000" />
+      <workItem from="1772963232692" duration="16869000" />
     </task>
     <servers />
   </component>

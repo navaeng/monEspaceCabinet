@@ -6,7 +6,7 @@ def json_template():
         "Secteurs_activités": [],
         "Langues": [{"langue": "", "niveau": ""}],
         "Experience_totale": "",
-        "compétences": [],
+        "competences": [],
         "Logiciels_par_titre": [{"titre": "", "logiciels_outils": []}],
         "Diplômes": [{"Diplôme": "", "École": "", "Année": "", "Lieu": ""}],
         "Expériences": [{

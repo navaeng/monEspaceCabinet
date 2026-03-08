@@ -16,8 +16,11 @@ def generate_dossier(
         #RENDER
         render_document(data)
 
+        file_stream = render_document(data)
+
         return {
             "success": True,
+            "file_stream": file_stream
         }
 
     except Exception as e:

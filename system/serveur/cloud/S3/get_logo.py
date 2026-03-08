@@ -20,13 +20,9 @@ def get_logo():
     print(f"DEBUG KEY: {os.getenv('S3_ENDPOINT')}")
 
     response = s3_client.get_object(Bucket='mybucket', Key='logoNAVA.jpg')
-    #
-    # img_data = BytesIO(response['Body'].read())
-    # img_data.seek(0)
-    # return img_data
-
     content = response['Body'].read()
     print(f"DEBUG IMAGE: {len(content)} bytes, starts with: {content[:10]}")
     img_data = BytesIO(content)
     img_data.seek(0)
+
     return img_data

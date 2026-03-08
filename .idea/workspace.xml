@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/cloud/S3/get_logo.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/cloud/S3/get_logo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/temp_cv_KOUICI_ISHAK (1).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/APIRouter/root_generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/APIRouter/root_generate_dossier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/build/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/pont/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/build/process_cv_to_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/pont/read_save_doc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/traitement/dossier_competences/generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/traitement/dossier_competences/generate_dossier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +85,7 @@
       <updated>1772883585553</updated>
       <workItem from="1772883587975" duration="12679000" />
       <workItem from="1772902017892" duration="1503000" />
-      <workItem from="1772963232692" duration="8482000" />
+      <workItem from="1772963232692" duration="8896000" />
     </task>
     <servers />
   </component>

@@ -8,7 +8,6 @@ def generate_dossier(
 ) -> dict:
 
     try:
-
         #EXTRACT
         all_data = analyse_data(file_path=selected_file)
         print(f"--- DEBUG ALL_DATA ---\n{all_data}\n----------------------")

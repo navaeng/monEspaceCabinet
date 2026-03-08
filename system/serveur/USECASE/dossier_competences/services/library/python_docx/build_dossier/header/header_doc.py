@@ -11,3 +11,7 @@ def header_doc(doc, data, logo_path):
     section = doc.sections[0]
     header = section.header
 
+    table = header.add_table(rows=1, cols=2, width=Cm(17))
+    table.columns[0].width = Cm(5)
+    table.columns[1].width = Cm(12)
+

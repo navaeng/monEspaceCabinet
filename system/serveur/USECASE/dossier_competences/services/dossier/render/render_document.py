@@ -1,6 +1,6 @@
 from docx import Document
 
-from USECASE.dossier_competences.library.python_docx.header.header_doc import header_doc
+from USECASE.dossier_competences.services.library import header_doc
 
 
 def render_document(data, output_path, logo_path):

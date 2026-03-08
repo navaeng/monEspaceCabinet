@@ -9,14 +9,13 @@ def generate_dossier(
 ) -> dict:
 
     try:
-        logo_path = "ressources/logo.ico
 
         #EXTRACT
         all_data = analyse_data(file_path=selected_file)
         #BUILD
         data = all_data
         #RENDER
-        render_document(data, output_path, logo_path)
+        render_document(data, output_path)
 
         return {
             "success": True,

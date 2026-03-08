@@ -3,25 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/all_packages.txt" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/all_packages.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/src/composants/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/cloud/S3/get_logo.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/cloud/S3/get_logo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/APIRouter/root_generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/APIRouter/root_generate_dossier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/IA/prompt/main/main_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/IA/prompt/main/main_prompt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/data/reading/read_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/data/reading/read_pdf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/dossier_competences/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/dossier_competences/build/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/build/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/dossier_competences/build/process_cv_to_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/build/process_cv_to_dossier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/dossier_competences/render/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/dossier_competences/render/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/traitement/dossier_competences/generate_dossier.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/traitement/dossier_competences/generate_dossier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/configurations/config_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/configurations/config_chrome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/request_connexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/request_connexion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/script_JS/find_button_envoyer_sans_note.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/script_JS/find_button_envoyer_sans_note.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/script_JS/find_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/script_JS/find_editor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/script_JS/post_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/script_JS/post_button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/temp_cv_KOUICI_ISHAK (1).pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +81,7 @@
       <updated>1772883585553</updated>
       <workItem from="1772883587975" duration="12679000" />
       <workItem from="1772902017892" duration="1503000" />
-      <workItem from="1772963232692" duration="6921000" />
+      <workItem from="1772963232692" duration="8482000" />
     </task>
     <servers />
   </component>

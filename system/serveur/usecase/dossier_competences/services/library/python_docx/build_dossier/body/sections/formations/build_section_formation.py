@@ -12,11 +12,13 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 def build_section_formation(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.keep_with_next = True
+
     run = p.add_run("FORMATIONS")
     run.font.color.rgb = RGBColor(255, 255, 255)
     run.font.bold = True
+
     p._element.get_or_add_pPr().append(parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>'))
+    p.paragraph_format.keep_with_next = True
 
     for diplome in data.get('Diplômes', []):
         table = doc.add_table(rows=1, cols=2)

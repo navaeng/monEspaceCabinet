@@ -7,8 +7,10 @@ def build_section_langues(doc, data):
     p_titre.alignment = 1  # Centre le titre
     run = p_titre.add_run("LANGUES")
     run.font.bold = True
+
     run.font.color.rgb =  RGBColor(255, 255, 255)
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
+
     p_titre._element.get_or_add_pPr().append(shd)
     p_titre.paragraph_format.keep_with_next = True
 
@@ -18,5 +20,3 @@ def build_section_langues(doc, data):
         run_l.bold = True
         p.add_run(langue.get('niveau'))
         p.paragraph_format.space_after = Pt(2)
-        p.paragraph_format.keep_together = True
-        p.paragraph_format.keep_with_next = True

@@ -22,6 +22,7 @@ def build_section_experiences(doc, data):
 
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
     p._element.get_or_add_pPr().append(shd)
+    p.paragraph_format.keep_with_next = True
 
     for exp in data.get('Expériences', []):
         table = doc.add_table(rows=1, cols=3)

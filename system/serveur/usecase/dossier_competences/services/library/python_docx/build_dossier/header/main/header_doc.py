@@ -1,6 +1,4 @@
 from docx.shared import Cm
-from docx.oxml.ns import qn
-from docx.oxml import OxmlElement
 from usecase.dossier_competences.services.library.python_docx.build_dossier.header.left.header_left import header_left
 
 from usecase.dossier_competences.services.library.python_docx.build_dossier.header.right.header_right import \

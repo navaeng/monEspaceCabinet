@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/langues/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/langues/build_section_langues.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/monEspaceCabinet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/monEspaceCabinet.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/competences/build_competences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/competences/build_section_competences.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_section_experiences.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/formations/build_formation.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/formations/build_section_formation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/outils/build_outils.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/outils/build_section_secteurs_activites.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/secteurs_activites/build_secteurs_activites.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/secteurs_activites/build_secteurs_activites.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/system/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/main/header_doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/main/header_doc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,19 +47,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "git-widget-placeholder": "develop",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\body\sections" />
@@ -73,8 +72,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.31033.139" />
-        <option value="bundled-python-sdk-2653e85de345-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.31033.139" />
+        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
       </set>
     </attachedChunks>
   </component>

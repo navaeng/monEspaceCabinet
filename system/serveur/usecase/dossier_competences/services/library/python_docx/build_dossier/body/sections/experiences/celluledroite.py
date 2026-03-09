@@ -9,5 +9,5 @@ def cellule_droite(table, exp):
     p_droite.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     run3 = p_droite.add_run(exp.get('Dates', ''))
     run3.font.name = POLICE
-    run3.font.size = Pt(10)
-    run3.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
+    run3.font.size = Pt(11)
+    run3.font.color.rgb = RGBColor(0x00, 0x20, 0x60)

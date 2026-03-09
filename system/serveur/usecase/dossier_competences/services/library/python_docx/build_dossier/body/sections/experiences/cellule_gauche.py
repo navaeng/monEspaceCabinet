@@ -1,7 +1,7 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt, RGBColor
 
-COULEUR_PRINCIPALE = RGBColor(0x1B, 0x4A, 0x8A)
+COULEUR_PRINCIPALE = RGBColor(0x00, 0x20, 0x60)
 POLICE = "Arial"
 
 def cellule_gauche(table, exp):

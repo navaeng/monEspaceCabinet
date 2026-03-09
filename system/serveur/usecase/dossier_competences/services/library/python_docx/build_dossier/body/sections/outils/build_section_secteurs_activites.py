@@ -23,3 +23,4 @@ def build_section_outils(doc, data):
             print(outil)
             p_item = doc.add_paragraph(outil, style='List Bullet')
             p_item.paragraph_format.space_after = Pt(2)
+            p_item.paragraph_format.keep_together = True

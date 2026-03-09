@@ -17,3 +17,4 @@ def build_section_formation(doc, data):
         run.bold = False
         p.add_run(f"\n{diplome.get('École')} - {diplome.get('Lieu')}")
         p.paragraph_format.space_after = Pt(8)
+        p.paragraph_format.keep_together = True

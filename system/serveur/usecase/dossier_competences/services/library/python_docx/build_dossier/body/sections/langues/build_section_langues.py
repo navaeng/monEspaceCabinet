@@ -17,3 +17,4 @@ def build_section_langues(doc, data):
         run_l.bold = True
         p.add_run(langue.get('niveau'))
         p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.keep_together = True

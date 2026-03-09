@@ -1,4 +1,4 @@
-from docx.shared import RGBColor
+from docx.shared import RGBColor, Cm
 
 
 def left_cells(cells, diplome):
@@ -9,5 +9,7 @@ def left_cells(cells, diplome):
     run_dip.bold = True
     run_dip.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
-    run_info = p.add_run(f"\n{diplome.get('École', '')} - {diplome.get('Lieu', '')}")
+    p_info = cells[0].add_paragraph()
+    p_info.paragraph_format.left_indent = Cm(1.25)
+    run_info = p_info.add_run(f"{diplome.get('École', '')} - {diplome.get('Lieu', '')}")
     run_info.font.color.rgb = RGBColor(0x00, 0x20, 0x60)

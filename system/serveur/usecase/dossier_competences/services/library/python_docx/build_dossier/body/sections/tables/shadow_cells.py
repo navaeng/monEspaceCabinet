@@ -1,3 +1,4 @@
+from docx.opc.oxml import qn
 from docx.oxml import OxmlElement
 
 def shadow_cells(table):

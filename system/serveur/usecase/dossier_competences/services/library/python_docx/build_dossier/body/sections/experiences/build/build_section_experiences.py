@@ -25,16 +25,7 @@ def build_section_experiences(doc, data):
 
     for exp in data.get('Expériences', []):
         table = doc.add_table(rows=1, cols=3)
-        table.columns[0].width = Cm(7)
-        table.columns[1].width = Cm(4)
-        table.columns[2].width = Cm(6)
         table.style = None
-
-        for row in table.rows:
-            tr = row._tr
-            trPr = tr.get_or_add_trPr()
-            tblHeader = OxmlElement('w:cantSplit')
-            trPr.append(tblHeader)
 
         cellule_gauche(table, exp)
         cellule_milieu(table, exp)
@@ -44,7 +35,8 @@ def build_section_experiences(doc, data):
         if exp.get('Mission'):
             display_mission(doc, exp)
 
-        display_tasks(doc, exp)
+        if exp.get('Tâches'):
+            display_tasks(doc, exp)
 
         if exp.get("Logiciels_outils"):
             display_logiciels_outils(doc, exp)

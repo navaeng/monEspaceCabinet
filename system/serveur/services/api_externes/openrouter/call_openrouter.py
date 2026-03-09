@@ -1,6 +1,8 @@
 import os
 from openai import OpenAI
 
+from usecase.dossier_competences.json.json_template import json_template
+
 
 def call_openrouter(prompt, model):
     try:
@@ -8,8 +10,12 @@ def call_openrouter(prompt, model):
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ.get("OPENROUTERAPI"))
         completion = client.chat.completions.create(
             model=model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0,
+            messages=[
+                {"role": "system", "content": f"EXTRAIT ET RENSEIGNE LES INFORMATIONS DANS LE JSON SANS OUBLIER AUCUN ELEMENT. : {json_template()}"},
+                {"role": "user", "content": prompt}
+            ],
+            response_format={"type": "json_object"},
+            temperature=0
         )
         return completion.choices[0].message.content
     except Exception as e:

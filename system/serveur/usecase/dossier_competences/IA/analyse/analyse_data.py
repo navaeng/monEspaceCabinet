@@ -11,14 +11,7 @@ def analyse_data(file_path):
         print("Erreur : Impossible de lire le texte du CV")
         return ""
 
-    # prompt_clean = clean_prompt(cv_text)
-    # temp_output = call_openrouter(prompt_clean, model="nousresearch/hermes-3-llama-3.1-405b")
-
-    # print(temp_output)
-
-    prompt_main = main_prompt(cv_text)
-    output = call_openrouter(prompt_main, model="nousresearch/hermes-4-405b")
-    output_clean = output.replace("’", "'").replace("–", "-")
-
-    print(output_clean)
-    return ast.literal_eval(output_clean)
+    temp_output = call_openrouter(clean_prompt(cv_text), model="nousresearch/hermes-3-llama-3.1-405b", json_mode=False)
+    prompt_main = main_prompt(temp_output)
+    output = call_openrouter(prompt_main, model="nousresearch/hermes-4-405b", json_mode=True)
+    return json.loads(output)

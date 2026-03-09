@@ -6,7 +6,6 @@ from docx.shared import RGBColor, Pt, Cm
 def build_section_competences(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-
     run = p.add_run("COMPETENCES")
     RGBColor(255, 255, 255)
     run.font.bold = True
@@ -17,6 +16,7 @@ def build_section_competences(doc, data):
     p.paragraph_format.keep_with_next = True
 
     for comp in data.get('competences', []):
-        p = doc.add_paragraph(comp, style='List Bullet')
-        p.paragraph_format.space_after = Pt(2)
-        p.paragraph_format.left_indent = Pt(20)
+        p_item = doc.add_paragraph(comp, style='List Bullet')
+        p_item.paragraph_format.keep_together = True
+        p_item.paragraph_format.space_after = Pt(2)
+        p_item.paragraph_format.left_indent = Pt(20)

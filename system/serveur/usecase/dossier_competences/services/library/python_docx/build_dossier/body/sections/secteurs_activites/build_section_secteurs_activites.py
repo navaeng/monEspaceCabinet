@@ -4,18 +4,19 @@ from docx.oxml.ns import nsdecls
 from docx.shared import RGBColor, Pt, Cm
 
 def build_section_secteurs_activites(doc, data):
-    p2 = doc.add_paragraph()
-    p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p2.add_run("SECTEURS ACTIVITES")
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    run = p.add_run("SECTEURS ACTIVITES")
     run.font.color.rgb = RGBColor(255, 255, 255)
     run.font.bold = True
 
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
-    p2._element.get_or_add_pPr().append(shd)
-    p2.paragraph_format.keep_with_next = True
+    p._element.get_or_add_pPr().append(shd)
+    p.paragraph_format.keep_with_next = True
 
     for secteur in data.get('Secteurs_activités', []):
         p_item = doc.add_paragraph(secteur, style='List Bullet')
+        p_item.paragraph_format.keep_with_next = True
         p_item.paragraph_format.space_after = Pt(2)
         p_item.paragraph_format.left_indent = Pt(20)
         print(secteur)

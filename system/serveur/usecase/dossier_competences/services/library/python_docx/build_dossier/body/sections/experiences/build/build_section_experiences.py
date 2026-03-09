@@ -8,6 +8,9 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.cellulemilieu import cellule_milieu
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_mission import display_mission
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_tasks import display_tasks
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.tables.shadow_cells import \
+    shadow_cells
+
 
 def build_section_experiences(doc, data):
     p = doc.add_paragraph()
@@ -24,6 +27,7 @@ def build_section_experiences(doc, data):
         table.columns[0].width = Cm(7)
         table.columns[1].width = Cm(4)
         table.columns[2].width = Cm(6)
+        shadow_cells(table)
 
         cellule_gauche(table, exp)
         cellule_milieu(table, exp)

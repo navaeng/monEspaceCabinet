@@ -1,6 +1,6 @@
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.competences.build_section_competences import \
     build_section_competences
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.build_section_experiences import \
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.build.build_section_experiences import \
     build_section_experiences
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.formations.build_section_formation import \
     build_section_formation

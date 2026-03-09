@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/marge/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/marge/add_marge.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/tables/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/tables/shadow_cells.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/documents/render/render_document.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/cellule_gauche.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/cellule_gauche.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/celluledroite.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/celluledroite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/main/body_doc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/competences/build_section_competences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/competences/build_section_competences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build_section_experiences.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build/build_section_experiences.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/left/header_left.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/left/header_left.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/main/header_doc.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/header/main/header_doc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +66,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections" />
+      <recent name="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences/build" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\body\sections" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\body\sections\secteurs_activites" />
       <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\body\sections\outils" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\body\sections\competences" />
-      <recent name="C:\Users\Rcom\monEspaceCabinet\system\serveur\usecase\dossier_competences\services\library\python_docx\build_dossier\body\sections_experiences" />
     </key>
   </component>
   <component name="SharedIndexes">

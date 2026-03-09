@@ -1,6 +1,7 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm
 
+
 def header_left(logo_path, cell_gauche):
     cell_gauche.margin_left = Cm(0)
     paragraph = cell_gauche.paragraphs[0]

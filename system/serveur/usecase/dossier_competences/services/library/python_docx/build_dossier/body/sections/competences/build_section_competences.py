@@ -17,5 +17,4 @@ def build_section_competences(doc, data):
         p = doc.add_paragraph(comp, style='List Bullet')
         p.paragraph_format.space_after = Pt(2)
         p.paragraph_format.left_indent = Pt(20)
-        p.paragraph_format.keep_with_next = True
         p.paragraph_format.keep_together = True

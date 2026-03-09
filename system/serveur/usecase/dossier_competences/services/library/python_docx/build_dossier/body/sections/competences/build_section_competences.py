@@ -7,8 +7,9 @@ def build_section_competences(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run("COMPETENCES")
-    run.font.color.rgb = RGBColor(255, 255, 255)
+    run.font.color.rgb =  RGBColor(0x00, 0x20, 0x60)
     run.font.bold = True
+
 
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
     p._element.get_or_add_pPr().append(shd)
@@ -18,3 +19,4 @@ def build_section_competences(doc, data):
         p.paragraph_format.space_after = Pt(2)
         p.paragraph_format.left_indent = Pt(20)
         p.paragraph_format.keep_together = True
+        p.paragraph_format.keep_with_next = True

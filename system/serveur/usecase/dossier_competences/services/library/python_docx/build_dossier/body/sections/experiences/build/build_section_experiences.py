@@ -12,8 +12,9 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 def build_section_experiences(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.keep_with_next = True
     run = p.add_run("Expériences")
-    run.font.color.rgb = RGBColor(255, 255, 255)
+    run.font.color.rgb =  RGBColor(0x00, 0x20, 0x60)
     run.font.bold = True
 
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')

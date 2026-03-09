@@ -1,18 +1,29 @@
-from docx.shared import RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
+from docx.shared import RGBColor, Cm
+
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.formations.cells.left_cells import \
+    left_cells
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.formations.cells.right_cells import \
+    right_cells
 
 
 def build_section_formation(doc, data):
-    table = doc.add_table(rows=1, cols=2)
-    table.style = None
-    cells = table.rows[0].cells
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.keep_with_next = True
+    run = p.add_run("FORMATIONS")
+    run.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+    run.font.bold = True
+    p._element.get_or_add_pPr().append(parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>'))
 
     for diplome in data.get('Diplômes', []):
-        p_left = cells[0].paragraphs[0]
-        run_dip = p_left.add_run(diplome.get('Diplôme', ''))
-        run_dip.bold = True
-        run_dip.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+        table = doc.add_table(rows=1, cols=2)
+        table.style = None
+        cells = table.rows[0].cells
+        table.columns[0].width = Cm(14)
+        table.columns[1].width = Cm(3)
 
-        p_right = cells[1].paragraphs[0]
-        p_right.alignment = 2
-        run_date = p_right.add_run(str(diplome.get('Année', '')))
-        run_date.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+        left_cells(cells, diplome)
+        right_cells(cells, diplome)

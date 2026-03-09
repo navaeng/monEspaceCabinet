@@ -12,7 +12,7 @@ def header_right(data, cell_droite):
     p1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     p1.paragraph_format.space_before = Pt(0)
     p1.paragraph_format.space_after = Pt(0)
-    run1 = p1.add_run(data.get('Initial', ''))
+    run1 = p1.add_run(data.get('Nom_prénom', ''))
     run1.font.name = POLICE
     run1.font.bold = True
     run1.font.size = Pt(17)

@@ -32,7 +32,7 @@ def header_right(data, cell_droite):
     p3.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     p3.paragraph_format.space_before = Pt(0)
     p2.paragraph_format.space_after = Pt(0)
-    run3 = p3.add_run(f"{data.get('Experience_totale', '')} d'expérience")
+    run3 = p3.add_run(f"{data.get('Experience_totale', '')}")
     run3.font.name = POLICE
     run3.font.size = Pt(14)
     run3.font.color.rgb = RGBColor(0x00, 0x20, 0x60)

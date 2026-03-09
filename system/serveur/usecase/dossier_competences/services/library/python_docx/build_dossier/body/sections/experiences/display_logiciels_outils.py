@@ -15,4 +15,4 @@ def display_logiciels_outils(doc, exp):
     run_liste.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
     p_outils.paragraph_format.space_before = Pt(6)
-    p_outils.paragraph_format.space_after = Pt(10)
+    p_outils.paragraph_format.space_after = Pt(20)

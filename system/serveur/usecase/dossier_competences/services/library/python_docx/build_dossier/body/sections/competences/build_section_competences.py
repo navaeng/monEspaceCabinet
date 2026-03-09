@@ -7,7 +7,7 @@ def build_section_competences(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run("COMPETENCES")
-    run.font.color.rgb =  RGBColor(0x00, 0x20, 0x60)
+    RGBColor(255, 255, 255)
     run.font.bold = True
 
 

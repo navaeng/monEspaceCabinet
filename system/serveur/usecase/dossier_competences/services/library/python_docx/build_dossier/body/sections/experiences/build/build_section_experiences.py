@@ -17,7 +17,7 @@ def build_section_experiences(doc, data):
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.keep_with_next = True
     run = p.add_run("Expériences")
-    run.font.color.rgb =  RGBColor(0x00, 0x20, 0x60)
+    run.font.color.rgb =  RGBColor(255, 255, 255)
     run.font.bold = True
 
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
@@ -40,5 +40,5 @@ def build_section_experiences(doc, data):
 
         display_tasks(doc, exp)
 
-        if exp.get("logiciels_outils"):
+        if exp.get("Logiciels_outils"):
             display_logiciels_outils(doc, exp)

@@ -5,6 +5,7 @@ def display_logiciels_outils(doc, exp):
     p_outils = doc.add_paragraph()
 
     liste_outils = exp.get('Logiciels_outils', [])
+    print(liste_outils)
     texte_outils = ", ".join(liste_outils) if isinstance(liste_outils, list) else str(liste_outils)
 
     run_label = p_outils.add_run("Logiciels et outils : ")

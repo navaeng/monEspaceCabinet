@@ -7,7 +7,7 @@ def build_section_secteurs_activites(doc, data):
     p2 = doc.add_paragraph()
     p2.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run = p2.add_run("SECTEURS ACTIVITES")
-    run.font.color.rgb =  RGBColor(0x00, 0x20, 0x60)
+    run.font.color.rgb = RGBColor(255, 255, 255)
     run.font.bold = True
 
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')

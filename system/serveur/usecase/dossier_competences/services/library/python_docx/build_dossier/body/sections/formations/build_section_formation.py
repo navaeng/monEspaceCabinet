@@ -1,6 +1,7 @@
 from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
-from docx.shared import Pt
+from docx.shared import Pt, RGBColor
+
 
 def build_section_formation(doc, data):
     p_titre = doc.add_paragraph()

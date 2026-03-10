@@ -9,7 +9,7 @@ def display_mission(doc, exp):
     run_label.bold = True
     run_label.underline = True
 
-    run_desc = p_mission.add_run(str(exp.get('Résumé_concis_tâches', '')))
+    run_desc = p_mission.add_run(str(exp.get('Résumé_concis_tâches_à_définir', '')))
     run_desc.font.color.rgb = RGBColor(0, 0, 0)
 
     p_mission.paragraph_format.space_before = Pt(10)

@@ -7,7 +7,7 @@ def cellule_milieu(table, exp):
     cell_milieu = table.cell(0, 1)
     p = cell_milieu.paragraphs[0]
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    duree = exp.get('Durée_Mission', '')
+    duree = exp.get('Durée_Mission_à_définir', '')
     run_duree = p.add_run(duree)
     run_duree.font.name = POLICE
     run_duree.font.size = Pt(11)

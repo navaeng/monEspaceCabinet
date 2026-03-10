@@ -6,7 +6,7 @@ def generate_exp(data):
 
         parts = []
         if ans > 0: parts.append(f"{ans} an{'s' if ans > 1 else ''}")
-        if mois > 0: parts.append(f"{ans} an{'s' if ans > 1 else ''}")
+        if mois > 0: parts.append(f"{mois} mois")
 
         return " et ".join(parts) + " d'expérience" if parts else "Moins d'un an d'expérience"
     except:

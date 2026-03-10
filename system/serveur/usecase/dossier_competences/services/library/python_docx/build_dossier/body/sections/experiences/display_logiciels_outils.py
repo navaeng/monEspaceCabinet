@@ -15,5 +15,6 @@ def display_logiciels_outils(doc, exp):
 
     p_outils.paragraph_format.space_before = Pt(6)
     p_outils.paragraph_format.space_after = Pt(20)
-    p_outils.paragraph_format.keep_with_next = True
 
+    p_outils.paragraph_format.keep_with_next = False
+    p_outils.paragraph_format.keep_together = True

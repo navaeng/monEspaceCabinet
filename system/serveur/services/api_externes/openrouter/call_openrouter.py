@@ -1,12 +1,10 @@
 import os
 from openai import OpenAI
 
-from usecase.dossier_competences.json.json_template import json_template
-
 
 def call_openrouter(prompt, model, json_mode=True):
     try:
-        print("Calling OpenRouter API...")
+        print(f"Calling {model}...")
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ.get("OPENROUTERAPI"))
         completion = client.chat.completions.create(
             model=model,

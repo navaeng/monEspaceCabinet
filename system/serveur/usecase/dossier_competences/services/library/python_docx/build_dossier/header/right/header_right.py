@@ -5,11 +5,11 @@ from docx.shared import Pt, RGBColor
 from usecase.dossier_competences.services.library.python_docx.build_dossier.header.right.generate.generate_initial import \
     generate_initial
 from usecase.dossier_competences.services.library.python_docx.build_dossier.header.right.generate.generate_exp import \
-    generate_word_exp, generate_exp
+    generate_exp
 
 POLICE = "Calibri (corps)"
 
-def header_right(data, cell_droite):
+def header_right(data: object, cell_droite: object) -> None:
 
     cell_droite.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
 

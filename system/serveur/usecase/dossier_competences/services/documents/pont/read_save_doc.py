@@ -3,7 +3,7 @@ from pathlib import Path
 from usecase.dossier_competences.traitement.generate_dossier import generate_dossier
 
 async def read_save_doc(cv_content: bytes, filename: str):
-    temp_path = Path(f"/temp_{filename}")
+    temp_path = Path(f"/tmp/temp_{filename}")
 
     
 

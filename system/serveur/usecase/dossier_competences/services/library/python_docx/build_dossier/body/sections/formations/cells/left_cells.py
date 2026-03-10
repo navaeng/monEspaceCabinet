@@ -7,6 +7,7 @@ def left_cells(cells, diplome):
 
     run_dip = p.add_run(diplome.get('Diplôme', ''))
     run_dip.bold = True
+    run_dip.underline = True
     run_dip.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
     if diplome.get("École"):

@@ -10,10 +10,8 @@ def cellule_droite(table, exp):
     cell_droite = table.cell(0, 2)
     p_droite = cell_droite.paragraphs[0]
 
-
     p_droite.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     run3 = p_droite.add_run(exp.get('Dates_Période', ''))
-    # calcul_durée_exp(exp)
 
     run3.font.name = POLICE
     run3.font.size = Pt(11)

@@ -31,6 +31,7 @@ def build_section_outils(doc, data):
             run_t = p.add_run(f"{titre.upper()} : ")
             run_t.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
             run_t.bold = True
+            run_t.underline = True
 
             p.add_run(", ".join(logiciels_outils))
 

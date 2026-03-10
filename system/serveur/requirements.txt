@@ -12,6 +12,7 @@ pydantic
 python-docx
 PyMuPDF
 docxtpl
+pytesseract
 undetected_chromedriver
 setuptools
 gunicorn

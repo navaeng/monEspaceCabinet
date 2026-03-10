@@ -1,6 +1,9 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import RGBColor, Pt
 
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.calcul.calcul_durée_exp import \
+    calcul_durée_exp
+
 POLICE = "Arial"
 
 def cellule_droite(table, exp):
@@ -10,6 +13,7 @@ def cellule_droite(table, exp):
 
     p_droite.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     run3 = p_droite.add_run(exp.get('Dates_Période', ''))
+    # calcul_durée_exp(exp)
 
     run3.font.name = POLICE
     run3.font.size = Pt(11)

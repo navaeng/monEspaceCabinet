@@ -1,7 +1,8 @@
 def main_prompt(cv_text, current_template):
 
-    return f"""TU ES UN EXPERT EN EXTRACTION DE DONNÉES. TON BUT EST DE STRUCTURER DANS LE JSON : {current_template} 
-    TOUT LE CONTENU DANS SON INTÉGRALITÉ SANS COMMENTAIRES.
+    return f"""Tu es un expert en extraction de données. ton but est de structurer dans le json : {current_template} 
+    tout le contenu dans son intégralité sans commentaires ,
+    pour les champ contenant 'à définir', tu dois générer toi-même une valeur
 DATA:
 {cv_text}
 """

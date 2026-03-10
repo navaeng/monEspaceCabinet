@@ -11,7 +11,7 @@ def display_logiciels_outils(doc, exp):
     run_label.bold = True
 
     run_liste = p_outils.add_run(texte_outils)
-    run_liste.font.color.rgb = RGBColor(255, 255, 255)
+    run_liste.font.color.rgb = RGBColor(0, 0, 0)
 
     p_outils.paragraph_format.space_before = Pt(6)
     p_outils.paragraph_format.space_after = Pt(20)

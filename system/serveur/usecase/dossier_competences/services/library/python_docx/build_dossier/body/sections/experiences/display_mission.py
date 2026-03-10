@@ -9,7 +9,7 @@ def display_mission(doc, exp):
     run_label.bold = True
 
     run_desc = p_mission.add_run(str(exp.get('Description_Mission', '')))
-    run_desc.font.color.rgb = RGBColor(255, 255, 255)
+    run_desc.font.color.rgb = RGBColor(0, 0, 0)
 
     p_mission.paragraph_format.space_before = Pt(10)
     p_mission.paragraph_format.space_after = Pt(10)

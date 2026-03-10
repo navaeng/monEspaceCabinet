@@ -5,8 +5,8 @@ def experiences_template():
             "Nom_Entreprise": "",
             "Dates_Période": "",
             "Durée_Mission": "",
-            "Description_Mission": "Max 300 caractères",
-            "Environnement_Technique": [],
+            "Résumé_concis_des_missions": "",
             "Liste_Tâches": [],
+            "Environnement_Technique": [],
         }]
     }

@@ -11,6 +11,8 @@ def config_ia():
         ("nousresearch/hermes-4-405b", outils_template()),
         ("meta-llama/llama-3.1-70b-instruct", competences_template()),
         ("nousresearch/hermes-4-405b", formation_template()),
-        ("nousresearch/hermes-4-405b", experiences_template())
+        ("nousresearch/hermes-4-405b", experiences_template()),
     ]
     return config
+
+

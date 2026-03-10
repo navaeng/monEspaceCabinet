@@ -8,10 +8,11 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.cellule_milieu import cellule_milieu
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_logiciels_outils import \
     display_logiciels_outils
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_mission import display_mission
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_poste import \
     display_poste
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_tasks import display_tasks
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_mission import display_mission
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.display_tasks import \
+    display_tasks
 
 
 def build_section_experiences(doc, data):
@@ -42,7 +43,7 @@ def build_section_experiences(doc, data):
         if exp.get("Poste_Occupé"):
             display_poste(doc, exp)
 
-        if exp.get('Description_Mission'):
+        if exp.get('Résumé_concis_des_missions'):
             display_mission(doc, exp)
 
         if exp.get('Liste_Tâches'):

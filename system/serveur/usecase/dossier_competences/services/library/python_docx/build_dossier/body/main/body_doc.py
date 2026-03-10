@@ -12,10 +12,20 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
     build_section_secteurs_activites
 
 def body_doc(doc, data):
-    print(data.keys())
-    build_section_competences(doc, data)
-    build_section_outils(doc, data)
-    build_section_secteurs_activites(doc, data)
-    build_section_formation(doc, data)
-    build_section_langues(doc, data)
-    build_section_experiences(doc, data)
+    if 'Compétences_Clefs' in data:
+        build_section_competences(doc, data)
+
+    if 'Logiciels_Et_Outils' in data:
+        build_section_outils(doc, data)
+
+    if 'Secteurs_Activités' in data:
+        build_section_secteurs_activites(doc, data)
+
+    if 'Diplômes_Et_Formations' in data:
+        build_section_formation(doc, data)
+
+    if 'Langues_Étrangères' in data:
+        build_section_langues(doc, data)
+
+    if 'Expériences_Professionnelles' in data:
+        build_section_experiences(doc, data)

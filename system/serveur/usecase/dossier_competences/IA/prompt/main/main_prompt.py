@@ -1,6 +1,6 @@
-def main_prompt(temp_output, json_template):
-    return f"""TU ES UN EXPERT EN EXTRACTION DE DONNÉES. TON BUT EST DE STRUCTURER DANS LE JSON : {json_template} 
+def main_prompt(cv_text, curren_template):
+    return f"""TU ES UN EXPERT EN EXTRACTION DE DONNÉES. TON BUT EST DE STRUCTURER DANS LE JSON : {curren_template} 
     TOUTES LES DONNÉES DANS LEUR INTÉGRALITÉ, SANS COMMENTAIRES.
 DATA:
-{temp_output}
+{cv_text}
 """

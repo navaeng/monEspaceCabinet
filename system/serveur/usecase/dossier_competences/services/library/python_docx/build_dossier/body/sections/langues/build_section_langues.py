@@ -3,7 +3,7 @@ from docx.oxml.ns import nsdecls
 from docx.shared import Pt, RGBColor
 
 def build_section_langues(doc, data):
-    langues = data.get('Langues_Étrangères', [])
+    langues = data.get('Langues', [])
 
     if not langues or not langues[0].get('Langue'):
         return
@@ -19,7 +19,7 @@ def build_section_langues(doc, data):
     p_titre._element.get_or_add_pPr().append(shd)
     p_titre.paragraph_format.keep_with_next = True
 
-    for langue in data.get('Langues_Étrangères', []):
+    for langue in data.get('Langues', []):
         p = doc.add_paragraph(style='List Bullet')
         run_l = p.add_run(f"{langue.get('Langue')} : ")
         run_l.bold = True

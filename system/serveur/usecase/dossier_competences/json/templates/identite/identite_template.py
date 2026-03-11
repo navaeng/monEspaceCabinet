@@ -1,8 +1,8 @@
 def identite_template():
     return {
         "Nom_Prénom": "",
-        "Poste_Actuel": "",
+        "Poste_actuel_précis": "",
         "Secteurs_Activités": [],
-        "Langues_Étrangères": [{"Langue": "", "Niveau": ""}],
+        "Langues": [{"Langue": "", "Niveau": ""}],
         "Expérience_Totale_Années": "",
     }

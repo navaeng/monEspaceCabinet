@@ -5,7 +5,7 @@ from docx.shared import RGBColor, Pt, Cm
 
 def build_section_competences(doc, data):
 
-    comps = data.get('Compétences_Clefs') or data.get('Compétences') or []
+    comps = data.get('Compétences_en_phrase_précise') or data.get('Compétences') or []
     comps = [c for c in comps if c and c.strip()]
     if not comps: return
 
@@ -20,7 +20,7 @@ def build_section_competences(doc, data):
     p._element.get_or_add_pPr().append(shd)
     p.paragraph_format.keep_with_next = True
 
-    for comp in (data.get('Compétences_Clefs') or data.get('Compétences') or []):
+    for comp in (data.get('Compétences_en_phrase_précise') or data.get('Compétences') or []):
         p_item = doc.add_paragraph(comp, style='List Bullet')
         p_item.paragraph_format.space_after = Pt(2)
         p_item.paragraph_format.left_indent = Pt(20)

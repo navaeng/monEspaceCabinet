@@ -1,9 +1,6 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import RGBColor, Pt
 
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.calcul.calcul_durée_exp import \
-    calcul_durée_exp
-
 POLICE = "Arial"
 
 def cellule_droite(table, exp):

@@ -14,6 +14,10 @@ logging.basicConfig(filename="planificateur.log", level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
 
 supabase = supabase_client()
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {os.getenv('SUPABASE_SERVICE_ROLE_KEY')}"
+}
 
 async def run():
     jobs = check_start()
@@ -23,7 +27,8 @@ async def run():
                 async with httpx.AsyncClient(timeout=None) as client:
                     response = await client.post(
                         "http://127.0.0.1:8001/backend/linkedin/start_chrome",
-                        json={**p, "intitule": p.get("job_title", "")}
+                        json={**p, "intitule": p.get("job_title", "")},
+                        headers=headers
                     )
                 logging.info(p)
                 print(f"Status: {response.status_code}")

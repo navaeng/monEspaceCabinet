@@ -18,7 +18,7 @@ export default function CVUploadForm() {
       const blob = await res.blob();
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `dossier_${file.name}.docx`;
+      a.download = `dossier_de_competences${file.name}.docx`;
       a.click();
       setStatus("success");
     } catch (e) {

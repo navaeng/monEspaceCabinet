@@ -5,7 +5,7 @@ from docx.shared import RGBColor, Pt, Cm
 
 def build_section_outils(doc, data):
     outils_data = data.get('Logiciels_Et_Outils', [])
-    if outils_data and outils_data[0].get('Liste_Logiciels'):
+    if outils_data and outils_data[0].get('Liste_Logiciels') and len(outils_data[0]['Liste_Logiciels']) > 0:
         return
 
     p = doc.add_paragraph()

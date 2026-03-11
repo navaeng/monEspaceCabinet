@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/system/client/src/composants/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/outils/build_section_outils.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/outils/build_section_outils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

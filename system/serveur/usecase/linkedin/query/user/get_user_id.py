@@ -1,3 +1,5 @@
+import os
+
 from data.database import supabase_client
 from fastapi import (
     HTTPException,
@@ -6,6 +8,10 @@ from fastapi import (
 
 
 async def get_user_id(request: Request):
+
+    internal = request.headers.get("X-Internal-Secret")
+    if internal and internal == os.getenv("INTERNAL_SECRET"):
+        return request.headers.get("X-User-Id")
 
     auth_header = request.headers.get("Authorization")
     if not auth_header:

@@ -25,7 +25,13 @@ async def run():
                 "X-Internal-Secret": os.getenv("INTERNAL_SECRET"),
                 "X-User-Id": p.get("user_id")
             }
-            payload = {**p, "intitule": p.get("job_title", "")}
+            payload = {
+                **p,
+                "intitule": p.get("job_title", ""),
+                "segment": p.get("segment", ""),
+                "post": p.get("post", ""),
+                "candidatrecherche": p.get("candidatrecherche") or "",
+            }
             print(f"Payload envoyé : {payload}")
             try:
                 async with httpx.AsyncClient(timeout=None) as client:
@@ -33,12 +39,12 @@ async def run():
 
                         "http://127.0.0.1:8001/backend/linkedin/start_chrome",
 
-                        json={ **p,
-                                "intitule": p.get("job_title", ""),
-                                "segment": p.get("segment", ""),
-                                "post": p.get("post", ""),},
+                        json=payload,
                         headers=headers
                     )
+
+                if response.status_code != 200:
+                    logging.error(f"422 détail: {response.text}")
 
                 logging.info(p)
                 print(f"Status: {response.status_code}")

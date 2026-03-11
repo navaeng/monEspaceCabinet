@@ -13,7 +13,7 @@ def insert_db(container, mode, user_data):
     )
     full_name = container.text.split("\n")[0] if container.text else None
     if profile_url:
-        supabase_client.table("linkedin_contacts").insert(
+        supabase_client().table("linkedin_contacts").insert(
             {
                 "user_id": user_data.get("user_id"),
                 "profile_url": profile_url,

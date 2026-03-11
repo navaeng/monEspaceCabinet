@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="import">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/system/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/client/src/composants/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/client/src/composants/ProspectionSourcing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/ProspectionSourcing.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/dossier_competences.js" afterDir="false" />

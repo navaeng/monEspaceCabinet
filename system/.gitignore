@@ -19,8 +19,8 @@ system/.env
 *.log
 
 # Chrome / Selenium
-system/serveur/cookies/
-system/serveur/outputs/
+serveur/cookies/
+serveur/outputs/
 
 # Divers
 *.lock

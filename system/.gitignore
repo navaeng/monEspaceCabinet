@@ -21,7 +21,7 @@ system/.env
 # Chrome / Selenium
 serveur/cookies/
 serveur/outputs/
-
+../.idea/workspace.xml
 # Divers
 *.lock
 user_data/

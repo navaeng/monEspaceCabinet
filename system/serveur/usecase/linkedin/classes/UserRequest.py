@@ -7,7 +7,7 @@ class UserRequest(BaseModel):  # contrat
     intitule: str
     mode: str
     details: str
-    segment: str
+    segment: Optional[str] = ""
     candidatrecherche: str
     post: Optional[str]
     telephone: Optional[str] = ""

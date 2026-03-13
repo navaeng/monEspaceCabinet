@@ -33,7 +33,7 @@ def config_chrome(user_data):
             print(f"Erreur lors de la suppression du fichier de verrouillage : {e}")
 
     print(f"[DEBUG] Path profil: {profil_path}")
-    options.add_argument(f"--user-data-dir={os.path.abspath('usecase/linkedin/profil_path')}")
+    options.add_argument(f"--user-data-dir={os.path.abspath('usecase/linkedin/cookies/profil_path')}")
     options.add_argument("--lang=fr-FR")
     options.add_experimental_option('prefs', {'intl.accept_languages': 'fr-FR'})
     options.add_argument("--profile-directory=Default")

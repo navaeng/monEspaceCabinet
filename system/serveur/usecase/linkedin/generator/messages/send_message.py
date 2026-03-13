@@ -43,6 +43,7 @@ def send_message(
                 driver.set_page_load_timeout(
                     20
                 )
+
                 try:
                     driver.get(url)
                     print("[DEBUG] ✅ Page du profil chargée avec succès")

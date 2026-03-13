@@ -22,7 +22,7 @@ def config_chrome(user_data):
     )
 
     options = uc.ChromeOptions()
-    profil_path = os.path.abspath(f"cookies/profile_{uid}")
+    profil_path = os.path.abspath(f"usecase/linkedin/cookies/profile_{uid}")
     lock_file = os.path.join(profil_path, "SingletonLock")
 
     if os.path.exists(lock_file):

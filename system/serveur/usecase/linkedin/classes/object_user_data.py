@@ -9,6 +9,7 @@ def object_user_data(body, current_user_id):
         "full_name": data.get("full_name"),
         "telephone": data.get("telephone"),
         "cabinet_name": data.get("cabinet_name"),
+        "origin_mode": data.get("mode"),
     }
     print(user_data)
     return user_data

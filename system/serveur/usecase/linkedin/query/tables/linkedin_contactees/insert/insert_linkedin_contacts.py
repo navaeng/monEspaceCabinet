@@ -18,7 +18,7 @@ def insert_linkedin_contacts(container, mode, user_data):
                 "user_id": user_data.get("user_id"),
                 "profile_url": profile_url,
                 "full_name": full_name,
-                "origin_mode": mode,
+                "origin_mode": user_data.get("mode"),
                 "status": "pending",
             }
         ).execute()

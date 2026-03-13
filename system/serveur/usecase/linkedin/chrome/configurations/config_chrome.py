@@ -34,6 +34,8 @@ def config_chrome(user_data):
 
     print(f"[DEBUG] Path profil: {profil_path}")
     options.add_argument(f"--user-data-dir={profil_path}")
+    options.add_argument("--lang-fr-FR")
+    options.add_experimental_option('prefs', {'inl.accept_languages': 'fr-FR'})
     options.add_argument("--profile-directory=Default")
     # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")

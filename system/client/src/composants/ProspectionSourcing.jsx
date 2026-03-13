@@ -87,6 +87,7 @@ function ProspectionSourcing() {
             segment,
             telephone: "",
             full_name: "",
+            "is_manual": true
           }),
         },
       );

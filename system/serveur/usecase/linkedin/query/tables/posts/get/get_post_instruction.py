@@ -1,9 +1,9 @@
-from system.data import supabase_client
+from data.database import supabase_client
 
 
 def get_post_instruction(uid):
     select_instruction_post = (
-        supabase_client.table("posts")
+        supabase_client().table("posts")
         .select("instruction_post")
         .eq("user_id", uid)
         .limit(1)

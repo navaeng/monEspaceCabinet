@@ -12,3 +12,4 @@ class UserRequest(BaseModel):  # contrat
     post: Optional[str]
     telephone: Optional[str] = ""
     full_name: Optional[str] = ""
+    is_manual: Optional[bool] = False

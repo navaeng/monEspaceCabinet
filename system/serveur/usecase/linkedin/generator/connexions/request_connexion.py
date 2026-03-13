@@ -68,10 +68,7 @@ def request_connexion(driver, job_title, user_data):
                 time.sleep(random.uniform(2, 4))
 
                 driver.execute_script("arguments[0].click();", bouton)
-                print(f"[DEBUG] Bouton tag: {bouton.tag_name}")
-                print(f"[DEBUG] Bouton visible: {bouton.is_displayed()}")
-                print(f"[DEBUG] Bouton enabled: {bouton.is_enabled()}")
-                print(f"[DEBUG] Bouton text: {bouton.text}")
+
                 yield f"[{i + 1}] invitations..."
 
                 time.sleep(random.uniform(2, 4))

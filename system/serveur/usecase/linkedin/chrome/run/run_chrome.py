@@ -25,13 +25,6 @@ def run_chrome(
     uid = user_data.get("user_id")
     driver, vdisplay = config_chrome(user_data, uid)
 
-
-    print(f"[DEBUG] User ID: {uid}")
-    print(f"[DEBUG] Entrée dans run_chrome pour: {job_title}")
-    print(f"[DEBUG] Détails du lancement : {details}")
-    print(f"[DEBUG] Mode : {mode}")
-    print(f"user data: {user_data}")
-
     if driver is not None:
         try:
             yield "Starting..."
@@ -41,14 +34,8 @@ def run_chrome(
             driver.get("https://www.linkedin.com/feed/")
 
             yield "Go LinkedIn..."
-            lang = driver.execute_script("return navigator.language")
-            langs = driver.execute_script("return navigator.languages")
-            print(f"[DEBUG] navigator.language: {lang}")
-            print(f"[DEBUG] navigator.languages: {langs}")
-
             time.sleep(random.uniform(3, 6))
             current_url = driver.current_url
-            print("Current URL:", current_url)
 
             if "login" in driver.current_url:
                 yield from login_linkedin(driver, user_data)

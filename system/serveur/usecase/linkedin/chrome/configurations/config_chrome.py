@@ -22,18 +22,7 @@ def config_chrome(user_data):
     )
 
     options = uc.ChromeOptions()
-    profil_path = os.path.abspath(f"cookies/profile_{uid}")
-    lock_file = os.path.join(profil_path, "SingletonLock")
 
-    if os.path.exists(lock_file):
-        try:
-            os.remove(lock_file)
-            print("lock supprimé avec succès")
-        except Exception as e:
-            print(f"Erreur lors de la suppression du fichier de verrouillage : {e}")
-
-    print(f"[DEBUG] Path profil: {profil_path}")
-    options.add_argument(f"--user-data-dir={os.path.abspath('usecase/linkedin/cookies/profil_path')}")
     options.add_argument("--lang=fr-FR")
     options.add_experimental_option('prefs', {'intl.accept_languages': 'fr-FR'})
     options.add_argument("--profile-directory=Default")
@@ -78,6 +67,7 @@ def config_chrome(user_data):
             use_subprocess=True,
             version_main=v_chrome,
         )
+
 
     except Exception as e:
         print(f"❌ Erreur lancement Chrome : {traceback.format_exc()}")  # Affiche toute la pile d'erreurs

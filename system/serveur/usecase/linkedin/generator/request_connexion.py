@@ -70,7 +70,7 @@ def request_connexion(driver, job_title, user_data):
                 success = find_button_envoyer_sans_note(driver)
                 if success:
                     yield "✅ Invitation envoyée !"
-                    insert_linkedin_contacts(user_data)
+                    insert_linkedin_contacts(container, user_data)
                 else:
                     yield "Bouton introuvable."
 

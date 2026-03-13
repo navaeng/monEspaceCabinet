@@ -16,7 +16,7 @@ def run_chrome(
     details: str,
     mode: str,
     user_data,
-
+    post: str
 ):
 
     uid = user_data.get("user_id")

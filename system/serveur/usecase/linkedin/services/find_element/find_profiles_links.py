@@ -18,7 +18,7 @@ def find_profiles_links(driver, user_data):
         links = driver.find_elements(By.CSS_SELECTOR, "a[href*='/in/']")
         time.sleep(2)
         for link in links:
-            url = link.get_attribute("href").split("?")[0] + "?locale=fr_FR"
+            url = link.get_attribute("href").replace("www.", "fr.").split("?")[0] + "?locale=fr_FR"
             print(f"[DEBUG] Checking URL: {url}")
             print(f"[DEBUG] Already in urls: {url in urls}")
             print(f"[DEBUG] In db_profiles_map: {url in db_profiles_map}")

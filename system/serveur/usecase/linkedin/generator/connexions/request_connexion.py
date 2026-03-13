@@ -14,7 +14,7 @@ def request_connexion(driver, job_title, user_data):
         try:
             time.sleep(random.uniform(8, 15))
             query_encoded = urllib.parse.quote(job_title)
-            target_url = f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}&lang=fr"
+            target_url = f"https://fr.linkedin.com/search/results/people/?keywords={query_encoded}&origin=SWITCH_SEARCH_VERTICAL&page={page}&lang=fr"
             driver.get(target_url)
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
             yield "Recherches de personnes..."

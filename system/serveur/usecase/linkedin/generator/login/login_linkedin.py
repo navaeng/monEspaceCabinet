@@ -35,7 +35,7 @@ def login_linkedin(driver, user_data, uid):
         if "feed" in driver.current_url:
             print("Connexion réussie, redirection vers feed OK")
             yield "Connexion réussie !"
-            li_at = next(c for c in driver.get_cookies() if c['name'] == '')
+            li_at = next(c for c in driver.get_cookies() if c['name'] == 'li_at')
             with open(f"usecase/linkedin/cookies/cookie_{uid}.json", "w") as f:
                 json.dump(li_at, f)
         else:

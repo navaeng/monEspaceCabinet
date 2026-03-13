@@ -25,6 +25,7 @@ def config_chrome(user_data):
 
     options.add_argument("--lang=fr-FR")
     options.add_experimental_option('prefs', {'intl.accept_languages': 'fr-FR'})
+
     options.add_argument("--profile-directory=Default")
     # options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
@@ -67,6 +68,7 @@ def config_chrome(user_data):
             use_subprocess=True,
             version_main=v_chrome,
         )
+        driver.execute_cdp_cmd('Network.setUserAgentOverride', {"acceptLanguage": "fr-FR,fr"})
 
 
     except Exception as e:

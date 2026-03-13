@@ -12,7 +12,7 @@ from usecase.linkedin.services.find_element.connexions.get_container_info import
 
 def request_connexion(driver, job_title, user_data):
 
-    for page in range(1, 2):
+    for page in range(1, 5):
         try:
             time.sleep(random.uniform(8, 15))
             query_encoded = urllib.parse.quote(job_title)

@@ -2,6 +2,7 @@ import random
 import time
 import traceback
 
+from selenium.common import WebDriverException
 from selenium.webdriver.common.by import By
 
 from services.api_externes.groq.call_groq import call_groq
@@ -11,7 +12,7 @@ from usecase.linkedin.services.find_element.messages.find_send_btn import find_s
 from usecase.linkedin.services.find_element.posts.get_textbox import get_textbox
 from usecase.linkedin.services.selenium.actions.click_on_message import click_on_message
 from usecase.linkedin.services.python_functions.slow_type import slow_type
-from usecase.linkedin.services.selenium.actions import write_and_send_message
+from usecase.linkedin.services.selenium.actions.write_and_send_message import write_and_send_message
 from usecase.linkedin.query.tables.url_contactees.insert.insert_url_contactees import insert_url_contactees
 from usecase.linkedin.query.tables.cabinets.get.get_cabinets_name import get_cabinets_name as get_cabinets_name
 
@@ -19,19 +20,23 @@ from usecase.linkedin.query.tables.cabinets.get.get_cabinets_name import get_cab
 def send_message(
     driver,
     job_title,
-    user_data
+    user_data,
+    details,
+    telephone,
+    full_name,
+    candidatrecherche
 ):
     print("start messages directs...")
     yield f"Start envoi de messages pour {job_title}..."
 
     message = None
-    urls, db_profiles_map = find_profiles_links(driver, user_data)
+    urls, db_profiles_map = find_profiles_links(driver, user_data, )
 
     for u, url in enumerate(urls, start=1):
         try:
             try:
                 print(f"Traitement du profil {u}/{len(urls)}...")
-                yield f"Traitement du profil {u}/{len(urls)}..."
+                yield f"lookig for profil {u}/{len(urls)}..."
                 time.sleep(random.uniform(5, 8))
 
                 print(f"[DEBUG] Accès au profil: {url}")
@@ -45,7 +50,6 @@ def send_message(
                     print(
                         f"[DEBUG] ❌ Timeout/Erreur chargement page profil: {load_error}"
                     )
-                    yield "⚠️ Page profil n'a pas pu charger. Passage au suivant..."
                     time.sleep(random.uniform(3, 5))
                     continue
                 finally:
@@ -80,15 +84,20 @@ def send_message(
                     yield f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
 
                 origin_mode = db_profiles_map.get(url, "")
-                if not origin_mode:
-                    print(f"⏭️ Profil {url} pas trouvé en base, skip...")
-                    yield "⏭️ Profil non trouvé en base, passage au suivant..."
-                    continue
-                print(f"origin mode: {origin_mode}")
+                # if not origin_mode:
+                #     print(f"⏭️ Profil {url} pas trouvé en base, skip...")
+                #     yield "⏭️ Profil non trouvé en base, passage au suivant..."
+                #     continue
+                # print(f"origin mode: {origin_mode}")
 
                 time.sleep(4)
 
-                instruction = check_mode_and_get_instruction()
+                instruction = check_mode_and_get_instruction(origin_mode,     driver,
+    job_title,
+    details,
+    telephone,
+    full_name,
+    candidatrecherche)
                 message = call_groq(instruction)
 
                 time.sleep(random.uniform(6, 8))
@@ -114,7 +123,6 @@ def send_message(
             except Exception as e:
                 traceback.print_exc()
                 print(f"Détails : {e}")
-                yield "❌ Échec à l'étape : Saisie du message"
                 time.sleep(random.uniform(6, 9))
                 continue
             try:
@@ -122,7 +130,6 @@ def send_message(
             except Exception as e:
                 traceback.print_exc()
                 print(f"Détails : {e}")
-                yield "❌ Échec à l'étape : localisation bouton"
                 time.sleep(random.uniform(6, 9))
                 continue
 
@@ -133,15 +140,10 @@ def send_message(
             except Exception as e:
                 traceback.print_exc()
                 print(f"Détails : {e}")
-                yield "❌ Échec à l'étape : Clic Envoi"
                 time.sleep(random.uniform(6, 9))
                 continue
 
-        except Exception as e:
-            print(f"Erreur : {e}")
-            print(f"Erreur :\n{traceback.format_exc()}")
-            continue
 
-        finally:
-            print("bloc finally")
-            print("Fin de la boucle principale dans send_message. Tous les profils ont été traités.")
+        except WebDriverException as e:
+            print(f"Error :\n{traceback.format_exc()}")
+            continue

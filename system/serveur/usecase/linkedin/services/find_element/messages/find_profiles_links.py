@@ -23,9 +23,9 @@ def find_profiles_links(driver, user_data):
             print(f"[DEBUG] Already in urls: {url in urls}")
             print(f"[DEBUG] In db_profiles_map: {url in db_profiles_map}")
             print(f"[DEBUG] In contacted_urls: {url in contacted_urls}")
-            if url not in urls and url in db_profiles_map and url not in contacted_urls:
-                print(f"[DEBUG] Adding URL to process: {url}")
-                urls.append(url)
+            # if url not in urls and url in db_profiles_map and url not in contacted_urls:
+            print(f"[DEBUG] Adding URL to process: {url}")
+            urls.append(url)
 
         if len(urls) == 0:
             print("Aucun profil trouvé")

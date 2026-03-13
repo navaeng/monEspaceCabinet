@@ -1,5 +1,5 @@
-from datetime import time
-from random import random
+import time
+import random
 
 
 def write_and_send_message(driver, btn_element):

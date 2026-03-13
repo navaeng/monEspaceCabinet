@@ -16,6 +16,10 @@ def run_chrome(
     details: str,
     mode: str,
     user_data,
+        telephone,
+        full_name,
+        candidatrecherche,
+        post
 ):
 
     uid = user_data.get("user_id")
@@ -43,7 +47,13 @@ def run_chrome(
                 yield from login_linkedin(driver, user_data)
 
             yield from request_connexion(driver, job_title, user_data)
-            yield from send_message(driver, job_title, user_data)
+            yield from send_message(    driver,
+    job_title,
+    user_data,
+    details,
+    telephone,
+    full_name,
+    candidatrecherche)
 
         except Exception as e:
             print(f"Error : {e}")

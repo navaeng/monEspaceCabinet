@@ -1,5 +1,5 @@
 from usecase.linkedin.IA.prompt.prospection.prompt_message_prospection import prompt_message_prospection
-from usecase.linkedin.IA.prompt.sourcing import prompt_message_sourcing
+from usecase.linkedin.IA.prompt.sourcing.prompt_message_sourcing import prompt_message_sourcing
 
 
 def check_mode_and_get_instruction(origin_mode,     driver,
@@ -10,8 +10,9 @@ def check_mode_and_get_instruction(origin_mode,     driver,
     candidatrecherche):
 
     previous_message = []
+    instruction = ""
 
-    if origin_mode == "linkedin":
+    if origin_mode == "prospection":
         instruction = prompt_message_prospection(
             job_title, details, telephone, full_name, previous_message
         )
@@ -19,5 +20,4 @@ def check_mode_and_get_instruction(origin_mode,     driver,
         instruction = prompt_message_sourcing(
             job_title, details, telephone, full_name, candidatrecherche, previous_message
         )
-
     return instruction

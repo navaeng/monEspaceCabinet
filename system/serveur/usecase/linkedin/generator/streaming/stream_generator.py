@@ -12,6 +12,9 @@ def stream_generator(body, user_data):
             mode=body.mode,
             post=body.post or "",
             user_data=user_data,
+            telephone=body.telephone,
+            full_name=body.full_name,
+            candidatrecherche=body.candidatrecherche,
         ):
             print(f"{step}\n")
             yield f"{step}\n"

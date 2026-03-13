@@ -2,9 +2,9 @@ from fastapi import FastAPI
 import uvicorn
 from configurations.config_CORS import config_CORS
 from usecase.dossier_competences.APIRouter.root_generate_dossier import router_start_generate_dossier
-from usecase.linkedin.APIRouter.root_start_auto import router_start_auto
-from usecase.linkedin.APIRouter.root_start_chrome import router_start_chrome
-from usecase.linkedin.APIRouter.root_listes import router_listes
+# from usecase.linkedin.APIRouter.root_start_auto import router_start_auto
+# from usecase.linkedin.APIRouter.root_start_chrome import router_start_chrome
+# from usecase.linkedin.APIRouter.root_listes import router_listes
 
 app = FastAPI()
 config_CORS(app)
@@ -15,10 +15,10 @@ async def root():
         "status": "OK",
     }
 
-app.include_router(router_listes)
-app.include_router(router_start_chrome)
+# app.include_router(router_listes)
+# app.include_router(router_start_chrome)
 app.include_router(router_start_generate_dossier)
-app.include_router(router_start_auto)
+# app.include_router(router_start_auto)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

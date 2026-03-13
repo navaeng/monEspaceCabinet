@@ -31,7 +31,7 @@ def header_right(data: object, cell_droite: object) -> None:
     p2.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     p2.paragraph_format.space_before = Pt(0)
     p2.paragraph_format.space_after = Pt(0)
-    run2 = p2.add_run(data.get('Poste_actuel_précis', ''))
+    run2 = p2.add_run(data.get('Poste_actuel', ''))
     run2.font.name = POLICE
     run2.font.size = Pt(14)
     run2.font.color.rgb = RGBColor(0x00, 0x20, 0x60)

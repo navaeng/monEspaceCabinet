@@ -19,7 +19,7 @@ system/.env
 *.log
 
 # Chrome / Selenium
-serveur/cookies/
+serveur/usecase/linkedin/cookies/
 serveur/outputs/
 ../.idea/workspace.xml
 # Divers

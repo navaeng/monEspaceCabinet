@@ -41,8 +41,16 @@ def run_chrome(
             yield "On tente l'accès à linkedin"
             print(requests.get("https://ipapi.co/json/").json())
 
-            driver.get("https://www.linkedin.com/feed/")
+            driver.get("https://fr.linkedin.com/feed/")
             cookie_path = f"usecase/linkedin/cookies/cookie_{uid}.json"
+
+            driver.add_cookie({
+                "name": "lang",
+                "value": "v=2&lang=fr-fr",
+                "domain": ".linkedin.com",
+                "path": "/",
+            })
+            driver.refresh()
 
             if os.path.exists(cookie_path):
                 with open(cookie_path, "r") as f:

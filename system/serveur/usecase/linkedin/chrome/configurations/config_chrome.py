@@ -24,7 +24,13 @@ def config_chrome(user_data):
     options = uc.ChromeOptions()
 
     options.add_argument("--lang=fr-FR")
-    options.add_experimental_option('prefs', {'intl.accept_languages': 'fr-FR'})
+    options.add_experimental_option('prefs', {
+        'intl.accept_languages': 'fr,fr-FR'
+    })
+
+    profile_dir = f"/home/ishak/Bureau/monEspaceCabinet (local)/system/serveur/chrome-profiles/user_{uid}"
+    os.makedirs(profile_dir, exist_ok=True)
+    options.add_argument(f"--user-data-dir={profile_dir}")
 
     options.add_argument("--profile-directory=Default")
     # options.add_argument("--headless=new")
@@ -71,9 +77,18 @@ def config_chrome(user_data):
         driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": driver.execute_script
         ("return navigator.userAgent"), "acceptLanguage": "fr-FR,fr"})
 
+        driver.get("https://www.linkedin.com")
+        driver.add_cookie({
+            "name": "lang",
+            "value": "v=2&lang=fr-fr",
+            "domain": ".linkedin.com",
+            "path": "/",
+        })
+        driver.refresh()
+
 
     except Exception as e:
-        print(f"❌ Erreur lancement Chrome : {traceback.format_exc()}")  # Affiche toute la pile d'erreurs
+        print(f"❌ Erreur lancement Chrome : {traceback.format_exc()}")
         return None
     print('fin de lancement chrome')
 

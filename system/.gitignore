@@ -26,3 +26,5 @@ serveur/outputs/
 *.lock
 user_data/
 .DS_Store
+
+../.idea

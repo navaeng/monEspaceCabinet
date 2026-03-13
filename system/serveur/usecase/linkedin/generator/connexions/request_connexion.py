@@ -39,8 +39,12 @@ def request_connexion(driver, job_title, user_data):
 
         for i, bouton in enumerate(boutons_conx):
             try:
+                boutons_conx = driver.find_elements(
+                    By.XPATH,
+                    "//button[.//svg[@id='connect-small']]"
+                )
                 # infos_profiles, container = get_container_info(bouton)
-                cabinet_name = get_cabinets_name(user_data)
+                # cabinet_name = get_cabinets_name(user_data)
 
                 yield f"check profile..."
                 print(f"On va vérifier si la personne est chez nous ...")

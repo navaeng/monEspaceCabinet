@@ -86,11 +86,11 @@ def send_message(
                     yield f"Pas de spécifications au cabinet {cabinet_name} dans son profil..."
 
                 origin_mode = db_profiles_map.get(url, "")
-                # if not origin_mode:
-                #     print(f"⏭️ Profil {url} pas trouvé en base, skip...")
-                #     yield "⏭️ Profil non trouvé en base, passage au suivant..."
-                #     continue
-                # print(f"origin mode: {origin_mode}")
+                if not origin_mode:
+                    print(f"⏭️ Profil {url} pas trouvé en base, skip...")
+                    yield "⏭️ Profil non trouvé en base, passage au suivant..."
+                    continue
+                print(f"origin mode: {origin_mode}")
 
                 time.sleep(4)
 
@@ -142,6 +142,7 @@ def send_message(
             try:
                 write_and_send_message(driver, btn_element)
                 insert_url_contactees(url, user_data)
+                continue
 
             except Exception as e:
                 traceback.print_exc()

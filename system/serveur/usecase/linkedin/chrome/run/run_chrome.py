@@ -40,7 +40,7 @@ def run_chrome(
             if "login" in driver.current_url:
                 yield from login_linkedin(driver, user_data)
 
-            # yield from request_connexion(driver, job_title, user_data)
+            yield from request_connexion(driver, job_title, user_data)
             yield from send_message(driver, job_title, user_data, details, telephone, full_name, candidatrecherche)
 
         except Exception as e:

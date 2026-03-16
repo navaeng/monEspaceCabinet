@@ -16,7 +16,7 @@ def config_chrome(user_data, uid):
     )
 
     vdisplay = Xvfb(width=1920, height=1080, colordepth=24)
-    vdisplay.start()
+    # vdisplay.start()
 
     options = uc.ChromeOptions()
 

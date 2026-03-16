@@ -1,4 +1,4 @@
-from usecase.linkedin.objects.user.object_user_data import object_user_data
+from usecase.linkedin.query.tables.user.get.get_user_data import object_user_data
 from serveur.data.database import supabase_client
 
 

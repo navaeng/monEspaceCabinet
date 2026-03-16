@@ -7,7 +7,7 @@ def insert_prospection_settings(body, cabinet_id, current_user_id, new_hour):
             {
                 "job_title": body.intitule,
                 "query": body.intitule,
-                "next_hour": new_hour.isoformat(),
+                "hour_start": new_hour.isoformat(),
                 "is_active": True,
                 "details": body.details,
                 "cabinet_id": cabinet_id,

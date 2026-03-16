@@ -18,7 +18,7 @@ async def root_start_chrome(
     body: UserRequest,
     current_user_id: str = Depends(get_user_id),
 ):
-    cabinet_id = get_cabinet_id()
+    cabinet_id =  await get_cabinet_id()
     user_data = object_user_data(body, current_user_id)
     user_data = get_user_informations(user_data)
 

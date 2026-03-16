@@ -36,7 +36,7 @@ def send_message(
         try:
             try:
                 print(f"Traitement du profil {u}/{len(url)}...")
-                yield f"lookig for profil {u}/{len(db_profiles_map)}..."
+                yield f"check profil {u}/{len(db_profiles_map)}..."
                 time.sleep(random.uniform(5, 8))
 
                 print(f"[DEBUG] Accès au profil: {url}")

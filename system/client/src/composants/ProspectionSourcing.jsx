@@ -479,23 +479,23 @@ function ProspectionSourcing() {
                               </span>
                             </div>*/}
 
-                            {p.hour_start && (
-                              <div className="flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 rounded-md text-xs border border-indigo-100">
-                                <svg
-                                  className="w-3.5 h-3.5"
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M11.3 3.046l1.396-1.408a.75.75 0 011.06 0l1.408 1.408a.75.75 0 010 1.06l-1.408 1.408a.75.75 0 01-1.06 0L11.3 4.106a.75.75 0 010-1.06zM15.956 7.75l-1.408-1.408a.75.75 0 00-1.06 0L12.08 7.75a.75.75 0 000 1.06l1.408 1.408a.75.75 0 001.06 0l1.408-1.408a.75.75 0 000-1.06zM6.02 4.106a.75.75 0 010 1.06L4.61 6.575a.75.75 0 01-1.06 0L2.142 5.166a.75.75 0 010-1.06L3.55 2.698a.75.75 0 011.06 0l1.409 1.408zM8.25 10.5a.75.75 0 00-.75.75v4.5a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75z" />
-                                </svg>
-                                <span>
-                                  Auto • demain{" "}
-                                  {p.hour_start.split("T")[1].slice(0, 5)}
-                                </span>
-                              </div>
-                            )}
-                          </div>
-                        </div>
+{/*                             {p.hour_start && ( */}
+{/*                               <div className="flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 rounded-md text-xs border border-indigo-100"> */}
+{/*                                 <svg */}
+{/*                                   className="w-3.5 h-3.5" */}
+{/*                                   fill="currentColor" */}
+{/*                                   viewBox="0 0 20 20" */}
+{/*                                 > */}
+{/*                                   <path d="M11.3 3.046l1.396-1.408a.75.75 0 011.06 0l1.408 1.408a.75.75 0 010 1.06l-1.408 1.408a.75.75 0 01-1.06 0L11.3 4.106a.75.75 0 010-1.06zM15.956 7.75l-1.408-1.408a.75.75 0 00-1.06 0L12.08 7.75a.75.75 0 000 1.06l1.408 1.408a.75.75 0 001.06 0l1.408-1.408a.75.75 0 000-1.06zM6.02 4.106a.75.75 0 010 1.06L4.61 6.575a.75.75 0 01-1.06 0L2.142 5.166a.75.75 0 010-1.06L3.55 2.698a.75.75 0 011.06 0l1.409 1.408zM8.25 10.5a.75.75 0 00-.75.75v4.5a.75.75 0 001.5 0v-4.5a.75.75 0 00-.75-.75z" /> */}
+{/*                                 </svg> */}
+{/*                                 <span> */}
+{/*                                   Auto • demain{" "} */}
+{/*                                   {p.hour_start.split("T")[1].slice(0, 5)} */}
+{/*                                 </span> */}
+{/*                               </div> */}
+{/*                             )} */}
+{/*                           </div> */}
+{/*                         </div> */}
 
                         {/* <div className="text-[10px] text-gray-500 mt-1">
                           {p.total_connexions ?? 0} connexions envoyés ·{" "}

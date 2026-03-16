@@ -16,7 +16,7 @@ def config_chrome(user_data, uid):
     )
 
     vdisplay = Xvfb(width=1920, height=1080, colordepth=24)
-    vdisplay.start()
+    # vdisplay.start()
     print('lancement avec XVFB')
 
     options = uc.ChromeOptions()
@@ -68,6 +68,5 @@ def config_chrome(user_data, uid):
     except (selenium.common.exceptions.WebDriverException, RuntimeError) as e:
         print(f"❌ Erreur lancement Chrome : {traceback.format_exc()}")
         return None
-    print('fin de lancement chrome')
 
     return driver, vdisplay

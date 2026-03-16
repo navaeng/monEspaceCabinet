@@ -1,5 +1,5 @@
 from datetime import timedelta, datetime
-from random import random
+import random
 from zoneinfo import ZoneInfo
 
 from serveur.data.database import supabase_client

@@ -7,7 +7,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__)).replace("/usecase/linke
 CRON_TAG = "# lancement-automatique"
 
 CRON_JOB = (
-    f'*/15 * * * * cd "{PROJECT_DIR}" && '
+    f'*/1 * * * * cd "{PROJECT_DIR}" && '
     f'/usr/bin/python3 usecase/linkedin/services/automatisation/planificateur.py '
     f'2>> planificateur.log {CRON_TAG}'
 )

@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)).replace("/usecase/
 
 
 from data.database import supabase_client
-from usecase.linkedin.query.tables.prospection_settings.read import check_start
+from usecase.linkedin.query.tables.prospection_settings.read.check_start import check_start
 
 logging.basicConfig(filename="planificateur.log", level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')

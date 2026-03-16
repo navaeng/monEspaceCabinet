@@ -21,9 +21,9 @@ async def root_start_chrome(
     cabinet_id =  await get_cabinet_id(current_user_id)
     user_data = object_user_data(body, current_user_id)
     user_data = get_user_informations(user_data)
-    next_hour = generate_next_hour()
+    new_hour = generate_next_hour()
 
     if body.is_manual:
-        insert_prospection_settings(body, cabinet_id, current_user_id, next_hour)
+        insert_prospection_settings(body, cabinet_id, current_user_id, new_hour)
 
     return StreamingResponse(stream_generator(body, user_data), media_type="text/plain")

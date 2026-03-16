@@ -29,6 +29,5 @@ def stream_generator(body, user_data):
     finally:
         update_is_active_false(user_data)
         update_has_run_today_true()
-        generate_next_hour()
 
         print("🔓 Session terminée")

@@ -1,6 +1,9 @@
 import time
 import random
 
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
 
 def write_and_send_message(driver, btn_element):
     try:
@@ -12,6 +15,10 @@ def write_and_send_message(driver, btn_element):
 
         time.sleep(random.uniform(5, 9))
         print("✅ Message envoyé")
+
+        ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+
+        print("✅ Message envoyé et fenêtre fermée")
     except Exception as e:
         print(f"❌ Erreur write_and_send_message: {e}")
         raise e

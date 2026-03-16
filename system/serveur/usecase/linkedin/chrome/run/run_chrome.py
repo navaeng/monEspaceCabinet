@@ -27,7 +27,7 @@ def run_chrome(
 
     if driver is not None:
         try:
-            yield "Starting..."
+            yield "Start..."
             time.sleep(random.uniform(3, 6))
 
             get_cookies(driver, uid)

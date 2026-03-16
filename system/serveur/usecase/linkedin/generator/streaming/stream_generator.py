@@ -10,6 +10,7 @@ def stream_generator(body, user_data):
         print(f"🚀 Lancement Chrome pour {body.intitule}")
         update_is_active_true(user_data)
         for step in run_chrome(
+
             job_title=body.intitule,
             details=body.details,
             mode=body.mode,

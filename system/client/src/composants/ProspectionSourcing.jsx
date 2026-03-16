@@ -494,8 +494,8 @@ function ProspectionSourcing() {
 {/*                                 </span> */}
 {/*                               </div> */}
 {/*                             )} */}
-{/*                           </div> */}
-{/*                         </div> */}
+                          </div>
+                        </div>
 
                         {/* <div className="text-[10px] text-gray-500 mt-1">
                           {p.total_connexions ?? 0} connexions envoyés ·{" "}

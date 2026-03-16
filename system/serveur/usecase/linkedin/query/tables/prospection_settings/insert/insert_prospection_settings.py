@@ -1,7 +1,7 @@
 from data.database import supabase_client
 
 
-def insert_prospection_settings(body, cabinet_id, current_user_id, generate_next_hour):
+def insert_prospection_settings(body, cabinet_id, current_user_id):
     try:
         supabase_client().table("prospection_settings").insert(
             {
@@ -12,7 +12,6 @@ def insert_prospection_settings(body, cabinet_id, current_user_id, generate_next
                 "cabinet_id": cabinet_id,
                 "mode": body.mode,
                 "user_id": current_user_id,
-                "hour_start": generate_next_hour.isoformat(),
             }
         ).execute()
     except Exception as e:

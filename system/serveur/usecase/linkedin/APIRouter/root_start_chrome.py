@@ -4,7 +4,7 @@ from starlette.responses import StreamingResponse
 from usecase.linkedin.generator.streaming.stream_generator import stream_generator
 from usecase.linkedin.classes.user.UserRequest import  UserRequest
 from usecase.linkedin.objects.user.object_user_data import object_user_data
-from usecase.linkedin.services.python_functions.generate_hour import generate_hour
+from usecase.linkedin.services.python_functions.generate_next_hour import generate_next_hour
 from usecase.linkedin.query.tables.cabinets.get.get_cabinet_id import get_cabinet_id
 from usecase.linkedin.query.tables.prospection_settings.insert.insert_prospection_settings import insert_prospection_settings
 from usecase.linkedin.query.tables.user.get.get_user_id import get_user_id
@@ -17,13 +17,12 @@ router_start_chrome = APIRouter()
 async def root_start_chrome(
     body: UserRequest,
     current_user_id: str = Depends(get_user_id),
-    cabinet_id: str = Depends(get_cabinet_id),
 ):
+    cabinet_id = get_cabinet_id()
     user_data = object_user_data(body, current_user_id)
     user_data = get_user_informations(user_data)
-    generate_next_hour = generate_hour()
 
     if body.is_manual:
-        insert_prospection_settings(body, cabinet_id, current_user_id, generate_next_hour)
+        insert_prospection_settings(body, cabinet_id, current_user_id)
 
     return StreamingResponse(stream_generator(body, user_data), media_type="text/plain")

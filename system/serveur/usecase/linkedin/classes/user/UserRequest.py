@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 class UserRequest(BaseModel):  # contrat
     id: Optional[int] = None
+    cabinet_id: Optional[int] = None
     intitule: str
     mode: str
     details: str

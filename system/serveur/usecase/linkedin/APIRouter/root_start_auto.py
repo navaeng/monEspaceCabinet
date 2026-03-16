@@ -26,4 +26,3 @@ async def root_start_auto():
         print("Cron enregistré")
     except Exception as e:
         print(e)
-

@@ -2,6 +2,7 @@ from usecase.linkedin.chrome.run.run_chrome import run_chrome
 from usecase.linkedin.query.tables.prospection_settings.update.update_has_run_today_true import update_has_run_today_true
 from usecase.linkedin.query.tables.prospection_settings.update.update_is_active_false import update_is_active_false
 from usecase.linkedin.query.tables.prospection_settings.update.update_is_active_true import update_is_active_true
+from usecase.linkedin.services.python_functions.generate_next_hour import generate_next_hour
 
 
 def stream_generator(body, user_data):
@@ -28,5 +29,6 @@ def stream_generator(body, user_data):
     finally:
         update_is_active_false(user_data)
         update_has_run_today_true()
+        generate_next_hour()
 
         print("🔓 Session terminée")

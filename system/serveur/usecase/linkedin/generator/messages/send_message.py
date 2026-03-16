@@ -35,8 +35,8 @@ def send_message(
     for u, url in enumerate(urls, start=1):
         try:
             try:
-                print(f"Traitement du profil {u}/{len(urls)}...")
-                yield f"lookig for profil {u}/{len(urls)}..."
+                print(f"Traitement du profil {u}/{len(db_profiles_map)}...")
+                yield f"lookig for profil {u}/{len(db_profiles_map)}..."
                 time.sleep(random.uniform(5, 8))
 
                 print(f"[DEBUG] Accès au profil: {url}")
@@ -110,6 +110,7 @@ def send_message(
                 yield "Traitement des profils impossibles"
 
             try:
+                print('click on message...')
                 click_on_message(driver)
             except Exception as e:
                 print(f"{e}")

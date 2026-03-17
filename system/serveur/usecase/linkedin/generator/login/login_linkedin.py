@@ -1,6 +1,6 @@
 import random
 import time
-
+import json
 from selenium.webdriver.common.keys import Keys
 from usecase.linkedin.services.find_element.login.find_email_input import find_email_input
 from usecase.linkedin.services.find_element.login.find_password_input import find_password_input
@@ -28,6 +28,10 @@ def login_linkedin(driver, user_data):
 
         if "feed" in driver.current_url:
             print("Connexion success, redirection vers feed OK")
+
+            cookies = driver.get_cookies()
+            with open(f"usecase/linkedin/cookies_{user_data.get('id')}.json", "w") as file:
+                json.dump(cookies, file)
             yield "Connexion success !"
         else:
             print(f"Redirection après login: {driver.current_url}")

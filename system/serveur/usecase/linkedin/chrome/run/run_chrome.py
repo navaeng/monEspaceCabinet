@@ -8,6 +8,7 @@ from usecase.linkedin.generator.connexions.request_connexion import request_conn
 from usecase.linkedin.generator.messages.send_message import send_message
 from usecase.linkedin.chrome.configurations.config_chrome import config_chrome
 from usecase.linkedin.generator.login.login_linkedin import login_linkedin
+from usecase.linkedin.services.python_functions.human_actions.human_move import human_move
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -40,6 +41,7 @@ def run_chrome(
             if "login" in driver.current_url:
                 yield from login_linkedin(driver, user_data)
 
+            human_move(driver)
             yield from request_connexion(driver, job_title, user_data)
             yield from send_message(driver, job_title, user_data, details, telephone, full_name, candidatrecherche)
 

@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="import">
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/services/python_functions/human_actions/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/services/python_functions/human_actions/human_move.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/services/python_functions/human_actions/scrolling.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/configurations/config_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/configurations/config_chrome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/run/run_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/run/run_chrome.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/connexions/request_connexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/connexions/request_connexion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/messages/send_message.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/messages/send_message.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,20 +54,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;hotfix&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ishak/Bureau/monEspaceCabinet (local)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "clean__code",
+    "last_opened_file_path": "/home/ishak/Bureau/monEspaceCabinet (local)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/system/serveur/usecase/dossier_competences/services/library/python_docx/build_dossier/body/sections/experiences" />

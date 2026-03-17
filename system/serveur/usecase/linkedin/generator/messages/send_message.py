@@ -10,6 +10,7 @@ from usecase.linkedin.services.instructions.check_mode_and_get_instruction impor
 from usecase.linkedin.services.find_element.messages.find_profiles_links import find_profiles_links
 from usecase.linkedin.services.find_element.messages.find_send_btn import find_send_btn
 from usecase.linkedin.services.find_element.posts.get_textbox import get_textbox
+from usecase.linkedin.services.python_functions.human_actions.human_move import human_move
 from usecase.linkedin.services.selenium.actions.click_on_message import click_on_message
 from usecase.linkedin.services.python_functions.slow_type import slow_type
 from usecase.linkedin.services.selenium.actions.write_and_send_message import write_and_send_message
@@ -48,6 +49,8 @@ def send_message(
 
                     driver.get(url)
                     print("[DEBUG] ✅ Page du profil chargée avec succès")
+                    human_move(driver)
+
                 except Exception as load_error:
                     print(
                         f"[DEBUG] ❌ Timeout/Erreur chargement page profil: {load_error}"
@@ -93,6 +96,7 @@ def send_message(
                 print(f"origin mode: {origin_mode}")
 
                 time.sleep(4)
+                human_move(driver)
 
                 instruction = check_mode_and_get_instruction(origin_mode,     driver,
                             job_title,

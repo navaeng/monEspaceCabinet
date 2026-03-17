@@ -9,6 +9,7 @@ from usecase.linkedin.script_JS.buttons.find_button_envoyer_sans_note import fin
 from usecase.linkedin.query.tables.cabinets.get.get_cabinets_name import get_cabinets_name
 from usecase.linkedin.services.find_element.connexions.find_buttons_conx import find_buttons_conx
 from usecase.linkedin.services.find_element.connexions.get_container_info import get_container_info
+from usecase.linkedin.services.python_functions.human_actions.human_move import human_move
 
 
 # from usecase.linkedin.services.find_element.connexions.find_buttons_conx import find_buttons_conx
@@ -24,8 +25,8 @@ def request_connexion(driver, job_title, user_data):
             target_url = (f"https://www.linkedin.com/search/results/people/?keywords={query_encoded}"
                           f"&origin=SWITCH_SEARCH_VERTICAL&page={page}")
             driver.get(target_url)
-            driver.add_cookie({"name": "lang", "value": "v=2&lang=fr-fr", "domain": ".linkedin.com", "path": "/"})
-            driver.refresh()
+            # driver.add_cookie({"name": "lang", "value": "v=2&lang=fr-fr", "domain": ".linkedin.com", "path": "/"})
+            # driver.refresh()
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
             yield "Searching..."
         except Exception as e:
@@ -36,6 +37,7 @@ def request_connexion(driver, job_title, user_data):
 
         boutons_conx = find_buttons_conx(driver)
         yield f" {len(boutons_conx)} users finding..."
+        human_move(driver)
 
         for i, bouton in enumerate(boutons_conx):
             try:
@@ -65,6 +67,8 @@ def request_connexion(driver, job_title, user_data):
                 time.sleep(random.uniform(2, 4))
 
                 driver.execute_script("arguments[0].click();", bouton)
+
+                human_move(driver)
 
                 yield f"[{i + 1}] invitations..."
 

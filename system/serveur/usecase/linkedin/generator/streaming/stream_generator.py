@@ -7,7 +7,7 @@ from usecase.linkedin.services.python_functions.generate_next_hour import genera
 
 def stream_generator(body, user_data):
     try:
-        update_is_active_true(user_data)
+
         print(f"🚀 Lancement Chrome pour {body.intitule}")
         for step in run_chrome(
 

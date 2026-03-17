@@ -8,6 +8,7 @@ from usecase.linkedin.generator.connexions.request_connexion import request_conn
 from usecase.linkedin.generator.messages.send_message import send_message
 from usecase.linkedin.chrome.configurations.config_chrome import config_chrome
 from usecase.linkedin.generator.login.login_linkedin import login_linkedin
+from usecase.linkedin.query.tables.prospection_settings.update.update_is_active_true import update_is_active_true
 from usecase.linkedin.services.python_functions.human_actions.human_move import human_move
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,7 +23,8 @@ def run_chrome(
     full_name,
     candidatrecherche,
 ):
-
+    print(f"ID juste avant update: {user_data.get('id')}")
+    update_is_active_true(user_data)
     uid = user_data.get("user_id")
     driver, vdisplay = config_chrome(user_data, uid)
 

@@ -6,18 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="import">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/client/src/composants/ProspectionSourcing.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/ProspectionSourcing.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/APIRouter/root_start_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/APIRouter/root_start_chrome.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/configurations/config_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/configurations/config_chrome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/run/run_chrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/run/run_chrome.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/connexions/request_connexion.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/connexions/request_connexion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/login/login_linkedin.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/login/login_linkedin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/streaming/stream_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/streaming/stream_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/cabinets/get/get_cabinet_id.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/cabinets/get/get_cabinet_id.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/cabinets/get/get_cabinets_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/cabinets/get/get_cabinets_name.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/prospection_settings/insert/insert_prospection_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/prospection_settings/insert/insert_prospection_settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/prospection_settings/update/update_is_active_true.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/prospection_settings/update/update_is_active_true.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/user/get/get_user_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/query/tables/user/get/get_user_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/services/python_functions/human_actions/scrolling.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

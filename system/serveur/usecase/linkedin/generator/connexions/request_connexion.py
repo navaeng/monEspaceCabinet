@@ -18,7 +18,7 @@ from usecase.linkedin.services.python_functions.human_actions.human_move import 
 
 def request_connexion(driver, job_title, user_data):
 
-    for page in range(1, 8):
+    for page in range(1, 2):
         try:
             time.sleep(random.uniform(8, 15))
             query_encoded = urllib.parse.quote(job_title)
@@ -44,9 +44,10 @@ def request_connexion(driver, job_title, user_data):
 
                 infos_profiles, container = get_container_info(bouton)
                 cabinet_name = get_cabinets_name(user_data)
+                print(f'cabinet name : {cabinet_name}')
 
                 yield f"check profile..."
-                print(f"On va vérifier si la personne est chez nous ...")
+                print(f"On va vérifier si la personne est chez {cabinet_name} ...")
 
                 time.sleep(6)
                 if cabinet_name:

@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="import">
+      <change afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/mycookies/configs/add_cookie.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/mycookies/get_cookies.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/chrome/mycookies/get_cookies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/login/login_linkedin.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/usecase/linkedin/generator/login/login_linkedin.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

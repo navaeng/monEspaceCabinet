@@ -3,7 +3,7 @@ import time
 import json
 from selenium.webdriver.common.keys import Keys
 
-from usecase.linkedin.chrome.mycookies.configs.read_cookie import add_cookie
+from usecase.linkedin.chrome.mycookies.configs.read_cookie import read_cookie
 from usecase.linkedin.services.find_element.login.find_email_input import find_email_input
 from usecase.linkedin.services.find_element.login.find_password_input import find_password_input
 from usecase.linkedin.services.python_functions.slow_type import slow_type
@@ -31,7 +31,7 @@ def login_linkedin(driver, user_data):
         if "feed" in driver.current_url:
             print("Connexion success, redirection vers feed OK")
 
-            add_cookie(driver, user_data)
+            read_cookie(driver, user_data)
             yield "Connexion success !"
         else:
             print(f"Redirection après login: {driver.current_url}")

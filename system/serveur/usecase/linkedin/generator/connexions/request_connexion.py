@@ -37,7 +37,7 @@ def request_connexion(driver, job_title, user_data):
 
         boutons_conx = find_buttons_conx(driver)
         yield f" {len(boutons_conx)} users finding..."
-        human_move(driver)
+        # human_move(driver)
 
         for i, bouton in enumerate(boutons_conx):
             try:
@@ -68,7 +68,7 @@ def request_connexion(driver, job_title, user_data):
 
                 driver.execute_script("arguments[0].click();", bouton)
 
-                human_move(driver)
+                # human_move(driver)
 
                 yield f"[{i + 1}] invitations..."
 

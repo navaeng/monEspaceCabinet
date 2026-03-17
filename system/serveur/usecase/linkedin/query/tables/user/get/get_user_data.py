@@ -28,7 +28,8 @@ def get_user_data(body, current_user_id):
     profile = result.data
 
     rpc_res = rpc_query({
-        "job_title": body.intitule
+        "job_title": body.intitule,
+        "user_id_input": current_user_id,
     })
 
     print(f"DEBUG credentials: {rpc_res.data}")

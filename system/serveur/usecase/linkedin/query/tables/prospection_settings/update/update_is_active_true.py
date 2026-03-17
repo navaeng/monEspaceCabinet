@@ -10,7 +10,7 @@ def update_is_active_true(user_data):
             supabase_client().table("prospection_settings").update(
                 {"is_active": True}
             ).eq("id", job_id).execute()
-            print(f"✅ Statut désactivé pour l'user {job_id}")
+            print(f"✅ Statut mis a jour pour {job_id}")
 
         except Exception as e:
             if "204" not in str(e) and "Missing response" not in str(e):

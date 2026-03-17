@@ -7,7 +7,7 @@ def get_cabinets_name(user_data):
     res = (
         supabase_client().table("profiles")
         .select("*, cabinets(nom)")
-        .eq("user_id", current_user_id)
+        .eq("id", current_user_id)
         .execute()
     )
     print(f"Supabase response: {res}")

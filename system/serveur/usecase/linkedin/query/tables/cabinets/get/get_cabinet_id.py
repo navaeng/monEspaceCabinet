@@ -6,7 +6,7 @@ async def get_cabinet_id(current_user_id):
         res_cabinet = (
             supabase_client().table("profiles")
             .select("cabinet_id")
-            .eq("user_id", current_user_id)
+            .eq("id", current_user_id)
             .limit(1)
             .execute()
         )

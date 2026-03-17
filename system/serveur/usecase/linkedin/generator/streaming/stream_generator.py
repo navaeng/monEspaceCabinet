@@ -7,8 +7,8 @@ from usecase.linkedin.services.python_functions.generate_next_hour import genera
 
 def stream_generator(body, user_data):
     try:
-        print(f"🚀 Lancement Chrome pour {body.intitule}")
         update_is_active_true(user_data)
+        print(f"🚀 Lancement Chrome pour {body.intitule}")
         for step in run_chrome(
 
             job_title=body.intitule,
@@ -19,6 +19,7 @@ def stream_generator(body, user_data):
             full_name=body.full_name,
             candidatrecherche=body.candidatrecherche,
         ):
+
             print(f"{step}\n")
             yield f"{step}\n"
     except Exception as e:

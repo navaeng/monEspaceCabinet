@@ -3,7 +3,7 @@ from data.database import supabase_client
 
 def insert_prospection_settings(body, cabinet_id, current_user_id, new_hour):
     try:
-        supabase_client().table("prospection_settings").insert(
+        response = supabase_client().table("prospection_settings").insert(
             {
                 "job_title": body.intitule,
                 "query": body.intitule,
@@ -14,7 +14,8 @@ def insert_prospection_settings(body, cabinet_id, current_user_id, new_hour):
                 "mode": body.mode,
                 "user_id": current_user_id,
             }
-        ).execute().data[0]['id']
+        ).execute()
+        return response.data[0]['id']
     except Exception as e:
         print(f" ERREUR SUPABASE INSERT DANS LA TABLE PROSPECTION_SETTINGS : {e}")
 

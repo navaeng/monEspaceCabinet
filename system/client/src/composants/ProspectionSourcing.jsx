@@ -347,12 +347,12 @@ function ProspectionSourcing() {
                   )}
                 </button>
               </form>
-              <div className="text-[10px] text-gray-500 mt-1">
-                {prospection.reduce((a, c) => a + (c.total_connexions || 0), 0)}{" "}
-                connexions envoyées ·{" "}
-                {prospection.reduce((a, c) => a + (c.total_messages || 0), 0)}{" "}
-                personnes contactées
-              </div>
+{/*               <div className="text-[10px] text-gray-500 mt-1"> */}
+{/*                 {prospection.reduce((a, c) => a + (c.total_connexions || 0), 0)}{" "} */}
+{/*                 connexions envoyées ·{" "} */}
+{/*                 {prospection.reduce((a, c) => a + (c.total_messages || 0), 0)}{" "} */}
+{/*                 personnes contactées */}
+{/*               </div> */}
             </div>
           </div>
           {/* Liste sobre */}
@@ -363,7 +363,7 @@ function ProspectionSourcing() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h2 className="text-sm font-normal text-gray-900">
-                      Historique
+                      Lancement automatique
                     </h2>
 
                     <p className="text-gray-500 text-xs mt-0.5">

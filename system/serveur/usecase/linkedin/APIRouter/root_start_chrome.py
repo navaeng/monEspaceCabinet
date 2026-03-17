@@ -24,7 +24,7 @@ async def root_start_chrome(
 
     if body.is_manual:
         job_id = insert_prospection_settings(body, cabinet_id, current_user_id, new_hour)
-        user_data["id"] = job_id
+        user_data["job_id"] = job_id
 
     user_data = get_user_informations(user_data)
 

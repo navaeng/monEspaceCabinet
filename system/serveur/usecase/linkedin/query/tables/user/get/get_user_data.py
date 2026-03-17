@@ -36,7 +36,7 @@ def get_user_data(body, current_user_id):
     creditendials = rpc_res.data[0] if rpc_res.data else {}
 
     user_data = {
-        "id": profile.get("id"),
+        "job_id": profile.get("job_id"),
         "user_id": current_user_id,
         "linkedin_email": profile.get("linkedin_email"),
         "linkedin_password": creditendials.get("pgp_sym_decrypt"),

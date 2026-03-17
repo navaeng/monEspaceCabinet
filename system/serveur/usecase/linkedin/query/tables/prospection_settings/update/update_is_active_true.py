@@ -2,7 +2,7 @@ from data.database import supabase_client
 
 
 def update_is_active_true(user_data):
-    job_id = user_data.get("id")
+    job_id = user_data.get("job_id")
     print(f"id de job : {job_id}")
     print(f"DEBUG: Tentative d'update pour ID: {job_id} (Type: {type(job_id)})")
 

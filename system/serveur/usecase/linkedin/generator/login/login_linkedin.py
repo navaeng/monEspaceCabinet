@@ -30,7 +30,7 @@ def login_linkedin(driver, user_data):
             print("Connexion success, redirection vers feed OK")
 
             cookies = driver.get_cookies()
-            with open(f"usecase/linkedin/cookies_{user_data.get('id')}.json", "w") as file:
+            with open(f"usecase/linkedin/cookies/cookies_{user_data.get('id')}.json", "w") as file:
                 json.dump(cookies, file)
             yield "Connexion success !"
         else:

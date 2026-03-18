@@ -18,7 +18,9 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 def build_section_experiences(doc, data):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
     run = p.add_run("EXPERIENCES PROFESIONELLES")
+
     run.font.color.rgb =  RGBColor(255, 255, 255)
     run.font.bold = True
 

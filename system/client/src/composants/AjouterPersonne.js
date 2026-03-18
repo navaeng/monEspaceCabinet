@@ -4,18 +4,21 @@ const AjouterPersonne = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleadd = async (e) => {
+const handleAdd = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`http://localhost:8001/endpoint/add_collaborator`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      if (res.ok) alert("Collaborateur ajouté !");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  e.preventdefault();
-  const res = await fetch(`${API_URL}/endpoint/router_add_collaborator`, {
 
-  }
-  method: "POST",
-  headers: { "Content-Type": "application/json"},
-  body: JSON.stringify({ email: email, password})
-
-  console.log(email);
-  console.log(password)});
 
   return (
     <form onSubmit={handleAdd} className="space-y-4 p-4 border rounded">

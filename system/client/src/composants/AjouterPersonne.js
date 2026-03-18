@@ -8,6 +8,7 @@ const AjouterPersonne = () => {
   const [role, setRole] = useState("Member");
   const [messagesuccess, setMessagesuccess] = useState("")
 
+
 const handleAdd = async (e) => {
     e.preventDefault();
     try {
@@ -18,7 +19,9 @@ const handleAdd = async (e) => {
         body: JSON.stringify({ email, password, nom, role, admin_id: user.id }),
 
       });
-if (res.ok) setMessagesuccess("Collaborateur invité avec succès !");
+const data = await res.text();
+setMessagesuccess(data.replace(/"/g, ''));
+if (res.ok) setMessagesuccess(data);
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +65,7 @@ if (res.ok) setMessagesuccess("Collaborateur invité avec succès !");
         Ajouter
       </button>
 
-<p className="text-green-600">{messagesuccess}</p>
+<p>{messagesuccess}</p>
 
 
     </form>

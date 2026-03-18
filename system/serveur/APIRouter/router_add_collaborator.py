@@ -13,4 +13,5 @@ async def root_add_collaborator(body: CollaborateurBody):
     print(current_user_id)
     cabinet_id = get_cabinet_id(current_user_id)
 
+
     return query_ajouter_collaborateur(body, cabinet_id)

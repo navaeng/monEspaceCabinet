@@ -21,7 +21,6 @@ const handleAdd = async (e) => {
       });
 const data = await res.text();
 setMessagesuccess(data.replace(/"/g, ''));
-if (res.ok) setMessagesuccess(data);
     } catch (error) {
       console.error(error);
     }
@@ -65,7 +64,9 @@ if (res.ok) setMessagesuccess(data);
         Ajouter
       </button>
 
-<p>{messagesuccess}</p>
+<p className={messagesuccess.includes("succès") ? "text-green-600" : "text-red-600"}>
+  {messagesuccess}
+</p>
 
 
     </form>

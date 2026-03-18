@@ -7,8 +7,6 @@
     <list default="true" id="1e8cbafc-4d6b-4c01-8bee-35904c57f173" name="Changes" comment="import">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/client/src/composants/AjouterPersonne.js" beforeDir="false" afterPath="$PROJECT_DIR$/system/client/src/composants/AjouterPersonne.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/APIRouter/router_add_collaborator.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/APIRouter/router_add_collaborator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/serveur/query/collaborateurs/ajouter_collaborateur.py" beforeDir="false" afterPath="$PROJECT_DIR$/system/serveur/query/collaborateurs/ajouter_collaborateur.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

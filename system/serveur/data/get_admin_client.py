@@ -4,7 +4,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from supabase import create_client
 
-def supabase_client():
+def get_admin_client():
+
     base_dir = Path(__file__).resolve().parent.parent.parent
     env_path = base_dir / ".env"
 
@@ -12,13 +13,9 @@ def supabase_client():
         raise FileNotFoundError(f"Fichier .env introuvable ici : {env_path}")
     load_dotenv(dotenv_path=env_path)
 
-    print(f"environnement : {env_path}")
-
     url = os.environ.get("SUPABASE_URL", "")
-    key = os.environ.get("SUPABASE_ANON_KEY", "")
-    
+    service_key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 
-    print(f"url: {url}, key: {key}")
-    supabase_client = create_client(url, key)
-    supabase_client.postgrest.timeout = 60
-    return supabase_client
+    return create_client(url, service_key)
+
+admin_supabase = get_admin_client()

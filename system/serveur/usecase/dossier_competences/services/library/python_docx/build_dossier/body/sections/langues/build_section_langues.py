@@ -2,22 +2,17 @@ from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
 from docx.shared import Pt, RGBColor
 
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
+    header_section
+
+
 def build_section_langues(doc, data):
     langues = data.get('Langues', [])
 
     if not langues or not langues[0].get('Langue'):
         return
 
-    p_titre = doc.add_paragraph()
-    p_titre.alignment = 1  # Centre le titre
-    run = p_titre.add_run("LANGUES")
-    run.font.bold = True
-
-    run.font.color.rgb =  RGBColor(255, 255, 255)
-    shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
-
-    p_titre._element.get_or_add_pPr().append(shd)
-    p_titre.paragraph_format.keep_with_next = True
+    header_section(doc, "LANGUES")
 
     for langue in data.get('Langues', []):
         p = doc.add_paragraph(style='List Bullet')

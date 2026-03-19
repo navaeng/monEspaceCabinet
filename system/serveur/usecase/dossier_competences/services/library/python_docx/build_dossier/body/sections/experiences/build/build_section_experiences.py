@@ -2,6 +2,9 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import parse_xml, OxmlElement
 from docx.oxml.ns import nsdecls, qn
 from docx.shared import RGBColor
+
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
+    header_section
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.blue_line import blue_line
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.cellule_gauche import cellule_gauche
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.cellule_droite import cellule_droite
@@ -16,17 +19,8 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 
 
 def build_section_experiences(doc, data):
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-    run = p.add_run("EXPERIENCES PROFESIONELLES")
-
-    run.font.color.rgb =  RGBColor(255, 255, 255)
-    run.font.bold = True
-
-    shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
-    p._element.get_or_add_pPr().append(shd)
-    p.paragraph_format.keep_with_next = True
+    header_section(doc, "EXPERIENCES PROFESSIONNELLES")
 
     for exp in data.get('Expériences_Professionnelles_Antéchronologiques', []):
         table = doc.add_table(rows=1, cols=3)

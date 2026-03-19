@@ -3,20 +3,15 @@ from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
 from docx.shared import RGBColor, Pt, Cm
 
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
+    header_section
+
+
 def build_section_outils(doc, data):
     outils_data = data.get('Logiciels_Et_Outils', [])
     if outils_data and outils_data[0].get('Liste_Logiciels') and len(outils_data[0]['Liste_Logiciels']) > 0:
 
-        p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        run = p.add_run("OUTILS")
-        run.font.color.rgb =  RGBColor(255, 255, 255)
-        run.font.bold = True
-
-        shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
-
-        p._element.get_or_add_pPr().append(shd)
-        p.paragraph_format.keep_with_next = True
+        header_section(doc, "LOGICIELS ET OUTILS")
 
         for categorie in data.get('Logiciels_Et_Outils', []):
             print(categorie)

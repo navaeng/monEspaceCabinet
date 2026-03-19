@@ -3,22 +3,17 @@ from docx.oxml import parse_xml
 from docx.oxml.ns import nsdecls
 from docx.shared import RGBColor, Pt, Cm
 
+from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
+    header_section
+
+
 def build_section_secteurs_activites(doc, data):
 
     secteurs = data.get('Secteurs_Activités') or []
     if not secteurs:
         return
 
-    p = doc.add_paragraph()
-
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = p.add_run("SECTEURS ACTIVITES")
-    run.font.color.rgb = RGBColor(255, 255, 255)
-    run.font.bold = True
-
-    shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="002060"/>')
-    p._element.get_or_add_pPr().append(shd)
-    p.paragraph_format.keep_with_next = True
+    header_section(doc, "SECTEURS ACTIVITES")
 
     for secteur in data.get('Secteurs_Activités', []):
         p_item = doc.add_paragraph(secteur, style='List Bullet')

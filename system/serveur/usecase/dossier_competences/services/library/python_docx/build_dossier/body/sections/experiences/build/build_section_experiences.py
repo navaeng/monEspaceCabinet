@@ -1,7 +1,7 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import parse_xml, OxmlElement
 from docx.oxml.ns import nsdecls, qn
-from docx.shared import RGBColor
+from docx.shared import RGBColor, Cm
 
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
     header_section
@@ -24,6 +24,10 @@ def build_section_experiences(doc, data):
 
     for exp in data.get('Expériences_Professionnelles_Antéchronologiques', []):
         table = doc.add_table(rows=1, cols=3)
+        widths = [Cm(6), Cm(3), Cm(9.04)]
+        for i, col in enumerate(table.columns):
+            for cell in col.cells:
+                cell.width = widths[i]
         table.style = None
 
         cellule_gauche(table, exp)

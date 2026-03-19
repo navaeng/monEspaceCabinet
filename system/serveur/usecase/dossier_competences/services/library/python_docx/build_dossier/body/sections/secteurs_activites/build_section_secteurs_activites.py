@@ -17,7 +17,8 @@ def build_section_secteurs_activites(doc, data):
 
     for secteur in data.get('Secteurs_Activités_Entreprises_Travaillés', []):
         p_item = doc.add_paragraph(secteur, style='List Bullet')
-        p_item.paragraph_format.keep_with_next = True
         p_item.paragraph_format.space_after = Pt(2)
         p_item.paragraph_format.left_indent = Pt(20)
+        p_item.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+
         print(secteur)

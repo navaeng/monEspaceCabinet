@@ -25,8 +25,11 @@ def build_section_formation(doc, data):
 
         table.style = None
         cells = table.rows[0].cells
-        table.columns[0].width = Cm(14)
-        table.columns[1].width = Cm(3)
+
+        widths = [Cm(14), Cm(4.04)]
+        for i, col in enumerate(table.columns):
+            for cell in col.cells:
+                cell.width = widths[i]
 
         for row in table.rows:
             row._tr.get_or_add_trPr().append(parse_xml(f'<w:cantSplit {nsdecls("w")} w:val="1"/>'))

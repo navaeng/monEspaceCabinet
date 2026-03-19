@@ -6,13 +6,18 @@ def display_logiciels_outils(doc, exp):
     liste_outils = exp.get('Logiciels_et_outils_utilisés', [])
     texte_outils = ", ".join(liste_outils) if isinstance(liste_outils, list) else str(liste_outils)
 
-    run_label = p_outils.add_run("LOGICIELS ET OUTILS : ")
-    run_label.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
-    run_label.bold = True
-    run_label.underline = True
+    run_t = p_outils.add_run("Logiciels et outils : ")
+    run_t.font.size = Pt(10)
+    run_t.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+    run_t.bold = True
+    run_t.underline = True
+
+    run_sep = p_outils.add_run(" : ")
+    run_sep.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+    run_sep.bold = True
 
     run_liste = p_outils.add_run(texte_outils)
-    run_liste.font.color.rgb = RGBColor(0, 0, 0)
+    run_liste.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
     p_outils.paragraph_format.space_before = Pt(6)
     p_outils.paragraph_format.space_after = Pt(20)

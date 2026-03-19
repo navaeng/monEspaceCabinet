@@ -1,9 +1,10 @@
+from docx.oxml.ns import qn
 from docx.oxml import parse_xml
 
 
 def header_section(doc, texte):
     p = doc.add_paragraph()
-    p.paragraph_format.keep_with_next = True
+    p.clear()
 
     drawing_xml = (
         '<w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '

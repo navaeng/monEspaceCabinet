@@ -1,5 +1,5 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import RGBColor, Pt
+from docx.shared import RGBColor, Pt, Cm
 
 POLICE = "Calibri (corps)"
 

@@ -19,6 +19,7 @@ def build_section_secteurs_activites(doc, data):
         p_item = doc.add_paragraph(secteur, style='List Bullet')
         p_item.paragraph_format.space_after = Pt(2)
         p_item.paragraph_format.left_indent = Pt(20)
-        p_item.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+        for run in p_item.runs:
+            run.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
         print(secteur)

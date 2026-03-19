@@ -24,11 +24,10 @@ def build_section_experiences(doc, data):
 
     for exp in data.get('Expériences_Professionnelles_Antéchronologiques', []):
         table = doc.add_table(rows=1, cols=3)
-        widths = [Cm(6), Cm(3), Cm(9.04)]
-        for i, col in enumerate(table.columns):
-            for cell in col.cells:
-                cell.width = widths[i]
         table.style = None
+        table.columns[0].width = Cm(7.11)
+        table.columns[1].width = Cm(3.39)
+        table.columns[2].width = Cm(6.17)
 
         cellule_gauche(table, exp)
         cellule_milieu(table, exp)

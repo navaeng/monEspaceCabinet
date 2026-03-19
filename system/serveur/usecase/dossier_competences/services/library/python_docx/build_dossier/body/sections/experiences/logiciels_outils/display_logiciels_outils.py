@@ -6,7 +6,7 @@ def display_logiciels_outils(doc, exp):
     liste_outils = exp.get('Logiciels_et_outils_utilisés', [])
     texte_outils = ", ".join(liste_outils) if isinstance(liste_outils, list) else str(liste_outils)
 
-    run_t = p_outils.add_run("Logiciels et outils : ")
+    run_t = p_outils.add_run("Logiciels et outils")
     run_t.font.size = Pt(10)
     run_t.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
     run_t.bold = True

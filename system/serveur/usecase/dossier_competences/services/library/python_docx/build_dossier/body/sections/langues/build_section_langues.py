@@ -18,5 +18,8 @@ def build_section_langues(doc, data):
         p = doc.add_paragraph(style='List Bullet')
         run_l = p.add_run(f"{langue.get('Langue')} : ")
         run_l.bold = True
-        p.add_run(langue.get('Niveau'))
+        run_l.font.color.rgb = RGBColor(00, 20, 60)
+
+        run_n = p.add_run(langue.get('Niveau'))
+        run_n.font.color.rgb = RGBColor(00, 20, 60)
         p.paragraph_format.space_after = Pt(2)

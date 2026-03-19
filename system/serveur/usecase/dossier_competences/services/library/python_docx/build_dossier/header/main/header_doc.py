@@ -1,13 +1,17 @@
-from docx.shared import Cm, Pt
+from docx.shared import Cm
 from usecase.dossier_competences.services.library.python_docx.build_dossier.header.left.header_left import header_left
-from docx.enum.text import WD_TAB_ALIGNMENT, WD_TAB_LEADER
+
 from usecase.dossier_competences.services.library.python_docx.build_dossier.header.right.header_right import \
     header_right
 
 def header_doc(doc, data, logo_path):
-    p = doc.sections[0].header.paragraphs[0]
-    p.paragraph_format.tab_stops.add_tab_stop(Cm(17), WD_TAB_ALIGNMENT.RIGHT)
+    table = doc.sections[0].header.add_table(rows=1, cols=2, width=Cm(17))
+    table.style = None
 
-    header_left(logo_path, p)
-    p.add_run("\t")
-    header_right(doc, data, p)
+    table.columns[0].width = Cm(3)
+    table.columns[1].width = Cm(14)
+
+    cells = table.rows[0].cells
+
+    header_left(logo_path, cells[0])
+    header_right(data, cells[1])

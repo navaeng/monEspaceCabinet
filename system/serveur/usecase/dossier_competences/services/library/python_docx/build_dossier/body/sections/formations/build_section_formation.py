@@ -20,19 +20,27 @@ def build_section_formation(doc, data):
 
     header_section(doc, "FORMATIONS/DIPLOMES")
 
+
     for diplome in data.get('Diplômes_Et_Formations_Antéchronologiques', []):
-        table = doc.add_table(rows=1, cols=2)
+        p = doc.add_paragraph()
 
-        table.style = None
-        cells = table.rows[0].cells
-        table.columns[0].width = Cm(14)
-        table.columns[1].width = Cm(3)
+        tab_xml = parse_xml(f'<w:tabs {nsdecls("w")}><w:tab w:val="right" w:pos="10249"/></w:tabs>')
+        p._element.get_or_add_pPr().append(tab_xml)
 
-        for row in table.rows:
-            row._tr.get_or_add_trPr().append(parse_xml(f'<w:cantSplit {nsdecls("w")} w:val="1"/>'))
+        run_dip = p.add_run(diplome.get('Diplôme', ''))
+        run_dip.bold = True
+        run_dip.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
-        if diplome.get('Diplôme'):
-            left_cells(cells, diplome)
+        p.add_run('\t')
 
-        if diplome.get('Année'):
-            right_cells(cells, diplome)
+        run_date = p.add_run(str(diplome.get('Année', '')))
+        run_date.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+
+        if diplome.get('École'):
+            p_info = doc.add_paragraph()
+            p_info.paragraph_format.left_indent = Cm(1.25)
+            texte = diplome.get('École')
+            if diplome.get('Lieu'):
+                texte += f" - {diplome.get('Lieu')}"
+            run_info = p_info.add_run(texte)
+            run_info.font.color.rgb = RGBColor(0x00, 0x20, 0x60)

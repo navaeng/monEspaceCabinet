@@ -5,7 +5,6 @@ from usecase.dossier_competences.traitement.generate_dossier import generate_dos
 async def read_save_doc(cv_content: bytes, filename: str):
     temp_path = Path(f"/tmp/temp_{filename}")
 
-    
 
     with open(temp_path, "wb") as f:
         f.write(cv_content)

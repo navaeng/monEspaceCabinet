@@ -6,7 +6,7 @@ from docx.shared import Cm
 def header_section(doc, texte):
     p = doc.add_paragraph()
     p.clear()
-    doc.sections[0].left_margin = Cm(2)
+
 
     drawing_xml = (
         '<w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '

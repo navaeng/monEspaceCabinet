@@ -5,10 +5,6 @@ from docx.shared import RGBColor, Cm
 
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
     header_section
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.blue_line import blue_line
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.cellule_gauche import cellule_gauche
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.cellule_droite import cellule_droite
-from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.tables.cellule_milieu import cellule_milieu
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.logiciels_outils.display_logiciels_outils import \
     display_logiciels_outils
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.sections.experiences.poste.display_poste import \
@@ -22,24 +18,29 @@ def build_section_experiences(doc, data):
 
     header_section(doc, "EXPERIENCES PROFESSIONNELLES")
 
-
     for exp in data.get('Expériences_Professionnelles_Antéchronologiques', []):
-        table = doc.add_table(rows=1, cols=3)
+        p = doc.add_paragraph()
 
-        table.style = None
-        table.columns[0].width = Cm(7.11)
-        table.columns[1].width = Cm(3.39)
-        table.columns[2].width = Cm(6.17)
+        tab_xml = parse_xml(f'<w:tabs {nsdecls("w")}><w:tab w:val="center" w:pos="5125"/><w:tab w:val="right" w:pos="10249"/></w:tabs>')
+        p._element.get_or_add_pPr().append(tab_xml)
 
-        cellule_gauche(table, exp)
-        cellule_milieu(table, exp)
-        cellule_droite(table, exp)
-        blue_line(table)
+        border_xml = parse_xml(f'<w:pBdr {nsdecls("w")}><w:bottom w:val="single" w:sz="6" w:color="002060"/></w:pBdr>')
+        p._element.get_or_add_pPr().append(border_xml)
 
-        for row in table.rows:
-            for cell in row.cells:
-                for p in cell.paragraphs:
-                    p.paragraph_format.keep_with_next = True
+
+        run_entreprise = p.add_run(exp.get('Nom_Entreprise', ''))
+        run_entreprise.bold = True
+        run_entreprise.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+
+        p.add_run('\t')
+
+        run_duree = p.add_run(f"({exp.get('Durée_Mission', '')})")
+        run_duree.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+
+        p.add_run('\t')
+
+        run_dates = p.add_run(str(exp.get('Dates_Période', '')))
+        run_dates.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
         if exp.get("Poste_Occupé"):
             display_poste(doc, exp)
@@ -52,9 +53,3 @@ def build_section_experiences(doc, data):
 
         if exp.get("Logiciels_et_outils_utilisés"):
             display_logiciels_outils(doc, exp)
-
-        for row in table.rows:
-            trPr = row._tr.get_or_add_trPr()
-            cantSplit = OxmlElement('w:cantSplit')
-            cantSplit.set(qn('w:val'), '1')
-            trPr.append(cantSplit)

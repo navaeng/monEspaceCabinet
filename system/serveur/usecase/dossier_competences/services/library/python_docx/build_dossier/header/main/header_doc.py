@@ -9,9 +9,8 @@ def header_doc(doc, data, logo_path):
     table.style = None
     doc.sections[0].left_margin = Cm(2)
 
-    table.columns[0].width = Cm(7)
-    table.columns[1].width = Cm(10)
-
+    table.columns[0].width = Cm(6.44)
+    table.columns[1].width = Cm(11.45)
     cells = table.rows[0].cells
 
     header_left(logo_path, cells[0])

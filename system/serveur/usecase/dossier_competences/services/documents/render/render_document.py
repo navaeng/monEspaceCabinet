@@ -1,6 +1,7 @@
 import io
 
 from docx import Document
+from docx.shared import Cm
 
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.main.body_doc import body_doc
 from usecase.dossier_competences.services.library.python_docx.build_dossier.footer.main.footer_doc import footer_doc
@@ -13,6 +14,7 @@ def render_document(data):
 
     logo_path = get_logo()
     doc = Document()
+    doc.sections[0].left_margin = Cm(2)
 
     add_marge(doc)
 

@@ -2,12 +2,9 @@ from docx.oxml.ns import qn
 from docx.oxml import parse_xml
 from docx.shared import Cm
 
-
 def header_section(doc, texte):
     p = doc.add_paragraph()
     p.clear()
-
-
     drawing_xml = (
         '<w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '
         'xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
@@ -16,7 +13,9 @@ def header_section(doc, texte):
         '<w:drawing>'
         '<wp:inline>'
         '<wp:extent cx="6120000" cy="309600"/>'
+        '<wp:effectExtent l="0" t="0" r="0" b="0"/>'
         '<wp:docPr id="1" name="header"/>'
+        '<wp:cNvGraphicFramePr/>'
         '<a:graphic>'
         '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
         '<wps:wsp>'
@@ -53,5 +52,4 @@ def header_section(doc, texte):
         '</w:drawing>'
         '</w:r>'
     )
-    p._element.append(parse_xml(drawing_xml)) 
-
+    p.add_run()._element.append(parse_xml(drawing_xml))

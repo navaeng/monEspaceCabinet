@@ -2,7 +2,7 @@ from docx.oxml.ns import qn
 from docx.oxml import parse_xml
 from docx.shared import Cm
 
-_header_counter = 0
+_header_counter = 100
 
 def header_section(doc, texte):
     global _header_counter

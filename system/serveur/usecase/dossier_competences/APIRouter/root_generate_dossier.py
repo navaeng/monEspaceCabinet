@@ -13,7 +13,7 @@ async def root_generate_dossier(cv: UploadFile = File(...)):
     file_stream,
     media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     headers={
-        "Content-Disposition": f"attachment; filename=dossier_{cv.filename}.docx",
+        "Content-Disposition": f"attachment; filename*=UTF-8''{encoded_filename}",
         "Cache-Control": "no-cache, no-store, must-revalidate",
         "Pragma": "no-cache",
         "Expires": "0"

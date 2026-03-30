@@ -3,7 +3,7 @@ def experiences_template():
         "Expériences_Professionnelles_Antéchronologiques": [{
             "Poste_Occupé": "",
             "Nom_Entreprise": "",
-            "Secteur_activité_entreprise": "",
+            "Phrase_Courte_Expliquant_Les_Secteurs_Activité_Entreprise": "",
             "Dates_Période": "",
             "Durée_Mission": "",
             "Liste_Tâches": [],

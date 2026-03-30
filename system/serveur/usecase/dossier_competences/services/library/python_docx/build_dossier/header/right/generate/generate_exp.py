@@ -1,6 +1,6 @@
 def generate_exp(data):
     try:
-        val = float(str(data.get('Expérience_Totale_Années', '')).replace('+', '').split('an')[0].strip())
+        val = float(str(data.get('Expérience_Totale_Années', '')).split('an')[0].strip())
         ans = int(val)
         mois = round((val - ans) * 12)
 

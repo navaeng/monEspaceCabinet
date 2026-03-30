@@ -32,7 +32,7 @@ def build_section_experiences(doc, data):
         p._element.get_or_add_pPr().append(border_xml)
 
 
-        run_entreprise = p.add_run(exp.get('Nom_Entreprise', '')).upper()
+        run_entreprise = p.add_run(exp.get('Nom_Entreprise', '').upper())
         run_entreprise.bold = True
         run_entreprise.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 

@@ -9,13 +9,13 @@ from usecase.dossier_competences.services.library.python_docx.build_dossier.body
 
 def build_section_competences(doc, data):
 
-    comps = data.get('15_Phrases_Percutantes_Savoir_Faire_Candidat_commencant_par_un_verbe_a_infinitif') or data.get('Compétences') or []
+    comps = data.get('15_Phrases_Percutantes_Precises_Competences_Candidat_Commencant_Par_Un_Verbe_A_Infinitif') or data.get('Compétences') or []
     comps = [c for c in comps if c and c.strip()]
     if not comps: return
 
     header_section(doc, "DOMAINES DE COMPETENCES")
 
-    for comp in (data.get('15_Phrases_Percutantes_Savoir_Faire_Candidat_commencant_par_un_verbe_a_infinitif') or data.get('Compétences') or []):
+    for comp in (data.get('15_Phrases_Percutantes_Precises_Competences_Candidat_Commencant_Par_Un_Verbe_A_Infinitif') or data.get('Compétences') or []):
         p_item = doc.add_paragraph(comp, style='List Bullet')
         p_item.paragraph_format.left_indent = Cm(1)
         p_item.paragraph_format.keep_together = True

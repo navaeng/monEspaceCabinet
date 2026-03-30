@@ -23,6 +23,7 @@ def build_section_formation(doc, data):
     for diplome in data.get('Diplômes_Et_Formations_Antéchronologiques', []):
         p = doc.add_paragraph(diplome.get('Diplôme', ''), style='List Bullet')
         p.paragraph_format.keep_together = True
+        p.paragraph_format.keep_with_next = True
         p.paragraph_format.space_after = Pt(3.5)
 
         tab_xml = parse_xml(f'<w:tabs {nsdecls("w")}><w:tab w:val="right" w:pos="9639"/></w:tabs>')

@@ -13,7 +13,7 @@ def call_openrouter(prompt, model, json_mode=True):
             ],
             response_format={"type": "json_object"} if json_mode else None,
             temperature=0,
-            max_tokens=8000
+            # max_tokens=8000
         )
         return completion.choices[0].message.content
     except Exception as e:

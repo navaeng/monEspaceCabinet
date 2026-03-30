@@ -49,7 +49,7 @@ def build_section_experiences(doc, data):
         if exp.get("Poste_Occupé"):
             display_poste(doc, exp)
 
-        if exp.get('Secteur_activité_entreprise'):
+        if exp.get('Phrase_Courte_Expliquant_Les_Secteurs_Activité_Entreprise'):
             display_environnement_entreprise(doc, exp)
 
         if exp.get('Résumé_mission'):

@@ -1,3 +1,5 @@
+import json
+
 from docx.shared import Pt, RGBColor
 
 from services.api_externes.openrouter.faire_recherche_openrouter import faire_recherche_openrouter
@@ -27,8 +29,16 @@ from services.api_externes.openrouter.faire_recherche_openrouter import faire_re
 async def display_environnement_entreprise(doc, exp):
 
     nom_boite = exp.get('Nom_Entreprise', '')
+    print(f"DEBUG: Recherche pour {nom_boite}...")
 
     secteur_reel = await faire_recherche_openrouter(nom_boite)
+    print(f"DEBUG: Résultat IA pour {nom_boite} -> '{secteur_reel}'")
+
+    try:
+        secteur_reel = json.loads(secteur_reel.replace("```json", "").replace("```", "").strip()).get("Secteur",
+                                                                                                      secteur_reel)
+    except (json.JSONDecodeError, AttributeError):
+        pass
 
     p_mission = doc.add_paragraph()
     p_mission.paragraph_format.space_before = Pt(10)

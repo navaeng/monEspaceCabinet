@@ -6,18 +6,24 @@ async def faire_recherche_openrouter(nom_entreprise):
         return ""
 
     client = AsyncOpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ.get("OPENROUTERAPI"))
+    print(client)
 
     try:
         print('lancement de recherche en ligne...')
         completion = await client.chat.completions.create(
-            model="perplexity/llama-3.1-sonar-small-128k-online",
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"En une seule phrase de moins de 20 mots, explique les secteurs d'activités de l'entreprise {nom_entreprise}"
-                }
-            ]
+        model="google/gemini-2.0-flash-001:online",
+            messages=[{
+                "role": "user",
+                "content": (
+                    f"Recherche le secteur d'activité de l'entreprise '{nom_entreprise}'. "
+                    f"Réponds UNIQUEMENT en JSON valide, sans texte autour, sans balises markdown, dans ce format exact : "
+                    f'{{"Secteur_entreprise": "valeur en une phrase courte"}}'
+                )
+            }]
         )
-        return completion.choices[0].message.content.strip()
-    except Exception:
-        return ""
+        res = completion.choices[0].message.content.strip()
+        print(f"Brut reçu: {res}")
+        return res
+    except Exception as e:
+        print(f"Erreur: {e}")
+        return "Erreur recherche"

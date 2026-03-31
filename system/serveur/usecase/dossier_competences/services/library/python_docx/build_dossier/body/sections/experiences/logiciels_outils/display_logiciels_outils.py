@@ -6,7 +6,7 @@ def display_logiciels_outils(doc, exp):
     p_outils.paragraph_format.keep_with_next = False
 
 
-    liste_outils = exp.get('Logiciels_et_outils_utilisés', [])
+    liste_outils = exp.get('Logiciels_et_outils_utilisés_Sans_Indiquer_Le_Niveau', [])
     texte_outils = ", ".join(liste_outils) if isinstance(liste_outils, list) else str(liste_outils)
 
     run_t = p_outils.add_run("Logiciels et outils")

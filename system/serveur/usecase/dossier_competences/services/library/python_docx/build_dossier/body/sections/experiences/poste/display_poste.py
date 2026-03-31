@@ -9,7 +9,6 @@ def display_poste(doc, exp):
     run_poste.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
     run_poste.bold = True
-    run_poste.underline = True
 
     p_poste.paragraph_format.space_before = Pt(10)
     p_poste.paragraph_format.space_after = Pt(10)

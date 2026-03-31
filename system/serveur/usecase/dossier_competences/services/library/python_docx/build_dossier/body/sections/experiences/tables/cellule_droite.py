@@ -9,7 +9,7 @@ def cellule_droite(table, exp):
     p = cell_droite.paragraphs[0]
     p.paragraph_format.space_after = Pt(0)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    duree = exp.get('Durée_Mission', '')
+    duree = exp.get('Durée_Mission_Ou_En_Cours', '')
     run_duree = p.add_run(f"({duree})")
     run_duree.font.name = POLICE
     run_duree.font.size = Pt(11)

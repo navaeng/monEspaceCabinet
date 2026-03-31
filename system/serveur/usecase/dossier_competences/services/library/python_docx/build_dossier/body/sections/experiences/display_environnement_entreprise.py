@@ -35,7 +35,7 @@ async def display_environnement_entreprise(doc, exp):
     print(f"DEBUG: Résultat IA pour {nom_boite} -> '{secteur_reel}'")
 
     try:
-        secteur_reel = json.loads(secteur_reel.replace("```json", "").replace("```", "").strip()).get("Secteur",
+        secteur_reel = json.loads(secteur_reel.replace("```json", "").replace("```", "").strip()).get("Secteur_entreprise",
                                                                                                       secteur_reel)
     except (json.JSONDecodeError, AttributeError):
         pass

@@ -4,30 +4,30 @@ from docx.oxml.ns import nsdecls
 from docx.shared import RGBColor, Pt, Cm
 
 from usecase.dossier_competences.services.library.python_docx.build_dossier.body.header_section.header_section import \
-    header_section
+    header_section
 
 
 def build_section_outils(doc, data):
-    outils_data = data.get('Logiciels_Et_Outils_Sans_Indiquer_Le_Niveau', [])
-    if outils_data and outils_data[0].get('Liste_Logiciels'):
+    outils_data = data.get('Logiciels_Et_Outils_Sans_Indiquer_Le_Niveau', [])
+    if outils_data and outils_data[0].get('Liste_Logiciels') and len(outils_data[0]['Liste_Logiciels']) > 0:
 
-        header_section(doc, "LOGICIELS ET OUTILS")
+        header_section(doc, "LOGICIELS ET OUTILS")
 
-        for categorie in outils_data:
-            titre = categorie.get('Catégorie', '')
-            logiciels_outils = list(dict.fromkeys(categorie.get('Liste_Logiciels', [])))
+        for categorie in data.get('Logiciels_Et_Outils_Sans_Indiquer_Le_Niveau', []):
+            print(categorie)
+            titre = categorie.get('Catégorie', '')
+            logiciels_outils = list(dict.fromkeys(categorie.get('Liste_Logiciels', [])))
 
-            if titre and logiciels_outils:
-                p_titre = doc.add_paragraph()
-                run_t = p_titre.add_run(f"{titre.upper()} :")
-                run_t.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
-                run_t.bold = True
-                run_t.underline = True
-                p_titre.paragraph_format.space_after = Pt(2)
+           if titre and logiciels_outils:
+                p = doc.add_paragraph(style='List Bullet')
+                p.paragraph_format.keep_together = True
 
-                for logiciel in logiciels_outils:
-                    p_bullet = doc.add_paragraph(logiciel, style='List Bullet')
-                    p_bullet.paragraph_format.space_after = Pt(2)
-                    
+                run_t = p.add_run(f"{titre.upper()} : ")
+                run_t.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+                run_t.bold = True
+                run_t.underline = True
 
-                p_bullet.paragraph_format.space_after = Pt(6)
+                run_l = p.add_run(", ".join(logiciels_outils))
+                run_l.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
+
+                p.paragraph_format.space_after = Pt(4)

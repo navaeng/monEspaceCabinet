@@ -9,11 +9,13 @@ resend.api_key = os.environ.get("RESEND_API")
 async def send_mail(data: UserMailSchema, ai_response: str):
 
     try:
+        html_response = ai_response.replace("\n", "<br>")
+
         params = {
             "from": "onboarding@resend.dev",
             "to": "kouicicontact@yahoo.com",
             "subject": f"Nouveau process : {data.nom}",
-            "html": f"<p>{ai_response}</p>"
+            "html": f'<p style="font-family: "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.7;">{html_response}</p>'
         }
         resend.Emails.send(params)
         return {"status": "success"}

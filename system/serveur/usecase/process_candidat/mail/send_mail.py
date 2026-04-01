@@ -1,5 +1,6 @@
-import os
 import json
+import os
+
 import resend
 from fastapi import HTTPException
 
@@ -11,14 +12,19 @@ resend.api_key = os.environ.get("RESEND_API")
 async def send_mail(data: UserMailSchema, ai_response: str):
 
     try:
-        # html_response = ai_response.replace("\n", "<br>")
-        body = ai_response.split("\n", 2)[-1].strip()
+        try:
+            res = json.loads(ai_response)
+            email_text = res.get("email", res).get("body", ai_response)
+        except:
+            email_text = ai_response
+
+        html_response = email_text.replace("\n", "<br>")
 
         params = {
             "from": "onboarding@resend.dev",
             "to": data.email,
-            "subject": extract_subjectf(ai_response),
-            "html" : body.replace("\n", "<br>")
+            "subject": extract_subject(ai_response),
+            "html": f'<p style="font-family: "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.7;">{html_response}</p>'
         }
         resend.Emails.send(params)
         return {"status": "success"}

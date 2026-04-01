@@ -3,26 +3,16 @@ import os
 import resend
 
 resend.api_key = os.environ.get("RESEND_API")
+from usecase.process_candidat.classes.UserMailSchema import UserMailSchema
 
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-import resend
+async def send_mail(data: UserMailSchema, ai_response: str):
 
-router_envoyer_mail = APIRouter()
-
-class EmailSchema(BaseModel):
-    nom: str
-    email: str
-    points: str
-
-@router_envoyer_mail.post("/envoyer-email")
-async def root_envoyer_mail(data: EmailSchema):
     try:
         params = {
             "from": "onboarding@resend.dev",
             "to": "kouicicontact@yahoo.com",
             "subject": f"Nouveau process : {data.nom}",
-            "html": f"<p><strong>Candidat :</strong> {data.nom}</p><p><strong>Notes :</strong> {data.points}</p>"
+            "html": f"<p>{ai_response}</p>"
         }
         resend.Emails.send(params)
         return {"status": "success"}

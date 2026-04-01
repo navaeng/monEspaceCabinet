@@ -1,7 +1,5 @@
 import os
 
-import yagmail
-
 
 def send_mail(argument, url, user_data):
     print(f"✅ [MAIL] Sent email with URL: {url}")

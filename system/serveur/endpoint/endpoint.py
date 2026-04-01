@@ -4,7 +4,7 @@ import uvicorn
 from APIRouter.router_add_collaborator import router_add_collaborator
 from configurations.config_CORS import config_CORS
 from usecase.dossier_competences.APIRouter.root_generate_dossier import router_start_generate_dossier
-from usecase.process_candidat.APIRouter.envoyer_mail import router_envoyer_mail
+from usecase.process_candidat.APIRouter.start_process import router_envoyer_mail
 
 # from usecase.linkedin.APIRouter.root_start_auto import router_start_auto
 # from usecase.linkedin.APIRouter.root_start_chrome import router_start_chrome

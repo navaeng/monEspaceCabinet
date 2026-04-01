@@ -47,7 +47,8 @@ def analyse_data(file_path):
 
     for output in outputs:
         try:
-            repaired = repair_json(output)
+            clean_output = output.replace('\xa0', ' ').replace('\u2019', "'")
+            repaired = repair_json(clean_output)
             final_data.update(json.loads(repaired))
         except Exception as e:
             print(f"Erreur {e}")

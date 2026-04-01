@@ -2,8 +2,9 @@ import os
 
 import resend
 
-resend.api_key = os.environ.get("RESEND_API")
 from usecase.process_candidat.classes.UserMailSchema import UserMailSchema
+
+resend.api_key = os.environ.get("RESEND_API")
 
 async def send_mail(data: UserMailSchema, ai_response: str):
 

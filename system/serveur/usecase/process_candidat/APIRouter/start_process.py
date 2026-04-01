@@ -12,7 +12,7 @@ async def root_start_process(data: UserMailSchema):
     try:
 
         prompt = prompt_mail(data.nom, data.notes_mail)
-        ai_response = call_openrouter(prompt, "google/gemini-2.0-flash-001", json_mode=True)
+        ai_response = call_openrouter(prompt, "meta-llama/llama-3.1-70b-instruct", json_mode=True)
         await send_mail(data, ai_response)
 
         return {"status": "success", "ai_msg": ai_response}

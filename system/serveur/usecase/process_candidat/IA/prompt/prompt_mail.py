@@ -1,7 +1,18 @@
-def prompt_mail(nom, notes):
+def prompt_mail(nom, poste, remuneration, doc, prochaine_etape, notes_email, lieu):
+    return f"""
+    Rôle : Expert en recrutement pour un cabinet de conseil.
+    Mission : Rédiger l'email de suivi pour {nom}.
 
-    return f"""En tant qu'expert pour un cabinet de conseil, je dois transmettre un email à mon candidat pour l'informer
-    de la suite du process, ecris un mail PRET à etre envoyé attention il sera tranmis immédiatement il ne faut pas
-    que tu insére des éléments à modifier, donc pas de crochet ni rien de similaire.
-      prends en compte les instructions suivant pour rédiger l'email : {notes} nom du candidat : {nom}.
-"""
+    Interdiction formelle d'utiliser des crochets [], des parenthèses () ou des champs à remplir. 
+    L'email doit être prêt à l'envoi immédiat.
+
+    Infos :
+    - Candidat : {nom}
+    - Poste pour lequel il est en process : {poste}
+    - Rémunération : {remuneration}
+    - Document attendu : {doc}
+    - Prochaine étape : {prochaine_etape}
+    - Instructions spécifiques : {notes_email}
+    - Lieu de l'offre : {lieu}
+    
+    """

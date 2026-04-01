@@ -44,7 +44,7 @@ function Dashboard() {
           <h1 className="text-lg font-normal text-gray-900 mb-1">
             Tableau de bord {nom ? nom : user ? user.nom : ""}
           </h1>
-          <p className="text-xs text-gray-500">Espace cabinet {cabinet}</p>
+         
           {/* <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

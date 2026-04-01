@@ -100,7 +100,7 @@ function EmailAuto() {
         body: JSON.stringify({
           nom: candidate,
           email: mail,
-          points: notes
+          notes_mail: notes
         }),
       });
       if (response.ok) alert("Email envoyé !");
@@ -115,7 +115,7 @@ function EmailAuto() {
     <div className="space-y-8">
       <section className="p-6 border border-blue-100 rounded-lg bg-blue-50/30">
         <h3 className="text-sm font-semibold mb-4 flex items-center">
-          <span className="mr-2">🚀</span> Démarrer un nouveau process
+          <span className="mr-2">🚀</span> Email automatisé
         </h3>
         <div className="flex gap-3">
           <input

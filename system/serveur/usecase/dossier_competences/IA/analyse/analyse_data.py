@@ -47,10 +47,15 @@ def analyse_data(file_path):
 
     for output in outputs:
         try:
-            clean_output = output.replace('\xa0', ' ').replace('\u2019', "'")
-            repaired = repair_json(clean_output)
-            final_data.update(json.loads(repaired))
+            if isinstance(output, str):
+                clean_output = output.replace('\xa0', ' ').replace('\u2019', "'")
+                repaired = repair_json(clean_output)
+            else:
+                repaired = json.dumps(output)
+
+            data_dict = json.loads(repaired)
+            final_data.update(data_dict)
         except Exception as e:
-            print(f"Erreur {e}")
+            print(f"Erreur de traitement sur un bloc : {e}")
 
     return final_data

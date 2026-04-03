@@ -13,7 +13,7 @@ from docx.shared import Cm, RGBColor
 
 def display_tasks(doc, exp):
         tasks = exp.get('Liste_Tâches', [])
-        has_next_section = bool(exp.get("Logiciels_et_outils_utilisés"))
+        has_next_section = bool(exp.get("Logiciels_et_outils_utilisés_Sans_Indiquer_Le_Niveau"))
 
         for i, tache in enumerate(tasks):
             p_tache = doc.add_paragraph(tache, style='List Bullet')

@@ -38,7 +38,7 @@ async def build_section_experiences(doc, data):
 
         p.add_run('\t')
 
-        run_duree = p.add_run(f"({exp.get('Durée_Mission_Ou_En_Cours', '')})")
+        run_duree = p.add_run(f"({exp.get('Durée_Mission_Ou_Mission_Toujours_En_Cours', '')})")
         run_duree.font.color.rgb = RGBColor(0x00, 0x20, 0x60)
 
         p.add_run('\t')

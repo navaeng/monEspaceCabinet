@@ -52,10 +52,10 @@ async def build_section_experiences(doc, data):
         # if exp.get('Phrase_Courte_Expliquant_Les_Secteurs_Activité_Entreprise'):
         await display_environnement_entreprise(doc, exp)
 
-        if exp.get('Résumé_mission'):
+        if exp.get('Résumé_mission_En_Phrase_Nominal'):
             display_mission(doc, exp)
 
-        if exp.get('Liste_Tâches'):
+        if exp.get('Liste_Tâches_En_Phrase_Nominal'):
             display_tasks(doc, exp)
 
         if exp.get("Logiciels_et_outils_utilisés_Sans_Indiquer_Le_Niveau"):
